@@ -15,5 +15,7 @@ namespace SmartAuditX.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime? UpdatedAt { get; set; }
+
+        public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }  = new List<ApplicationUserRole>(); //added this to establish the relationship with ApplicationUserRole
     }
 }

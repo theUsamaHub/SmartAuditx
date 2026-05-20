@@ -6487,11 +6487,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj",
+      "projectUniqueName": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
       "projectName": "SmartAuditX",
-      "projectPath": "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj",
+      "projectPath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
       "packagesPath": "C:\\Users\\u6413\\.nuget\\packages\\",
-      "outputPath": "D:\\SmartAuditx\\SmartAuditX\\obj\\",
+      "outputPath": "D:\\SmartAuditX\\SmartAuditX\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

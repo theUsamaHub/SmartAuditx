@@ -21,7 +21,18 @@ namespace SmartAuditX.Data
             DbContextOptions<ApplicationDbContext> options
         ) : base(options)
         {
+
         }
+        public DbSet<Company> Companies { get; set; } //added this DbSet to allow us to query and manage companies through the ApplicationDbContext, which is necessary for the company management features of the platform.
+        public DbSet<CompanyContact> CompanyContacts { get; set; } //added this DbSet to allow us to query and manage company contacts through the ApplicationDbContext, which is necessary for the company contact management features of the platform.
+
+        public DbSet<Branch> Branches { get; set; } //  added this DbSet to allow us to query and manage branches through the ApplicationDbContext, which is necessary for the branch management features of the platform.
+
+        public DbSet<Department> Departments { get; set; } //added this DbSet to allow us to query and manage departments through the ApplicationDbContext, which is necessary for the department management features of the platform.
+
+        public DbSet<BranchDepartment> BranchDepartments { get; set; }
+
+        public DbSet<Designation> Designations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -159,15 +170,290 @@ namespace SmartAuditX.Data
                     .IsUnique();
 
                 // Relationships
+                //entity.HasOne(x => x.User)
+                //    .WithMany()
+                //    .HasForeignKey(x => x.UserId)
+                //    .OnDelete(DeleteBehavior.Cascade);
+
+                //entity.HasOne(x => x.Role)
+                //    .WithMany()
+                //    .HasForeignKey(x => x.RoleId)
+                //    .OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne(x => x.User)
-                    .WithMany()
-                    .HasForeignKey(x => x.UserId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                      .WithMany(x => x.UserRoles)
+                      .HasForeignKey(x => x.UserId)
+                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(x => x.Role)
-                    .WithMany()
+                    .WithMany(x => x.UserRoles)
                     .HasForeignKey(x => x.RoleId)
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+
+
+            // =========================
+            // COMPANIES TABLE
+            // =========================
+
+            builder.Entity<Company>(entity =>
+            {
+                entity.ToTable("Companies");
+
+                // Primary Key
+                entity.HasKey(x => x.CompanyId);
+
+                entity.Property(x => x.CompanyId)
+                    .ValueGeneratedOnAdd();
+
+                // Name
+                entity.Property(x => x.Name)
+                    .HasMaxLength(255)
+                    .IsRequired();
+
+                // Industry
+                entity.Property(x => x.IndustryType)
+                    .HasMaxLength(100);
+
+                // Logo
+                entity.Property(x => x.LogoUrl)
+                    .HasMaxLength(500);
+
+                // Flags
+                entity.Property(x => x.IsActive)
+                    .HasDefaultValue(true);
+
+                entity.Property(x => x.IsDeleted)
+                    .HasDefaultValue(false);
+
+                // Dates
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+                //updated at by default will be null until the record is updated for the first time, so we set the default value to null
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+
+                // Soft Delete Filter
+                entity.HasQueryFilter(x => !x.IsDeleted); //we have to add this filter to ensure that when we query the companies, we only get the ones that are not deleted. This is important for the soft delete functionality to work correctly.
+            });
+            // =========================
+            // COMPANY CONTACT TABLES
+            // =========================
+
+            builder.Entity<CompanyContact>(entity =>
+            {
+                entity.ToTable("CompanyContacts");
+
+                entity.HasKey(x => x.CompanyContactId);
+
+                entity.Property(x => x.Email)
+                    .HasMaxLength(255)
+                    .IsRequired();
+
+                entity.Property(x => x.PhoneNumber)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.ContactName)
+                    .HasMaxLength(150);
+
+                entity.Property(x => x.FaxNumber)
+                    .HasMaxLength(50);
+
+                entity.Property(x => x.PhysicalAddress)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.IsPrimary)
+                    .HasDefaultValue(false);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null); //updated at by default will be null until the record is updated for the first time, so we set the default value to null
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasIndex(x => x.CompanyId);
+            });
+
+            // =========================
+            // BRANCH TABLES
+            // =========================
+            builder.Entity<Branch>(entity =>
+            {
+                entity.ToTable("Branches");
+
+                entity.HasKey(x => x.BranchId);
+
+                entity.Property(x => x.BranchName)
+                    .HasMaxLength(200)
+                    .IsRequired();
+
+                entity.Property(x => x.BranchCode)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.Email)
+                    .HasMaxLength(255);
+
+                entity.Property(x => x.PhoneNumber)
+                    .HasMaxLength(50);
+
+                entity.Property(x => x.PhysicalAddress)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.IsHeadOffice)
+                    .HasDefaultValue(false);
+
+                entity.Property(x => x.IsActive)
+                    .HasDefaultValue(true);
+
+                entity.Property(x => x.IsDeleted)
+                    .HasDefaultValue(false);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null); 
+                //updated at by default will be null until the record is updated for the first time, so we set the default value to null
+
+                entity.HasIndex(x => new { x.CompanyId, x.BranchCode })
+                    .IsUnique();
+
+                entity.HasIndex(x => x.CompanyId);
+
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasQueryFilter(x => !x.IsDeleted); //we have to add this filter to ensure that when we query the branches, we only get the ones that are not deleted. This is important for the soft delete functionality to work correctly.
+            });
+            // =========================
+            // DEPARTMENT TABLES
+            // =========================
+
+            builder.Entity<Department>(entity =>
+            {
+                entity.ToTable("Departments");
+
+                entity.HasKey(x => x.DepartmentId);
+
+                entity.Property(x => x.Name)
+                    .HasMaxLength(150)
+                    .IsRequired();
+
+                entity.Property(x => x.Code)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.Description)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.IsActive)
+                    .HasDefaultValue(true);
+
+                entity.Property(x => x.IsDeleted)
+                    .HasDefaultValue(false);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt) 
+                    .HasDefaultValue(null);
+                entity.HasIndex(x => new { x.CompanyId, x.Code })
+                    .IsUnique();
+
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasQueryFilter(x => !x.IsDeleted);
+
+                entity.HasIndex(x => x.CompanyId);
+            });
+
+            // =========================
+            // BRANCH DEPARTMENT TABLES
+            // =========================
+
+            builder.Entity<BranchDepartment>(entity =>
+            {
+                entity.ToTable("BranchDepartments");
+
+                entity.HasKey(x => x.BranchDepartmentId);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                   .HasDefaultValue(null);
+
+                // Prevent duplicate assignment
+                entity.HasIndex(x => new { x.BranchId, x.DepartmentId })
+                    .IsUnique();
+
+                // Relationships
+                entity.HasOne(x => x.Branch)
+                    .WithMany()
+                    .HasForeignKey(x => x.BranchId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(x => x.Department)
+                    .WithMany()
+                    .HasForeignKey(x => x.DepartmentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // =========================
+            // DESIGNATION  TABLES
+            // =========================
+
+            builder.Entity<Designation>(entity =>
+            {
+                entity.ToTable("Designations");
+
+                entity.HasKey(x => x.DesignationId);
+
+                entity.Property(x => x.Name)
+                    .HasMaxLength(150)
+                    .IsRequired();
+
+                entity.Property(x => x.Code)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.Description)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.IsActive)
+                    .HasDefaultValue(true);
+
+                entity.Property(x => x.IsDeleted)
+                    .HasDefaultValue(false);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null); // updated at by default will be null until the record is updated for the first time, so we set the default value to null
+
+                // unique per company
+                entity.HasIndex(x => new { x.CompanyId, x.Code })
+                    .IsUnique();
+
+                entity.HasIndex(x => x.CompanyId);
+
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasQueryFilter(x => !x.IsDeleted); // we have to add this filter to ensure that when we query the designations, we only get the ones that are not deleted. This is important for the soft delete functionality to work correctly.
             });
 
             // =========================

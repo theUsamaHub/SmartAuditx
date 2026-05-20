@@ -19,137 +19,137 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v10.0
 build_property.RootNamespace = SmartAuditX
 build_property.RootNamespace = SmartAuditX
-build_property.ProjectDir = D:\SmartAuditX\SmartAuditX\
+build_property.ProjectDir = D:\SmartAuditx\SmartAuditX\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\SmartAuditX\SmartAuditX
+build_property.MSBuildProjectDirectory = D:\SmartAuditx\SmartAuditX
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/AccessDenied.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/ConfirmEmail.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/ConfirmEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/Login.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/Logout.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/Manage/Email.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/Manage/Email.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcU2V0UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/Register.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/ResetPassword.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/_ViewImports.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Areas/Identity/Pages/_ViewStart.cshtml]
+[D:/SmartAuditx/SmartAuditX/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Admin/Index.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Auditor/Index.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Auditor/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXVkaXRvclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Auth/Index.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Auth/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Company/Index.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Company/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Home/Index.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Home/Privacy.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Manager/Index.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Manager/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Shared/Error.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Shared/_LoginPartial.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/User/Index.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/_ViewImports.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/_ViewStart.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SmartAuditX/SmartAuditX/Views/Shared/_Layout.cshtml]
+[D:/SmartAuditx/SmartAuditX/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-wdlv71na0l

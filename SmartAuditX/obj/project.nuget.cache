@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AqMYwo1MrVw=",
+  "dgSpecHash": "IuhLtn2ENik=",
   "success": true,
-  "projectFilePath": "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj",
+  "projectFilePath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\u6413\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -139,9 +139,9 @@
       "code": "NU1603",
       "level": "Warning",
       "message": "SmartAuditX depends on NuGet.Packaging (>= 6.13.0) but NuGet.Packaging 6.13.0 was not found. NuGet.Packaging 6.13.1 was resolved instead.",
-      "projectPath": "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj",
+      "projectPath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
       "warningLevel": 1,
-      "filePath": "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj",
+      "filePath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
       "libraryId": "NuGet.Packaging",
       "targetGraphs": [
         "net10.0"
