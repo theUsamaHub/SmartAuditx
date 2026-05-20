@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "SmartAuditX\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
               "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
               "RelativeToolTip": "SmartAuditX\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAIwHYAAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-20T17:24:41.804Z",
               "EditorCaption": ""
@@ -47,8 +47,7 @@
               "RelativeToolTip": "SmartAuditX\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAAAswGoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T17:06:16.317Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-20T17:06:16.317Z"
             },
             {
               "$type": "Document",
