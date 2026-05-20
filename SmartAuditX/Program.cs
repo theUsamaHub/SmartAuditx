@@ -24,10 +24,10 @@ builder.Services
         options.Password.RequireNonAlphanumeric = false;
 
         // User settings
-        options.User.RequireUniqueEmail = true;
+        options.User.RequireUniqueEmail = true; 
 
         // Sign In settings
-        options.SignIn.RequireConfirmedEmail = true;
+        //options.SignIn.RequireConfirmedEmail = true;   //we will uncomment it later WHEN GO TO THE PHASE A-II
     })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();

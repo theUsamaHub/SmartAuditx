@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wPhBDKPftrg=",
+  "dgSpecHash": "gieFhOAgjxA=",
   "success": true,
   "projectFilePath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
   "expectedPackageFiles": [
@@ -109,15 +109,15 @@
     "C:\\Users\\u6413\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\10.0.2\\microsoft.visualstudio.web.codegenerators.mvc.10.0.2.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
-    "C:\\Users\\u6413\\.nuget\\packages\\nuget.common\\6.12.1\\nuget.common.6.12.1.nupkg.sha512",
-    "C:\\Users\\u6413\\.nuget\\packages\\nuget.configuration\\6.12.1\\nuget.configuration.6.12.1.nupkg.sha512",
+    "C:\\Users\\u6413\\.nuget\\packages\\nuget.common\\6.13.1\\nuget.common.6.13.1.nupkg.sha512",
+    "C:\\Users\\u6413\\.nuget\\packages\\nuget.configuration\\6.13.1\\nuget.configuration.6.13.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\nuget.dependencyresolver.core\\6.12.1\\nuget.dependencyresolver.core.6.12.1.nupkg.sha512",
-    "C:\\Users\\u6413\\.nuget\\packages\\nuget.frameworks\\6.12.1\\nuget.frameworks.6.12.1.nupkg.sha512",
+    "C:\\Users\\u6413\\.nuget\\packages\\nuget.frameworks\\6.13.1\\nuget.frameworks.6.13.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\nuget.librarymodel\\6.12.1\\nuget.librarymodel.6.12.1.nupkg.sha512",
-    "C:\\Users\\u6413\\.nuget\\packages\\nuget.packaging\\6.12.1\\nuget.packaging.6.12.1.nupkg.sha512",
+    "C:\\Users\\u6413\\.nuget\\packages\\nuget.packaging\\6.13.1\\nuget.packaging.6.13.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\nuget.projectmodel\\6.12.1\\nuget.projectmodel.6.12.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\nuget.protocol\\6.12.1\\nuget.protocol.6.12.1.nupkg.sha512",
-    "C:\\Users\\u6413\\.nuget\\packages\\nuget.versioning\\6.12.1\\nuget.versioning.6.12.1.nupkg.sha512",
+    "C:\\Users\\u6413\\.nuget\\packages\\nuget.versioning\\6.13.1\\nuget.versioning.6.13.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\system.clientmodel\\1.5.1\\system.clientmodel.1.5.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\system.composition\\9.0.0\\system.composition.9.0.0.nupkg.sha512",
@@ -136,25 +136,13 @@
   ],
   "logs": [
     {
-      "code": "NU1901",
+      "code": "NU1603",
       "level": "Warning",
-      "message": "Package 'NuGet.Packaging' 6.12.1 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg",
+      "message": "SmartAuditX depends on NuGet.Packaging (>= 6.13.0) but NuGet.Packaging 6.13.0 was not found. NuGet.Packaging 6.13.1 was resolved instead.",
       "projectPath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
       "warningLevel": 1,
       "filePath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
       "libraryId": "NuGet.Packaging",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1901",
-      "level": "Warning",
-      "message": "Package 'NuGet.Protocol' 6.12.1 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg",
-      "projectPath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
-      "libraryId": "NuGet.Protocol",
       "targetGraphs": [
         "net10.0"
       ]

@@ -6,9 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-SmartAuditX-34ad1d67-3a1c-4f07-a4a4-c9f00035acf7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	  <NoWarn>NU1901</NoWarn> <!-- added this to suppress warnings about missing package versions, as we are using central package management in Directory.Packages.props -->
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="NuGet.Packaging" Version="6.13.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.8" />

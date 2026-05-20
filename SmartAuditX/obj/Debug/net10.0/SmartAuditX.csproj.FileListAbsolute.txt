@@ -396,10 +396,11 @@ D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.build.json.cache
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.development.json
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\swae.build.ex.cache
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAud.174E70FA.Up2Date
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.dll
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\refint\SmartAuditX.dll
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.pdb
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.genruntimeconfig.cache
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\ref\SmartAuditX.dll
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.sourcelink.json
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
