@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj": {}
+    "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj": {}
   },
   "projects": {
-    "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj": {
+    "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
+        "projectUniqueName": "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj",
         "projectName": "SmartAuditX",
-        "projectPath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
+        "projectPath": "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj",
         "packagesPath": "C:\\Users\\u6413\\.nuget\\packages\\",
         "outputPath": "D:\\SmartAuditx\\SmartAuditX\\obj\\",
         "projectStyle": "PackageReference",
