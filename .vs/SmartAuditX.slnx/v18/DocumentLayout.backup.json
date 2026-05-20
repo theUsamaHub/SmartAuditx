@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\SmartAuditX\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -38,17 +38,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Register.cshtml.cs",
               "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "RelativeDocumentMoniker": "SmartAuditX\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "RelativeToolTip": "SmartAuditX\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAswGoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-20T17:06:16.317Z",
               "EditorCaption": ""
@@ -81,13 +81,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Program.cs",
               "RelativeDocumentMoniker": "SmartAuditX\\Program.cs",
               "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Program.cs",
               "RelativeToolTip": "SmartAuditX\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAAA8AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-19T17:45:01.072Z",
               "EditorCaption": ""
