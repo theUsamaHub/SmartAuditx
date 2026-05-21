@@ -34,6 +34,9 @@ namespace SmartAuditX.Data
 
         public DbSet<Designation> Designations { get; set; }
 
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeDocumentType> EmployeeDocumentTypes { get; set; }
+        public DbSet<EmployeeDocument> EmployeeDocuments { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -487,6 +490,153 @@ namespace SmartAuditX.Data
                 entity.HasQueryFilter(x => !x.IsDeleted); // we have to add this filter to ensure that when we query the designations, we only get the ones that are not deleted. This is important for the soft delete functionality to work correctly.
             });
 
+            // =========================
+            // EMPLOYEE  TABLES
+            // =========================
+            builder.Entity<Employee>(entity =>
+            {
+                entity.ToTable("Employees");
+
+                entity.HasKey(x => x.EmployeeId);
+
+                entity.Property(x => x.EmployeeCode)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.FirstName)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.LastName)
+                    .HasMaxLength(100);
+
+                entity.Property(x => x.Gender)
+                    .IsRequired();
+
+                entity.Property(x => x.PersonalEmail)
+                    .HasMaxLength(255);
+
+                entity.Property(x => x.PersonalPhone)
+                    .HasMaxLength(20);
+
+                entity.Property(x => x.CNICOrNationalId)
+                    .HasMaxLength(30);
+
+                entity.Property(x => x.ProfileImageUrl)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.IsActive)
+                   .HasDefaultValue(true);
+
+                entity.Property(x => x.IsDeleted)
+                    .HasDefaultValue(false);
+
+                entity.Property(x => x.CreatedAt)
+    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+
+                entity.HasIndex(x => x.CompanyId);
+                entity.HasIndex(x => new { x.CompanyId, x.EmployeeCode }).IsUnique();
+
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.Branch)
+                    .WithMany()
+                    .HasForeignKey(x => x.BranchId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.Department)
+                    .WithMany()
+                    .HasForeignKey(x => x.DepartmentId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.Designation)
+                    .WithMany()
+                    .HasForeignKey(x => x.DesignationId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // =========================
+            // EMPLOYEE DOCUMENT TYPE  TABLES
+            // =========================
+
+            builder.Entity<EmployeeDocumentType>(entity =>
+            {
+                entity.ToTable("EmployeeDocumentTypes");
+
+                entity.HasKey(x => x.EmployeeDocumentTypeId);
+
+                entity.Property(x => x.Name)
+                    .HasMaxLength(150)
+                    .IsRequired();
+
+                entity.Property(x => x.Description)
+                    .HasMaxLength(500);
+
+
+                entity.Property(x => x.IsActive)
+                  .HasDefaultValue(true);
+
+                entity.Property(x => x.IsDeleted)
+                    .HasDefaultValue(false);
+
+                entity.Property(x => x.CreatedAt)
+                   .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+                entity.HasIndex(x => x.CompanyId);
+
+                entity.HasIndex(x => new { x.CompanyId, x.Name })
+                    .IsUnique();
+
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // =========================
+            // EMPLOYEE DOCUMENT  TABLES
+            // =========================
+            builder.Entity<EmployeeDocument>(entity =>
+            {
+                entity.ToTable("EmployeeDocuments");
+
+                entity.HasKey(x => x.EmployeeDocumentId);
+
+                entity.Property(x => x.FileUrl)
+                    .HasMaxLength(500)
+                    .IsRequired();
+
+                entity.Property(x => x.FileName)
+                    .HasMaxLength(255);
+
+                entity.Property(x => x.FileType)
+                    .HasMaxLength(50);
+
+                entity.Property(x => x.DocumentTypeNameSnapshot)
+                    .HasMaxLength(150);
+               
+              
+                entity.HasIndex(x => x.EmployeeId);
+                entity.HasIndex(x => x.EmployeeDocumentTypeId);
+
+                entity.HasOne(x => x.Employee)
+                    .WithMany()
+                    .HasForeignKey(x => x.EmployeeId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(x => x.EmployeeDocumentType)
+                    .WithMany()
+                    .HasForeignKey(x => x.EmployeeDocumentTypeId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
             // =========================
             // OTHER IDENTITY TABLES
             // =========================

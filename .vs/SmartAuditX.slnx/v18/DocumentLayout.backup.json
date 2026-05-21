@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\SmartAuditX\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521183037_InitialSetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SmartAuditX\\Migrations\\20260521183037_InitialSetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521194155_AddedEmpDocType.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SmartAuditX\\Migrations\\20260521194155_AddedEmpDocType.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521182247_InitialSetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SmartAuditX\\Migrations\\20260521182247_InitialSetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\employeedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\employeedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\branch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,27 +35,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20260521183037_InitialSetup.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521183037_InitialSetup.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Migrations\\20260521183037_InitialSetup.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521183037_InitialSetup.cs",
-              "RelativeToolTip": "SmartAuditX\\Migrations\\20260521183037_InitialSetup.cs",
-              "ViewState": "AgIAAMoAAAAAAAAAAAAQwNcAAAAyAAAAAAAAAA==",
+              "Title": "20260521194155_AddedEmpDocType.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521194155_AddedEmpDocType.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Migrations\\20260521194155_AddedEmpDocType.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521194155_AddedEmpDocType.cs",
+              "RelativeToolTip": "SmartAuditX\\Migrations\\20260521194155_AddedEmpDocType.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAgwLQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T18:30:37.68Z",
+              "WhenOpened": "2026-05-21T19:41:56.022Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "20260521182247_InitialSetup.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521182247_InitialSetup.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Migrations\\20260521182247_InitialSetup.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260521182247_InitialSetup.cs",
-              "RelativeToolTip": "SmartAuditX\\Migrations\\20260521182247_InitialSetup.cs",
-              "ViewState": "AgIAAB4BAAAAAAAAAAAqwEABAAA+AAAAAAAAAA==",
+              "Title": "EmployeeDocument.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\EmployeeDocument.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Models\\EmployeeDocument.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\EmployeeDocument.cs",
+              "RelativeToolTip": "SmartAuditX\\Models\\EmployeeDocument.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAgwBkAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T18:22:48.191Z",
+              "WhenOpened": "2026-05-21T19:38:51.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\Employee.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Models\\Employee.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\Employee.cs",
+              "RelativeToolTip": "SmartAuditX\\Models\\Employee.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAxwB0AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T19:13:56.633Z",
               "EditorCaption": ""
             },
             {
@@ -66,7 +79,7 @@
               "RelativeDocumentMoniker": "SmartAuditX\\Models\\Branch.cs",
               "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\Branch.cs",
               "RelativeToolTip": "SmartAuditX\\Models\\Branch.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAswC0AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T17:20:30.884Z",
               "EditorCaption": ""
@@ -79,22 +92,9 @@
               "RelativeDocumentMoniker": "SmartAuditX\\Data\\ApplicationDbContext.cs",
               "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "SmartAuditX\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAuwHEAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAADECAAAAAAAAAAAqwIMCAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T17:15:42.057Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Company.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\Company.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\Company.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\Company.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\Company.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T17:14:58.353Z",
               "EditorCaption": ""
             }
           ]
