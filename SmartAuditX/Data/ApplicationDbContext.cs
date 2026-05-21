@@ -74,6 +74,10 @@ namespace SmartAuditX.Data
                 entity.Property(x => x.Id)
                     .HasColumnName("UserId");
 
+                // CompanyId (MANDATORY FIELD)
+                entity.Property(x => x.CompanyId)
+                    .IsRequired();
+
                 // Username
                 entity.Property(x => x.UserName)
                     .HasColumnName("Username")
@@ -104,6 +108,9 @@ namespace SmartAuditX.Data
                 entity.Property(x => x.CreatedAt)
                     .HasDefaultValueSql("GETUTCDATE()");
 
+                // Index for performance (multi-tenant filtering)
+                entity.HasIndex(x => x.CompanyId);
+
                 // Unique Constraints
                 entity.HasIndex(x => x.UserName)
                     .IsUnique()
@@ -120,6 +127,10 @@ namespace SmartAuditX.Data
                 entity.HasIndex(x => x.IsDeleted);
                 entity.HasIndex(x => x.IsActive);
                 entity.HasIndex(x => x.CreatedAt);
+                entity.HasOne<Company>()
+     .WithMany()
+     .HasForeignKey(x => x.CompanyId)
+     .OnDelete(DeleteBehavior.Restrict);
                 // Soft Delete Filter
                 entity.HasQueryFilter(x => !x.IsDeleted);
             });
@@ -412,22 +423,20 @@ namespace SmartAuditX.Data
                     .HasDefaultValueSql("GETUTCDATE()");
 
                 entity.Property(x => x.UpdatedAt)
-                   .HasDefaultValue(null);
+                    .HasDefaultValue(null);
 
-                // Prevent duplicate assignment
                 entity.HasIndex(x => new { x.BranchId, x.DepartmentId })
                     .IsUnique();
 
-                // Relationships
                 entity.HasOne(x => x.Branch)
-                    .WithMany()
+                    .WithMany(x => x.BranchDepartments)
                     .HasForeignKey(x => x.BranchId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(x => x.Department)
-                    .WithMany()
+                    .WithMany(x => x.BranchDepartments)
                     .HasForeignKey(x => x.DepartmentId)
-                    .OnDelete(DeleteBehavior.Restrict); //changed due to security of delete if get deleted everything gone 
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // =========================
