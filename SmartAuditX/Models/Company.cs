@@ -26,5 +26,11 @@ namespace SmartAuditX.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime? UpdatedAt { get; set; }
+
+
+        public ICollection<Branch> Branches { get; set; }
+        public ICollection<Department> Departments { get; set; }
+        public ICollection<CompanyContact> CompanyContacts { get; set; }
+        public ICollection<Designation> Designations { get; set; }
     }
 }

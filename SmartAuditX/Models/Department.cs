@@ -35,5 +35,7 @@ namespace SmartAuditX.Models
         //public virtual required Company Company { get; set; } //we can make it required if we want to ensure that every department must be associated with a company, but for now we will keep it optional to allow for flexibility in case we want to create departments before associating them with a company
         public virtual Company Company { get; set; }
 
+        public ICollection<BranchDepartment> BranchDepartments { get; set; }
+
     }
 }

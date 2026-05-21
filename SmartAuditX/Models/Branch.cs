@@ -43,6 +43,8 @@ namespace SmartAuditX.Models
         // Navigation
         //public virtual required Company Company { get; set; } //we can make it required if we want to ensure that every branch must be associated with a company, but for now we will keep it optional to allow for flexibility in case we want to create branches before associating them with a company
         public virtual Company Company { get; set; }
+        //added this 
+        public ICollection<BranchDepartment> BranchDepartments { get; set; }
 
     }
 }

@@ -36,5 +36,6 @@ namespace SmartAuditX.Models
 
         public virtual Company Company { get; set; }
 
+
     }
 }

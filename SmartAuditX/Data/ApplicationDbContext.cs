@@ -106,14 +106,20 @@ namespace SmartAuditX.Data
 
                 // Unique Constraints
                 entity.HasIndex(x => x.UserName)
-                    .IsUnique();
+                    .IsUnique()
+                    .HasFilter("[IsDeleted] = 0"); //important for 
 
                 entity.HasIndex(x => x.Email)
-                    .IsUnique();
+                    .IsUnique()
+                    .HasFilter("[IsDeleted] = 0"); //important for 
 
                 entity.HasIndex(x => x.PhoneNumber)
-                    .IsUnique();
+                    .IsUnique()
+                    .HasFilter("[IsDeleted] = 0"); //important for 
 
+                entity.HasIndex(x => x.IsDeleted);
+                entity.HasIndex(x => x.IsActive);
+                entity.HasIndex(x => x.CreatedAt);
                 // Soft Delete Filter
                 entity.HasQueryFilter(x => !x.IsDeleted);
             });
@@ -182,14 +188,13 @@ namespace SmartAuditX.Data
                 entity.HasOne(x => x.User)
                       .WithMany(x => x.UserRoles)
                       .HasForeignKey(x => x.UserId)
-                       .OnDelete(DeleteBehavior.Cascade);
+                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(x => x.Role)
                     .WithMany(x => x.UserRoles)
                     .HasForeignKey(x => x.RoleId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.Restrict);
             });
-
 
             // =========================
             // COMPANIES TABLE
@@ -232,6 +237,9 @@ namespace SmartAuditX.Data
                 entity.Property(x => x.UpdatedAt)
                     .HasDefaultValue(null);
 
+                entity.HasIndex(x => x.IsDeleted);
+                entity.HasIndex(x => x.IsActive);
+                entity.HasIndex(x => x.CreatedAt);
                 // Soft Delete Filter
                 entity.HasQueryFilter(x => !x.IsDeleted); //we have to add this filter to ensure that when we query the companies, we only get the ones that are not deleted. This is important for the soft delete functionality to work correctly.
             });
@@ -271,9 +279,9 @@ namespace SmartAuditX.Data
                 entity.Property(x => x.UpdatedAt)
                     .HasDefaultValue(null); //updated at by default will be null until the record is updated for the first time, so we set the default value to null
                 entity.HasOne(x => x.Company)
-                    .WithMany()
-                    .HasForeignKey(x => x.CompanyId)
-                    .OnDelete(DeleteBehavior.Cascade);
+.WithMany(x => x.CompanyContacts)
+.HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasIndex(x => x.CompanyId);
             });
@@ -317,18 +325,24 @@ namespace SmartAuditX.Data
                     .HasDefaultValueSql("GETUTCDATE()");
 
                 entity.Property(x => x.UpdatedAt)
-                    .HasDefaultValue(null); 
+                    .HasDefaultValue(null);
+
+                entity.HasIndex(x => x.IsDeleted);
+                entity.HasIndex(x => x.IsActive);
+                entity.HasIndex(x => x.CreatedAt);
+
                 //updated at by default will be null until the record is updated for the first time, so we set the default value to null
 
                 entity.HasIndex(x => new { x.CompanyId, x.BranchCode })
-                    .IsUnique();
+                    .IsUnique()
+                  .HasFilter("[IsDeleted] = 0"); //added this line to ensure that the unique constraint only applies to branches that are not deleted, allowing us to reuse branch codes from deleted branches if necessary.
 
                 entity.HasIndex(x => x.CompanyId);
 
                 entity.HasOne(x => x.Company)
-                    .WithMany()
-                    .HasForeignKey(x => x.CompanyId)
-                    .OnDelete(DeleteBehavior.Cascade);
+         .WithMany(x => x.Branches)
+         .HasForeignKey(x => x.CompanyId)
+         .OnDelete(DeleteBehavior.Restrict); 
 
                 entity.HasQueryFilter(x => !x.IsDeleted); //we have to add this filter to ensure that when we query the branches, we only get the ones that are not deleted. This is important for the soft delete functionality to work correctly.
             });
@@ -364,13 +378,20 @@ namespace SmartAuditX.Data
 
                 entity.Property(x => x.UpdatedAt) 
                     .HasDefaultValue(null);
+
+                entity.HasIndex(x => x.IsDeleted);
+                entity.HasIndex(x => x.IsActive);
+                entity.HasIndex(x => x.CreatedAt);
                 entity.HasIndex(x => new { x.CompanyId, x.Code })
-                    .IsUnique();
+                    .IsUnique()
+                    .HasFilter("[IsDeleted] = 0"); //added this line to ensure that the unique constraint only applies to departments that are not deleted, allowing us to reuse department codes from deleted departments if necessary.
+
+
 
                 entity.HasOne(x => x.Company)
-                    .WithMany()
-                    .HasForeignKey(x => x.CompanyId)
-                    .OnDelete(DeleteBehavior.Cascade);
+.WithMany(x => x.Departments)
+.HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(x => !x.IsDeleted);
 
@@ -401,12 +422,12 @@ namespace SmartAuditX.Data
                 entity.HasOne(x => x.Branch)
                     .WithMany()
                     .HasForeignKey(x => x.BranchId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(x => x.Department)
                     .WithMany()
                     .HasForeignKey(x => x.DepartmentId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.Restrict); //changed due to security of delete if get deleted everything gone 
             });
 
             // =========================
@@ -444,14 +465,15 @@ namespace SmartAuditX.Data
 
                 // unique per company
                 entity.HasIndex(x => new { x.CompanyId, x.Code })
-                    .IsUnique();
+                    .IsUnique()
+                 .HasFilter("[IsDeleted] = 0"); //added this line 
 
                 entity.HasIndex(x => x.CompanyId);
 
                 entity.HasOne(x => x.Company)
-                    .WithMany()
-                    .HasForeignKey(x => x.CompanyId)
-                    .OnDelete(DeleteBehavior.Cascade);
+.WithMany(x => x.Designations)
+.HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict); //updated this also
 
                 entity.HasQueryFilter(x => !x.IsDeleted); // we have to add this filter to ensure that when we query the designations, we only get the ones that are not deleted. This is important for the soft delete functionality to work correctly.
             });
@@ -475,7 +497,7 @@ namespace SmartAuditX.Data
             // =========================
             // SEED DEFAULT ROLES
             // =========================
-
+            //Every migration becomes "data changed". we fixed that by providing the static guid
             builder.Entity<ApplicationRole>().HasData(
 
                 new ApplicationRole
@@ -485,8 +507,8 @@ namespace SmartAuditX.Data
                     NormalizedName = "SYSTEMADMIN",
                     Description = "Full platform administration access",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                    CreatedAt = new DateTime(2026, 1, 1),
+                    ConcurrencyStamp = "8f4c6a90-1111-2222-3333-444444444444"
                 },
 
                 new ApplicationRole
@@ -496,8 +518,8 @@ namespace SmartAuditX.Data
                     NormalizedName = "COMPANYOWNER",
                     Description = "Company owner with company-level access",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                    CreatedAt = new DateTime(2026, 1, 1),
+                    ConcurrencyStamp = "8f4c6a21-1111-2222-3333-444444444444"
                 },
 
                 new ApplicationRole
@@ -507,8 +529,8 @@ namespace SmartAuditX.Data
                     NormalizedName = "MANAGER",
                     Description = "Department and employee management access",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                    CreatedAt = new DateTime(2026, 1, 1),
+                    ConcurrencyStamp = "11111111-1111-1111-1111-111111111111"
                 },
 
                 new ApplicationRole
@@ -518,8 +540,8 @@ namespace SmartAuditX.Data
                     NormalizedName = "AUDITOR",
                     Description = "Audit and inspection related access",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                    CreatedAt = new DateTime(2026, 1, 1),
+                    ConcurrencyStamp = "8f4c6a90-2123-2222-3333-444444444444"
                 },
 
                 new ApplicationRole
@@ -529,8 +551,8 @@ namespace SmartAuditX.Data
                     NormalizedName = "USER",
                     Description = "Basic system user access",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                    CreatedAt = new DateTime(2026, 1, 1),
+                    ConcurrencyStamp = "22222222-2222-2222-2222-222222222222"
                 }
             );
         }

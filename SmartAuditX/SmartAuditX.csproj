@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include="NuGet.Packaging" Version="6.13.0" />
+	  <PackageReference Include="Dapper" Version="2.1.79" />
+	  <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.1" />
+	  <PackageReference Include="NuGet.Packaging" Version="6.13.1" />  <!--Updated this to 6.13.1 becuase 6.13.0 stopping commands-->
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.8" />
