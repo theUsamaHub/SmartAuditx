@@ -134,7 +134,7 @@ namespace SmartAuditX.Data
      .WithMany()
      .HasForeignKey(x => x.CompanyId)
      .OnDelete(DeleteBehavior.Restrict);
-                // Soft Delete Filter
+                // Soft Delete Filter 
                 entity.HasQueryFilter(x => !x.IsDeleted);
             });
 
@@ -173,43 +173,67 @@ namespace SmartAuditX.Data
             // USER ROLES TABLE
             // =========================
 
+            //builder.Entity<ApplicationUserRole>(entity =>
+            //{
+            //    //// Primary Key
+            //    //entity.HasKey(x => x.UserRoleId);
+
+            //    //entity.Property(x => x.UserRoleId)
+            //    //    .ValueGeneratedOnAdd();
+
+            //    // CreatedAt
+            //    entity.Property(x => x.CreatedAt)
+            //        .HasDefaultValueSql("GETUTCDATE()");
+
+            //    // Composite Unique Constraint
+            //    entity.HasIndex(x => new { x.UserId, x.RoleId })
+            //        .IsUnique();
+
+            //    // Relationships
+            //    //entity.HasOne(x => x.User)
+            //    //    .WithMany()
+            //    //    .HasForeignKey(x => x.UserId)
+            //    //    .OnDelete(DeleteBehavior.Cascade);
+
+            //    //entity.HasOne(x => x.Role)
+            //    //    .WithMany()
+            //    //    .HasForeignKey(x => x.RoleId)
+            //    //    .OnDelete(DeleteBehavior.Cascade);
+            //    entity.HasOne(x => x.User)
+            //          .WithMany(x => x.UserRoles)
+            //          .HasForeignKey(x => x.UserId)
+            //           .OnDelete(DeleteBehavior.Restrict);
+
+            //    entity.HasOne(x => x.Role)
+            //        .WithMany(x => x.UserRoles)
+            //        .HasForeignKey(x => x.RoleId)
+            //        .OnDelete(DeleteBehavior.Restrict);
+            //});
+
             builder.Entity<ApplicationUserRole>(entity =>
             {
-                // Primary Key
-                entity.HasKey(x => x.UserRoleId);
-
-                entity.Property(x => x.UserRoleId)
-                    .ValueGeneratedOnAdd();
+                // Composite Primary Key
+                entity.HasKey(x => new
+                {
+                    x.UserId,
+                    x.RoleId
+                });
 
                 // CreatedAt
                 entity.Property(x => x.CreatedAt)
                     .HasDefaultValueSql("GETUTCDATE()");
 
-                // Composite Unique Constraint
-                entity.HasIndex(x => new { x.UserId, x.RoleId })
-                    .IsUnique();
-
                 // Relationships
-                //entity.HasOne(x => x.User)
-                //    .WithMany()
-                //    .HasForeignKey(x => x.UserId)
-                //    .OnDelete(DeleteBehavior.Cascade);
-
-                //entity.HasOne(x => x.Role)
-                //    .WithMany()
-                //    .HasForeignKey(x => x.RoleId)
-                //    .OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne(x => x.User)
-                      .WithMany(x => x.UserRoles)
-                      .HasForeignKey(x => x.UserId)
-                       .OnDelete(DeleteBehavior.Restrict);
+                    .WithMany(x => x.UserRoles)
+                    .HasForeignKey(x => x.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(x => x.Role)
                     .WithMany(x => x.UserRoles)
                     .HasForeignKey(x => x.RoleId)
                     .OnDelete(DeleteBehavior.Restrict);
-            });
-
+            }); 
             // =========================
             // COMPANIES TABLE
             // =========================

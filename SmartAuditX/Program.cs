@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SmartAuditX.Data;
 using SmartAuditX.Models;
+using SmartAuditX.Services.Implementations;
+using SmartAuditX.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +34,7 @@ builder.Services
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-
+builder.Services.AddScoped<ISeedService, SeedService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();  //added this for the internal ui of identity 
 var app = builder.Build();
@@ -47,6 +49,15 @@ else
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var seedService =
+        scope.ServiceProvider
+             .GetRequiredService<ISeedService>();
+
+    await seedService.SeedSystemAdminAsync();
 }
 
 app.UseHttpsRedirection();
