@@ -147,6 +147,7 @@ using (var scope = app.Services.CreateScope())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseSession(); //added for the session
 app.UseAuthentication(); //added this 
 app.UseAuthorization();
 
