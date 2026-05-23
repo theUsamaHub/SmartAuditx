@@ -1,9 +1,28 @@
+using Humanizer;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using Newtonsoft.Json.Linq;
+using NuGet.Configuration;
+using NuGet.Protocol.Plugins;
 using SmartAuditX.Data;
 using SmartAuditX.Models;
 using SmartAuditX.Services.Implementations;
 using SmartAuditX.Services.Interfaces;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Net;
+using System.Timers;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+using static System.Collections.Specialized.BitVector32;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Net.WebRequestMethods;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,14 +45,89 @@ builder.Services
         options.Password.RequireNonAlphanumeric = false;
 
         // User settings
-        options.User.RequireUniqueEmail = true; 
+        options.User.RequireUniqueEmail = true;
+        // Lockout settings
+    //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    //    options.Lockout.MaxFailedAccessAttempts = 5;
 
         // Sign In settings
-        //options.SignIn.RequireConfirmedEmail = true;   //we will uncomment it later WHEN GO TO THE PHASE A-II
+        //options.SignIn.RequireConfirmedEmail = true; //we will uncomment it later WHEN GO TO THE PHASE A-II
     })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    //Purpose: Prevents client-side JavaScript from accessing the cookie
+    //Why important: Protects against Cross - Site Scripting(XSS) attacks
+    //Effect: Cookie can only be sent to the server via HTTP requests
+
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    //Purpose: Controls whether cookies are sent with cross - site requests
+    //Values: Lax(default), Strict, None
+    //Lax behavior: Cookie sent when user navigates to site via link(GET requests) but not for POST requests from other sites
+    //Why Lax ?: Good balance of security and usability for login cookies
+
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    //Purpose: Ensures cookie is only sent over HTTPS connections
+    //Values: Always, SameAsRequest, None
+    //Why Always: Prevents cookie theft over insecure HTTP connections
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    //Purpose: Sets how long the authentication cookie remains valid
+    //Current: 30 days
+    //Default without configuration: 14 days
+    //How Remember Me works: When user checks "Remember Me", this 30 - day timer applies. When unchecked, cookie expires when browser closes
+    //Your LoginModel passes this: Input.RememberMe → PasswordSignInAsync → sets cookie duration based on this value
+    options.SlidingExpiration = true;
+    //Purpose: Resets the expiration timer on each request when user is active
+    //How it works:
+    //With true: Cookie expires 30 days from the user's LAST request
+    //With false: Cookie expires 30 days from initial login, regardless of activity
+    //Example: User logs in day 0, sets cookie for 30 days.On day 25 they make a request → cookie expiration extends another 30 days from day 25
+    //Best for: Users who stay actively logged in for months / years
+    options.LoginPath = "/Identity/Account/Login";
+    //Purpose: Redirects unauthorized users to this login page
+    //When triggered: When[Authorize] attribute is on a controller / page and user isn't authenticated
+    options.LogoutPath = "/Identity/Account/Logout";
+    //Purpose: Default URL for sign -out requests
+    //What happens: Clears the authentication cookie
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+
+    //Purpose: Redirects users who are authenticated but lack required roles / policies
+    //When triggered: User has valid login but[Authorize(Roles = "Admin")] fails
+    options.Cookie.MaxAge = TimeSpan.FromDays(30);
+    //Purpose: Explicitly sets the cookie's maximum age in the browser
+    //Relationship to ExpireTimeSpan: They typically match.ExpireTimeSpan is the server - side validation, MaxAge is the browser - side instruction
+    //Why set both: Ensures browser respects the expiration even if server validation fails
+});
+builder.Services.AddSession(options =>
+{
+   options.IdleTimeout = TimeSpan.FromMinutes(60);
+//Purpose: How long session can be idle before it expires on the server
+//Current: 60 minutes
+//Default: 20 minutes
+//Behavior: Timer resets with each request
+//Difference from cookie: Cookie lives on client, session data lives on server
+
+options.Cookie.HttpOnly = true;
+//    Same as application cookie - prevents JavaScript access
+//Session - specific: Controls the session ID cookie, not the auth cookie
+    options.Cookie.IsEssential = true;
+//Purpose: Allows session cookie to work without user consent under GDPR
+//Why important: Without true, some browsers might block session cookies until user accepts cookies
+//Essential session: Storing shopping cart, login state -user expects this functionality
+
+    options.Cookie.MaxAge = TimeSpan.FromDays(7);
+//Purpose: Maximum age for the session ID cookie in the browser
+//Current: 7 days
+//Relationship to IdleTimeout: Session dies when EITHER:
+//No activity for 60 minutes(IdleTimeout)
+//Cookie reaches 7 days old(MaxAge)
+//Whichever comes first wins
+
+});
 builder.Services.AddScoped<ISeedService, SeedService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();  //added this for the internal ui of identity 

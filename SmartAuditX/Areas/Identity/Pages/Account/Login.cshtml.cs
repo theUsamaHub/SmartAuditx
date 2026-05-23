@@ -32,7 +32,7 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
         private readonly ILogger<LoginModel> _logger;
 
         // Manages user account operations (finding users by email/username, checking roles, etc.)
-        private readonly UserManager<ApplicationUser> _userManager; //added this for login because we need to use the email/username/phoneno
+        private readonly UserManager<ApplicationUser> _userManager; //added this for login because we need to use the email/username
 
         /// <summary>
         /// Initializes a new instance of the LoginModel with required services
@@ -69,16 +69,13 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+
             //[Required]
             //[EmailAddress]
             //public string Email { get; set; }
 
             /// <summary>
-            /// The user's login identifier - can be email address, username, or phone number
+            /// The user's login identifier - can be email address, username, 
             /// </summary>
             [Required]
             public string LoginIdentifier { get; set; } = string.Empty;

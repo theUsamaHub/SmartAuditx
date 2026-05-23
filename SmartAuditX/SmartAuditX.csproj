@@ -28,6 +28,9 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\css\Company\" />
+    <Folder Include="wwwroot\css\Auditor\" />
+    <Folder Include="wwwroot\css\Manager\" />
   </ItemGroup>
 
 </Project>

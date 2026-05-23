@@ -5,13 +5,13 @@ using SmartAuditX.Models;
 using SmartAuditX.Services.Interfaces;
 
 namespace SmartAuditX.Services.Implementations
-{
+{   
     /// <summary>
     /// Service responsible for seeding initial data into the application database
     /// including the system admin user and required company records
     /// </summary>
     public class SeedService : ISeedService
-    {
+    {   
         // Database context for direct database operations
         private readonly ApplicationDbContext _context;
 
