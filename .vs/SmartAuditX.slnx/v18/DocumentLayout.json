@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "D:\\SmartAuditX\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\registrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\registrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\mvccontrollers\\registrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\mvccontrollers\\registrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Program.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Program.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Program.cs",
-              "RelativeToolTip": "SmartAuditX\\Program.cs",
-              "ViewState": "AgIAAIEAAAAAAAAAAAAAAIQAAAABAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "RegistrationController.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\mvccontrollers\\RegistrationController.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\mvccontrollers\\RegistrationController.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\mvccontrollers\\RegistrationController.cs",
+              "RelativeToolTip": "SmartAuditX\\Controllers\\mvccontrollers\\RegistrationController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAowA4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-23T18:41:13.88Z",
+              "WhenOpened": "2026-05-23T20:01:06.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegistrationService.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\RegistrationService.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\RegistrationService.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\RegistrationService.cs",
+              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\RegistrationService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T19:48:47.778Z",
               "EditorCaption": ""
             }
           ]

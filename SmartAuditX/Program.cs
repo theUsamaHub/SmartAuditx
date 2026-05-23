@@ -119,7 +119,8 @@ options.Cookie.HttpOnly = true;
 });
 
 
-builder.Services.AddScoped<ISeedService, SeedService>();
+builder.Services.AddScoped<ISeedService, SeedService>(); //added seed service to the DI container
+builder.Services.AddScoped<  IRegistrationService, RegistrationService>(); //added company registeration service to the DI container
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();  //added this for the internal ui of identity 
 var app = builder.Build();
