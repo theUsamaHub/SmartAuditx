@@ -1,22 +1,11 @@
 using Humanizer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using Newtonsoft.Json.Linq;
-using NuGet.Configuration;
-using NuGet.Protocol.Plugins;
 using SmartAuditX.Data;
 using SmartAuditX.Models;
 using SmartAuditX.Services.Implementations;
 using SmartAuditX.Services.Interfaces;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Net;
-using System.Timers;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 using static System.Collections.Specialized.BitVector32;
@@ -33,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 builder.Services
     .AddIdentity<ApplicationUser, ApplicationRole>(options =>
@@ -94,7 +84,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     //Purpose: Default URL for sign -out requests
     //What happens: Clears the authentication cookie
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-
     //Purpose: Redirects users who are authenticated but lack required roles / policies
     //When triggered: User has valid login but[Authorize(Roles = "Admin")] fails
     options.Cookie.MaxAge = TimeSpan.FromDays(30);
@@ -128,6 +117,8 @@ options.Cookie.HttpOnly = true;
 //Whichever comes first wins
 
 });
+
+
 builder.Services.AddScoped<ISeedService, SeedService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();  //added this for the internal ui of identity 
@@ -144,7 +135,6 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
 using (var scope = app.Services.CreateScope())
 {
     var seedService =
