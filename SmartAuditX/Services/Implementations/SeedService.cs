@@ -43,90 +43,164 @@ namespace SmartAuditX.Services.Implementations
         /// Creates admin@smartauditx.com user with SystemAdmin role
         /// </summary>
         /// <exception cref="Exception">Thrown when SystemAdmin role doesn't exist or user creation fails</exception>
+        /// 
         public async Task SeedSystemAdminAsync()
         {
-            // STEP 1: Check if SYSTEM company exists (CompanyId = 1 is reserved for SYSTEM)
+            // STEP 1:
+            // Check whether the SYSTEM company already exists.
+            // CompanyId = 1 is reserved for platform-level operations.
             var systemCompany = await _context.Companies
                 .FirstOrDefaultAsync(c => c.CompanyId == 1);
 
-            // STEP 2: Create SYSTEM company if it doesn't exist
+            // STEP 2:
+            // Create SYSTEM company if it does not exist.
             if (systemCompany == null)
             {
                 systemCompany = new Company
                 {
-                    Name = "SYSTEM",           // Special company name for system-level operations
-                    IsActive = true,           // Company is active
-                    IsDeleted = false          // Company is not deleted
+                    // ─────────────────────────────────────────────
+                    // CORE COMPANY INFORMATION
+                    // ─────────────────────────────────────────────
+
+                    Name = "SYSTEM",
+
+                    IndustryType = "Platform Administration",
+
+                    Website = "https://smartauditx.com",
+
+                    LogoUrl = null,
+
+                    // ─────────────────────────────────────────────
+                    // COMPANY SEGMENTATION
+                    // ─────────────────────────────────────────────
+
+                    CompanySize = CompanySize.Enterprise,
+
+                    EmployeeCountRange = "1000+",
+
+                    // ─────────────────────────────────────────────
+                    // LOCATION
+                    // ─────────────────────────────────────────────
+
+                    CountryCode = "PK",
+
+                    City = "Karachi",
+
+                    // ─────────────────────────────────────────────
+                    // MARKETING / ONBOARDING
+                    // ─────────────────────────────────────────────
+
+                    ReferralSource = "Internal",
+
+                    OnboardingStatus = OnboardingStatus.Active,
+
+                    // ─────────────────────────────────────────────
+                    // SYSTEM FLAGS
+                    // ─────────────────────────────────────────────
+
+                    IsActive = true,
+
+                    IsDeleted = false
                 };
 
                 _context.Companies.Add(systemCompany);
 
-                // Save to generate CompanyId (will be 1 due to auto-increment starting from 1)
+                // Save immediately to generate CompanyId
                 await _context.SaveChangesAsync();
+            }
 
-                // STEP 3: Verify SystemAdmin role exists before creating admin user
-                var roleExists = await _roleManager.RoleExistsAsync("SystemAdmin");
+            // STEP 3:
+            // Ensure SystemAdmin role exists before creating user.
+            var roleExists =
+                await _roleManager.RoleExistsAsync("SystemAdmin");
 
-                if (!roleExists)
+            if (!roleExists)
+            {
+                throw new Exception(
+                    "SystemAdmin role not found. Run role seeding first.");
+            }
+
+            // STEP 4:
+            // Check whether admin user already exists.
+            var adminUser =
+                await _userManager.FindByEmailAsync(
+                    "admin@smartauditx.com");
+
+            // STEP 5:
+            // Create system admin user if not found.
+            if (adminUser == null)
+            {
+                adminUser = new ApplicationUser
+                {
+                    // ─────────────────────────────────────────────
+                    // TENANT RELATIONSHIP
+                    // ─────────────────────────────────────────────
+
+                    CompanyId = systemCompany.CompanyId,
+
+                    EmployeeId = null,
+
+                    // ─────────────────────────────────────────────
+                    // LOGIN INFORMATION
+                    // ─────────────────────────────────────────────
+
+                    UserName = "admin",
+
+                    Email = "admin@smartauditx.com",
+
+                    // ─────────────────────────────────────────────
+                    // PHONE INFORMATION
+                    // ─────────────────────────────────────────────
+
+                    PhoneDialCode = "+92",
+
+                    PhoneNumber = "3000000000",
+
+                    // ─────────────────────────────────────────────
+                    // CONFIRMATIONS
+                    // ─────────────────────────────────────────────
+
+                    EmailConfirmed = true,
+
+                    PhoneNumberConfirmed = true,
+
+                    // ─────────────────────────────────────────────
+                    // SECURITY
+                    // ─────────────────────────────────────────────
+
+                    LockoutEnabled = true,
+
+                    TwoFactorEnabled = false,
+
+                    // ─────────────────────────────────────────────
+                    // SYSTEM FLAGS
+                    // ─────────────────────────────────────────────
+
+                    IsActive = true,
+
+                    IsDeleted = false
+                };
+
+                // Create admin user
+                var result =
+                    await _userManager.CreateAsync(
+                        adminUser,
+                        "Admin@123");
+
+                // Validate user creation
+                if (!result.Succeeded)
                 {
                     throw new Exception(
-                        "SystemAdmin role not found. Please run role seeding first.");
+                        string.Join(", ",
+                        result.Errors.Select(x => x.Description)));
                 }
 
-                // STEP 4: Check if admin user already exists
-                var adminUser =
-                  await _userManager.FindByEmailAsync("admin@smartauditx.com");
-
-                // STEP 5: Create admin user if it doesn't exist
-                if (adminUser == null)
-                {
-                    adminUser = new ApplicationUser
-                    {
-                        CompanyId = systemCompany.CompanyId,     // Link to SYSTEM company
-
-                        UserName = "admin",                       // Username for login
-
-                        Email = "admin@smartauditx.com",          // Email address
-
-                        PhoneNumber = "0000000000",               // Default phone number
-
-                        EmailConfirmed = true,                    // Bypass email verification for system admin
-
-                        PhoneNumberConfirmed = true,              // Bypass phone verification
-
-                        IsActive = true,                          // Account is active
-
-                        IsDeleted = false                         // Account is not deleted
-                    };
-
-                    // Create the user with default password
-                    var result =
-                        await _userManager.CreateAsync(
-                            adminUser,
-                            "Admin@123"                           // Default password (should be changed on first login)
-                        );
-
-                    // Check if user creation was successful
-                    if (!result.Succeeded)
-                    {
-                        throw new Exception(
-                            string.Join(", ",
-                            result.Errors.Select(x => x.Description)));
-                    }
-
-                    // STEP 6: Assign SystemAdmin role to the newly created admin user
-                    if (!await _userManager.IsInRoleAsync(
-            adminUser,
-            "SystemAdmin"))
-                    {
-                        await _userManager.AddToRoleAsync(
-                            adminUser,
-                            "SystemAdmin");
-                    }
-                }
+                // STEP 6:
+                // Assign SystemAdmin role.
+                await _userManager.AddToRoleAsync(
+                    adminUser,
+                    "SystemAdmin");
             }
-            // Note: If SYSTEM company already exists, we assume admin user also exists
-            // and skip the seeding process to avoid duplicates
         }
     }
 }
