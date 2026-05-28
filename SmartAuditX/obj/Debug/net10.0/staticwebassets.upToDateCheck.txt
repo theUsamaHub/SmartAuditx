@@ -1,3 +1,4 @@
+wwwroot\Companylogo\92e8ce9a-acdb-4f63-8913-8693223ff213.jpeg
 wwwroot\Companylogo\aa07bcb8-4dd2-49a2-ab57-0773122866fc.png
 wwwroot\css\site.css
 wwwroot\favicon.ico

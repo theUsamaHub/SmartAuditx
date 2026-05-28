@@ -2117,6 +2117,22 @@
           }
         }
       },
+      "PSC.CSharp.Library.CountryData/8.0.9": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/PSC.CSharp.Library.CountryData.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/PSC.CSharp.Library.CountryData.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/net8.0/psc_ico.ico": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "System.CodeDom/6.0.0": {
         "type": "package",
         "compile": {
@@ -5956,6 +5972,22 @@
         "nuget.versioning.nuspec"
       ]
     },
+    "PSC.CSharp.Library.CountryData/8.0.9": {
+      "sha512": "injLtPp8kuG2n1cFQOa+xe3pm07ARTJTKQ0Qd9paP+oQwpda+mAr7O7T1vxKYoP/SducO7e9+YQVGNOEwVzQhw==",
+      "type": "package",
+      "path": "psc.csharp.library.countrydata/8.0.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "content/psc_ico.ico",
+        "contentFiles/any/net8.0/psc_ico.ico",
+        "lib/net8.0/PSC.CSharp.Library.CountryData.dll",
+        "psc.csharp.library.countrydata.8.0.9.nupkg.sha512",
+        "psc.csharp.library.countrydata.nuspec",
+        "psc_logo.png"
+      ]
+    },
     "System.CodeDom/6.0.0": {
       "sha512": "CPc6tWO1LAer3IzfZufDBRL+UZQcj5uS207NHALQzP84Vp/z6wF0Aa0YZImOQY8iStY0A2zI/e3ihKNPfUm8XA==",
       "type": "package",
@@ -6325,7 +6357,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 10.0.8",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.23.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 10.0.2",
-      "NuGet.Packaging >= 6.13.1"
+      "NuGet.Packaging >= 6.13.1",
+      "PSC.CSharp.Library.CountryData >= 8.0.9"
     ]
   },
   "packageFolders": {
@@ -6429,6 +6462,10 @@
           "NuGet.Packaging": {
             "target": "Package",
             "version": "[6.13.1, )"
+          },
+          "PSC.CSharp.Library.CountryData": {
+            "target": "Package",
+            "version": "[8.0.9, )"
           }
         },
         "imports": [
