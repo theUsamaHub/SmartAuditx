@@ -127,10 +127,9 @@ namespace SmartAuditX.Models
         /// No Countries table needed — frontend loads from a static JSON list.
         /// Stored as 2-letter code to keep it compact and standard.
         /// </summary>
-        [MaxLength(2, ErrorMessage = "Country code must be a 2-letter ISO code")]
-        [MinLength(2, ErrorMessage = "Country code must be a 2-letter ISO code")]
-        public string? CountryCode { get; set; }
-
+        [RegularExpression(@"^[A-Z]{2}$", ErrorMessage = "Invalid country selection.")]
+        [Required]
+        public string CountryCode { get; set; }
         /// <summary>
         /// Free-text city name. No Cities table — too large to maintain (150k+ rows).
         /// Standard approach used by Stripe, HubSpot, Slack.

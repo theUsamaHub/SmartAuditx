@@ -7,6 +7,7 @@ D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\SmartAuditX.deps.json
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\SmartAuditX.runtimeconfig.json
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\SmartAuditX.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\SmartAuditX.pdb
+D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Dapper.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Humanizer.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -27,6 +28,8 @@ D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.CodeAnalysis.Workspaces.d
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.Data.SqlClient.dll
+D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.Data.SqlClient.Extensions.Abstractions.dll
+D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.Data.SqlClient.Internal.Logging.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.DiaSymReader.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.DotNet.Scaffolding.Shared.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
@@ -252,6 +255,7 @@ D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.MvcApplicationPartsAsse
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.MvcApplicationPartsAssemblyInfo.cache
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.RazorAssemblyInfo.cache
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.RazorAssemblyInfo.cs
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.sourcelink.json
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\rjimswa.dswa.cache.json
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -389,14 +393,10 @@ D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.build.json.cache
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.development.json
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\swae.build.ex.cache
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAud.174E70FA.Up2Date
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.dll
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\refint\SmartAuditX.dll
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.pdb
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.genruntimeconfig.cache
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\ref\SmartAuditX.dll
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.sourcelink.json
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
-D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Dapper.dll
-D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.Data.SqlClient.Extensions.Abstractions.dll
-D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\Microsoft.Data.SqlClient.Internal.Logging.dll

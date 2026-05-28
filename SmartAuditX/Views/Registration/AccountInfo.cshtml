@@ -4,42 +4,129 @@
     ViewData["Title"] = "Account Information";
 }
 
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css" />
+
 <h2>Account Information</h2>
 
 <form asp-action="AccountInfo" method="post">
 
-    <div class="mb-3">
-        <label asp-for="Username" class="form-label"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger mb-3">
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+    <!-- USERNAME -->
 
     <div class="mb-3">
-        <label asp-for="PhoneNumber" class="form-label"></label>
-        <input asp-for="PhoneNumber" class="form-control" />
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+        <label asp-for="Username"
+               class="form-label">
+        </label>
+
+        <input asp-for="Username"
+               class="form-control"
+               placeholder="Enter username"
+               autocomplete="username" />
+
+        <span asp-validation-for="Username"
+              class="text-danger">
+        </span>
+
     </div>
+
+    <!-- EMAIL -->
 
     <div class="mb-3">
-        <label asp-for="Password" class="form-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <label asp-for="Email"
+               class="form-label">
+        </label>
+
+        <input asp-for="Email"
+               class="form-control"
+               placeholder="Enter email"
+               autocomplete="email" />
+
+        <span asp-validation-for="Email"
+              class="text-danger">
+        </span>
+
     </div>
+
+    <!-- PHONE -->
 
     <div class="mb-3">
-        <label asp-for="ConfirmPassword" class="form-label"></label>
-        <input asp-for="ConfirmPassword" class="form-control" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        <label asp-for="PhoneNumber"
+               class="form-label">
+        </label>
+
+        <input asp-for="PhoneNumber"
+               id="phone"
+               class="form-control"
+               autocomplete="tel" />
+
+        <!-- hidden dial code -->
+
+        <input type="hidden"
+               asp-for="PhoneDialCode"
+               id="PhoneDialCode" />
+
+        <span asp-validation-for="PhoneNumber"
+              class="text-danger">
+        </span>
+
+        <span asp-validation-for="PhoneDialCode"
+              class="text-danger">
+        </span>
+
     </div>
 
-    <button type="submit" class="btn btn-primary">
+    <!-- PASSWORD -->
+
+    <div class="mb-3">
+
+        <label asp-for="Password"
+               class="form-label">
+        </label>
+
+        <input asp-for="Password"
+               type="password"
+               class="form-control"
+               autocomplete="new-password" />
+
+        <span asp-validation-for="Password"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <!-- CONFIRM PASSWORD -->
+
+    <div class="mb-3">
+
+        <label asp-for="ConfirmPassword"
+               class="form-label">
+        </label>
+
+        <input asp-for="ConfirmPassword"
+               type="password"
+               class="form-control"
+               autocomplete="new-password" />
+
+        <span asp-validation-for="ConfirmPassword"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
         Next
+
     </button>
 
 </form>
@@ -47,4 +134,40 @@
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
+
+    <script>
+
+        const phoneInput =
+        document.querySelector("#phone");
+
+        const iti =
+        window.intlTelInput(phoneInput, {
+
+        initialCountry: "pk",
+
+        preferredCountries: ["pk", "ae", "sa", "us", "gb"],
+
+        separateDialCode: true,
+
+        strictMode: true,
+
+        utilsScript:
+        "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"
+        });
+
+        const form =
+        phoneInput.closest("form");
+
+        form.addEventListener("submit", function () {
+
+        const countryData =
+        iti.getSelectedCountryData();
+
+        document.getElementById("PhoneDialCode").value =
+        "+" + countryData.dialCode;
+        });
+
+    </script>
 }

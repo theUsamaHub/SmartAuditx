@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartAuditX")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+721ae6641d7b4ad802d0356a11f847922b4375ff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abec3e5423e09cdccce47b7edd4328f200af00ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartAuditX")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartAuditX")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

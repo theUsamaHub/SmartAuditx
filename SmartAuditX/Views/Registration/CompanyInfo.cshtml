@@ -1,33 +1,203 @@
 ﻿@model SmartAuditX.Models.ViewModels.RegisterCompanyViewModel
 
+@using SmartAuditX.Models
+
 @{
     ViewData["Title"] = "Company Information";
 }
 
 <h2>Company Information</h2>
 
-<form asp-action="CompanyInfo" method="post">
+<form asp-action="CompanyInfo"
+      method="post"
+      enctype="multipart/form-data">
 
-    <div class="mb-3">
-        <label asp-for="CompanyName" class="form-label"></label>
-        <input asp-for="CompanyName" class="form-control" />
-        <span asp-validation-for="CompanyName" class="text-danger"></span>
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger mb-3">
     </div>
 
-    <div class="mb-3">
-        <label asp-for="IndustryType" class="form-label"></label>
-        <input asp-for="IndustryType" class="form-control" />
-        <span asp-validation-for="IndustryType" class="text-danger"></span>
-    </div>
+    <!-- COMPANY NAME -->
 
     <div class="mb-3">
-        <label asp-for="LogoUrl" class="form-label"></label>
-        <input asp-for="LogoUrl" class="form-control" />
-        <span asp-validation-for="LogoUrl" class="text-danger"></span>
+
+        <label asp-for="CompanyName"
+               class="form-label">
+        </label>
+
+        <input asp-for="CompanyName"
+               class="form-control"
+               placeholder="Enter company name" />
+
+        <span asp-validation-for="CompanyName"
+              class="text-danger">
+        </span>
+
     </div>
 
-    <button type="submit" class="btn btn-success">
+    <!-- INDUSTRY TYPE -->
+
+    <div class="mb-3">
+
+        <label asp-for="IndustryType"
+               class="form-label">
+        </label>
+
+        <input asp-for="IndustryType"
+               class="form-control"
+               placeholder="e.g. Healthcare, Retail" />
+
+        <span asp-validation-for="IndustryType"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <!-- WEBSITE -->
+
+    <div class="mb-3">
+
+        <label asp-for="Website"
+               class="form-label">
+        </label>
+
+        <input asp-for="Website"
+               class="form-control"
+               placeholder="https://example.com" />
+
+        <span asp-validation-for="Website"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <!-- COMPANY SIZE -->
+
+    <div class="mb-3">
+
+        <label asp-for="CompanySize"
+               class="form-label">
+        </label>
+
+        <select asp-for="CompanySize"
+                class="form-select"
+                asp-items="Html.GetEnumSelectList<CompanySize>()">
+
+            <option value="">
+                -- Select Company Size --
+            </option>
+
+        </select>
+
+        <span asp-validation-for="CompanySize"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <!-- EMPLOYEE COUNT RANGE -->
+
+    <div class="mb-3">
+
+        <label asp-for="EmployeeCountRange"
+               class="form-label">
+        </label>
+
+        <select asp-for="EmployeeCountRange"
+                class="form-select">
+
+            <option value="">
+                -- Select Employee Range --
+            </option>
+
+            <option value="1-50">1 - 50</option>
+            <option value="51-200">51 - 200</option>
+            <option value="201-1000">201 - 1000</option>
+            <option value="1000+">1000+</option>
+
+        </select>
+
+        <span asp-validation-for="EmployeeCountRange"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <!-- COUNTRY CODE -->
+
+    <div class="mb-3">
+
+        <label asp-for="CountryCode" class="form-label"></label>
+
+        <select asp-for="CountryCode" asp-items="Model.Countries">
+            <option value="">-- Select Country --</option>
+        </select>
+
+        <span asp-validation-for="CountryCode" class="text-danger"></span>
+
+    </div>
+
+    <!-- CITY -->
+
+    <div class="mb-3">
+
+        <label asp-for="City"
+               class="form-label">
+        </label>
+
+        <input asp-for="City"
+               class="form-control"
+               placeholder="Karachi" />
+
+        <span asp-validation-for="City"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <!-- REFERRAL SOURCE -->
+
+    <div class="mb-3">
+
+        <label asp-for="ReferralSource"
+               class="form-label">
+        </label>
+
+        <input asp-for="ReferralSource"
+               class="form-control"
+               placeholder="Google, LinkedIn, Referral" />
+
+        <span asp-validation-for="ReferralSource"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <!-- COMPANY LOGO -->
+
+    <div class="mb-3">
+
+        <label asp-for="CompanyLogo"
+               class="form-label">
+        </label>
+
+        <input asp-for="CompanyLogo"
+               type="file"
+               class="form-control"
+               accept=".jpg,.jpeg,.png,.webp" />
+
+        <span asp-validation-for="CompanyLogo"
+              class="text-danger">
+        </span>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+
         Register Company
+
     </button>
 
 </form>

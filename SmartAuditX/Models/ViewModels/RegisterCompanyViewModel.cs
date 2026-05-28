@@ -1,16 +1,69 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using SmartAuditX.Models;
+using System.ComponentModel.DataAnnotations;
+
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace SmartAuditX.Models.ViewModels
 {
     public class RegisterCompanyViewModel
     {
+        // ─────────────────────────────────────────────
+        // COMPANY INFORMATION
+        // ─────────────────────────────────────────────
+
         [Required]
-        [MaxLength(255)]
+        [StringLength(255)]
         public string CompanyName { get; set; } = string.Empty;
 
-        [MaxLength(100)]
+        [StringLength(100)]
         public string? IndustryType { get; set; }
 
-        [MaxLength(500)]
-        public string? LogoUrl { get; set; }
+        [Url]
+        [StringLength(255)]
+        public string? Website { get; set; }
+
+        // ─────────────────────────────────────────────
+        // COMPANY SIZE
+        // ─────────────────────────────────────────────
+
+        [Required]
+        public CompanySize CompanySize { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string EmployeeCountRange { get; set; } = string.Empty;
+
+        // ─────────────────────────────────────────────
+        // LOCATION
+        // ─────────────────────────────────────────────
+
+        // COUNTRY CODE (selected value)
+        [Required(ErrorMessage = "Country is required")]
+        [RegularExpression(@"^[A-Z]{2}$", ErrorMessage = "Invalid country selection")]
+        public string CountryCode { get; set; } = string.Empty;
+
+
+
+        [Required]
+        [StringLength(100)]
+        public string City { get; set; } = string.Empty;
+
+        // ─────────────────────────────────────────────
+        // MARKETING
+        // ─────────────────────────────────────────────
+
+        [StringLength(100)]
+        public string? ReferralSource { get; set; }
+
+        // ─────────────────────────────────────────────
+        // COMPANY LOGO
+        // ─────────────────────────────────────────────
+
+        public IFormFile? CompanyLogo { get; set; }
+
+        // UI DROPDOWN SOURCE (NOT STORED IN DB)
+        public List<SelectListItem>? Countries { get; set; }
     }
+
 }

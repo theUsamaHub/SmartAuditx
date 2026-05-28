@@ -92,6 +92,11 @@ namespace SmartAuditX.Data
                     .HasMaxLength(255)
                     .IsRequired();
 
+                // ── New Field ──────────────────────────────────────
+                entity.Property(x => x.PhoneDialCode)
+                    .HasMaxLength(5)
+                    .IsRequired();
+
                 // Phone Number
                 entity.Property(x => x.PhoneNumber)
                     .HasMaxLength(20)
@@ -130,10 +135,12 @@ namespace SmartAuditX.Data
                 entity.HasIndex(x => x.IsDeleted);
                 entity.HasIndex(x => x.IsActive);
                 entity.HasIndex(x => x.CreatedAt);
-                entity.HasOne<Company>()
-     .WithMany()
-     .HasForeignKey(x => x.CompanyId)
-     .OnDelete(DeleteBehavior.Restrict);
+                // ── Fix: Company relationship now has navigation ───
+                // Replace your existing HasOne with this:
+                entity.HasOne(x => x.Company)
+                    .WithMany(x => x.Users)
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
                 // Soft Delete Filter 
                 entity.HasQueryFilter(x => !x.IsDeleted);
             });
@@ -274,6 +281,53 @@ namespace SmartAuditX.Data
                 //updated at by default will be null until the record is updated for the first time, so we set the default value to null
                 entity.Property(x => x.UpdatedAt)
                     .HasDefaultValue(null);
+
+                // ── New Fields ─────────────────────────────────────
+
+                entity.Property(x => x.Website)
+                    .HasMaxLength(255);
+
+                //entity.Property(x => x.RegistrationNumber)
+                //    .HasMaxLength(100);
+
+                //entity.Property(x => x.TaxNumber)
+                //    .HasMaxLength(100);
+
+                entity.Property(x => x.EmployeeCountRange)
+                    .HasMaxLength(20);
+
+                entity.Property(x => x.CountryCode)
+                    .HasMaxLength(2);
+
+                entity.Property(x => x.City)
+                    .HasMaxLength(100);
+
+                entity.Property(x => x.ReferralSource)
+                    .HasMaxLength(100);
+
+                // ── Enums stored as strings (not integers) ─────────
+                // Without HasConversion EF Core stores enums as 0,1,2
+                // With it you get "Active", "CompanyInfoSaved" — readable in DB
+
+                entity.Property(x => x.CompanySize)
+                    .HasMaxLength(20)
+                    .HasConversion<string>();
+
+                entity.Property(x => x.OnboardingStatus)
+                    .HasMaxLength(30)
+                    .IsRequired()
+                    .HasConversion<string>()
+                    .HasDefaultValue(OnboardingStatus.CompanyInfoSaved);
+
+                // ── New Indexes ────────────────────────────────────
+                entity.HasIndex(x => x.OnboardingStatus); // filter companies by funnel stage
+                entity.HasIndex(x => x.CountryCode);      // filter by region
+
+                // ── Fix relationship — Company now has Users collection
+                entity.HasMany(x => x.Users)
+                    .WithOne(x => x.Company)
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasIndex(x => x.IsDeleted);
                 entity.HasIndex(x => x.IsActive);
