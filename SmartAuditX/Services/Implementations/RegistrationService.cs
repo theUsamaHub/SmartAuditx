@@ -247,7 +247,7 @@ namespace SmartAuditX.Services.Implementations
                 {
                     Name = company.CompanyName,
 
-                    IndustryType = company.IndustryType,
+                    IndustryType =null,
 
                     Website = company.Website,
 

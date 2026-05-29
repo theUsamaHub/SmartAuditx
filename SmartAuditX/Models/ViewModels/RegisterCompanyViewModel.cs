@@ -6,6 +6,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SmartAuditX.Models.ViewModels
 {
+
+    public enum IndustryType
+    {
+        Hellom,
+        gggg,
+        usama,
+
+    }
+
     public class RegisterCompanyViewModel
     {
         // ─────────────────────────────────────────────
@@ -16,7 +25,6 @@ namespace SmartAuditX.Models.ViewModels
         [StringLength(255)]
         public string CompanyName { get; set; } = string.Empty;
 
-        [StringLength(100)]
         public string? IndustryType { get; set; }
 
         [Url]

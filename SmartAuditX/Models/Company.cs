@@ -31,6 +31,14 @@ namespace SmartAuditX.Models
         Active
     }
 
+
+    public enum IndustryType
+    {
+        Hellom,
+        gggg,
+        usama,
+        
+    }
     /// <summary>
     /// Broad classification of company size.
     /// Used for analytics, segmentation, and plan recommendation.
@@ -73,8 +81,9 @@ namespace SmartAuditX.Models
         /// Broad industry category (e.g. Retail, Healthcare, Education, Manufacturing).
         /// Free text — not an enum — so new industries don't require a migration.
         /// </summary>
-        [MaxLength(100)]
+
         public string? IndustryType { get; set; }
+        //public IndustryType? IndustryType { get; set; }
 
         /// <summary>URL to the company logo stored in your file storage (S3, Azure Blob, etc.).</summary>
         [MaxLength(500)]

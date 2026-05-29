@@ -44,9 +44,15 @@
                class="form-label">
         </label>
 
-        <input asp-for="IndustryType"
-               class="form-control"
-               placeholder="e.g. Healthcare, Retail" />
+        <select asp-for="IndustryType"
+                class="form-select"
+                asp-items="Html.GetEnumSelectList<IndustryType>()">
+
+            <option value="">
+                -- Select Industry Type --
+            </option>
+
+        </select>
 
         <span asp-validation-for="IndustryType"
               class="text-danger">
@@ -127,15 +133,11 @@
     <!-- COUNTRY CODE -->
 
     <div class="mb-3">
-
         <label asp-for="CountryCode" class="form-label"></label>
-
-        <select asp-for="CountryCode" asp-items="Model.Countries">
+        <select asp-for="CountryCode" class="form-select" asp-items="Model.Countries">
             <option value="">-- Select Country --</option>
         </select>
-
         <span asp-validation-for="CountryCode" class="text-danger"></span>
-
     </div>
 
     <!-- CITY -->
