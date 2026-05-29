@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d5+xS/4VT3Y=",
+  "dgSpecHash": "V5WTRtWtRHU=",
   "success": true,
-  "projectFilePath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
+  "projectFilePath": "D:\\SmartAuditX\\SmartAuditX\\SmartAuditX.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\u6413\\.nuget\\packages\\dapper\\2.1.79\\dapper.2.1.79.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",

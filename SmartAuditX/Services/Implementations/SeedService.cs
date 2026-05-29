@@ -46,6 +46,8 @@ namespace SmartAuditX.Services.Implementations
         /// 
         public async Task SeedSystemAdminAsync()
         {
+            // STEP 1: Check if we need to migrate old data first
+
             // STEP 1:
             // Check whether the SYSTEM company already exists.
             // CompanyId = 1 is reserved for platform-level operations.
@@ -64,7 +66,7 @@ namespace SmartAuditX.Services.Implementations
 
                     Name = "SYSTEM",
 
-                    IndustryType = "Platform Administration",
+                    IndustryType = IndustryType.Administrative, //Using Administrative as a generic industry type for the system company
 
                     Website = "https://smartauditx.com",
 
@@ -76,7 +78,7 @@ namespace SmartAuditX.Services.Implementations
 
                     CompanySize = CompanySize.Enterprise,
 
-                    EmployeeCountRange = "1000+",
+                    EmployeeCountRange = EmployeeCountRange.Large, //now uses the enum value instead of hardcoded number
 
                     // ─────────────────────────────────────────────
                     // LOCATION

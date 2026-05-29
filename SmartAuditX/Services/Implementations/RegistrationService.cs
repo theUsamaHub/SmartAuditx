@@ -247,14 +247,13 @@ namespace SmartAuditX.Services.Implementations
                 {
                     Name = company.CompanyName,
 
-                    IndustryType =null,
+                    IndustryType = company.IndustryType,
 
                     Website = company.Website,
 
                     CompanySize = company.CompanySize,
 
-                    EmployeeCountRange =
-                        company.EmployeeCountRange,
+                    EmployeeCountRange = company.EmployeeCountRange,  // Now uses enum
 
                     CountryCode =
                         company.CountryCode.ToUpper(),

@@ -39,25 +39,11 @@
     <!-- INDUSTRY TYPE -->
 
     <div class="mb-3">
-
-        <label asp-for="IndustryType"
-               class="form-label">
-        </label>
-
-        <select asp-for="IndustryType"
-                class="form-select"
-                asp-items="Html.GetEnumSelectList<IndustryType>()">
-
-            <option value="">
-                -- Select Industry Type --
-            </option>
-
+        <label asp-for="IndustryType" class="form-label"></label>
+        <select asp-for="IndustryType" class="form-select" asp-items="Model.IndustryList">
+            <option value="">-- Select Industry --</option>
         </select>
-
-        <span asp-validation-for="IndustryType"
-              class="text-danger">
-        </span>
-
+        <span asp-validation-for="IndustryType" class="text-danger"></span>
     </div>
 
     <!-- WEBSITE -->
@@ -105,29 +91,11 @@
     <!-- EMPLOYEE COUNT RANGE -->
 
     <div class="mb-3">
-
-        <label asp-for="EmployeeCountRange"
-               class="form-label">
-        </label>
-
-        <select asp-for="EmployeeCountRange"
-                class="form-select">
-
-            <option value="">
-                -- Select Employee Range --
-            </option>
-
-            <option value="1-50">1 - 50</option>
-            <option value="51-200">51 - 200</option>
-            <option value="201-1000">201 - 1000</option>
-            <option value="1000+">1000+</option>
-
+        <label asp-for="EmployeeCountRange" class="form-label"></label>
+        <select asp-for="EmployeeCountRange" class="form-select" asp-items="Model.EmployeeRangeList">
+            <option value="">-- Select Employee Count --</option>
         </select>
-
-        <span asp-validation-for="EmployeeCountRange"
-              class="text-danger">
-        </span>
-
+        <span asp-validation-for="EmployeeCountRange" class="text-danger"></span>
     </div>
 
     <!-- COUNTRY CODE -->

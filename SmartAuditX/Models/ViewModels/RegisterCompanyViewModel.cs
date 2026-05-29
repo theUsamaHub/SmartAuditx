@@ -1,20 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SmartAuditX.Models;
 using System.ComponentModel.DataAnnotations;
-
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using SmartAuditX.Extensions;
 namespace SmartAuditX.Models.ViewModels
 {
-
-    public enum IndustryType
-    {
-        Hellom,
-        gggg,
-        usama,
-
-    }
-
     public class RegisterCompanyViewModel
     {
         // ─────────────────────────────────────────────
@@ -25,7 +15,8 @@ namespace SmartAuditX.Models.ViewModels
         [StringLength(255)]
         public string CompanyName { get; set; } = string.Empty;
 
-        public string? IndustryType { get; set; }
+        [Required(ErrorMessage = "Please select your industry")]
+        public IndustryType? IndustryType { get; set; }
 
         [Url]
         [StringLength(255)]
@@ -38,9 +29,8 @@ namespace SmartAuditX.Models.ViewModels
         [Required]
         public CompanySize CompanySize { get; set; }
 
-        [Required]
-        [StringLength(20)]
-        public string EmployeeCountRange { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Please select employee count range")]
+        public EmployeeCountRange? EmployeeCountRange { get; set; }
 
         // ─────────────────────────────────────────────
         // LOCATION
@@ -50,8 +40,6 @@ namespace SmartAuditX.Models.ViewModels
         [Required(ErrorMessage = "Country is required")]
         [RegularExpression(@"^[A-Z]{2}$", ErrorMessage = "Invalid country selection")]
         public string CountryCode { get; set; } = string.Empty;
-
-
 
         [Required]
         [StringLength(100)]
@@ -72,6 +60,23 @@ namespace SmartAuditX.Models.ViewModels
 
         // UI DROPDOWN SOURCE (NOT STORED IN DB)
         public List<SelectListItem>? Countries { get; set; }
-    }
 
+        // UI Helper - Get industry list for dropdown
+        public List<SelectListItem> IndustryList => Enum.GetValues(typeof(IndustryType))
+            .Cast<IndustryType>()
+            .Select(i => new SelectListItem
+            {
+                Value = i.ToString(),
+                Text = i.GetDisplayName()
+            }).ToList();
+
+        // UI Helper - Get employee range list for dropdown
+        public List<SelectListItem> EmployeeRangeList => Enum.GetValues(typeof(EmployeeCountRange))
+            .Cast<EmployeeCountRange>()
+            .Select(r => new SelectListItem
+            {
+                Value = r.ToString(),
+                Text = r.GetDisplayName()
+            }).ToList();
+    }
 }

@@ -260,9 +260,11 @@ namespace SmartAuditX.Data
                     .HasMaxLength(255)
                     .IsRequired();
 
-                // Industry
+                // Industry - NOW AN ENUM
                 entity.Property(x => x.IndustryType)
-                    .HasMaxLength(100);
+                    .HasConversion<string>()  // Store as string in DB (e.g., "IT", "Healthcare")
+                    .HasMaxLength(50)          // Max enum name length
+                    .IsRequired(false);        // Nullable
 
                 // Logo
                 entity.Property(x => x.LogoUrl)
@@ -293,8 +295,11 @@ namespace SmartAuditX.Data
                 //entity.Property(x => x.TaxNumber)
                 //    .HasMaxLength(100);
 
+                // Employee Count Range - NOW AN ENUM
                 entity.Property(x => x.EmployeeCountRange)
-                    .HasMaxLength(20);
+                    .HasConversion<string>()  // Store as string in DB (e.g., "Small", "Medium")
+                    .HasMaxLength(30)          // Max enum name length
+                    .IsRequired(false);        // Nullable
 
                 entity.Property(x => x.CountryCode)
                     .HasMaxLength(2);
@@ -309,20 +314,25 @@ namespace SmartAuditX.Data
                 // Without HasConversion EF Core stores enums as 0,1,2
                 // With it you get "Active", "CompanyInfoSaved" — readable in DB
 
+                // Enums stored as strings (not integers)
                 entity.Property(x => x.CompanySize)
+                    .HasConversion<string>()
                     .HasMaxLength(20)
-                    .HasConversion<string>();
+                    .IsRequired(false);
 
                 entity.Property(x => x.OnboardingStatus)
-                    .HasMaxLength(30)
-                    .IsRequired()
-                    .HasConversion<string>()
-                    .HasDefaultValue(OnboardingStatus.CompanyInfoSaved);
+        .HasConversion<string>()
+        .HasMaxLength(30)
+        .IsRequired()
+        .HasDefaultValue(OnboardingStatus.CompanyInfoSaved);
 
                 // ── New Indexes ────────────────────────────────────
                 entity.HasIndex(x => x.OnboardingStatus); // filter companies by funnel stage
                 entity.HasIndex(x => x.CountryCode);      // filter by region
 
+                // Optional: Add indexes for new enum fields if you query by them often
+                entity.HasIndex(x => x.IndustryType);
+                entity.HasIndex(x => x.EmployeeCountRange);
                 // ── Fix relationship — Company now has Users collection
                 entity.HasMany(x => x.Users)
                     .WithOne(x => x.Company)
