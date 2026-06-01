@@ -4,7 +4,7 @@ namespace SmartAuditX.Services.Interfaces
 {
     public interface IRegistrationService
     {
-        Task<bool> RegisterCompanyOwnerAsync(
+        Task<RegistrationResult> RegisterCompanyOwnerAsync(
             RegisterAccountViewModel account,
             RegisterCompanyViewModel company);
     }

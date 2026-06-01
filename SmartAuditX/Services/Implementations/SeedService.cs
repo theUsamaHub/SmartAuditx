@@ -10,7 +10,7 @@ namespace SmartAuditX.Services.Implementations
     /// Service responsible for seeding initial data into the application database
     /// including the system admin user and required company records
     /// </summary>
-    public class SeedService : ISeedService
+    public class SeedService : ISeedService 
     {   
         // Database context for direct database operations
         private readonly ApplicationDbContext _context;
@@ -92,7 +92,7 @@ namespace SmartAuditX.Services.Implementations
                     // MARKETING / ONBOARDING
                     // ─────────────────────────────────────────────
 
-                    ReferralSource = "Internal",
+                    ReferralSource = ReferralSources.Youtube,
 
                     OnboardingStatus = OnboardingStatus.Active,
 

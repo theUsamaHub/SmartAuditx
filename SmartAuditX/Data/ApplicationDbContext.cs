@@ -307,8 +307,11 @@ namespace SmartAuditX.Data
                 entity.Property(x => x.City)
                     .HasMaxLength(100);
 
+                // ReferralSource - NOW AN ENUM
                 entity.Property(x => x.ReferralSource)
-                    .HasMaxLength(100);
+                    .HasConversion<string>()  // Store as string in DB (e.g., "IT", "Healthcare")
+                    .HasMaxLength(100)          // Max enum name length
+                    .IsRequired(false);        // Nullable
 
                 // ── Enums stored as strings (not integers) ─────────
                 // Without HasConversion EF Core stores enums as 0,1,2

@@ -101,7 +101,7 @@
     <!-- COUNTRY CODE -->
 
     <div class="mb-3">
-        <label asp-for="CountryCode" class="form-label"></label>
+        <label asp-for="CountryCode" class="form-label">Country</label>
         <select asp-for="CountryCode" class="form-select" asp-items="Model.Countries">
             <option value="">-- Select Country --</option>
         </select>
@@ -129,19 +129,11 @@
     <!-- REFERRAL SOURCE -->
 
     <div class="mb-3">
-
-        <label asp-for="ReferralSource"
-               class="form-label">
-        </label>
-
-        <input asp-for="ReferralSource"
-               class="form-control"
-               placeholder="Google, LinkedIn, Referral" />
-
-        <span asp-validation-for="ReferralSource"
-              class="text-danger">
-        </span>
-
+        <label asp-for="ReferralSource" class="form-label"></label>
+        <select asp-for="ReferralSource" class="form-select" asp-items="Model.ReferralSourceList">
+            <option value="">-- Select Refferal Source --</option>
+        </select>
+        <span asp-validation-for="ReferralSourceList" class="text-danger"></span>
     </div>
 
     <!-- COMPANY LOGO -->

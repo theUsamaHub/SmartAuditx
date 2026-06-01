@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SmartAuditX.Data;
 using SmartAuditX.Models;
+using SmartAuditX.Models.SmartAuditX.Models.Settings;
 using SmartAuditX.Services.Implementations;
 using SmartAuditX.Services.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -37,11 +38,11 @@ builder.Services
         // User settings
         options.User.RequireUniqueEmail = true;
         // Lockout settings
-    //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    //    options.Lockout.MaxFailedAccessAttempts = 5;
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+        options.Lockout.MaxFailedAccessAttempts = 5;
 
         // Sign In settings
-        //options.SignIn.RequireConfirmedEmail = true; //we will uncomment it later WHEN GO TO THE PHASE A-II
+        options.SignIn.RequireConfirmedEmail = true; //we will uncomment it later WHEN GO TO THE PHASE A-II
     })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
@@ -123,6 +124,9 @@ builder.Services.AddScoped<ISeedService, SeedService>(); //added seed service to
 builder.Services.AddScoped<  IRegistrationService, RegistrationService>(); //added company registeration service to the DI container
 builder.Services.AddScoped<IFileService, FileService>(); //added file service to the DI container
 builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();  //added this for the internal ui of identity 
 var app = builder.Build();

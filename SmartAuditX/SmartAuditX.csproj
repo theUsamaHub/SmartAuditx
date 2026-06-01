@@ -11,6 +11,7 @@
 
   <ItemGroup>
 	  <PackageReference Include="Dapper" Version="2.1.79" />
+	  <PackageReference Include="MailKit" Version="4.17.0" />
 	  <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.1" />
 	  <PackageReference Include="NuGet.Packaging" Version="6.13.1" />  <!--Updated this to 6.13.1 becuase 6.13.0 stopping commands-->
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.8" />
@@ -28,11 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
+    <Folder Include="Views\Shared\Layouts\Partials\" />
     <Folder Include="wwwroot\css\Company\" />
     <Folder Include="wwwroot\css\Auditor\" />
     <Folder Include="wwwroot\css\Manager\" />
     <Folder Include="wwwroot\Companylogo\" />
+    <Folder Include="wwwroot\css\Admin\" />
+    <Folder Include="wwwroot\js\Admin\" />
+    <Folder Include="wwwroot\js\Auditor\" />
+    <Folder Include="wwwroot\js\Company\" />
+    <Folder Include="wwwroot\js\Manager\" />
   </ItemGroup>
 
 </Project>

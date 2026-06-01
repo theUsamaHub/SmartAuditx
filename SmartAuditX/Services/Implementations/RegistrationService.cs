@@ -110,12 +110,18 @@
 //}
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using SmartAuditX.Data;
 using SmartAuditX.Helpers;
 using SmartAuditX.Models;
 using SmartAuditX.Models.ViewModels;
 using SmartAuditX.Services.Interfaces;
+using System.Runtime.Intrinsics.X86;
+using System.Text;
+using static Dapper.SqlMapper;
 
 namespace SmartAuditX.Services.Implementations
 {
@@ -137,12 +143,14 @@ namespace SmartAuditX.Services.Implementations
         // DEPENDENCIES
         // ─────────────────────────────────────────────
 
+
         private readonly IFileService _fileService;
 
         private readonly ApplicationDbContext _context;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
+        private readonly IEmailService _emailService;
         // ─────────────────────────────────────────────
         // CONSTRUCTOR
         // ─────────────────────────────────────────────
@@ -150,20 +158,23 @@ namespace SmartAuditX.Services.Implementations
         public RegistrationService(
             IFileService fileService,
             ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+             IEmailService emailService)
         {
             _fileService = fileService;
 
             _context = context;
 
             _userManager = userManager;
+            _emailService = emailService;
+
         }
 
         // ─────────────────────────────────────────────
         // MAIN REGISTRATION METHOD
         // ─────────────────────────────────────────────
 
-        public async Task<bool> RegisterCompanyOwnerAsync(
+        public async Task<RegistrationResult> RegisterCompanyOwnerAsync(
             RegisterAccountViewModel account,
             RegisterCompanyViewModel company)
         {
@@ -172,6 +183,10 @@ namespace SmartAuditX.Services.Implementations
 
             try
             {
+    //            await _emailService.SendEmailAsync(
+    //"u641332@gmail.com",
+    //"Test Email",
+    //"<h1>Email Service Working</h1>");
                 // ─────────────────────────────────────────────
                 // STEP 1: VALIDATE COUNTRY CODE
                 // ─────────────────────────────────────────────
@@ -184,8 +199,12 @@ namespace SmartAuditX.Services.Implementations
                 if (!CountryValidator.IsValidCountryCode(
                     company.CountryCode))
                 {
-                    throw new Exception(
-                        "Invalid country code.");
+                    await transaction.RollbackAsync();
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = "Invalid Country Code"
+                    };
                 }
 
                 // ─────────────────────────────────────────────
@@ -198,8 +217,15 @@ namespace SmartAuditX.Services.Implementations
 
                 if (emailExists != null)
                 {
-                    throw new Exception(
-                        "Email already exists.");
+                    await transaction.RollbackAsync();
+
+                    //throw new Exception(
+                    //    "Email already exists.");
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = "Email already exists."
+                    };
                 }
 
                 // ─────────────────────────────────────────────
@@ -212,8 +238,12 @@ namespace SmartAuditX.Services.Implementations
 
                 if (usernameExists != null)
                 {
-                    throw new Exception(
-                        "Username already exists.");
+                    await transaction.RollbackAsync();
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = "Username already exists."
+                    };
                 }
 
                 // ─────────────────────────────────────────────
@@ -228,7 +258,12 @@ namespace SmartAuditX.Services.Implementations
 
                 if (phoneExists)
                 {
-                    throw new Exception("Phone number already exists.");
+                    await transaction.RollbackAsync();
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = "Phone number already exists."
+                    };
                 }
                 // ─────────────────────────────────────────────
                 // STEP 5: UPLOAD COMPANY LOGO
@@ -261,7 +296,7 @@ namespace SmartAuditX.Services.Implementations
                     City = company.City,
 
                     ReferralSource =
-                        company.ReferralSource,
+                        company.ReferralSource, //now uses the enum
 
                     LogoUrl = logoPath,
 
@@ -298,7 +333,7 @@ namespace SmartAuditX.Services.Implementations
                     PhoneDialCode = account.PhoneDialCode,
 
                     // Verification
-                    EmailConfirmed = true,
+                    EmailConfirmed = false, //now we are going to work for the email verification in the next step
 
                     PhoneNumberConfirmed = true,
 
@@ -312,6 +347,7 @@ namespace SmartAuditX.Services.Implementations
                 };
 
                 // ─────────────────────────────────────────────
+
                 // STEP 8: CREATE USER IN IDENTITY
                 // ─────────────────────────────────────────────
 
@@ -320,14 +356,27 @@ namespace SmartAuditX.Services.Implementations
                         user,
                         account.Password);
 
+
                 if (!createUserResult.Succeeded)
                 {
-                    throw new Exception(
-                        string.Join(
+                    await transaction.RollbackAsync();
+
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = string.Join(
                             ", ",
                             createUserResult.Errors
-                                .Select(x => x.Description)));
+                                .Select(x => x.Description))
+                    };
                 }
+
+                var token =
+    await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                var encodedToken =
+        WebEncoders.Base64UrlEncode(
+        Encoding.UTF8.GetBytes(token));
 
                 // ─────────────────────────────────────────────
                 // STEP 9: ASSIGN COMPANY OWNER ROLE
@@ -340,11 +389,15 @@ namespace SmartAuditX.Services.Implementations
 
                 if (!roleResult.Succeeded)
                 {
-                    throw new Exception(
-                        string.Join(
-                            ", ",
-                            roleResult.Errors
-                                .Select(x => x.Description)));
+                    await transaction.RollbackAsync();
+
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = string.Join(
+          ", ",
+          roleResult.Errors.Select(x => x.Description))
+                    };
                 }
 
                 // ─────────────────────────────────────────────
@@ -359,17 +412,23 @@ namespace SmartAuditX.Services.Implementations
 
                 await transaction.CommitAsync();
 
-                return true;
+                return new RegistrationResult
+                {
+                    Success = true,
+                    UserId = user.Id,
+                    EncodedToken = encodedToken
+                };
             }
-            catch
+            catch (Exception ex)
             {
-                // ─────────────────────────────────────────────
-                // ROLLBACK EVERYTHING
-                // ─────────────────────────────────────────────
-
                 await transaction.RollbackAsync();
 
-                return false;
+                return new RegistrationResult
+                {
+                    Success = false,
+                    ErrorMessage = ex.Message
+                };
+
             }
         }
     }

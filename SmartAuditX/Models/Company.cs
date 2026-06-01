@@ -236,6 +236,18 @@ namespace SmartAuditX.Models
     }
 
     /// <summary>
+    /// Employee count ranges for company size segmentation
+    /// Add new ranges here as needed - no database migration required
+    /// </summary>
+    
+    public enum ReferralSources
+    {
+        Youtube,
+        Instagram,
+        Facebook,
+
+    }
+    /// <summary>
     /// Broad classification of company size.
     /// Used for analytics, segmentation, and plan recommendation.
     /// The actual enforced employee limit comes from SubscriptionPlanFeature (MaxEmployees),
@@ -336,8 +348,8 @@ namespace SmartAuditX.Models
         /// Free text — not enum — so new sources don't require a migration.
         /// Used for marketing attribution and ROI tracking.
         /// </summary>
-        [MaxLength(100)]
-        public string? ReferralSource { get; set; }
+
+        public ReferralSources? ReferralSource { get; set; }
 
         /// <summary>
         /// Tracks which step of the onboarding funnel the company is at.
