@@ -9,5 +9,7 @@
         public string? EncodedToken { get; set; } = string.Empty;
 
         public string? ErrorMessage { get; set; } = string.Empty;
+        public string? Email { get; set; } //added this 
+
     }
 }

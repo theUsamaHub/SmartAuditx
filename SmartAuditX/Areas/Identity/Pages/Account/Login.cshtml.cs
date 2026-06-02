@@ -206,6 +206,18 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                 ModelState.AddModelError("", "Account is inactive.");
                 return Page();
             }
+            //check email confirmation
+            if (!user.EmailConfirmed)
+            {
+                return RedirectToAction(
+                    "EmailVerificationRequired",
+                    "Registration",
+                    new
+                    {
+                        userId = user.Id
+                    });
+            }
+
 
             // STEP 4: Attempt password authentication
             var result = await _signInManager.PasswordSignInAsync(
@@ -249,6 +261,13 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
 
                 // Fallback to default return URL if no specific role match
                 return LocalRedirect(returnUrl);
+            }
+
+            if (!user.EmailConfirmed)
+            {
+                return RedirectToAction(
+                    "EmailVerificationRequired",
+                    "Registration");
             }
 
             // STEP 6: Authentication failed - display generic error message
