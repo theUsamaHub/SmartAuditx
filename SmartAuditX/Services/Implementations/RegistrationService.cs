@@ -158,11 +158,22 @@ namespace SmartAuditX.Services.Implementations
                 // STEP 5: UPLOAD COMPANY LOGO
                 // ─────────────────────────────────────────────
 
-                var logoPath =
-                    await _fileService
-                        .UploadCompanyLogoAsync(
-                            company.CompanyLogo);
+                var uploadResult =
+    await _fileService
+        .UploadCompanyLogoAsync(
+            company.CompanyLogo);
 
+                if (!uploadResult.Success)
+                {
+                    await transaction.RollbackAsync();
+
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = uploadResult.ErrorMessage
+                    };
+
+                }
                 // ─────────────────────────────────────────────
                 // STEP 6: CREATE COMPANY
                 // ─────────────────────────────────────────────
@@ -187,8 +198,7 @@ namespace SmartAuditX.Services.Implementations
                     ReferralSource =
                         company.ReferralSource, //now uses the enum
 
-                    LogoUrl = logoPath,
-
+                    LogoUrl = uploadResult.FilePath,
                     OnboardingStatus =
                         OnboardingStatus.CompanyInfoSaved,
 
@@ -310,16 +320,29 @@ namespace SmartAuditX.Services.Implementations
                      Email = user.Email
                 };
             }
+            //catch (Exception ex)
+            //{
+            //    await transaction.RollbackAsync();
+
+            //    return new RegistrationResult
+            //    {
+            //        Success = false,
+            //        ErrorMessage = ex.Message
+            //    };
+
+            //}
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
 
+                // log exception here
+
                 return new RegistrationResult
                 {
                     Success = false,
-                    ErrorMessage = ex.Message
+                    ErrorMessage =
+                        "An unexpected error occurred while creating the account."
                 };
-
             }
         }
     }

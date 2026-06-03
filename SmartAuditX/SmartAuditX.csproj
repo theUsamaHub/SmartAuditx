@@ -35,10 +35,12 @@
     <Folder Include="wwwroot\css\Manager\" />
     <Folder Include="wwwroot\Companylogo\" />
     <Folder Include="wwwroot\css\Admin\" />
+    <Folder Include="wwwroot\css\Public\" />
     <Folder Include="wwwroot\js\Admin\" />
     <Folder Include="wwwroot\js\Auditor\" />
     <Folder Include="wwwroot\js\Company\" />
     <Folder Include="wwwroot\js\Manager\" />
+    <Folder Include="wwwroot\js\Public\" />
   </ItemGroup>
 
 </Project>

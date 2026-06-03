@@ -1,8 +1,10 @@
-﻿namespace SmartAuditX.Services.Interfaces
+﻿using SmartAuditX.Models.ViewModels;
+
+namespace SmartAuditX.Services.Interfaces
 {
     public interface IFileService
     {
-        Task<string?> UploadCompanyLogoAsync(
+        Task<FileUploadResult?> UploadCompanyLogoAsync(
             IFormFile? file);
     }
 }

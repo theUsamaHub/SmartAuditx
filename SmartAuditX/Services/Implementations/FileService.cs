@@ -1,4 +1,5 @@
-﻿using SmartAuditX.Services.Interfaces;
+﻿using SmartAuditX.Models.ViewModels;
+using SmartAuditX.Services.Interfaces;
 
 namespace SmartAuditX.Services.Implementations
 {
@@ -12,13 +13,17 @@ namespace SmartAuditX.Services.Implementations
             _environment = environment;
         }
 
-        public async Task<string?> UploadCompanyLogoAsync(
+        public async Task<FileUploadResult?> UploadCompanyLogoAsync(
             IFormFile? file)
         {
             // No image uploaded
             if (file == null || file.Length == 0)
             {
-                return null;
+                return new FileUploadResult
+                {
+                    Success = true,
+                    FilePath = null
+                };
             }
 
             // ─────────────────────────────────────────────
@@ -30,8 +35,11 @@ namespace SmartAuditX.Services.Implementations
 
             if (file.Length > maxFileSize)
             {
-                throw new Exception(
-                    "Logo size cannot exceed 2 MB.");
+                return new FileUploadResult
+                {
+                    Success = false,
+                    ErrorMessage = "Logo size cannot exceed 2 MB."
+                };
             }
 
             // ─────────────────────────────────────────────
@@ -43,7 +51,7 @@ namespace SmartAuditX.Services.Implementations
                 ".jpg",
                 ".jpeg",
                 ".png",
-                ".webp"
+                ".webp" //we can remove this 
             };
 
             var extension =
@@ -52,8 +60,11 @@ namespace SmartAuditX.Services.Implementations
 
             if (!allowedExtensions.Contains(extension))
             {
-                throw new Exception(
-                    "Only JPG, JPEG, PNG, and WEBP images are allowed.");
+                return new FileUploadResult
+                {
+                    Success = false,
+                    ErrorMessage = "Only jpg,jpeg,webp allowed"
+                };
             }
 
             // ─────────────────────────────────────────────
@@ -69,8 +80,11 @@ namespace SmartAuditX.Services.Implementations
 
             if (!allowedMimeTypes.Contains(file.ContentType))
             {
-                throw new Exception(
-                    "Invalid image format.");
+                return new FileUploadResult
+                {
+                    Success = false,
+                    ErrorMessage = "Invalid Image Format"
+                };
             }
 
             // ─────────────────────────────────────────────
@@ -112,7 +126,11 @@ namespace SmartAuditX.Services.Implementations
             await file.CopyToAsync(stream);
 
             // Return relative path for database
-            return $"/CompanyLogo/{fileName}";
+            return new FileUploadResult
+            {
+                Success = true,
+                FilePath = $"/CompanyLogo/{fileName}"
+            };
         }
     }
 }

@@ -218,7 +218,6 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                     });
             }
 
-
             // STEP 4: Attempt password authentication
             var result = await _signInManager.PasswordSignInAsync(
                 user.UserName!,     // Use the found user's username for authentication
@@ -263,12 +262,17 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                 return LocalRedirect(returnUrl);
             }
 
-            if (!user.EmailConfirmed)
-            {
-                return RedirectToAction(
-                    "EmailVerificationRequired",
-                    "Registration");
-            }
+            //if (!user.EmailConfirmed)
+            //{
+            //    return RedirectToAction(
+            //        "EmailVerificationRequired",
+            //        "Registration",
+            //           new
+            //           {
+            //               userId = user.Id
+            //           });
+
+            //}
 
             // STEP 6: Authentication failed - display generic error message
             ModelState.AddModelError(

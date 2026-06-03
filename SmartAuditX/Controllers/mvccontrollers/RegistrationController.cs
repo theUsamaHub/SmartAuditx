@@ -99,7 +99,6 @@
             public IActionResult AccountInfo()
             {
                 return View();
-
             }
 
         [HttpPost]
@@ -219,7 +218,7 @@
                         accountModel,
                         model);
 
-                //its failing here in the registeration the result status is not getting the success
+                //its failing here in the registeration the result status is not getting the success solved
 
                 if (!result.Success)
                 {
@@ -248,8 +247,8 @@
                 token = result.EncodedToken
             },
             protocol: Request.Scheme);
-
-
+            
+            
                 await _emailService.SendEmailAsync(
         accountModel.Email,
         "Verify Your SmartAuditX Account",
@@ -388,7 +387,7 @@
             ViewBag.UserId = userId;
 
             return View();
-        }
+        } 
 
         [HttpGet]
             public async Task<IActionResult> ConfirmEmail(
@@ -412,7 +411,7 @@
                 var decodedToken =
                     Encoding.UTF8.GetString(
                         WebEncoders.Base64UrlDecode(token));
-
+                
                 var result =
                     await _userManager.ConfirmEmailAsync(
                         user,
