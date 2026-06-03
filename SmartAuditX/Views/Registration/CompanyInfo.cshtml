@@ -1,170 +1,125 @@
-﻿@model SmartAuditX.Models.ViewModels.RegisterCompanyViewModel
-
+@model SmartAuditX.Models.ViewModels.RegisterCompanyViewModel
 @using SmartAuditX.Models
 
 @{
     ViewData["Title"] = "Company Information";
+    Layout = "~/Views/Shared/_PublicAuthLayout.cshtml";
 }
 
-<h2>Company Information</h2>
+<div class="registration-layout">
+    <div class="registration-container">
+        
+        <div class="step-indicator">
+            <div class="step-item completed">
+                <div class="step-number"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                <span class="step-label">Account Info</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step-item active">
+                <div class="step-number">2</div>
+                <span class="step-label">Company Info</span>
+            </div>
+        </div>
 
-<form asp-action="CompanyInfo"
-      method="post"
-      enctype="multipart/form-data">
+        <div class="card-base">
+            <h2 class="heading-3">Tell us about your company</h2>
+            <p class="subtitle">We'll use this to set up your workspace.</p>
 
-    @Html.AntiForgeryToken()
+            <form asp-action="CompanyInfo" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
 
-    <div asp-validation-summary="ModelOnly"
-         class="text-danger mb-3">
+                <div asp-validation-summary="ModelOnly" class="badge-error mb-3" style="display:block; text-align:left;"></div>
+
+                <div class="form-group">
+                    <label asp-for="CompanyName" class="form-label">Company Name</label>
+                    <input asp-for="CompanyName" class="form-control" placeholder="Acme Corp" />
+                    <span asp-validation-for="CompanyName" class="invalid-feedback" style="display:block;"></span>
+                </div>
+
+                <div style="display: flex; gap: var(--spacing-md);">
+                    <div class="form-group" style="flex: 1;">
+                        <label asp-for="IndustryType" class="form-label">Industry</label>
+                        <select asp-for="IndustryType" class="form-control" asp-items="Model.IndustryList">
+                            <option value="">Select Industry</option>
+                        </select>
+                        <span asp-validation-for="IndustryType" class="invalid-feedback" style="display:block;"></span>
+                    </div>
+
+                    <div class="form-group" style="flex: 1;">
+                        <label asp-for="Website" class="form-label">Website (Optional)</label>
+                        <input asp-for="Website" class="form-control" placeholder="https://example.com" />
+                        <span asp-validation-for="Website" class="invalid-feedback" style="display:block;"></span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: var(--spacing-md);">
+                    <div class="form-group" style="flex: 1;">
+                        <label asp-for="CompanySize" class="form-label">Company Type</label>
+                        <select asp-for="CompanySize" class="form-control" asp-items="Html.GetEnumSelectList<CompanySize>()">
+                            <option value="">Select Type</option>
+                        </select>
+                        <span asp-validation-for="CompanySize" class="invalid-feedback" style="display:block;"></span>
+                    </div>
+
+                    <div class="form-group" style="flex: 1;">
+                        <label asp-for="EmployeeCountRange" class="form-label">Employees</label>
+                        <select asp-for="EmployeeCountRange" class="form-control" asp-items="Model.EmployeeRangeList">
+                            <option value="">Select Range</option>
+                        </select>
+                        <span asp-validation-for="EmployeeCountRange" class="invalid-feedback" style="display:block;"></span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: var(--spacing-md);">
+                    <div class="form-group" style="flex: 1;">
+                        <label asp-for="CountryCode" class="form-label">Country</label>
+                        <select asp-for="CountryCode" class="form-control" asp-items="Model.Countries">
+                            <option value="">Select Country</option>
+                        </select>
+                        <span asp-validation-for="CountryCode" class="invalid-feedback" style="display:block;"></span>
+                    </div>
+
+                    <div class="form-group" style="flex: 1;">
+                        <label asp-for="City" class="form-label">City</label>
+                        <input asp-for="City" class="form-control" placeholder="New York" />
+                        <span asp-validation-for="City" class="invalid-feedback" style="display:block;"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ReferralSource" class="form-label">How did you hear about us?</label>
+                    <select asp-for="ReferralSource" class="form-control" asp-items="Model.ReferralSourceList">
+                        <option value="">Select Source</option>
+                    </select>
+                    <span asp-validation-for="ReferralSource" class="invalid-feedback" style="display:block;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Company Logo</label>
+                    <input asp-for="CompanyLogo" type="file" id="LogoFile" accept=".jpg,.jpeg,.png,.webp" style="display:none;" />
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <div class="upload-text">Upload Logo</div>
+                        <div class="upload-hint">PNG, JPG or WEBP up to 5MB</div>
+                    </div>
+                    <span asp-validation-for="CompanyLogo" class="invalid-feedback" style="display:block;"></span>
+                </div>
+
+                <div style="margin-top: var(--spacing-xl);">
+                    <button type="submit" class="btn-primary" style="width: 100%;">
+                        Complete Registration
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
-    <!-- COMPANY NAME -->
-
-    <div class="mb-3">
-
-        <label asp-for="CompanyName"
-               class="form-label">
-        </label>
-
-        <input asp-for="CompanyName"
-               class="form-control"
-               placeholder="Enter company name" />
-
-        <span asp-validation-for="CompanyName"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <!-- INDUSTRY TYPE -->
-
-    <div class="mb-3">
-        <label asp-for="IndustryType" class="form-label"></label>
-        <select asp-for="IndustryType" class="form-select" asp-items="Model.IndustryList">
-            <option value="">-- Select Industry --</option>
-        </select>
-        <span asp-validation-for="IndustryType" class="text-danger"></span>
-    </div>
-
-    <!-- WEBSITE -->
-
-    <div class="mb-3">
-
-        <label asp-for="Website"
-               class="form-label">
-        </label>
-
-        <input asp-for="Website"
-               class="form-control"
-               placeholder="https://example.com" />
-
-        <span asp-validation-for="Website"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <!-- COMPANY SIZE -->
-
-    <div class="mb-3">
-
-        <label asp-for="CompanySize"
-               class="form-label">
-        </label>
-
-        <select asp-for="CompanySize"
-                class="form-select"
-                asp-items="Html.GetEnumSelectList<CompanySize>()">
-
-            <option value="">
-                -- Select Company Size --
-            </option>
-
-        </select>
-
-        <span asp-validation-for="CompanySize"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <!-- EMPLOYEE COUNT RANGE -->
-
-    <div class="mb-3">
-        <label asp-for="EmployeeCountRange" class="form-label"></label>
-        <select asp-for="EmployeeCountRange" class="form-select" asp-items="Model.EmployeeRangeList">
-            <option value="">-- Select Employee Count --</option>
-        </select>
-        <span asp-validation-for="EmployeeCountRange" class="text-danger"></span>
-    </div>
-
-    <!-- COUNTRY CODE -->
-
-    <div class="mb-3">
-        <label asp-for="CountryCode" class="form-label">Country</label>
-        <select asp-for="CountryCode" class="form-select" asp-items="Model.Countries">
-            <option value="">-- Select Country --</option>
-        </select>
-        <span asp-validation-for="CountryCode" class="text-danger"></span>
-    </div>
-
-    <!-- CITY -->
-
-    <div class="mb-3">
-
-        <label asp-for="City"
-               class="form-label">
-        </label>
-
-        <input asp-for="City"
-               class="form-control"
-               placeholder="Karachi" />
-
-        <span asp-validation-for="City"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <!-- REFERRAL SOURCE -->
-
-    <div class="mb-3">
-        <label asp-for="ReferralSource" class="form-label"></label>
-        <select asp-for="ReferralSource" class="form-select" asp-items="Model.ReferralSourceList">
-            <option value="">-- Select Refferal Source --</option>
-        </select>
-        <span asp-validation-for="ReferralSourceList" class="text-danger"></span>
-    </div>
-
-    <!-- COMPANY LOGO -->
-
-    <div class="mb-3">
-
-        <label asp-for="CompanyLogo"
-               class="form-label">
-        </label>
-
-        <input asp-for="CompanyLogo"
-               type="file"
-               class="form-control"
-               accept=".jpg,.jpeg,.png,.webp" />
-
-        <span asp-validation-for="CompanyLogo"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <button type="submit"
-            class="btn btn-success">
-
-        Register Company
-
-    </button>
-
-</form>
-
-@section Scripts
-{
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

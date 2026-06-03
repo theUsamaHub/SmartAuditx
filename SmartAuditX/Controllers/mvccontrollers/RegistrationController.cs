@@ -1,4 +1,4 @@
-﻿        using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
         using Microsoft.AspNetCore.Mvc;
         using Microsoft.AspNetCore.Mvc.Rendering;
         using Microsoft.AspNetCore.WebUtilities;
@@ -8,6 +8,7 @@
         using SmartAuditX.Services.Interfaces;
         using System.Text;
         using Microsoft.EntityFrameworkCore;
+        using Microsoft.AspNetCore.Authorization;
         namespace SmartAuditX.Controllers.mvccontrollers
         {
         public class RegistrationController : Controller
@@ -150,6 +151,7 @@
         // STEP 2: COMPANY INFO
         // ─────────────────────────────────────────────
 
+
         [HttpGet]
         public IActionResult CompanyInfo()
         {
@@ -283,6 +285,7 @@
 
         // ─────────────────────────────────────────────
 
+        [Authorize]
         public IActionResult RegistrationSuccess()
         {
             var userId =
@@ -306,6 +309,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> ResendVerificationEmail(string userId)
         {
             if (string.IsNullOrWhiteSpace(userId))
@@ -381,51 +385,42 @@
         }
 
 
+[Authorize]
         public IActionResult EmailVerificationRequired(
-        string userId)
+            string userId)
         {
             ViewBag.UserId = userId;
 
             return View();
         } 
 
+    [Authorize]
         [HttpGet]
-            public async Task<IActionResult> ConfirmEmail(
-                string userId,
-                string token)
+            public async Task<IActionResult> ConfirmEmail(string userId, string token)
             {
-                if (string.IsNullOrWhiteSpace(userId) ||
-                    string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
                 {
+                    ViewBag.UserId = userId;
                     return View("EmailConfirmationFailed");
                 }
 
-                var user =
-                    await _userManager.FindByIdAsync(userId);
-
+                var user = await _userManager.FindByIdAsync(userId);
                 if (user == null)
                 {
+                    ViewBag.UserId = userId;
                     return View("EmailConfirmationFailed");
                 }
 
-                var decodedToken =
-                    Encoding.UTF8.GetString(
-                        WebEncoders.Base64UrlDecode(token));
-                
-                var result =
-                    await _userManager.ConfirmEmailAsync(
-                        user,
-                        decodedToken);
+                var decodedToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+                var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
 
                 if (!result.Succeeded)
                 {
+                    ViewBag.UserId = userId;
                     return View("EmailConfirmationFailed");
                 }
 
-                var company =
-                    await _context.Companies
-                        .FirstOrDefaultAsync(
-                            x => x.CompanyId == user.CompanyId);
+                var company = await _context.Companies.FirstOrDefaultAsync(x => x.CompanyId == user.CompanyId);
 
                 if (company != null)
                 {
@@ -437,5 +432,67 @@
 
                 return View("EmailConfirmationSuccess");
             }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> ValidateFieldAjax(string field, string value)
+            {
+                if (string.IsNullOrWhiteSpace(value)) return Json(new { success = true });
+
+                switch (field)
+                {
+                    case "Email":
+                        var emailExists = await _userManager.FindByEmailAsync(value);
+                        if (emailExists != null) return Json(new { success = false, message = "Email already exists." });
+                        break;
+                    case "Username":
+                        var usernameExists = await _userManager.FindByNameAsync(value);
+                        if (usernameExists != null) return Json(new { success = false, message = "Username already exists." });
+                        break;
+                    case "PhoneNumber":
+                        var normalizedPhone = value.Replace(" ", "").Replace("-", "").Trim();
+                        // Optional: Dial code could be passed via AJAX if needed, but checking raw phone here.
+                        var phoneExists = await _userManager.Users.AnyAsync(x => x.PhoneNumber == normalizedPhone);
+                        if (phoneExists) return Json(new { success = false, message = "Phone number already exists." });
+                        break;
+                }
+
+                return Json(new { success = true });
+            }
+
+            [Authorize]
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> ResendVerificationAjax(string userId)
+            {
+                if (string.IsNullOrWhiteSpace(userId))
+                    return Json(new { success = false, message = "Invalid request." });
+
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user == null)
+                    return Json(new { success = false, message = "User not found." });
+
+                if (user.EmailConfirmed)
+                    return Json(new { success = false, message = "Email already verified." });
+
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+
+                var verificationUrl = Url.Action(
+                    "ConfirmEmail",
+                    "Registration",
+                    new { userId = user.Id, token = encodedToken },
+                    Request.Scheme);
+
+                await _emailService.SendEmailAsync(
+                    user.Email!,
+                    "Verify Your SmartAuditX Account",
+                    $@"
+                    <h2>Email Verification</h2>
+                    <p>Please click below to verify your account.</p>
+                    <p><a href='{verificationUrl}'>Verify Email</a></p>");
+
+                return Json(new { success = true, message = "Verification email sent successfully." });
+            }
         }
-        }
+    }

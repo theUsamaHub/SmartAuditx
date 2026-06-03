@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -281,6 +281,58 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAjaxAsync(string returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/");
+
+            var loginIdentifier = Input.LoginIdentifier?.Trim() ?? "";
+
+            ApplicationUser? user = null;
+
+            if (loginIdentifier.Contains("@"))
+            {
+                user = await _userManager.FindByEmailAsync(loginIdentifier);
+            }
+            else
+            {
+                user = await _userManager.FindByNameAsync(loginIdentifier);
+            }
+
+            if (user == null || !user.IsActive || user.IsDeleted)
+            {
+                return new JsonResult(new { success = false, message = "Invalid login attempt or account is inactive." });
+            }
+
+            if (!user.EmailConfirmed)
+            {
+                return new JsonResult(new { success = false, requiresVerification = true, userId = user.Id });
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(
+                user.UserName!,
+                Input.Password,
+                Input.RememberMe,
+                lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("User logged in via AJAX.");
+                var roles = await _userManager.GetRolesAsync(user);
+                
+                string targetUrl = returnUrl;
+                if (roles.Contains("SystemAdmin")) targetUrl = "/Admin/Index";
+                else if (roles.Contains("CompanyOwner")) targetUrl = "/Company/Index";
+                else if (roles.Contains("Manager")) targetUrl = "/Manager/Index";
+                else if (roles.Contains("Auditor")) targetUrl = "/Auditor/Index";
+                else if (roles.Contains("Employee")) targetUrl = "/Employee/Index";
+                else if (roles.Contains("User")) targetUrl = "/User/Index";
+
+                return new JsonResult(new { success = true, redirectUrl = targetUrl });
+            }
+
+            return new JsonResult(new { success = false, message = "Invalid login attempt." });
         }
     }
 }

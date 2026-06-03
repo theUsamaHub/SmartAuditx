@@ -1,28 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
+    ViewData["Title"] = "Email Verification Required";
+    Layout = "~/Views/Shared/_PublicAuthLayout.cshtml";
 }
 
-<h2>Verify Your Email</h2>
+<div class="status-layout">
+    <div class="card-base status-card">
+        
+        <div class="status-icon-container warning">
+            <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+        </div>
 
-<p>
-Your account has been created successfully but your email
-address has not been verified yet.
-</p>
-<form asp-action="ResendVerificationEmail"
-      asp-controller="Registration"
-      method="post">
+        <h2 class="heading-3">Verification Required</h2>
+        
+        <p class="subtitle">
+            Your email address has not been verified yet.
+        </p>
 
-    @Html.AntiForgeryToken()
+        <p class="body-sm" style="margin-top: var(--spacing-md);">
+            You must verify your email address before you can sign in and access your workspace. Check your inbox or spam folder for the verification link.
+        </p>
 
-    <input type="hidden"
-           name="userId"
-           value="@ViewBag.UserId" />
+        <div class="status-actions">
+            <form>
+                @Html.AntiForgeryToken()
+                <button type="button" class="btn-primary btn-resend-verification" data-userid="@ViewBag.UserId" style="width: 100%;">
+                    Resend Verification Email
+                </button>
+            </form>
 
-    <button type="submit"
-            class="btn btn-primary">
-        Resend Verification Email
-    </button>
+            <a href="/Identity/Account/Login" class="btn-secondary" style="width: 100%;">
+                Return to Login
+            </a>
+        </div>
+        
+    </div>
+</div>
 
-</form>
+@section Scripts {
+    <script src="~/js/Public/verification.js" asp-append-version="true"></script>
+}

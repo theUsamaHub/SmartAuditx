@@ -1,83 +1,94 @@
-﻿@page
+@page
 @model LoginModel
 
 @{
     ViewData["Title"] = "Log in";
+    Layout = "~/Views/Shared/_PublicAuthLayout.cshtml";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.LoginIdentifier" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.LoginIdentifier" class="form-label">Username / Email / Phone Number</label>
-                    <span asp-validation-for="Input.LoginIdentifier" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password" class="form-label">Password</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="checkbox mb-3">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    </label>
-                </div>
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-          @*   @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
+<div class="auth-layout">
+    <div class="auth-container">
+        
+        <div class="auth-header">
+            <a href="/" class="auth-logo">SmartAuditX</a>
+            <h1 class="heading-3 auth-title">Welcome back</h1>
+            <p class="subtitle auth-subtitle">Log in to your workspace to continue.</p>
+        </div>
+
+        <div class="card-base">
+            
+            <div id="globalError" class="badge-error mb-3" style="display:none; text-align:left; width:100%;"></div>
+            
+            <!-- Standard Login Form -->
+            <div class="auth-form-container">
+                <form id="loginForm" method="post" asp-page-handler="Ajax">
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="form-group">
+                        <label asp-for="Input.LoginIdentifier" class="form-label">Email or Username</label>
+                        <input asp-for="Input.LoginIdentifier" class="form-control" autocomplete="username" placeholder="name@company.com" id="Input_LoginIdentifier" />
+                        <span class="invalid-feedback"></span>
                     </div>
-                }
-                else
-                {
-                    // <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                    //     <div>
-                    //         <p>
-                    //             @foreach (var provider in Model.ExternalLogins!)
-                    //             {
-                    //                 <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                    //             }
-                    //         </p>
-                    //     </div>
-                    // </form>
-                }
-            } *@
-        </section>
+
+                    <div class="form-group">
+                        <label asp-for="Input.Password" class="form-label">Password</label>
+                        <div class="password-wrapper">
+                            <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" placeholder="••••••••" id="Input_Password" />
+                            <button type="button" class="password-toggle-btn" tabindex="-1">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </button>
+                        </div>
+                        <span class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="form-check-wrapper">
+                        <label class="form-check">
+                            <input type="checkbox" asp-for="Input.RememberMe" class="form-check-input" />
+                            <span class="form-check-label">Remember me for 30 days</span>
+                        </label>
+                        <a href="/Identity/Account/ForgotPassword" class="password-reset-link">Forgot password?</a>
+                    </div>
+
+                    <button id="loginSubmit" type="submit" class="btn-primary" style="width: 100%;">
+                        <span class="spinner" style="display: none;"></span>
+                        <span class="btn-text">Sign in</span>
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <span class="body-sm">Don't have an account?</span>
+                    <a href="/Registration/AccountInfo" class="btn-link" style="margin-left: 4px;">Sign up</a>
+                </div>
+            </div>
+
+            <!-- Inline Verification Panel (Hidden by Default) -->
+            <div id="verificationPanel" class="verification-panel">
+                <svg class="verification-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                
+                <h3 class="heading-4" style="margin-bottom: var(--spacing-xs);">Verification Required</h3>
+                <p class="body-sm" style="margin-bottom: var(--spacing-xl);">
+                    Your email address has not been verified yet. You must verify your email before signing in.
+                </p>
+
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                    <button id="resendVerificationBtn" class="btn-primary" style="width: 100%;">
+                        Resend Verification Email
+                    </button>
+                    <button id="backToLoginBtn" class="btn-secondary" style="width: 100%;">
+                        Back to Login
+                    </button>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/Public/login.js" asp-append-version="true"></script>
 }

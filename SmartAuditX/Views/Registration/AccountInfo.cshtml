@@ -1,173 +1,136 @@
-﻿@model SmartAuditX.Models.ViewModels.RegisterAccountViewModel
+@model SmartAuditX.Models.ViewModels.RegisterAccountViewModel
 
 @{
     ViewData["Title"] = "Account Information";
+    Layout = "~/Views/Shared/_PublicAuthLayout.cshtml";
 }
 
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css" />
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css" />
+    <link rel="stylesheet" href="~/css/Public/registration.css" />
+    <style>
+        .iti { width: 100%; }
+        .iti__country-list { background-color: var(--color-canvas); color: var(--color-ink); border: 1px solid var(--color-hairline); border-radius: var(--rounded-md); }
+        .iti__country.iti__highlight { background-color: var(--color-surface); }
+    </style>
+}
 
-<h2>Account Information</h2>
+<div class="registration-layout">
+    <div class="registration-container">
+        
+        <div class="step-indicator">
+            <div class="step-item active">
+                <div class="step-number">1</div>
+                <span class="step-label">Account Info</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <span class="step-label">Company Info</span>
+            </div>
+        </div>
 
-<form asp-action="AccountInfo" method="post">
+        <div class="card-base">
+            <h2 class="heading-3">Create your account</h2>
+            <p class="subtitle">Start your journey with SmartAuditX today.</p>
 
-    @Html.AntiForgeryToken()
+            <form asp-action="AccountInfo" method="post" id="accountInfoForm">
+                @Html.AntiForgeryToken()
 
-    <div asp-validation-summary="ModelOnly"
-         class="text-danger mb-3">
+                <div asp-validation-summary="ModelOnly" class="badge-error mb-3" style="display:block; text-align:left;"></div>
+
+                <div class="form-group">
+                    <label asp-for="Username" class="form-label">Username</label>
+                    <input asp-for="Username" class="form-control" placeholder="Choose a username" autocomplete="username" id="Username" />
+                    <span class="invalid-feedback"></span>
+                    <span asp-validation-for="Username" class="invalid-feedback" style="display:block;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <input asp-for="Email" class="form-control" placeholder="name@company.com" autocomplete="email" id="Email" />
+                    <span class="invalid-feedback"></span>
+                    <span asp-validation-for="Email" class="invalid-feedback" style="display:block;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                    <input asp-for="PhoneNumber" id="PhoneNumber" class="form-control" autocomplete="tel" />
+                    <input type="hidden" asp-for="PhoneDialCode" id="PhoneDialCode" />
+                    <span class="invalid-feedback"></span>
+                    <span asp-validation-for="PhoneNumber" class="invalid-feedback" style="display:block;"></span>
+                    <span asp-validation-for="PhoneDialCode" class="invalid-feedback" style="display:block;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <div class="password-wrapper">
+                        <input asp-for="Password" type="password" class="form-control" autocomplete="new-password" id="Password" />
+                        <button type="button" class="password-toggle-btn" tabindex="-1">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                    
+                    <div class="password-strength-container">
+                        <div class="password-strength-bars">
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                        </div>
+                        <div class="strength-text">Strength</div>
+                    </div>
+
+                    <span asp-validation-for="Password" class="invalid-feedback" style="display:block;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" autocomplete="new-password" />
+                        <button type="button" class="password-toggle-btn" tabindex="-1">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                    <span asp-validation-for="ConfirmPassword" class="invalid-feedback" style="display:block;"></span>
+                </div>
+
+                <div style="margin-top: var(--spacing-xl);">
+                    <button type="submit" class="btn-primary" style="width: 100%;">
+                        Continue to Company Details
+                    </button>
+                </div>
+            </form>
+            
+            <div style="text-align: center; margin-top: var(--spacing-xl);">
+                <span class="body-sm">Already have an account?</span>
+                <a href="/Identity/Account/Login" class="btn-link" style="margin-left: 4px;">Sign in</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- USERNAME -->
-
-    <div class="mb-3">
-
-        <label asp-for="Username"
-               class="form-label">
-        </label>
-
-        <input asp-for="Username"
-               class="form-control"
-               placeholder="Enter username"
-               autocomplete="username" />
-
-        <span asp-validation-for="Username"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <!-- EMAIL -->
-
-    <div class="mb-3">
-
-        <label asp-for="Email"
-               class="form-label">
-        </label>
-
-        <input asp-for="Email"
-               class="form-control"
-               placeholder="Enter email"
-               autocomplete="email" />
-
-        <span asp-validation-for="Email"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <!-- PHONE -->
-
-    <div class="mb-3">
-
-        <label asp-for="PhoneNumber"
-               class="form-label">
-        </label>
-
-        <input asp-for="PhoneNumber"
-               id="phone"
-               class="form-control"
-               autocomplete="tel" />
-
-        <!-- hidden dial code -->
-
-        <input type="hidden"
-               asp-for="PhoneDialCode"
-               id="PhoneDialCode" />
-
-        <span asp-validation-for="PhoneNumber"
-              class="text-danger">
-        </span>
-
-        <span asp-validation-for="PhoneDialCode"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <!-- PASSWORD -->
-
-    <div class="mb-3">
-
-        <label asp-for="Password"
-               class="form-label">
-        </label>
-
-        <input asp-for="Password"
-               type="password"
-               class="form-control"
-               autocomplete="new-password" />
-
-        <span asp-validation-for="Password"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <!-- CONFIRM PASSWORD -->
-
-    <div class="mb-3">
-
-        <label asp-for="ConfirmPassword"
-               class="form-label">
-        </label>
-
-        <input asp-for="ConfirmPassword"
-               type="password"
-               class="form-control"
-               autocomplete="new-password" />
-
-        <span asp-validation-for="ConfirmPassword"
-              class="text-danger">
-        </span>
-
-    </div>
-
-    <button type="submit"
-            class="btn btn-primary">
-
-        Next
-
-    </button>
-
-</form>
-
-@section Scripts
-{
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
-
+    <script src="~/js/Public/registration.js"></script>
     <script>
+        $(document).ready(function() {
+            const phoneInput = document.querySelector("#PhoneNumber");
+            if (phoneInput) {
+                const iti = window.intlTelInput(phoneInput, {
+                    initialCountry: "pk",
+                    preferredCountries: ["pk", "ae", "sa", "us", "gb"],
+                    separateDialCode: true,
+                    strictMode: true,
+                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"
+                });
 
-        const phoneInput =
-        document.querySelector("#phone");
-
-        const iti =
-        window.intlTelInput(phoneInput, {
-
-        initialCountry: "pk",
-
-        preferredCountries: ["pk", "ae", "sa", "us", "gb"],
-
-        separateDialCode: true,
-
-        strictMode: true,
-
-        utilsScript:
-        "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"
+                $('#accountInfoForm').on("submit", function () {
+                    const countryData = iti.getSelectedCountryData();
+                    $("#PhoneDialCode").val("+" + countryData.dialCode);
+                });
+            }
         });
-
-        const form =
-        phoneInput.closest("form");
-
-        form.addEventListener("submit", function () {
-
-        const countryData =
-        iti.getSelectedCountryData();
-
-        document.getElementById("PhoneDialCode").value =
-        "+" + countryData.dialCode;
-        });
-
     </script>
 }

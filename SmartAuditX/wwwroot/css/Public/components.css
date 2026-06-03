@@ -1,0 +1,292 @@
+/* ─────────────────────────────────────────────
+// SECTION: DESIGN TOKENS (MINTLIFY)
+// ───────────────────────────────────────────── */
+:root {
+  --color-primary: #0a0a0a;
+  --color-on-primary: #ffffff;
+  --color-brand-green: #00d4a4;
+  --color-brand-green-deep: #00b48a;
+  --color-brand-green-soft: #7cebcb;
+  --color-brand-error: #d45656;
+  --color-brand-warn: #c37d0d;
+  --color-canvas: #ffffff;
+  --color-surface: #f7f7f7;
+  --color-surface-soft: #fafafa;
+  --color-hairline: #e5e5e5;
+  --color-hairline-soft: #ededed;
+  --color-ink: #0a0a0a;
+  --color-charcoal: #1c1c1e;
+  --color-slate: #3a3a3c;
+  --color-steel: #5a5a5c;
+  --color-stone: #888888;
+  --color-muted: #a8a8aa;
+
+  --rounded-sm: 6px;
+  --rounded-md: 8px;
+  --rounded-lg: 12px;
+  --rounded-full: 9999px;
+
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 20px;
+  --spacing-xl: 24px;
+  --spacing-xxl: 32px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--color-surface-soft);
+  color: var(--color-ink);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────────────────────────
+// SECTION: TYPOGRAPHY
+// ───────────────────────────────────────────── */
+.heading-3 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-ink);
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.50;
+  color: var(--color-steel);
+  margin-bottom: var(--spacing-xl);
+}
+
+.body-sm {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.50;
+  color: var(--color-steel);
+}
+
+.body-sm-medium {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.50;
+  color: var(--color-ink);
+}
+
+.caption {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-stone);
+}
+
+/* ─────────────────────────────────────────────
+// SECTION: COMPONENTS
+// ───────────────────────────────────────────── */
+
+/* Cards */
+.card-base {
+  background-color: var(--color-canvas);
+  border-radius: var(--rounded-lg);
+  padding: var(--spacing-xxl);
+  border: 1px solid var(--color-hairline);
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 2px 0px;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--rounded-full);
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background-color: var(--color-charcoal);
+  color: var(--color-on-primary);
+}
+.btn-primary:disabled {
+  background-color: var(--color-hairline);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.btn-accent-green {
+  background-color: var(--color-brand-green);
+  color: var(--color-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--rounded-full);
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.btn-accent-green:hover {
+  background-color: var(--color-brand-green-deep);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--rounded-full);
+  padding: 10px 20px;
+  border: 1px solid var(--color-hairline);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  background-color: var(--color-surface);
+}
+
+.btn-link {
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: var(--spacing-md);
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-control {
+  width: 100%;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-size: 16px; /* 16px prevents iOS zoom */
+  font-family: 'Inter', sans-serif;
+  border-radius: var(--rounded-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-hairline);
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  height: 44px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-brand-green);
+  box-shadow: 0 0 0 1px var(--color-brand-green);
+}
+
+.form-control.is-invalid {
+  border-color: var(--color-brand-error);
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 1px var(--color-brand-error);
+}
+
+.invalid-feedback {
+  display: none;
+  color: var(--color-brand-error);
+  font-size: 13px;
+  margin-top: 4px;
+}
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+/* Badges */
+.badge-error {
+  background-color: var(--color-brand-error);
+  color: var(--color-on-primary);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: var(--rounded-sm);
+  padding: 2px 6px;
+  display: inline-block;
+}
+
+/* Spinner for buttons */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+.spinner-dark {
+  border: 2px solid rgba(0,0,0,.1);
+  border-top-color: var(--color-ink);
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Password Toggle */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--color-stone);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  height: 100%;
+}
+
+.password-toggle-btn:hover {
+  color: var(--color-ink);
+}
+
+.password-wrapper .form-control {
+  padding-right: 40px;
+}

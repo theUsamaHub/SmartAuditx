@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SmartAuditX</title>
+
+    <!-- Google Fonts: Inter and Geist Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Mintlify Redesign CSS Architecture -->
+    <link rel="stylesheet" href="~/css/Public/components.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/auth.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/registration.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/verification.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/responsive.css" asp-append-version="true" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    @RenderBody()
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- Public JS Architecture -->
+    <script src="~/js/Public/common.js" asp-append-version="true"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

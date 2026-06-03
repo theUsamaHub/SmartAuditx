@@ -1,14 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
+    ViewData["Title"] = "Email Confirmed";
+    Layout = "~/Views/Shared/_PublicAuthLayout.cshtml";
 }
-<h2>Email Verified Successfully</h2>
 
-<p>
-    Your email address has been verified.
-</p>
+<div class="status-layout">
+    <div class="card-base status-card">
+        
+        <div class="status-icon-container success">
+            <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        </div>
 
-<p>
-    You may now continue using SmartAuditX.
-</p>
+        <h2 class="heading-3">Email Verified</h2>
+        
+        <p class="subtitle">
+            Thank you! Your email address has been successfully verified.
+        </p>
+
+        <p class="body-sm" style="margin-top: var(--spacing-md);">
+            Your account is now fully active. You can proceed to sign in to your dashboard.
+        </p>
+
+        <div class="status-actions">
+            <a href="/Identity/Account/Login" class="btn-primary">
+                Continue to Login
+            </a>
+        </div>
+        
+    </div>
+</div>

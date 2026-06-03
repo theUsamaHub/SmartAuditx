@@ -1,63 +1,45 @@
-﻿@model SmartAuditX.Models.ViewModels.RegistrationSuccessViewModel
+@model SmartAuditX.Models.ViewModels.RegistrationSuccessViewModel
 @{
     ViewData["Title"] = "Registration Complete";
+    Layout = "~/Views/Shared/_PublicAuthLayout.cshtml";
 }
 
+<div class="status-layout">
+    <div class="card-base status-card">
+        
+        <div class="status-icon-container success">
+            <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        </div>
 
-@if (!string.IsNullOrWhiteSpace(TempData["SuccessMessage"]?.ToString()))
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
+        <h2 class="heading-3">Check your email</h2>
+        
+        <p class="subtitle">
+            Your company account has been created successfully. We've sent a verification link to your email address.
+        </p>
+
+        <p class="body-sm" style="margin-top: var(--spacing-md);">
+            Please verify your email before signing in to access your workspace.
+        </p>
+
+        <div class="status-actions">
+            <a href="/Identity/Account/Login" class="btn-primary">
+                Return to Login
+            </a>
+
+            <form>
+                @Html.AntiForgeryToken()
+                <button type="button" class="btn-secondary btn-resend-verification" data-userid="@Model.UserId" style="width: 100%;">
+                    Resend Verification Email
+                </button>
+            </form>
+        </div>
+        
     </div>
-}
-
-@if (!string.IsNullOrWhiteSpace(TempData["ErrorMessage"]?.ToString()))
-{
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
-}
-
-
-<h2>Registration Successful</h2>
-
-
-
-<div class="text-center">
-    <h2>Registration Successful</h2>
-
-    <p>
-        Your company account has been created successfully.
-    </p>
-
-    <p>
-        We've sent a verification email to your inbox.
-    </p>
-
-    <p>
-        Please verify your email before signing in.
-    </p>
-
-    <a asp-area="Identity"
-           asp-page="/Account/Login"
-           class="btn btn-primary">
-        Login
-    </a>
-
-    <form asp-action="ResendVerificationEmail"
-          asp-controller="Registration"
-          method="post">
-
-        @Html.AntiForgeryToken()
-
-        <input type="hidden"
-               name="userId"
-               value="@Model.UserId" />
-
-        <button type="submit"
-                class="btn btn-warning">
-            Resend Verification Email
-        </button>
-
-    </form>
 </div>
+
+@section Scripts {
+    <script src="~/js/Public/verification.js" asp-append-version="true"></script>
+}

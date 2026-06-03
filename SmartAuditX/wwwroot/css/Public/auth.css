@@ -1,0 +1,103 @@
+/* ─────────────────────────────────────────────
+// SECTION: AUTHENTICATION LAYOUT (LOGIN)
+// ───────────────────────────────────────────── */
+.auth-layout {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-soft);
+  padding: var(--spacing-xxl) var(--spacing-md);
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 440px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xxl);
+}
+
+.auth-logo {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--color-ink);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: var(--spacing-lg);
+}
+
+.auth-title {
+  margin: 0;
+}
+
+.auth-subtitle {
+  margin-top: var(--spacing-xs);
+  margin-bottom: 0;
+}
+
+.auth-form-container {
+  margin-bottom: var(--spacing-xl);
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: var(--spacing-xxl);
+}
+
+.password-reset-link {
+  font-size: 13px;
+  color: var(--color-steel);
+  text-decoration: none;
+  font-weight: 500;
+}
+.password-reset-link:hover {
+  color: var(--color-ink);
+}
+
+.form-check-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-check-input {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-brand-green);
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: 14px;
+  color: var(--color-steel);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Verification Panel inside Login */
+.verification-panel {
+  display: none;
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+}
+.verification-panel.active {
+  display: block;
+}
+.verification-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--color-brand-error);
+  margin-bottom: var(--spacing-lg);
+}

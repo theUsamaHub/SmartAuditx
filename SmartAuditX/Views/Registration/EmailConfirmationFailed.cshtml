@@ -1,11 +1,48 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
+    ViewData["Title"] = "Verification Failed";
+    Layout = "~/Views/Shared/_PublicAuthLayout.cshtml";
 }
 
-<h2>Email Verification Failed</h2>
+<div class="status-layout">
+    <div class="card-base status-card">
+        
+        <div class="status-icon-container error">
+            <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+        </div>
 
-<p>
-    Invalid or expired verification link.
-</p>
+        <h2 class="heading-3">Verification Failed</h2>
+        
+        <p class="subtitle">
+            The verification link is invalid or has expired.
+        </p>
+
+        <p class="body-sm" style="margin-top: var(--spacing-md);">
+            For security reasons, verification links expire after a short period. You can request a new verification link below.
+        </p>
+
+        <div class="status-actions">
+            @if (!string.IsNullOrEmpty(ViewBag.UserId))
+            {
+                <form>
+                    @Html.AntiForgeryToken()
+                    <button type="button" class="btn-primary btn-resend-verification" data-userid="@ViewBag.UserId" style="width: 100%;">
+                        Request New Link
+                    </button>
+                </form>
+            }
+
+            <a href="/Identity/Account/Login" class="btn-secondary" style="width: 100%;">
+                Return to Login
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Public/verification.js" asp-append-version="true"></script>
+}
