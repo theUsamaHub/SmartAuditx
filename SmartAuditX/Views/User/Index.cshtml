@@ -1,8 +1,416 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    ViewData["Title"] = "SmartAuditX - Enterprise Audit & Compliance Platform";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
 }
 
-<h1>Welcome User</h1>
+<!-- HERO SECTION -->
+<section class="hero-section" id="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span>Multi-Tenant Enterprise Platform</span>
+            </div>
+            <h1 class="hero-title">
+                Simplify Audit Management &<br>Compliance Tracking
+            </h1>
+            <p class="hero-description">
+                SmartAuditX empowers enterprises to manage audits, track compliance, organize employees, and govern organizational structure — all in one secure platform.
+            </p>
+            <div class="hero-actions">
+                <a class="btn-accent-green" asp-controller="Registration" asp-action="AccountInfo">Get Started Free</a>
+                <a class="btn-secondary" href="#features">Explore Features</a>
+            </div>
+        </div>
 
+        <div class="hero-mockup">
+            <div class="hero-mockup-header">
+                <span class="mockup-dot red"></span>
+                <span class="mockup-dot yellow"></span>
+                <span class="mockup-dot green"></span>
+            </div>
+            <div class="hero-mockup-body">
+                <div class="mockup-sidebar">
+                    <div class="mockup-sidebar-item"></div>
+                    <div class="mockup-sidebar-item short"></div>
+                    <div class="mockup-sidebar-item"></div>
+                    <div class="mockup-sidebar-item"></div>
+                    <div class="mockup-sidebar-item short"></div>
+                </div>
+                <div class="mockup-content">
+                    <div class="mockup-content-line"></div>
+                    <div class="mockup-content-line"></div>
+                    <div class="mockup-content-line short"></div>
+                    <div class="mockup-content-line"></div>
+                    <div class="mockup-content-line shorter"></div>
+                    <div class="mockup-content-line"></div>
+                    <div class="mockup-content-line short"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features-section section" id="features">
+    <div class="container">
+        <div class="section-heading">
+            <h2 class="section-title">Everything You Need to Stay Compliant</h2>
+            <p class="section-subtitle">A complete suite of tools designed for enterprise audit and compliance workflows.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <h3 class="feature-title">Company Management</h3>
+                <p class="feature-desc">Centralize company profiles, contacts, and organizational hierarchy with multi-tenant isolation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3 class="feature-title">Employee Management</h3>
+                <p class="feature-desc">Track employee records, documents, designations, and department assignments seamlessly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <h3 class="feature-title">Audit Tracking</h3>
+                <p class="feature-desc">Plan, execute, and document audits with structured workflows and real-time status updates.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3 class="feature-title">Compliance Monitoring</h3>
+                <p class="feature-desc">Monitor regulatory compliance across departments with automated alerts and dashboards.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                </div>
+                <h3 class="feature-title">Branch Management</h3>
+                <p class="feature-desc">Manage multiple branches, locations, and regional offices under a unified company structure.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                </div>
+                <h3 class="feature-title">Document Tracking</h3>
+                <p class="feature-desc">Store, categorize, and retrieve employee and compliance documents with version control.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS SECTION -->
+<section class="how-it-works-section section" id="how-it-works">
+    <div class="container">
+        <div class="section-heading">
+            <h2 class="section-title">Get Started in Minutes</h2>
+            <p class="section-subtitle">A simple four-step process to transform your organization's audit and compliance operations.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Register Company</h3>
+                <p class="step-desc">Sign up and create your company profile with basic information and contact details.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Setup Organization</h3>
+                <p class="step-desc">Configure branches, departments, and designations to match your organizational structure.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Manage Employees</h3>
+                <p class="step-desc">Add employees, assign roles, upload documents, and link them to departments.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Run Audits</h3>
+                <p class="step-desc">Create audit plans, assign auditors, track findings, and generate compliance reports.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PLATFORM MODULES SECTION -->
+<section class="modules-section section" id="modules">
+    <div class="container">
+        <div class="section-heading">
+            <h2 class="section-title">Powerful Platform Modules</h2>
+            <p class="section-subtitle">Modular architecture that grows with your organization's needs.</p>
+        </div>
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="module-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <h3 class="module-name">Companies</h3>
+                <p class="module-desc">Multi-tenant company profiles</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                </div>
+                <h3 class="module-name">Branches</h3>
+                <p class="module-desc">Location & office management</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3 class="module-name">Employees</h3>
+                <p class="module-desc">HR & workforce records</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <h3 class="module-name">Documents</h3>
+                <p class="module-desc">Secure file storage</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <h3 class="module-name">Audits</h3>
+                <p class="module-desc">Plan & execute audits</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3 class="module-name">Compliance</h3>
+                <p class="module-desc">Regulatory adherence</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
+                <h3 class="module-name">Departments</h3>
+                <p class="module-desc">Organizational units</p>
+            </div>
+            <div class="module-card">
+                <div class="module-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+                <h3 class="module-name">Designations</h3>
+                <p class="module-desc">Role hierarchies</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECURITY SECTION -->
+<section class="security-section section" id="security">
+    <div class="container">
+        <div class="section-heading">
+            <h2 class="section-title">Enterprise-Grade Security</h2>
+            <p class="section-subtitle">Built with security-first architecture to protect your sensitive organizational data.</p>
+        </div>
+        <div class="security-grid">
+            <div class="security-card">
+                <div class="security-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <div>
+                    <h3 class="security-title">Multi-Tenant Architecture</h3>
+                    <p class="security-desc">Complete data isolation between companies with tenant-aware queries and access controls.</p>
+                </div>
+            </div>
+            <div class="security-card">
+                <div class="security-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="security-title">Role-Based Access Control</h3>
+                    <p class="security-desc">Granular permissions for System Admins, Company Owners, Auditors, and Managers.</p>
+                </div>
+            </div>
+            <div class="security-card">
+                <div class="security-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                </div>
+                <div>
+                    <h3 class="security-title">Secure Authentication</h3>
+                    <p class="security-desc">ASP.NET Core Identity with password policies, lockout protection, and secure cookies.</p>
+                </div>
+            </div>
+            <div class="security-card">
+                <div class="security-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                    <h3 class="security-title">Email Verification</h3>
+                    <p class="security-desc">Built-in email confirmation flows to ensure valid user accounts and secure communication.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials-section section" id="testimonials">
+    <div class="container">
+        <div class="section-heading">
+            <h2 class="section-title">Trusted by Compliance Teams</h2>
+            <p class="section-subtitle">See how organizations are transforming their audit operations with SmartAuditX.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"SmartAuditX reduced our audit preparation time by 60%. The multi-tenant structure is perfect for managing our subsidiaries."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">SK</div>
+                    <div>
+                        <p class="testimonial-name">Sarah Khan</p>
+                        <p class="testimonial-role">Head of Compliance, Nexus Group</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"Finally, a platform that understands enterprise governance. Employee document tracking alone saved us countless hours."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JR</div>
+                    <div>
+                        <p class="testimonial-name">James Rodriguez</p>
+                        <p class="testimonial-role">Internal Auditor, Apex Manufacturing</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"The role-based access control gives us confidence that sensitive audit data is only visible to authorized personnel."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">AP</div>
+                    <div>
+                        <p class="testimonial-name">Aisha Patel</p>
+                        <p class="testimonial-role">CFO, Horizon Enterprises</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section class="pricing-section section" id="pricing">
+    <div class="container">
+        <div class="section-heading">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">Choose the plan that fits your organization's size and compliance needs.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <p class="pricing-tier">Starter</p>
+                <p class="pricing-amount">$0<span>/month</span></p>
+                <p class="pricing-desc">Perfect for small teams getting started.</p>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 1 Company</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 25 Employees</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Basic Audit Tracking</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Email Support</li>
+                </ul>
+                <a class="btn-secondary w-100" asp-area="Identity" asp-page="/Account/Register">Get Started</a>
+            </div>
+            <div class="pricing-card featured">
+                <p class="pricing-tier">Professional</p>
+                <p class="pricing-amount">$99<span>/month</span></p>
+                <p class="pricing-desc">For growing organizations with complex needs.</p>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited Companies</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 500 Employees</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Advanced Audit Workflows</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Document Management</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority Support</li>
+                </ul>
+                <a class="btn-accent-green w-100" asp-area="Identity" asp-page="/Account/Register">Start Free Trial</a>
+            </div>
+            <div class="pricing-card">
+                <p class="pricing-tier">Enterprise</p>
+                <p class="pricing-amount">Custom</p>
+                <p class="pricing-desc">Tailored solutions for large enterprises.</p>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited Everything</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Custom Integrations</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Dedicated Account Manager</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> SLA & On-Premise Option</li>
+                </ul>
+                <a class="btn-secondary w-100" href="#contact">Contact Sales</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section section" id="faq">
+    <div class="container">
+        <div class="section-heading">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know about getting started with SmartAuditX.</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item active">
+                <button class="faq-question" type="button">
+                    <span>What is SmartAuditX?</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>SmartAuditX is an enterprise-grade audit and compliance management platform that helps organizations manage companies, employees, branches, departments, audits, and compliance documentation in a single secure system.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <span>Is my data secure?</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Absolutely. SmartAuditX uses multi-tenant architecture with complete data isolation, ASP.NET Core Identity for authentication, role-based access control, and secure HTTPS-only cookies. Each company's data is fully segregated from others.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <span>Can I manage multiple companies?</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes. SmartAuditX is built on a multi-tenant architecture. Each company operates within its own isolated environment with separate employees, departments, branches, and audit records.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <span>What roles are supported?</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>SmartAuditX supports System Admin, Company Owner, Manager, and Auditor roles. Each role has carefully designed permissions appropriate to their responsibilities within the organization.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <span>How do I get started?</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Simply register your company, verify your email, and start setting up your organizational structure. You can add branches, departments, employees, and begin creating audits within minutes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section section" id="contact">
+    <div class="container">
+        <div class="cta-card">
+            <h2 class="cta-title">Ready to Transform Your Compliance?</h2>
+            <p class="cta-desc">Join hundreds of organizations using SmartAuditX to streamline their audit and compliance operations.</p>
+            <div class="cta-actions">
+                <a class="btn-on-dark" asp-controller="Registration" asp-action="AccountInfo">Get Started Free</a>
+                <a class="btn-ghost-light" href="mailto:hello@smartauditx.com">Contact Sales</a>
+            </div>
+        </div>
+    </div>
+</section>

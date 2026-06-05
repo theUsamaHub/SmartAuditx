@@ -355,22 +355,35 @@ namespace SmartAuditX.Data
             builder.Entity<CompanyContact>(entity =>
             {
                 entity.ToTable("CompanyContacts");
-
                 entity.HasKey(x => x.CompanyContactId);
 
-                entity.Property(x => x.Email)
-                    .HasMaxLength(255)
+                // ── New: ContactType stored as string ──────────────
+                entity.Property(x => x.ContactType)
+                    .HasMaxLength(30)
+                    .IsRequired()
+                    .HasConversion<string>()
+                    .HasDefaultValue(ContactType.HeadOffice);
+
+                // ── New: PhoneDialCode ─────────────────────────────
+                entity.Property(x => x.PhoneDialCode)
+                    .HasMaxLength(5)
                     .IsRequired();
 
+                // ── Fix: PhoneNumber MaxLength (was 50, should be 20)
                 entity.Property(x => x.PhoneNumber)
-                    .HasMaxLength(50)
+                    .HasMaxLength(20)
+                    .IsRequired();
+
+                // ── Existing fields — keep as is ──────────────────
+                entity.Property(x => x.Email)
+                    .HasMaxLength(255)
                     .IsRequired();
 
                 entity.Property(x => x.ContactName)
                     .HasMaxLength(150);
 
                 entity.Property(x => x.FaxNumber)
-                    .HasMaxLength(50);
+                    .HasMaxLength(20);
 
                 entity.Property(x => x.PhysicalAddress)
                     .HasMaxLength(500);
@@ -382,15 +395,26 @@ namespace SmartAuditX.Data
                     .HasDefaultValueSql("GETUTCDATE()");
 
                 entity.Property(x => x.UpdatedAt)
-                    .HasDefaultValue(null); //updated at by default will be null until the record is updated for the first time, so we set the default value to null
+                    .HasDefaultValue(null);
+
+                // ── New: IsDeleted ────────────────────────────────
+                entity.Property(x => x.IsDeleted)
+                    .HasDefaultValue(false);
+
+                entity.HasQueryFilter(x => !x.IsDeleted);
+
+                // ── Existing relationship — keep as is ────────────
                 entity.HasOne(x => x.Company)
-.WithMany(x => x.CompanyContacts)
-.HasForeignKey(x => x.CompanyId)
+                    .WithMany(x => x.CompanyContacts)
+                    .HasForeignKey(x => x.CompanyId)
                     .OnDelete(DeleteBehavior.Restrict);
 
+                // ── Indexes ───────────────────────────────────────
                 entity.HasIndex(x => x.CompanyId);
+                entity.HasIndex(x => x.ContactType);  // New — filter by type
+                entity.HasIndex(x => x.IsPrimary);    // New — quick primary lookup
+                entity.HasIndex(x => x.IsDeleted);    // New — soft delete filter
             });
-
             // =========================
             // BRANCH TABLES
             // =========================

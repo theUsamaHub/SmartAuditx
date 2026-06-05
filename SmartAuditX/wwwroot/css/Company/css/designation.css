@@ -1,0 +1,70 @@
+.designation-panel .designation-filter-select {
+  min-width: 160px;
+}
+
+.designation-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+
+.designation-empty i {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--admin-primary);
+  font-size: 2rem;
+}
+
+.designation-code-badge {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--admin-primary);
+  font-family: Consolas, "Courier New", monospace;
+  letter-spacing: 0.03em;
+}
+
+.designation-status-active {
+  background: rgba(15, 118, 110, 0.12);
+  color: var(--admin-success);
+}
+
+.designation-status-inactive {
+  background: rgba(107, 114, 128, 0.15);
+  color: var(--admin-muted);
+}
+
+.designation-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.designation-actions .btn {
+  box-shadow: none;
+}
+
+.designation-description {
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#designationAlert {
+  border-radius: 8px;
+}
+
+@media (max-width: 767.98px) {
+  .designation-panel .panel-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .designation-panel .panel-header .d-flex {
+    width: 100%;
+  }
+
+  .designation-panel .designation-filter-select,
+  .designation-panel .table-search {
+    width: 100%;
+  }
+}

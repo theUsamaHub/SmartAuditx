@@ -20,6 +20,8 @@
   --color-steel: #5a5a5c;
   --color-stone: #888888;
   --color-muted: #a8a8aa;
+  --color-hero-dark-from: #1a3d4a;
+  --color-hero-dark-to: #2d5a4f;
 
   --rounded-sm: 6px;
   --rounded-md: 8px;
@@ -116,6 +118,11 @@ body {
   background-color: var(--color-charcoal);
   color: var(--color-on-primary);
 }
+.btn-primary.w-100,
+.btn-accent-green.w-100,
+.btn-secondary.w-100 {
+  width: 100%;
+}
 .btn-primary:disabled {
   background-color: var(--color-hairline);
   color: var(--color-muted);
@@ -186,6 +193,7 @@ body {
 .form-label {
   display: block;
   font-size: 14px;
+  margin-top:10px;
   font-weight: 500;
   color: var(--color-ink);
   margin-bottom: var(--spacing-xs);

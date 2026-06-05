@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SmartAuditX</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Public CSS Architecture -->
+    <link rel="stylesheet" href="~/css/Public/components.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/public-layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/navbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/footer.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Public/responsive.css" asp-append-version="true" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <partial name="_PublicNavbar" />
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <partial name="_PublicFooter" />
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Public/common.js" asp-append-version="true"></script>
+    <script src="~/js/Public/site.js" asp-append-version="true"></script>
+    <script src="~/js/Public/navbar.js" asp-append-version="true"></script>
+    <script src="~/js/Public/home.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

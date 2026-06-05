@@ -1,0 +1,64 @@
+.company-contact-panel .contact-filter-select {
+  min-width: 180px;
+}
+
+.company-contact-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+
+.company-contact-empty i {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--admin-primary);
+  font-size: 2rem;
+}
+
+.contact-type-badge {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--admin-primary);
+}
+
+.contact-primary-badge {
+  background: rgba(15, 118, 110, 0.12);
+  color: var(--admin-success);
+}
+
+.company-contact-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.company-contact-actions .btn {
+  box-shadow: none;
+}
+
+#contactModal .iti {
+  width: 100%;
+}
+
+#contactModal .iti__country-list {
+  z-index: 2000;
+}
+
+#contactAlert {
+  border-radius: 8px;
+}
+
+@media (max-width: 767.98px) {
+  .company-contact-panel .panel-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .company-contact-panel .panel-header .d-flex {
+    width: 100%;
+  }
+
+  .company-contact-panel .contact-filter-select,
+  .company-contact-panel .table-search {
+    width: 100%;
+  }
+}

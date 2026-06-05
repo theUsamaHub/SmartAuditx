@@ -6,6 +6,7 @@ namespace SmartAuditX.Controllers.mvccontrollers
     {
         public IActionResult Index()
         {
+            ViewData["Title"] = "SmartAuditX - Enterprise Audit & Compliance Platform";
             return View();
         }
     }

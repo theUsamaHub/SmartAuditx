@@ -3,6 +3,30 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartAuditX.Models
 {
+    /// <summary>
+    /// Contact type enum — replaces using ContactName as both a label and type.
+    /// Enables proper filtering: "give me all Finance contacts across branches".
+    /// </summary>
+    public enum ContactType
+    {
+        HeadOffice,
+        HR,
+        Finance,
+        Legal,
+        Operations,      
+              // ── Add these ─────────────────────
+    IT,               // Technical support, software issues
+        Sales,            // Sales inquiries and deals
+        CustomerSupport,  // Client-facing support desk
+        Procurement,      // Purchasing and vendor management
+        Logistics,        // Warehouse, delivery, supply chain
+        Management,       // C-level / executive contacts
+        Compliance,       // Audit, regulatory, risk management
+        Admin,            // General administration
+
+        Other
+    }
+
     public class CompanyContact
     {
         [Key]
@@ -10,20 +34,36 @@ namespace SmartAuditX.Models
         public int CompanyContactId { get; set; }
 
         [Required]
+        [ForeignKey("Company")]
         public int CompanyId { get; set; }
 
+        /// <summary>
+        /// What type of contact this is.
+        /// Replaces ContactName doing double duty as both a label and a type.
+        /// Now you can filter by type reliably.
+        /// </summary>
+        [Required]
+        [Column(TypeName = "nvarchar(30)")]
+        public ContactType ContactType { get; set; } = ContactType.HeadOffice;
+
+        /// <summary>Actual person's name at this contact point. e.g. "Ali Hassan".</summary>
         [MaxLength(150)]
         public string? ContactName { get; set; }
 
         [Required]
         [MaxLength(255)]
+        [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(5)]
+        public string PhoneDialCode { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(20)]
         public string PhoneNumber { get; set; } = string.Empty;
 
-        [MaxLength(50)]
+        [MaxLength(20)]
         public string? FaxNumber { get; set; }
 
         [MaxLength(500)]
@@ -31,16 +71,12 @@ namespace SmartAuditX.Models
 
         public bool IsPrimary { get; set; } = false;
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public bool IsDeleted { get; set; } = false;
 
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
 
         // Navigation
-        //public virtual required Company Company { get; set; } //we can make it required if we want to ensure that every contact must be associated with a company, but for now we will keep it optional to allow for flexibility in case we want to create contacts before associating them with a company
-
-        public virtual Company Company { get; set; }
-
-
-
+        public virtual Company? Company { get; set; }
     }
 }

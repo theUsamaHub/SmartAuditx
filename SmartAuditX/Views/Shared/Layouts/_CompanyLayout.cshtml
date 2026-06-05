@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="~/css/Company/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/Company/css/style.css">
     <link rel="stylesheet" href="~/css/Company/vendors/bootstrap-icons/bootstrap-icons.css">
-  
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body>
@@ -36,6 +36,7 @@
 
     <script src="~/js/Company/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/Company/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

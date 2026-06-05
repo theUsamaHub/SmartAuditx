@@ -49,9 +49,6 @@ builder.Services
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-
-
-
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
@@ -105,10 +102,10 @@ builder.Services.AddSession(options =>
 //Behavior: Timer resets with each request
 //Difference from cookie: Cookie lives on client, session data lives on server
 
-options.Cookie.HttpOnly = true;
+options.Cookie.HttpOnly = true; 
 //    Same as application cookie - prevents JavaScript access
 //Session - specific: Controls the session ID cookie, not the auth cookie
-    options.Cookie.IsEssential = true;
+    options.Cookie.IsEssential = true; 
 //Purpose: Allows session cookie to work without user consent under GDPR
 //Why important: Without true, some browsers might block session cookies until user accepts cookies
 //Essential session: Storing shopping cart, login state -user expects this functionality
@@ -134,6 +131,9 @@ builder.Services.AddScoped<ISeedService, SeedService>(); //added seed service to
 builder.Services.AddScoped<  IRegistrationService, RegistrationService>(); //added company registeration service to the DI container
 builder.Services.AddScoped<IFileService, FileService>(); //added file service to the DI container
 builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<ICompanyContactService, CompanyContactService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IDesignationService, DesignationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
@@ -171,7 +171,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=User}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 app.MapRazorPages()

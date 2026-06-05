@@ -571,6 +571,13 @@ namespace SmartAuditX.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<string>("ContactType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValue("HeadOffice");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -582,18 +589,28 @@ namespace SmartAuditX.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("FaxNumber")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<bool>("IsPrimary")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<string>("PhoneDialCode")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("PhysicalAddress")
                         .HasMaxLength(500)
@@ -605,6 +622,12 @@ namespace SmartAuditX.Migrations
                     b.HasKey("CompanyContactId");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("ContactType");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("IsPrimary");
 
                     b.ToTable("CompanyContacts", (string)null);
                 });

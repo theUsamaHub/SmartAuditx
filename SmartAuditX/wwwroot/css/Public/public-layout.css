@@ -1,0 +1,63 @@
+/* ─────────────────────────────────────────────
+// SECTION: PUBLIC LAYOUT BASE
+// ───────────────────────────────────────────── */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+main {
+    min-height: calc(100vh - 300px);
+}
+
+/* Section base */
+.section {
+    padding: 96px 0;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 64px;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.20;
+    letter-spacing: -0.5px;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.50;
+    color: var(--color-steel);
+}
+
+/* Utility */
+.text-brand-green {
+    color: var(--color-brand-green);
+}
+
+.bg-surface {
+    background-color: var(--color-surface-soft);
+}
+
+/* Container override for wider layouts */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1280px;
+    }
+}
