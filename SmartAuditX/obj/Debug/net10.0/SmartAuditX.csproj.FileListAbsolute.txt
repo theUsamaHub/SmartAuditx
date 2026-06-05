@@ -438,4 +438,8 @@ d:\SmartAuditX\SmartAuditX\obj\Debug\net10.0\compressed\hq9z7wds2w-{0}-b3do9zq6g
 d:\SmartAuditX\SmartAuditX\obj\Debug\net10.0\compressed\lcg6ftxyas-{0}-6b5gjcfnho-6b5gjcfnho.gz
 d:\SmartAuditX\SmartAuditX\obj\Debug\net10.0\compressed\2opneumobb-{0}-aexfp88z97-aexfp88z97.gz
 d:\SmartAuditX\SmartAuditX\obj\Debug\net10.0\compressed\56fmgqeqn5-{0}-gyz76axho7-gyz76axho7.gz
+D:\SmartAuditX\SmartAuditX\obj\Debug\net10.0\compressed\8ljxqgj3it-{0}-92p4g6qupb-92p4g6qupb.gz
+D:\SmartAuditX\SmartAuditX\obj\Debug\net10.0\compressed\xrabo6ue4w-{0}-mq3rs3c2m1-mq3rs3c2m1.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\2elebt11nd-{0}-zg5vxo6eih-zg5vxo6eih.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\t77o2dqvs6-{0}-34aoqq2ezg-34aoqq2ezg.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

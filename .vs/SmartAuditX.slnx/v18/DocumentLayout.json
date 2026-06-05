@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "SmartAuditX\\Views\\Shared\\_PublicNavbar.cshtml",
               "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\_PublicNavbar.cshtml",
               "RelativeToolTip": "SmartAuditX\\Views\\Shared\\_PublicNavbar.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAABRAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAC4AAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-06-05T21:01:23.06Z",
               "EditorCaption": ""
@@ -51,8 +51,7 @@
               "RelativeToolTip": "SmartAuditX\\Views\\User\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-05T20:57:22.665Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T20:57:22.665Z"
             },
             {
               "$type": "Document",
@@ -64,8 +63,7 @@
               "RelativeToolTip": "SmartAuditX\\Controllers\\mvccontrollers\\CompanyContactController.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T19:42:10.606Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T19:42:10.606Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "SmartAuditX\\Program.cs",
               "ViewState": "AgIAAJwAAAAAAAAAAAAAAK0AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T18:57:01.471Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T18:57:01.471Z"
             }
           ]
         }

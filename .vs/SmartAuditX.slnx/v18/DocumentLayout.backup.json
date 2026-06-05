@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\SmartAuditX\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\shared\\_publicnavbar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\shared\\_publicnavbar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -27,19 +31,31 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "_PublicNavbar.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\_PublicNavbar.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Shared\\_PublicNavbar.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\_PublicNavbar.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\Shared\\_PublicNavbar.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABwAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-05T21:01:23.06Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\User\\Index.cshtml",
               "RelativeDocumentMoniker": "SmartAuditX\\Views\\User\\Index.cshtml",
               "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\User\\Index.cshtml",
               "RelativeToolTip": "SmartAuditX\\Views\\User\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-05T20:57:22.665Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T20:57:22.665Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CompanyContactController.cs",
               "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\mvccontrollers\\CompanyContactController.cs",
               "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\mvccontrollers\\CompanyContactController.cs",
@@ -47,12 +63,11 @@
               "RelativeToolTip": "SmartAuditX\\Controllers\\mvccontrollers\\CompanyContactController.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T19:42:10.606Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T19:42:10.606Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Program.cs",
               "RelativeDocumentMoniker": "SmartAuditX\\Program.cs",
@@ -60,8 +75,7 @@
               "RelativeToolTip": "SmartAuditX\\Program.cs",
               "ViewState": "AgIAAJwAAAAAAAAAAAAAAK0AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T18:57:01.471Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T18:57:01.471Z"
             }
           ]
         }

@@ -1,0 +1,175 @@
+@model SmartAuditX.Models.ViewModels.BranchViewModel
+
+@{
+    ViewData["Title"] = "Branches";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/branch.css" asp-append-version="true" />
+}
+
+<div class="page-heading">
+    <div>
+        <p class="eyebrow mb-1">Organization Setup</p>
+        <h1 class="h3 mb-0">Branches</h1>
+        <p class="text-muted mb-0 mt-1">Manage company branches and office locations.</p>
+    </div>
+    <div class="heading-actions">
+        <button type="button" class="btn btn-primary" id="btnAddBranch">
+            <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>
+            Add Branch
+        </button>
+    </div>
+</div>
+
+<div id="branchAlert" class="alert d-none" role="alert"></div>
+
+<section class="panel branch-panel">
+    <div class="panel-header px-3 px-md-4 pt-3 pt-md-4 pb-0">
+        <div>
+            <h2 class="h5 mb-1">Branch Directory</h2>
+            <p class="text-muted mb-0">Filter by status or search by name, code, or address.</p>
+        </div>
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+            <select id="filterBranchStatus" class="form-select form-select-sm branch-filter-select">
+                <option value="">All Statuses</option>
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+            <input type="search"
+                   id="searchBranches"
+                   class="form-control form-control-sm table-search"
+                   placeholder="Search branches..." />
+        </div>
+    </div>
+
+    <div class="table-responsive px-3 px-md-4 pb-3 pb-md-4 pt-3">
+        <table class="table align-middle mb-0" id="branchesTable">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Type</th>
+                    <th>Departments</th>
+                    <th>Employees</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="branchesTableBody">
+                <tr id="branchesLoadingRow">
+                    <td colspan="8" class="text-center text-muted py-4">Loading branches...</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="branchesEmptyState" class="branch-empty d-none">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <p class="mb-1 fw-semibold">No branches yet</p>
+            <p class="text-muted mb-0">Add your first branch to organize departments and employees.</p>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="branchModal" tabindex="-1" aria-labelledby="branchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title h5" id="branchModalLabel">Add Branch</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="branchForm" class="needs-validation" novalidate>
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="BranchId" name="BranchId" />
+
+                <div class="modal-body">
+                    <div id="branchFormAlert" class="alert alert-danger d-none" role="alert"></div>
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="BranchCode" class="form-label">Branch Code</label>
+                            <input asp-for="BranchCode" class="form-control text-uppercase" id="BranchCode" required maxlength="50" placeholder="e.g. HQ" />
+                            <div class="invalid-feedback">Enter a valid branch code.</div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="BranchName" class="form-label">Branch Name</label>
+                            <input asp-for="BranchName" class="form-control" id="BranchName" required maxlength="200" placeholder="e.g. Head Office Karachi" />
+                            <div class="invalid-feedback">Branch name is required.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" id="Email" type="email" maxlength="255" placeholder="branch@company.com" />
+                            <div class="invalid-feedback">Enter a valid email address.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="PhoneNumber" class="form-label">Phone Number</label>
+                            <input asp-for="PhoneNumber" class="form-control" id="PhoneNumber" maxlength="50" placeholder="+92 300 1234567" />
+                        </div>
+
+                        <div class="col-12">
+                            <label for="PhysicalAddress" class="form-label">Physical Address</label>
+                            <textarea asp-for="PhysicalAddress" class="form-control" id="PhysicalAddress" rows="2" maxlength="500" placeholder="Street address, city, country"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input asp-for="IsHeadOffice" class="form-check-input" type="checkbox" id="IsHeadOffice" />
+                                <label class="form-check-label" for="IsHeadOffice">This is the head office</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input asp-for="IsActive" class="form-check-input" type="checkbox" id="IsActive" checked />
+                                <label class="form-check-label" for="IsActive">Branch is active</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="branchFormSubmit">
+                        Save Branch
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteBranchModal" tabindex="-1" aria-labelledby="deleteBranchModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title h5" id="deleteBranchModalLabel">Delete Branch</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Are you sure you want to delete <strong id="deleteBranchName">this branch</strong>? Branches with linked departments or assigned employees cannot be deleted.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBranch">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        window.branchConfig = {
+            listUrl: '@Url.Action("List", "Branch")',
+            getUrl: '@Url.Action("Get", "Branch")',
+            createUrl: '@Url.Action("Create", "Branch")',
+            editUrl: '@Url.Action("Edit", "Branch")',
+            deleteUrl: '@Url.Action("Delete", "Branch")',
+            toggleActiveUrl: '@Url.Action("ToggleActive", "Branch")'
+        };
+    </script>
+    <script src="~/js/Company/js/branch.js" asp-append-version="true"></script>
+}
