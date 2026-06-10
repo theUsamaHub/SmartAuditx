@@ -13,7 +13,7 @@
 .status-card {
   text-align: center;
   padding: var(--spacing-section-sm);
-  max-width: 480px;
+  max-width: 580px;
 }
 
 .status-icon-container {
@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--spacing-xl);
+  margin: 10px auto var(--spacing-xl);
 }
 
 .status-icon-container.success {

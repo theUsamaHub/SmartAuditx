@@ -44,7 +44,7 @@ builder.Services
             TimeSpan.FromMinutes(15);
 
         // Sign In settings
-        options.SignIn.RequireConfirmedEmail = false; //we will uncomment it later WHEN GO TO THE PHASE A-II
+        options.SignIn.RequireConfirmedEmail = true; //we will uncomment it later WHEN GO TO THE PHASE A-II
     })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();

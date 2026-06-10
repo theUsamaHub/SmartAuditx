@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Identity;
         using System.Text;
         using Microsoft.EntityFrameworkCore;
         using Microsoft.AspNetCore.Authorization;
-        namespace SmartAuditX.Controllers.mvccontrollers
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+namespace SmartAuditX.Controllers.mvccontrollers
         {
         public class RegistrationController : Controller
         {
@@ -117,13 +118,35 @@ using Microsoft.AspNetCore.Identity;
 
             if (validationError != null)
             {
-                ModelState.AddModelError(
-                    string.Empty,
-                    validationError);
+                switch (validationError)
+                {
+                    case "Username already exists.":
+                        ModelState.AddModelError(
+                            nameof(model.Username),
+                            validationError);
+                        break;
+
+                    case "Email already exists.":
+                        ModelState.AddModelError(
+                            nameof(model.Email),
+                            validationError);
+                        break;
+
+                    case "Phone number already exists.":
+                        ModelState.AddModelError(
+                            nameof(model.PhoneNumber),
+                            validationError);
+                        break;
+
+                    default:
+                        ModelState.AddModelError(
+                            string.Empty,
+                            validationError);
+                        break;
+                }
 
                 return View(model);
             }
-
             HttpContext.Session.SetString(
                 "Username",
                 model.Username);
@@ -175,7 +198,7 @@ using Microsoft.AspNetCore.Identity;
         }
 
         [HttpPost]
-            [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
             public async Task<IActionResult> CompanyInfo(RegisterCompanyViewModel model)
             {
                 if (!ModelState.IsValid)
@@ -275,21 +298,25 @@ using Microsoft.AspNetCore.Identity;
             If you did not create this account,
             ignore this email.
         </p>");
-            TempData["RegisteredUserId"] = result.UserId;
+            //TempData["RegisteredUserId"] = result.UserId; removed this not needed more
 
             HttpContext.Session.Clear();
 
-                return RedirectToAction(nameof(RegistrationSuccess));
+                return RedirectToAction(nameof(RegistrationSuccess),
+                    new
+                {
+                    userId = result.UserId
+                });
             }
 
 
         // ─────────────────────────────────────────────
 
-        [Authorize]
-        public IActionResult RegistrationSuccess()
+        //[Authorize] ths is causing the redirect issue 
+        public IActionResult RegistrationSuccess(String userId)
         {
-            var userId =
-                TempData["RegisteredUserId"]?.ToString();
+            //var userId =
+            //    TempData["RegisteredUserId"]?.ToString();
 
             if (string.IsNullOrWhiteSpace(userId))
             {
@@ -309,16 +336,22 @@ using Microsoft.AspNetCore.Identity;
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> ResendVerificationEmail(string userId)
         {
+            // ─────────────────────────────────────────────
+            // VALIDATE REQUEST
+            // ─────────────────────────────────────────────
+
             if (string.IsNullOrWhiteSpace(userId))
             {
                 ErrorMessage = "Invalid request.";
 
-                return RedirectToAction(
-                    nameof(RegistrationSuccess));
+                return RedirectToAction(nameof(AccountInfo));
             }
+
+            // ─────────────────────────────────────────────
+            // FIND USER
+            // ─────────────────────────────────────────────
 
             var user =
                 await _userManager.FindByIdAsync(userId);
@@ -327,18 +360,28 @@ using Microsoft.AspNetCore.Identity;
             {
                 ErrorMessage = "User not found.";
 
-                return RedirectToAction(
-                    nameof(RegistrationSuccess));
+                return RedirectToAction(nameof(AccountInfo));
             }
+
+            // ─────────────────────────────────────────────
+            // ALREADY VERIFIED
+            // ─────────────────────────────────────────────
 
             if (user.EmailConfirmed)
             {
-                SuccessMessage =
-                    "Email already verified.";
+                SuccessMessage = "Email already verified.";
 
                 return RedirectToAction(
-                    nameof(RegistrationSuccess));
+                    nameof(RegistrationSuccess),
+                    new
+                    {
+                        userId = user.Id
+                    });
             }
+
+            // ─────────────────────────────────────────────
+            // GENERATE NEW TOKEN
+            // ─────────────────────────────────────────────
 
             var token =
                 await _userManager
@@ -359,6 +402,10 @@ using Microsoft.AspNetCore.Identity;
                     },
                     Request.Scheme);
 
+            // ─────────────────────────────────────────────
+            // SEND EMAIL
+            // ─────────────────────────────────────────────
+
             await _emailService.SendEmailAsync(
                 user.Email!,
                 "Verify Your SmartAuditX Account",
@@ -375,26 +422,29 @@ using Microsoft.AspNetCore.Identity;
             </a>
         </p>");
 
+            // ─────────────────────────────────────────────
+            // SUCCESS MESSAGE
+            // ─────────────────────────────────────────────
+
             SuccessMessage =
                 "Verification email sent successfully.";
 
-            TempData["RegisteredUserId"] = user.Id;
-
             return RedirectToAction(
-                nameof(RegistrationSuccess));
+                nameof(RegistrationSuccess),
+                new
+                {
+                    userId = user.Id
+                });
         }
 
-
-[Authorize]
-        public IActionResult EmailVerificationRequired(
-            string userId)
+        public IActionResult EmailVerificationRequired(string userId)
         {
             ViewBag.UserId = userId;
 
             return View();
         } 
 
-    [Authorize]
+       
         [HttpGet]
             public async Task<IActionResult> ConfirmEmail(string userId, string token)
             {
@@ -402,7 +452,7 @@ using Microsoft.AspNetCore.Identity;
                 {
                     ViewBag.UserId = userId;
                     return View("EmailConfirmationFailed");
-                }
+                } 
 
                 var user = await _userManager.FindByIdAsync(userId);
                 if (user == null)
@@ -460,7 +510,7 @@ using Microsoft.AspNetCore.Identity;
                 return Json(new { success = true });
             }
 
-            [Authorize]
+           
             [HttpPost]
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> ResendVerificationAjax(string userId)

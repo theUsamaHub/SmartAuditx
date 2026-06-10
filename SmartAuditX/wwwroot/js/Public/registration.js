@@ -36,7 +36,12 @@ $(document).ready(function () {
     function setupValidation($input, fieldName) {
         if ($input.length === 0) return;
         
-        const $feedback = $input.siblings('.invalid-feedback');
+          const $feedback = $input.siblings('.invalid-feedback');
+        //const fieldName =
+        //    $input.attr('name');
+
+        //const $feedback =
+        //    $('[data-valmsg-for="' + fieldName + '"]');
         
         $input.on('keyup', function() {
             clearTimeout(debounceTimer);

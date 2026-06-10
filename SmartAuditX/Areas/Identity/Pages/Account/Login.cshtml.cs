@@ -199,6 +199,8 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                 return Page();
             }
 
+
+
             // STEP 3: INACTIVE CHECK (MUST BE HERE)
             // Verify account is active and not deleted before allowing login
             if (!user.IsActive || user.IsDeleted)
@@ -206,16 +208,18 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                 ModelState.AddModelError("", "Account is inactive.");
                 return Page();
             }
-            //check email confirmation
+
             if (!user.EmailConfirmed)
             {
+
                 return RedirectToAction(
                     "EmailVerificationRequired",
                     "Registration",
-                    new
-                    {
-                        userId = user.Id
-                    });
+                       new
+                       {
+                           userId = user.Id
+                       });
+
             }
 
             // STEP 4: Attempt password authentication
@@ -261,18 +265,6 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                 // Fallback to default return URL if no specific role match
                 return LocalRedirect(returnUrl);
             }
-
-            //if (!user.EmailConfirmed)
-            //{
-            //    return RedirectToAction(
-            //        "EmailVerificationRequired",
-            //        "Registration",
-            //           new
-            //           {
-            //               userId = user.Id
-            //           });
-
-            //}
 
             // STEP 6: Authentication failed - display generic error message
             ModelState.AddModelError(

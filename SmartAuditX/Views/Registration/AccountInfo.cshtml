@@ -42,14 +42,14 @@
                 <div class="form-group">
                     <label asp-for="Username" class="form-label">Username</label>
                     <input asp-for="Username" class="form-control" placeholder="Choose a username" autocomplete="username" id="Username" />
-                    <span class="invalid-feedback"></span>
+                  @*   <span class="invalid-feedback"></span> *@
                     <span asp-validation-for="Username" class="invalid-feedback" style="display:block;"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Email" class="form-label">Email Address</label>
                     <input asp-for="Email" class="form-control" placeholder="name@company.com" autocomplete="email" id="Email" />
-                    <span class="invalid-feedback"></span>
+               @*      <span class="invalid-feedback"></span> *@
                     <span asp-validation-for="Email" class="invalid-feedback" style="display:block;"></span>
                 </div>
 
@@ -57,7 +57,7 @@
                     <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
                     <input asp-for="PhoneNumber" id="PhoneNumber" class="form-control" autocomplete="tel" />
                     <input type="hidden" asp-for="PhoneDialCode" id="PhoneDialCode" />
-                    <span class="invalid-feedback"></span>
+                 @*    <span class="invalid-feedback"></span> *@
                     <span asp-validation-for="PhoneNumber" class="invalid-feedback" style="display:block;"></span>
                     <span asp-validation-for="PhoneDialCode" class="invalid-feedback" style="display:block;"></span>
                 </div>
@@ -119,10 +119,10 @@
             const phoneInput = document.querySelector("#PhoneNumber");
             if (phoneInput) {
                 const iti = window.intlTelInput(phoneInput, {
-                    initialCountry: "pk",
+                    initialCountry: "us",
                     preferredCountries: ["pk", "ae", "sa", "us", "gb"],
                     separateDialCode: true,
-                    strictMode: true,
+                    strictMode: true, 
                     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"
                 });
 

@@ -1,39 +1,40 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// ─── SubscriptionPlan.cs ──────────────────────────────────────────────────
+
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SmartAuditX.Models
+namespace SmartAuditX.Models.BillingModule
 {
+    /// <summary>
+    /// Top-level plan tier. e.g. Basic, Professional, Enterprise.
+    /// No pricing stored here — pricing lives in SubscriptionPlanPricing
+    /// to support multiple billing cycles and historical accuracy.
+    /// </summary>
+    [Table("SubscriptionPlans")]
     public class SubscriptionPlan : BaseEntity
     {
-        /// <summary>
-        /// Represents a top-level subscription plan tier (Basic, Professional, Enterprise)
-        /// No pricing information is stored here to maintain historical accuracy
-        /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SubscriptionPlanId { get; set; }
 
-        [Required(ErrorMessage = "Plan name is required")]
-        [StringLength(100, MinimumLength = 2, ErrorMessage = "Plan name must be between 2 and 100 characters")]
-        //[Display(Name = "Plan Name")]
+        [Required]
+        [MaxLength(100)]
         public string Name { get; set; } = string.Empty;
 
-        [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
-        //[Display(Name = "Description")]
+        [MaxLength(500)]
         public string? Description { get; set; }
 
-        [Required]
-        //[Display(Name = "Is Active")]
-        public bool IsActive { get; set; } = true;
+        /// <summary>
+        /// Free trial days offered for this plan.
+        /// 0 = no trial.
+        /// </summary>
+        [Range(0, 90)]
+        public int TrialDays { get; set; } = 0;
 
-        [Required]
-        //[Display(Name = "Is Deleted")]
-        public bool IsDeleted { get; set; } = false;
-
-        // Navigation properties
-        public virtual ICollection<SubscriptionPlanPricing> PricingOptions { get; set; } = new List<SubscriptionPlanPricing>();
-        public virtual ICollection<SubscriptionPlanFeature> Features { get; set; } = new List<SubscriptionPlanFeature>();
-        public virtual ICollection<CompanySubscription> CompanySubscriptions { get; set; } = new List<CompanySubscription>();
+        // ── Navigation ────────────────────────────────────────────────────
+        public virtual ICollection<SubscriptionPlanPricing> PricingOptions { get; set; }
+            = new List<SubscriptionPlanPricing>();
+        public virtual ICollection<SubscriptionPlanFeature> Features { get; set; }
+            = new List<SubscriptionPlanFeature>();
     }
-
 }

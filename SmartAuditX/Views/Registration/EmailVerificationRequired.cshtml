@@ -27,12 +27,12 @@
         <div class="status-actions">
             <form>
                 @Html.AntiForgeryToken()
-                <button type="button" class="btn-primary btn-resend-verification" data-userid="@ViewBag.UserId" style="width: 100%;">
+                <button type="button" class="btn-primary btn-resend-verification" data-userid="@ViewBag.UserId" style="width:50%">
                     Resend Verification Email
                 </button>
             </form>
 
-            <a href="/Identity/Account/Login" class="btn-secondary" style="width: 100%;">
+            <a href="/Identity/Account/Login" class="btn-secondary" style="width: 50%; display: block; margin: 0 auto 10px; text-align: center;">
                 Return to Login
             </a>
         </div>

@@ -39,7 +39,7 @@ namespace SmartAuditX.Services.Implementations
                 HtmlBody = htmlBody
             }.ToMessageBody();
 
-            using var smtp = new SmtpClient();
+        using var smtp = new SmtpClient();
 
             await smtp.ConnectAsync(
                 _settings.Host,
