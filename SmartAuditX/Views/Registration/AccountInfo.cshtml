@@ -9,9 +9,43 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css" />
     <link rel="stylesheet" href="~/css/Public/registration.css" />
     <style>
-        .iti { width: 100%; }
+
+
+        /* Updated css for the search */
+        @* .iti { width: 100%; }
         .iti__country-list { background-color: var(--color-canvas); color: var(--color-ink); border: 1px solid var(--color-hairline); border-radius: var(--rounded-md); }
-        .iti__country.iti__highlight { background-color: var(--color-surface); }
+        .iti__country.iti__highlight { background-color: var(--color-surface); } *@
+        .iti {
+    width: 100%;
+}
+
+.iti__country-list {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--rounded-md);
+}
+
+.iti__country.iti__highlight {
+    background-color: var(--color-surface);
+}
+
+/* Search box inside country dropdown */
+.iti__search-container {
+    padding: 8px;
+}
+
+.iti__search-input {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--rounded-md);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-size: 14px;
+    box-sizing: border-box;
+}
     </style>
 }
 
@@ -52,7 +86,7 @@
                @*      <span class="invalid-feedback"></span> *@
                     <span asp-validation-for="Email" class="invalid-feedback" style="display:block;"></span>
                 </div>
-
+    
                 <div class="form-group">
                     <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
                     <input asp-for="PhoneNumber" id="PhoneNumber" class="form-control" autocomplete="tel" />

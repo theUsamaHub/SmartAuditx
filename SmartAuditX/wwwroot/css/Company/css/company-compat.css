@@ -1,0 +1,247 @@
+/* ============================================
+   SmartAuditX Company Panel - Backward Compatibility
+   Maps old class names to new design system
+   ============================================ */
+
+/* Map old layout classes to new ones */
+.admin-shell {
+  composes: company-shell from './company-layout.css';
+}
+
+.admin-main {
+  composes: company-main from './company-layout.css';
+}
+
+.dashboard-content {
+  composes: company-content from './company-layout.css';
+}
+
+.dashboard-content > .container-fluid {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Map old sidebar classes - DO NOT override new styles */
+.admin-sidebar {
+  /* Inherits from company-sidebar */
+}
+
+/* Map old navbar classes */
+.admin-navbar {
+  /* Inherits from company-navbar */
+}
+
+/* Map old footer classes */
+.admin-footer {
+  /* Inherits from company-footer */
+}
+
+/* Maintain old page heading styles */
+.page-heading {
+  margin-bottom: var(--spacing-xxl);
+}
+
+.page-heading h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 var(--spacing-xs) 0;
+  letter-spacing: -0.5px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-brand-green);
+  margin-bottom: var(--spacing-xs);
+}
+
+.page-heading .text-muted {
+  color: var(--company-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Maintain old panel styles */
+.panel {
+  background: var(--company-surface);
+  border: 1px solid var(--company-border);
+  border-radius: var(--rounded-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl) var(--spacing-xl) 0;
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.panel-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--company-text);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.panel-header p {
+  font-size: 13px;
+  color: var(--company-muted);
+  margin: 0;
+}
+
+/* Maintain old button styles - let Bootstrap handle base, we enhance */
+.btn-primary {
+  /* Enhanced by company-forms.css */
+}
+
+.btn-outline-secondary {
+  /* Enhanced by company-forms.css */
+}
+
+.btn-danger {
+  /* Enhanced by company-forms.css */
+}
+
+/* Maintain old form styles - enhanced by company-forms.css */
+.form-control {
+  /* Enhanced by company-forms.css */
+}
+
+.form-select {
+  /* Enhanced by company-forms.css */
+}
+
+.form-label {
+  /* Enhanced by company-forms.css */
+}
+
+.form-check-input {
+  /* Enhanced by company-forms.css */
+}
+
+.form-check-label {
+  /* Enhanced by company-forms.css */
+}
+
+.invalid-feedback {
+  /* Enhanced by company-forms.css */
+}
+
+/* Maintain old table styles - enhanced by company-tables.css */
+.table {
+  /* Enhanced by company-tables.css */
+}
+
+.table-search {
+  /* Enhanced by company-tables.css */
+}
+
+/* Maintain old badge styles - enhanced by company-components.css */
+.badge {
+  /* Enhanced by company-components.css */
+}
+
+/* Maintain old alert styles - enhanced by company-dashboard.css */
+.alert {
+  /* Enhanced by company-dashboard.css */
+}
+
+/* Maintain old modal styles - enhanced by company-forms.css */
+.modal-content {
+  /* Enhanced by company-forms.css */
+}
+
+.modal-header {
+  /* Enhanced by company-forms.css */
+}
+
+.modal-body {
+  /* Enhanced by company-forms.css */
+}
+
+.modal-footer {
+  /* Enhanced by company-forms.css */
+}
+
+/* Maintain old heading styles */
+.h1, h1 { font-size: 32px; font-weight: 600; }
+.h2, h2 { font-size: 24px; font-weight: 600; }
+.h3, h3 { font-size: 20px; font-weight: 600; }
+.h4, h4 { font-size: 18px; font-weight: 600; }
+.h5, h5 { font-size: 16px; font-weight: 600; }
+.h6, h6 { font-size: 14px; font-weight: 600; }
+
+/* Maintain old text utilities */
+.text-muted {
+  color: var(--company-muted) !important;
+}
+
+.text-success {
+  color: var(--color-brand-green) !important;
+}
+
+.text-danger {
+  color: var(--color-brand-error) !important;
+}
+
+.text-warning {
+  color: var(--color-brand-warn) !important;
+}
+
+.text-info {
+  color: var(--color-brand-tag) !important;
+}
+
+.fw-bold {
+  font-weight: 600 !important;
+}
+
+.fw-semibold {
+  font-weight: 500 !important;
+}
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: var(--spacing-xs) !important; }
+.mb-2 { margin-bottom: var(--spacing-sm) !important; }
+.mb-3 { margin-bottom: var(--spacing-md) !important; }
+.mb-4 { margin-bottom: var(--spacing-lg) !important; }
+.mb-5 { margin-bottom: var(--spacing-xl) !important; }
+
+.mt-1 { margin-top: var(--spacing-xs) !important; }
+.mt-2 { margin-top: var(--spacing-sm) !important; }
+.mt-3 { margin-top: var(--spacing-md) !important; }
+.mt-4 { margin-top: var(--spacing-lg) !important; }
+
+.me-1 { margin-right: var(--spacing-xs) !important; }
+.me-2 { margin-right: var(--spacing-sm) !important; }
+
+.px-3 { padding-left: var(--spacing-md) !important; padding-right: var(--spacing-md) !important; }
+.py-4 { padding-top: var(--spacing-lg) !important; padding-bottom: var(--spacing-lg) !important; }
+
+.gap-2 { gap: var(--spacing-sm) !important; }
+.gap-3 { gap: var(--spacing-md) !important; }
+
+.w-100 { width: 100% !important; }
+.d-none { display: none !important; }
+.d-flex { display: flex !important; }
+.d-grid { display: grid !important; }
+
+.flex-wrap { flex-wrap: wrap !important; }
+.align-items-center { align-items: center !important; }
+.justify-content-between { justify-content: space-between !important; }
+.justify-content-center { justify-content: center !important; }
+
+.text-center { text-align: center !important; }
+.text-end { text-align: right !important; }
+
+/* Maintain old spacing utilities */
+.p-0 { padding: 0 !important; }
+.p-3 { padding: var(--spacing-md) !important; }
+.p-4 { padding: var(--spacing-lg) !important; }
+
+.m-0 { margin: 0 !important; }

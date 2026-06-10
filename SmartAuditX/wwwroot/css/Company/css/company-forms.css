@@ -1,0 +1,488 @@
+/* ============================================
+   SmartAuditX Company Panel - Forms
+   Modern Form Styling
+   ============================================ */
+
+/* ─────────────────────────────────────────────
+   SECTION: FORM GROUPS
+   ───────────────────────────────────────────── */
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--company-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-label-required::after {
+  content: ' *';
+  color: var(--color-brand-error);
+}
+
+.form-hint {
+  font-size: 12px;
+  color: var(--company-muted);
+  margin-top: var(--spacing-xs);
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: TEXT INPUTS
+   ───────────────────────────────────────────── */
+
+.form-control {
+  width: 100%;
+  height: 40px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--company-border);
+  border-radius: var(--rounded-md);
+  background: var(--company-surface);
+  color: var(--company-text);
+  font-size: 14px;
+  font-family: var(--font-family);
+  transition: all 0.15s ease;
+}
+
+.form-control::placeholder {
+  color: var(--company-muted);
+}
+
+.form-control:hover {
+  border-color: var(--color-stone);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-brand-green);
+  background: var(--company-surface);
+  box-shadow: var(--company-ring);
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background: var(--company-surface-soft);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 80px;
+  resize: vertical;
+}
+
+select.form-control {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a5a5c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: VALIDATION STATES
+   ───────────────────────────────────────────── */
+
+.form-control.is-valid {
+  border-color: var(--color-brand-green);
+}
+
+.form-control.is-valid:focus {
+  box-shadow: 0 0 0 2px rgba(0, 212, 164, 0.15);
+}
+
+.form-control.is-invalid {
+  border-color: var(--color-brand-error);
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 2px rgba(212, 86, 86, 0.15);
+}
+
+.invalid-feedback {
+  display: none;
+  color: var(--color-brand-error);
+  font-size: 12px;
+  margin-top: var(--spacing-xs);
+}
+
+.valid-feedback {
+  display: none;
+  color: var(--color-brand-green);
+  font-size: 12px;
+  margin-top: var(--spacing-xs);
+}
+
+.was-validated .form-control:valid ~ .valid-feedback,
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.form-control.is-valid ~ .valid-feedback,
+.form-control.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: CHECKBOXES & RADIOS
+   ───────────────────────────────────────────── */
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.form-check-input {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--company-border);
+  border-radius: var(--rounded-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.form-check-input[type="checkbox"] {
+  border-radius: var(--rounded-sm);
+}
+
+.form-check-input[type="radio"] {
+  border-radius: 50%;
+}
+
+.form-check-input:checked {
+  background-color: var(--color-brand-green);
+  border-color: var(--color-brand-green);
+}
+
+.form-check-input:focus {
+  outline: none;
+  box-shadow: var(--company-ring);
+}
+
+.form-check-label {
+  font-size: 14px;
+  color: var(--company-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: INPUT GROUPS
+   ───────────────────────────────────────────── */
+
+.input-group {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.input-group .form-control {
+  flex: 1;
+  border-radius: var(--rounded-md) 0 0 var(--rounded-md);
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--company-border);
+  border-left: none;
+  border-radius: 0 var(--rounded-md) var(--rounded-md) 0;
+  background: var(--company-surface-soft);
+  color: var(--company-muted);
+  font-size: 14px;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: FILE UPLOAD
+   ───────────────────────────────────────────── */
+
+.form-file {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.form-file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.form-file-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xl);
+  border: 2px dashed var(--company-border);
+  border-radius: var(--rounded-lg);
+  background: var(--company-surface-soft);
+  color: var(--company-muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.form-file-input:hover + .form-file-label {
+  border-color: var(--color-brand-green);
+  background: rgba(0, 212, 164, 0.05);
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: BUTTONS
+   ───────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:10px;
+  gap: var(--spacing-s);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: 1px solid transparent;
+  border-radius: var(--rounded-md);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-family);
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  margin-bottom:10px;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: var(--company-ring);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-charcoal);
+  border-color: var(--color-charcoal);
+}
+
+/* Accent Green Button */
+.btn-success {
+  background: var(--color-brand-green);
+  border-color: var(--color-brand-green);
+  color: var(--color-primary);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: var(--color-brand-green-deep);
+  border-color: var(--color-brand-green-deep);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: transparent;
+  border-color: var(--company-border);
+  color: var(--company-text);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--company-surface-soft);
+  border-color: var(--color-stone);
+}
+
+/* Danger Button */
+.btn-danger {
+  background: var(--color-brand-error);
+  border-color: var(--color-brand-error);
+  color: var(--color-on-primary);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #b94646;
+  border-color: #b94646;
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--company-muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--company-surface-soft);
+  color: var(--company-text);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 13px;
+}
+
+.btn-lg {
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: 16px;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: MODALS
+   ───────────────────────────────────────────── */
+
+.modal-content {
+  border: 1px solid var(--company-border);
+  border-radius: var(--rounded-lg);
+  box-shadow: var(--company-shadow-lg);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-xl);
+  border-bottom: 1px solid var(--company-border);
+  flex-shrink: 0;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--company-text);
+  margin: 0;
+}
+
+.modal-body {
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: var(--company-border);
+  border-radius: var(--rounded-full);
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone);
+}
+
+/* Firefox */
+.modal-body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--company-border) transparent;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xl);
+  border-top: 1px solid var(--company-border);
+  flex-shrink: 0;
+  background: var(--company-surface);
+  border-radius: 0 0 var(--rounded-lg) var(--rounded-lg);
+}
+
+.btn-close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  
+  color: var(--company-muted);
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-close:hover {
+  /*background: var(--company-surface-soft);*/
+  color: var(--company-text);
+}
+
+/* Modal Dialog Scrollable */
+.modal-dialog-scrollable .modal-content {
+  max-height: calc(100vh - 3.5rem);
+}
+
+.modal-dialog-scrollable .modal-body {
+  max-height: calc(100vh - 280px);
+  overflow-y: auto;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* Large Modal */
+.modal-lg {
+  max-width: 800px;
+}
+
+.modal-xl {
+  max-width: 1140px;
+}
+
+
+.iti {
+    width: 100%;
+}
+
+.iti__country-list {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--rounded-md);
+}
+
+.iti__country.iti__highlight {
+    background-color: var(--color-surface);
+}
+
+/* Search box inside country dropdown */
+.iti__search-container {
+    padding: 8px;
+}
+
+.iti__search-input {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--rounded-md);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-size: 14px;
+    box-sizing: border-box;
+}

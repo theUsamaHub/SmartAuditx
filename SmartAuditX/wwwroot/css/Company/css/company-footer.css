@@ -1,0 +1,87 @@
+/* ============================================
+   SmartAuditX Company Panel - Footer Styles
+   Minimalist Mintlify-Inspired Footer
+   ============================================ */
+
+/* ─────────────────────────────────────────────
+   SECTION: FOOTER SHELL
+   ───────────────────────────────────────────── */
+
+.company-footer {
+  border-top: 1px solid var(--company-border);
+  background: var(--company-surface);
+  padding: var(--spacing-lg) 0;
+  margin-top: auto;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: FOOTER LEFT
+   ───────────────────────────────────────────── */
+
+.footer-left {
+  flex: 1;
+}
+
+.copyright {
+  font-size: 13px;
+  color: var(--company-muted);
+  font-weight: 400;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: FOOTER RIGHT
+   ───────────────────────────────────────────── */
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.footer-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--company-muted);
+  transition: color 0.15s ease;
+}
+
+.footer-link:hover,
+.footer-link:focus {
+  color: var(--company-text);
+  text-decoration: underline;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: RESPONSIVE
+   ───────────────────────────────────────────── */
+
+@media (max-width: 767.98px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-right {
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+
+  .footer-container {
+    padding: 0 var(--spacing-md);
+  }
+}

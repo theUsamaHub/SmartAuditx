@@ -1,8 +1,8 @@
 "use strict";
 
 (function () {
-  var sidebarStorageKey = "adminHMD.sidebarMini";
-  var themeStorageKey = "adminHMD.colorTheme";
+  var sidebarStorageKey = "smartAuditX.sidebarMini";
+  var themeStorageKey = "smartAuditX.colorTheme";
   var desktopMedia = "(min-width: 992px)";
 
   function onReady(callback) {
@@ -63,7 +63,7 @@
     var themeToggles = document.querySelectorAll("[data-theme-toggle]");
     var themeIcons = document.querySelectorAll("[data-theme-icon]");
     var closeButtons = document.querySelectorAll("[data-sidebar-close]");
-    var sidebarLinks = document.querySelectorAll(".sidebar-nav .nav-link");
+    var sidebarLinks = document.querySelectorAll(".sidebar-navigation .nav-link");
     var mediaQuery = window.matchMedia(desktopMedia);
     var storageAvailable = canUseStorage();
 
@@ -145,25 +145,64 @@
     initTableSearch();
     initThemeToggle();
 
-    // Initialize user profile values in UI. Provide a window.adminHMDUser object to override defaults.
+    // Initialize user profile values in UI. Provide a window.smartAuditXUser object to override defaults.
     function initUserProfile() {
-      var user = window.adminHMDUser || { name: "Admin Hasan", workspace: "Active Workspace", avatar: "../assets/images/avatar/avatar.jpg" };
+      var user = window.smartAuditXUser || { name: "User Name", email: "user@company.com", role: "Company Admin", avatar: "~/images/default-avatar.png" };
 
-      var sidebarNameEl = document.querySelector(".sidebar-user strong");
-      var sidebarWorkspaceEl = document.querySelector(".sidebar-user small");
-      var sidebarAvatar = document.querySelector(".sidebar-user .avatar-img");
       var profileNameEls = document.querySelectorAll(".profile-name");
-      var profileAvatarEls = document.querySelectorAll(".profile-button .avatar-img, .profile-button img");
-
-      if (sidebarNameEl) sidebarNameEl.textContent = user.name;
-      if (sidebarWorkspaceEl) sidebarWorkspaceEl.textContent = user.workspace;
-      if (sidebarAvatar && user.avatar) { sidebarAvatar.src = user.avatar; sidebarAvatar.alt = user.name; }
+      var profileRoleEls = document.querySelectorAll(".profile-role");
+      var profileAvatarEls = document.querySelectorAll(".avatar-image");
+      var profileFallbackEls = document.querySelectorAll(".avatar-fallback");
 
       Array.prototype.forEach.call(profileNameEls, function (el) { el.textContent = user.name; });
-      Array.prototype.forEach.call(profileAvatarEls, function (img) { if (user.avatar) img.src = user.avatar; if (user.name) img.alt = user.name; });
+      Array.prototype.forEach.call(profileRoleEls, function (el) { el.textContent = user.role; });
+      
+      Array.prototype.forEach.call(profileAvatarEls, function (img) {
+        if (user.avatar) {
+          img.src = user.avatar;
+          img.alt = user.name;
+        }
+      });
+
+      Array.prototype.forEach.call(profileFallbackEls, function (fallback) {
+        if (user.name) {
+          fallback.textContent = user.name.charAt(0).toUpperCase();
+        }
+      });
     }
 
     initUserProfile();
+
+    // Initialize active sidebar navigation based on current URL
+    function initActiveNavigation() {
+      var currentPath = window.location.pathname.toLowerCase();
+      var currentSearch = window.location.search.toLowerCase();
+      var navLinks = document.querySelectorAll('.sidebar-navigation .nav-link');
+
+      Array.prototype.forEach.call(navLinks, function (link) {
+        var href = link.getAttribute('href');
+        
+        if (!href || href === '#') {
+          return;
+        }
+
+        // Normalize href for comparison
+        var linkPath = href.toLowerCase();
+        
+        // Check if current URL matches the link
+        if (linkPath === currentPath + currentSearch || 
+            linkPath === currentPath ||
+            (linkPath !== '/' && currentPath.startsWith(linkPath))) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    initActiveNavigation();
 
     if (!sidebarToggle) {
       return;

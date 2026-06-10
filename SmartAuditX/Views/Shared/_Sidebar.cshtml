@@ -6,96 +6,74 @@
 
 <div class="sidebar-backdrop" data-sidebar-close></div>
 
-<aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+<aside class="company-sidebar" id="adminSidebar" aria-label="Main navigation">
+    <!-- Sidebar Header / Brand -->
     <div class="sidebar-header">
-        <a class="brand-mark" href="index.html" aria-label="adminHMD dashboard">
-            <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
-            <span class="brand-copy">
-                <span class="brand-title">adminHMD</span>
-                <span class="brand-subtitle">Admin Template</span>
+        <a class="sidebar-brand" asp-controller="Home" asp-action="Index" aria-label="SmartAuditX Dashboard">
+            <span class="brand-icon">
+                <i class="bi bi-shield-check" aria-hidden="true"></i>
+            </span>
+            <span class="brand-text">
+                <span class="brand-name">SmartAuditX</span>
+                <span class="brand-tagline">Company Portal</span>
             </span>
         </a>
     </div>
 
-    <nav class="sidebar-nav">
-        <a class="nav-link active" href="index.html" aria-current="page">
-            <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
-            <span class="nav-text">Dashboard</span>
-        </a>
-        <a class="nav-link" href="users.html">
-            <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
-            <span class="nav-text">Users</span>
-        </a>
-        <a class="nav-link" href="add-user.html">
-            <span class="nav-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
-            <span class="nav-text">Add User</span>
-        </a>
-        <a class="nav-link" href="profile.html">
-            <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
-            <span class="nav-text">Profile</span>
-        </a>
-        <a class="nav-link" href="charts.html">
-            <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
-            <span class="nav-text">Charts</span>
-        </a>
-        <a class="nav-link" href="tables.html">
-            <span class="nav-icon"><i class="bi bi-table" aria-hidden="true"></i></span>
-            <span class="nav-text">Tables</span>
-        </a>
-        <a class="nav-link" href="forms.html">
-            <span class="nav-icon"><i class="bi bi-ui-checks-grid" aria-hidden="true"></i></span>
-            <span class="nav-text">Forms</span>
-        </a>
-        <a class="nav-link" href="components.html">
-            <span class="nav-icon"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i></span>
-            <span class="nav-text">Components</span>
-        </a>
-        <a class="nav-link" href="alerts.html">
-            <span class="nav-icon"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i></span>
-            <span class="nav-text">Alerts</span>
-        </a>
-        <a class="nav-link" href="modals.html">
-            <span class="nav-icon"><i class="bi bi-window-stack" aria-hidden="true"></i></span>
-            <span class="nav-text">Modals</span>
-        </a>
-        <a class="nav-link" href="@Url.Action("Index", "CompanyContact")">
-            <span class="nav-icon"><i class="bi bi-person-lines-fill" aria-hidden="true"></i></span>
-            <span class="nav-text">Company Contacts</span>
-        </a>
-        <a class="nav-link" href="@Url.Action("Index", "Department")">
-            <span class="nav-icon"><i class="bi bi-diagram-3" aria-hidden="true"></i></span>
-            <span class="nav-text">Departments</span>
-        </a>
-        <a class="nav-link" href="@Url.Action("Index", "Designation")">
-            <span class="nav-icon"><i class="bi bi-briefcase" aria-hidden="true"></i></span>
-            <span class="nav-text">Designations</span>
-        </a>
-        <a class="nav-link" href="@Url.Action("Index", "Branch")">
-            <span class="nav-icon"><i class="bi bi-building" aria-hidden="true"></i></span>
-            <span class="nav-text">Branches</span>
-        </a>
-        <a class="nav-link" href="@Url.Action("Index", "BranchDepartment")">
-            <span class="nav-icon"><i class="bi bi-link-45deg" aria-hidden="true"></i></span>
-            <span class="nav-text">Branch Departments</span>
-        </a>
-        <a class="nav-link" href="settings.html">
-            <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
-            <span class="nav-text">Settings</span>
-        </a>
-        <a class="nav-link" href="blank.html">
-            <span class="nav-icon"><i class="bi bi-file-earmark" aria-hidden="true"></i></span>
-            <span class="nav-text">Blank Page</span>
-        </a>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-navigation">
+        <!-- Dashboard Section -->
+        <div class="nav-section">
+            <div class="nav-section-header">Overview</div>
+            <a class="nav-link active" href="@Url.Action("Index", "Home")" aria-current="page">
+                <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+        </div>
+
+        <!-- Organization Section -->
+        <div class="nav-section">
+            <div class="nav-section-header">Organization</div>
+            <a class="nav-link" href="@Url.Action("Index", "Department")">
+                <span class="nav-icon"><i class="bi bi-diagram-3" aria-hidden="true"></i></span>
+                <span class="nav-text">Departments</span>
+            </a>
+            <a class="nav-link" href="@Url.Action("Index", "Designation")">
+                <span class="nav-icon"><i class="bi bi-briefcase" aria-hidden="true"></i></span>
+                <span class="nav-text">Designations</span>
+            </a>
+            <a class="nav-link" href="@Url.Action("Index", "Branch")">
+                <span class="nav-icon"><i class="bi bi-building" aria-hidden="true"></i></span>
+                <span class="nav-text">Branches</span>
+            </a>
+            <a class="nav-link" href="@Url.Action("Index", "BranchDepartment")">
+                <span class="nav-icon"><i class="bi bi-link-45deg" aria-hidden="true"></i></span>
+                <span class="nav-text">Branch Departments</span>
+            </a>
+        </div>
+
+        <!-- People Section -->
+        <div class="nav-section">
+            <div class="nav-section-header">People</div>
+            <a class="nav-link" href="@Url.Action("Index", "CompanyContact")">
+                <span class="nav-icon"><i class="bi bi-person-lines-fill" aria-hidden="true"></i></span>
+                <span class="nav-text">Company Contacts</span>
+            </a>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="nav-section">
+            <div class="nav-section-header">System</div>
+            <a class="nav-link" href="#">
+                <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+                <span class="nav-text">Settings</span>
+            </a>
+        </div>
     </nav>
 
-    <div class="sidebar-user">
-        <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="Admin Hasan">
-        <strong>Admin Hasan</strong>
-        <small>Active Workspace</small>
-    </div>
-
+    <!-- Sidebar Footer -->
     <div class="sidebar-footer">
-        <span class="status-dot"></span>
-        <span class="sidebar-footer-text">System running smoothly</span>
+        <span class="status-indicator"></span>
+        <span class="sidebar-footer-text">All systems operational</span>
     </div>
 </aside>

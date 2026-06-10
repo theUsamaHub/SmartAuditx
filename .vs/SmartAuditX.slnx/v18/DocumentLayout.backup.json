@@ -3,36 +3,12 @@
   "WorkspaceRootPath": "D:\\SmartAuditX\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\registration\\accountinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\registration\\accountinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\billingmodule\\companysubscription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\billingmodule\\companysubscription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\billingmodule\\subscriptionplanpricing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\billingmodule\\subscriptionplanpricing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\billingmodule\\enums\\billingenums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\billingmodule\\enums\\billingenums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditableentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditableentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\billingmodule\\promocode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\billingmodule\\promocode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\billingmodule\\taxconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\billingmodule\\taxconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\billingmodule\\dunningschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\billingmodule\\dunningschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\shared\\layouts\\_companylayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\shared\\layouts\\_companylayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,110 +18,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Company.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\Company.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\Company.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\Company.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\Company.cs",
-              "ViewState": "AgIAAEMBAAAAAAAAAAAQwHwBAAB2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T18:59:19.448Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CompanySubscription.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\CompanySubscription.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\BillingModule\\CompanySubscription.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\CompanySubscription.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\BillingModule\\CompanySubscription.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T18:43:13.749Z",
-              "EditorCaption": ""
+              "Title": "_CompanyLayout.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-10T19:54:11.847Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SubscriptionPlanPricing.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\SubscriptionPlanPricing.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\BillingModule\\SubscriptionPlanPricing.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\SubscriptionPlanPricing.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\BillingModule\\SubscriptionPlanPricing.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAQwHMAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T18:04:06.179Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AuditableEntity.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditableEntity.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditableEntity.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditableEntity.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditableEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T18:37:08.11Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TaxConfiguration.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\TaxConfiguration.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\BillingModule\\TaxConfiguration.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\TaxConfiguration.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\BillingModule\\TaxConfiguration.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAA3wCMAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T18:23:56.914Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PromoCode.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\PromoCode.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\BillingModule\\PromoCode.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\PromoCode.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\BillingModule\\PromoCode.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAswCYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T18:22:45.033Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DunningSchedule.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\DunningSchedule.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\BillingModule\\DunningSchedule.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\DunningSchedule.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\BillingModule\\DunningSchedule.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T18:22:16.649Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BillingEnums.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\Enums\\BillingEnums.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\BillingModule\\Enums\\BillingEnums.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\BillingModule\\Enums\\BillingEnums.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\BillingModule\\Enums\\BillingEnums.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAowGcAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T18:00:01.543Z",
+              "DocumentIndex": 0,
+              "Title": "AccountInfo.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Registration\\AccountInfo.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Registration\\AccountInfo.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Registration\\AccountInfo.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\Registration\\AccountInfo.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-10T19:48:54.023Z",
               "EditorCaption": ""
             }
           ]

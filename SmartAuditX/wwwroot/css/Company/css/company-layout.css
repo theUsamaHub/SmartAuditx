@@ -1,0 +1,265 @@
+/* ============================================
+   SmartAuditX Company Panel - Layout & Design Tokens
+   Mintlify-Inspired Design System
+   ============================================ */
+
+/* ─────────────────────────────────────────────
+   SECTION: DESIGN TOKENS
+   ───────────────────────────────────────────── */
+
+:root {
+  /* Brand Colors - Mintlify Inspired */
+  --color-primary: #0a0a0a;
+  --color-on-primary: #ffffff;
+  --color-brand-green: #00d4a4;
+  --color-brand-green-deep: #00b48a;
+  --color-brand-green-soft: #7cebcb;
+  --color-brand-tag: #3772cf;
+  --color-brand-warn: #c37d0d;
+  --color-brand-annotate: #1ba673;
+  --color-brand-error: #d45656;
+  
+  /* Surface Colors */
+  --color-canvas: #ffffff;
+  --color-canvas-dark: #0a0a0a;
+  --color-surface: #f7f7f7;
+  --color-surface-soft: #fafafa;
+  --color-surface-code: #1c1c1e;
+  
+  /* Border Colors */
+  --color-hairline: #e5e5e5;
+  --color-hairline-soft: #ededed;
+  --color-hairline-dark: #1f1f1f;
+  
+  /* Text Colors */
+  --color-ink: #0a0a0a;
+  --color-charcoal: #1c1c1e;
+  --color-slate: #3a3a3c;
+  --color-steel: #5a5a5c;
+  --color-stone: #888888;
+  --color-muted: #a8a8aa;
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: #b3b3b3;
+  
+  /* Company Panel Specific */
+  --company-sidebar-width: 260px;
+  --company-sidebar-mini-width: 72px;
+  --company-navbar-height: 64px;
+  --company-bg: #fafafa;
+  --company-surface: #ffffff;
+  --company-surface-soft: #f7f7f7;
+  --company-border: #e5e5e5;
+  --company-text: #0a0a0a;
+  --company-muted: #5a5a5c;
+  --company-sidebar-bg: #ffffff;
+  --company-sidebar-border: #e5e5e5;
+  --company-sidebar-text: #5a5a5c;
+  --company-sidebar-text-strong: #0a0a0a;
+  --company-sidebar-muted: #888888;
+  --company-sidebar-icon-bg: #f7f7f7;
+  --company-sidebar-icon: #0a0a0a;
+  --company-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --company-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+  --company-shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.12);
+  --company-ring: 0 0 0 2px rgba(0, 212, 164, 0.15);
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Border Radius */
+  --rounded-xs: 4px;
+  --rounded-sm: 6px;
+  --rounded-md: 8px;
+  --rounded-lg: 12px;
+  --rounded-xl: 16px;
+  --rounded-xxl: 24px;
+  --rounded-full: 9999px;
+  
+  /* Spacing */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 20px;
+  --spacing-xl: 24px;
+  --spacing-xxl: 32px;
+  --spacing-xxxl: 40px;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: DARK MODE TOKENS
+   ───────────────────────────────────────────── */
+
+html[data-theme="dark"] {
+  --color-canvas: #0a0a0a;
+  --color-surface: #1c1c1e;
+  --color-surface-soft: #111827;
+  --color-hairline: #2f3b52;
+  --color-hairline-soft: #1f1f1f;
+  --color-ink: #e5edf7;
+  --color-charcoal: #e5edf7;
+  --color-slate: #9aa8bd;
+  --color-steel: #9aa8bd;
+  --color-stone: #6b7280;
+  --color-muted: #6b7280;
+  
+  --company-bg: #0f172a;
+  --company-surface: #182235;
+  --company-surface-soft: #111827;
+  --company-border: #2f3b52;
+  --company-text: #e5edf7;
+  --company-muted: #9aa8bd;
+  --company-sidebar-bg: #090f1d;
+  --company-sidebar-border: rgba(255, 255, 255, 0.08);
+  --company-sidebar-text: #d1d5db;
+  --company-sidebar-text-strong: #ffffff;
+  --company-sidebar-muted: #9ca3af;
+  --company-sidebar-icon-bg: rgba(255, 255, 255, 0.08);
+  --company-sidebar-icon: #bfdbfe;
+  --company-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  --company-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.32);
+  --company-shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.42);
+  --company-ring: 0 0 0 2px rgba(96, 165, 250, 0.18);
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: BASE STYLES
+   ───────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--company-bg);
+  color: var(--company-text);
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: LAYOUT SHELL
+   ───────────────────────────────────────────── */
+
+.company-shell {
+  min-height: 100vh;
+  display: flex;
+}
+
+.company-main {
+  flex: 1;
+  margin-left: var(--company-sidebar-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.2s ease;
+}
+
+.company-content {
+  flex: 1;
+  padding: var(--spacing-xxl);
+  min-height: calc(100vh - var(--company-navbar-height) - 60px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Smooth scrolling for main content */
+.company-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--company-border) transparent;
+}
+
+.company-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.company-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.company-content::-webkit-scrollbar-thumb {
+  background: var(--company-border);
+  border-radius: var(--rounded-full);
+}
+
+.company-content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone);
+}
+
+.company-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: TYPOGRAPHY
+   ───────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--company-text);
+}
+
+h1 { font-size: 32px; letter-spacing: -0.5px; }
+h2 { font-size: 24px; letter-spacing: -0.3px; }
+h3 { font-size: 20px; }
+h4 { font-size: 18px; }
+h5 { font-size: 16px; }
+h6 { font-size: 14px; }
+
+p {
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--company-muted);
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: TRANSITIONS
+   ───────────────────────────────────────────── */
+
+.company-sidebar,
+.company-navbar,
+.company-main,
+.metric-card,
+.panel,
+.dropdown-menu,
+.form-control,
+.form-select {
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: ACCESSIBILITY
+   ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-green);
+  outline-offset: 2px;
+}
