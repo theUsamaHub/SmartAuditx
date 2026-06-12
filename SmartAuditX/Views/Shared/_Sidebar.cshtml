@@ -25,7 +25,7 @@
         <!-- Dashboard Section -->
         <div class="nav-section">
             <div class="nav-section-header">Overview</div>
-            <a class="nav-link active" href="@Url.Action("Index", "Home")" aria-current="page">
+            <a class="nav-link active" href="@Url.Action("Index", "Company")" aria-current="page">
                 <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
                 <span class="nav-text">Dashboard</span>
             </a>
@@ -55,6 +55,14 @@
         <!-- People Section -->
         <div class="nav-section">
             <div class="nav-section-header">People</div>
+            <a class="nav-link" href="@Url.Action("Index", "Employee")">
+                <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+                <span class="nav-text">Employees</span>
+            </a>
+            <a class="nav-link" href="@Url.Action("Index", "EmployeeDocumentType")">
+                <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+                <span class="nav-text">Employee Document Types</span>
+            </a>
             <a class="nav-link" href="@Url.Action("Index", "CompanyContact")">
                 <span class="nav-icon"><i class="bi bi-person-lines-fill" aria-hidden="true"></i></span>
                 <span class="nav-text">Company Contacts</span>

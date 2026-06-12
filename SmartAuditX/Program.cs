@@ -102,10 +102,10 @@ builder.Services.AddSession(options =>
 //Behavior: Timer resets with each request
 //Difference from cookie: Cookie lives on client, session data lives on server
 
-options.Cookie.HttpOnly = true; 
+options.Cookie.HttpOnly = true;
 //    Same as application cookie - prevents JavaScript access
 //Session - specific: Controls the session ID cookie, not the auth cookie
-    options.Cookie.IsEssential = true; 
+    options.Cookie.IsEssential = true;
 //Purpose: Allows session cookie to work without user consent under GDPR
 //Why important: Without true, some browsers might block session cookies until user accepts cookies
 //Essential session: Storing shopping cart, login state -user expects this functionality
@@ -136,11 +136,14 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IDesignationService, DesignationService>();
 builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IBranchDepartmentService, BranchDepartmentService>();
+builder.Services.AddScoped<IEmployeeDocumentTypeService, EmployeeDocumentTypeService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IEmployeeDocumentService, EmployeeDocumentService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();  //added this for the internal ui of identity 
+builder.Services.AddRazorPages();  //added this for the internal ui of identity
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -166,7 +169,7 @@ using (var scope = app.Services.CreateScope())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseSession(); //added for the session
-app.UseAuthentication(); //added this 
+app.UseAuthentication(); //added this
 app.UseAuthorization();
 
 app.MapStaticAssets();

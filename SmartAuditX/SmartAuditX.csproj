@@ -41,6 +41,7 @@
     <Folder Include="wwwroot\js\Company\" />
     <Folder Include="wwwroot\js\Manager\" />
     <Folder Include="wwwroot\js\Public\" />
+    <Folder Include="wwwroot\EmployeeDocuments\" />
   </ItemGroup>
 
 </Project>

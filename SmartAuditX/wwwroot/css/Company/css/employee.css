@@ -1,0 +1,206 @@
+.employee-panel .employee-filter-select {
+  min-width: 150px;
+}
+
+.employee-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+
+.employee-empty i {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--admin-primary);
+  font-size: 2rem;
+}
+
+.employee-code-badge {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--admin-primary);
+  font-family: Consolas, "Courier New", monospace;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+
+.employee-status-active {
+  background: rgba(15, 118, 110, 0.12);
+  color: var(--admin-success);
+}
+
+.employee-status-inactive {
+  background: rgba(107, 114, 128, 0.15);
+  color: var(--admin-muted);
+}
+
+.employee-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.employee-actions .btn {
+  box-shadow: none;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.employee-section {
+  padding: 1.5rem;
+/*  background: var(--bs-light);
+*/  border-radius: 8px;
+  border: 1px solid var(--bs-border-color);
+}
+
+.employee-section h3 {
+  color: var(--admin-text);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--admin-primary);
+  display: inline-block;
+}
+
+#employeeAlert {
+  border-radius: 8px;
+}
+
+#employeeDetailsContent table td {
+  padding: 0.5rem;
+}
+
+#employeeDetailsContent table td:first-child {
+  font-weight: 500;
+}
+
+.document-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.document-badge-verified {
+  background: rgba(15, 118, 110, 0.12);
+  color: var(--admin-success);
+}
+
+.document-badge-pending {
+  background: rgba(255, 193, 7, 0.15);
+  color: #856404;
+}
+
+@media (max-width: 767.98px) {
+  .employee-panel .panel-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .employee-panel .panel-header .d-flex {
+    width: 100%;
+  }
+
+  .employee-panel .employee-filter-select,
+  .employee-panel .table-search {
+    width: 100%;
+  }
+
+  .employee-section {
+    padding: 1rem;
+  }
+
+  .employee-actions {
+    flex-direction: column;
+  }
+
+  .employee-actions .btn {
+    width: 100%;
+  }
+}
+
+/* Form validation styles */
+.needs-validation .form-control.is-invalid,
+.needs-validation .form-select.is-invalid {
+  border-color: var(--bs-danger);
+}
+
+.needs-validation .form-control.is-valid,
+.needs-validation .form-select.is-valid {
+  border-color: var(--bs-success);
+}
+
+/* Modal enhancements */
+.modal-xl {
+  max-width: 95%;
+}
+
+.modal-body .employee-section {
+  margin-bottom: 1.5rem;
+}
+
+/* Loading spinner */
+.employee-loading {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: employee-spin 0.75s linear infinite;
+}
+
+@keyframes employee-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Smooth transitions */
+.employee-panel,
+.employee-section,
+.modal-content {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effects for table rows */
+#employeesTableBody tr {
+  transition: background-color 0.15s ease;
+}
+
+#employeesTableBody tr:hover {
+  background-color: rgba(37, 99, 235, 0.04);
+}
+
+/* Badge improvements */
+.badge {
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+}
+
+/* Button hover states */
+.btn-toggle-active:hover,
+.btn-edit-employee:hover,
+.btn-view-employee:hover,
+.btn-delete-employee:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Document upload area */
+#documentUploadForm {
+  transition: all 0.3s ease;
+}
+
+#documentUploadForm.d-none {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+#documentUploadForm:not(.d-none) {
+  opacity: 1;
+  max-height: 200px;
+}

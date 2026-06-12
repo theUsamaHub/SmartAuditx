@@ -1,0 +1,69 @@
+@model SmartAuditX.Models.EmployeeDocumentType
+
+@{
+    ViewData["Title"] = "Document Type Details";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+<div class="page-heading">
+    <div>
+        <p class="eyebrow mb-1">Employee Management</p>
+        <h1 class="h3 mb-0">Document Type Details</h1>
+        <p class="text-muted mb-0 mt-1">View the details of this employee document type.</p>
+    </div>
+    <div class="heading-actions">
+        <a href="@Url.Action("Index", "EmployeeDocumentType")" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>
+            Back to List
+        </a>
+        <a href="@Url.Action("Edit", "EmployeeDocumentType", new { id = Model.EmployeeDocumentTypeId })" class="btn btn-primary">
+            <i class="bi bi-pencil me-1" aria-hidden="true"></i>
+            Edit
+        </a>
+    </div>
+</div>
+
+<div class="employee-document-type-details-card">
+    <div class="card-header">
+        <h3 class="card-title mb-0">@Model.Name</h3>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Description) ? "<em>No description provided</em>" : Model.Description)</dd>
+
+            <dt class="col-sm-3">Is Required</dt>
+            <dd class="col-sm-9">
+                @if (Model.IsRequired)
+                {
+                    <span class="badge bg-success">Yes</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">No</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">
+                @if (Model.IsActive)
+                {
+                    <span class="badge bg-success">Active</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Inactive</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Created At</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("MMM dd, yyyy HH:mm")</dd>
+
+            @if (Model.UpdatedAt.HasValue)
+            {
+                <dt class="col-sm-3">Updated At</dt>
+                <dd class="col-sm-9">@Model.UpdatedAt.Value.ToString("MMM dd, yyyy HH:mm")</dd>
+            }
+        </dl>
+    </div>
+</div>

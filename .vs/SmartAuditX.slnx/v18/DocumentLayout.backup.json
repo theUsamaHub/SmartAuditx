@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\SmartAuditX\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\registration\\accountinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\registration\\accountinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\employeedocumentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\employeedocumentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\shared\\layouts\\_companylayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\shared\\layouts\\_companylayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\registrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\registrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,31 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "_CompanyLayout.cshtml",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
-              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
-              "RelativeToolTip": "SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-10T19:54:11.847Z"
+              "Title": "FileService.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\FileService.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\FileService.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\FileService.cs",
+              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\FileService.cs",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAAAMIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T18:56:24.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RegistrationService.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\RegistrationService.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\RegistrationService.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\RegistrationService.cs",
+              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\RegistrationService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAADMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T18:55:26.622Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AccountInfo.cshtml",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Registration\\AccountInfo.cshtml",
-              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Registration\\AccountInfo.cshtml",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Registration\\AccountInfo.cshtml",
-              "RelativeToolTip": "SmartAuditX\\Views\\Registration\\AccountInfo.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-10T19:48:54.023Z",
+              "Title": "EmployeeDocumentService.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\EmployeeDocumentService.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\EmployeeDocumentService.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\EmployeeDocumentService.cs",
+              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\EmployeeDocumentService.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAwwDMAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T18:42:55.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EmployeeService.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\EmployeeService.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\EmployeeService.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\EmployeeService.cs",
+              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\EmployeeService.cs",
+              "ViewState": "AgIAALMAAAAAAAAAAAAiwLwAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T18:41:59.274Z",
               "EditorCaption": ""
             }
           ]

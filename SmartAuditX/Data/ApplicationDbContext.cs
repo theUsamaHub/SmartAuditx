@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SmartAuditX.Models;
+using SmartAuditX.Models.BillingModule;
 
 
 namespace SmartAuditX.Data
@@ -37,6 +38,13 @@ namespace SmartAuditX.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeDocumentType> EmployeeDocumentTypes { get; set; }
         public DbSet<EmployeeDocument> EmployeeDocuments { get; set; }
+
+        public DbSet<SubscriptionPlanChange> SubscriptionPlanChanges { get; set; }
+        public DbSet<SubscriptionPlanPricing> SubscriptionPlanPricings { get; set; }
+        public DbSet<CompanySubscription> CompanySubscriptions { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<PaymentGateway> PaymentGateways { get; set; }
+        public DbSet<Refund> Refunds { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -180,42 +188,6 @@ namespace SmartAuditX.Data
             // USER ROLES TABLE
             // =========================
 
-            //builder.Entity<ApplicationUserRole>(entity =>
-            //{
-            //    //// Primary Key
-            //    //entity.HasKey(x => x.UserRoleId);
-
-            //    //entity.Property(x => x.UserRoleId)
-            //    //    .ValueGeneratedOnAdd();
-
-            //    // CreatedAt
-            //    entity.Property(x => x.CreatedAt)
-            //        .HasDefaultValueSql("GETUTCDATE()");
-
-            //    // Composite Unique Constraint
-            //    entity.HasIndex(x => new { x.UserId, x.RoleId })
-            //        .IsUnique();
-
-            //    // Relationships
-            //    //entity.HasOne(x => x.User)
-            //    //    .WithMany()
-            //    //    .HasForeignKey(x => x.UserId)
-            //    //    .OnDelete(DeleteBehavior.Cascade);
-
-            //    //entity.HasOne(x => x.Role)
-            //    //    .WithMany()
-            //    //    .HasForeignKey(x => x.RoleId)
-            //    //    .OnDelete(DeleteBehavior.Cascade);
-            //    entity.HasOne(x => x.User)
-            //          .WithMany(x => x.UserRoles)
-            //          .HasForeignKey(x => x.UserId)
-            //           .OnDelete(DeleteBehavior.Restrict);
-
-            //    entity.HasOne(x => x.Role)
-            //        .WithMany(x => x.UserRoles)
-            //        .HasForeignKey(x => x.RoleId)
-            //        .OnDelete(DeleteBehavior.Restrict);
-            //});
 
             builder.Entity<ApplicationUserRole>(entity =>
             {
@@ -752,6 +724,808 @@ namespace SmartAuditX.Data
                     .HasForeignKey(x => x.EmployeeDocumentTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+
+
+            // =========================
+            // COMPANY CREDIT TABLE
+            // =========================
+
+            builder.Entity<CompanyCredit>(entity =>
+            {
+                entity.ToTable("CompanyCredits");
+
+                entity.HasKey(x => x.CompanyCreditId);
+
+                entity.Property(x => x.CompanyCreditId)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(x => x.Amount)
+                    .HasColumnType("decimal(19,4)")
+                    .IsRequired();
+
+                entity.Property(x => x.Currency)
+                    .HasMaxLength(3)
+                    .IsRequired();
+
+                entity.Property(x => x.Reason)
+                    .HasConversion<string>()
+                    .HasMaxLength(20)
+                    .IsRequired();
+
+                entity.Property(x => x.IsUsed)
+                    .HasDefaultValue(false);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+
+                // Indexes
+                entity.HasIndex(x => x.CompanyId);
+                entity.HasIndex(x => x.UsedInPaymentId);
+                entity.HasIndex(x => x.IsUsed);
+                entity.HasIndex(x => x.ExpiresAt);
+
+                // Company -> Credits
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Payment -> Used Credit
+                entity.HasOne(x => x.UsedInPayment)
+                    .WithMany()
+                    .HasForeignKey(x => x.UsedInPaymentId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+
+            // =========================
+            // COMPANY SUBSCRIPTIONS
+            // =========================
+
+            builder.Entity<CompanySubscription>(entity =>
+            {
+                entity.ToTable("CompanySubscriptions");
+
+                entity.HasKey(x => x.CompanySubscriptionId);
+
+                entity.Property(x => x.CompanySubscriptionId)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(x => x.Status)
+                    .HasConversion<string>()
+                    .HasMaxLength(20)
+                    .IsRequired();
+
+                entity.Property(x => x.AutoRenew)
+                    .HasDefaultValue(true);
+
+                entity.Property(x => x.RenewalAttemptCount)
+                    .HasDefaultValue(0);
+
+                entity.Property(x => x.TotalPausedDays)
+                    .HasDefaultValue(0);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+
+                // Indexes
+                entity.HasIndex(x => x.CompanyId);
+
+                entity.HasIndex(x => x.SubscriptionPlanPricingId);
+
+                entity.HasIndex(x => x.Status);
+
+                entity.HasIndex(x => x.StartDate);
+
+                entity.HasIndex(x => x.ExpiryDate);
+
+                entity.HasIndex(x => x.TrialEndsAt);
+
+                entity.HasIndex(x => x.GracePeriodEndsAt);
+
+                // Company
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Pricing
+                entity.HasOne(x => x.SubscriptionPlanPricing)
+                    .WithMany(x => x.CompanySubscriptions)
+                    .HasForeignKey(x => x.SubscriptionPlanPricingId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Payments
+                entity.HasMany(x => x.Payments)
+                    .WithOne(x => x.CompanySubscription)
+                    .HasForeignKey(x => x.CompanySubscriptionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Invoices
+                entity.HasMany(x => x.Invoices)
+                    .WithOne(x => x.CompanySubscription)
+                    .HasForeignKey(x => x.CompanySubscriptionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // DunningSchedules
+                entity.HasMany(x => x.DunningSchedules)
+                    .WithOne(x => x.CompanySubscription)
+                    .HasForeignKey(x => x.CompanySubscriptionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Plan Changes
+                entity.HasMany(x => x.PlanChanges)
+                    .WithOne(x => x.CompanySubscription)
+                    .HasForeignKey(x => x.CompanySubscriptionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+
+            // =========================
+            // DUNNING SCHEDULES
+            // =========================
+
+            builder.Entity<DunningSchedule>(entity =>
+            {
+                entity.ToTable("DunningSchedules");
+
+                entity.HasKey(x => x.DunningScheduleId);
+
+                entity.Property(x => x.DunningScheduleId)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(x => x.AttemptNumber)
+                    .HasDefaultValue(1);
+
+                entity.Property(x => x.Status)
+                    .HasConversion<string>()
+                    .HasMaxLength(15)
+                    .IsRequired();
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+
+                // Indexes
+
+                entity.HasIndex(x => x.CompanySubscriptionId);
+
+                entity.HasIndex(x => x.PaymentAttemptId);
+
+                entity.HasIndex(x => x.Status);
+
+                entity.HasIndex(x => x.ScheduledAt);
+
+                entity.HasIndex(x => new
+                {
+                    x.Status,
+                    x.ScheduledAt
+                });
+
+                // Company Subscription
+
+                entity.HasOne(x => x.CompanySubscription)
+                    .WithMany(x => x.DunningSchedules)
+                    .HasForeignKey(x => x.CompanySubscriptionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Payment Attempt
+
+                entity.HasOne(x => x.PaymentAttempt)
+                    .WithMany()
+                    .HasForeignKey(x => x.PaymentAttemptId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            builder.Entity<IdempotencyKey>(entity =>
+            {
+                entity.ToTable("IdempotencyKeys");
+
+                entity.HasKey(x => x.IdempotencyKeyId);
+
+                entity.Property(x => x.Key)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.RequestHash)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.ResponsePayload)
+                    .HasColumnType("nvarchar(max)");
+
+                entity.Property(x => x.ExpiresAt)
+                    .IsRequired();
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+
+                entity.HasIndex(x => x.Key)
+                    .IsUnique();
+
+                entity.HasIndex(x => x.CompanyId);
+
+                entity.HasIndex(x => x.ExpiresAt);
+
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            builder.Entity<Invoice>(entity =>
+            {
+                entity.ToTable("Invoices");
+
+                entity.HasKey(x => x.InvoiceId);
+
+                entity.Property(x => x.InvoiceNumber)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.IssuedAt)
+                    .IsRequired();
+
+                entity.Property(x => x.SubTotal)
+                    .HasColumnType("decimal(19,4)")
+                    .IsRequired();
+
+                entity.Property(x => x.TaxAmount)
+                    .HasColumnType("decimal(19,4)")
+                    .HasDefaultValue(0);
+
+                entity.Property(x => x.Discount)
+                    .HasColumnType("decimal(19,4)")
+                    .HasDefaultValue(0);
+
+                entity.Property(x => x.TotalAmount)
+                    .HasColumnType("decimal(19,4)")
+                    .IsRequired();
+
+                entity.Property(x => x.Currency)
+                    .HasMaxLength(3)
+                    .IsRequired();
+
+                entity.Property(x => x.Status)
+                    .HasConversion<string>()
+                    .HasMaxLength(10)
+                    .IsRequired();
+
+                entity.Property(x => x.PdfUrl)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+
+                entity.HasIndex(x => x.InvoiceNumber)
+                    .IsUnique();
+
+                entity.HasIndex(x => x.CompanySubscriptionId);
+
+                entity.HasIndex(x => x.PaymentId);
+
+                entity.HasIndex(x => x.Status);
+
+                entity.HasIndex(x => x.IssuedAt);
+
+                entity.HasOne(x => x.CompanySubscription)
+                    .WithMany(x => x.Invoices)
+                    .HasForeignKey(x => x.CompanySubscriptionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.Payment)
+                    .WithMany()
+                    .HasForeignKey(x => x.PaymentId)
+                    .OnDelete(DeleteBehavior.SetNull);
+            });
+
+            builder.Entity<Payment>(entity =>
+            {
+                entity.ToTable("Payments");
+
+                entity.HasKey(x => x.PaymentId);
+
+                entity.Property(x => x.InternalReference)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.GatewayTransactionId)
+                    .HasMaxLength(200);
+
+                entity.Property(x => x.PaymentMethod)
+                    .HasConversion<string>()
+                    .HasMaxLength(20)
+                    .IsRequired();
+
+                entity.Property(x => x.Amount)
+                    .HasColumnType("decimal(19,4)")
+                    .IsRequired();
+
+                entity.Property(x => x.Currency)
+                    .HasMaxLength(3)
+                    .IsRequired();
+
+                entity.Property(x => x.GatewayFee)
+                    .HasColumnType("decimal(19,4)")
+                    .HasDefaultValue(0);
+
+                entity.Property(x => x.TaxAmount)
+                    .HasColumnType("decimal(19,4)")
+                    .HasDefaultValue(0);
+
+                entity.Property(x => x.PaymentStatus)
+                    .HasConversion<string>()
+                    .HasMaxLength(20)
+                    .IsRequired();
+
+                entity.Property(x => x.FailureCode)
+                    .HasConversion<string>()
+                    .HasMaxLength(30)
+                    .IsRequired();
+
+                entity.Property(x => x.FailureMessage)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.GatewayResponse)
+                    .HasColumnType("nvarchar(max)");
+
+                entity.Property(x => x.RefundedAmount)
+                    .HasColumnType("decimal(19,4)")
+                    .HasDefaultValue(0);
+
+                entity.Property(x => x.CardLastFour)
+                    .HasMaxLength(4);
+
+                entity.Property(x => x.CardBrand)
+                    .HasConversion<string>()
+                    .HasMaxLength(20);
+
+                entity.Property(x => x.CardExpiryMonth)
+                    .HasMaxLength(2);
+
+                entity.Property(x => x.CardExpiryYear)
+                    .HasMaxLength(4);
+
+                entity.Property(x => x.GatewayCardToken)
+                    .HasMaxLength(200);
+
+                entity.Property(x => x.CreatedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+
+                entity.Property(x => x.UpdatedAt)
+                    .HasDefaultValue(null);
+
+                // Indexes
+
+                entity.HasIndex(x => x.CompanySubscriptionId);
+
+                entity.HasIndex(x => x.PaymentGatewayId);
+
+                entity.HasIndex(x => x.InternalReference)
+                    .IsUnique();
+
+                entity.HasIndex(x => x.GatewayTransactionId);
+
+                entity.HasIndex(x => x.PaymentStatus);
+
+                entity.HasIndex(x => x.PaidAt);
+
+                // Relationships
+
+                entity.HasOne(x => x.CompanySubscription)
+                    .WithMany(x => x.Payments)
+                    .HasForeignKey(x => x.CompanySubscriptionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.PaymentGateway)
+                    .WithMany()
+                    .HasForeignKey(x => x.PaymentGatewayId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Invoice <-> Payment (One-to-One)
+
+                entity.HasOne(x => x.Invoice)
+                    .WithOne(x => x.Payment)
+                    .HasForeignKey<Invoice>(x => x.PaymentId)
+                    .OnDelete(DeleteBehavior.SetNull);
+            });
+
+            // =========================
+            // PAYMENT ATTEMPT TABLE
+            // =========================
+
+            builder.Entity<PaymentAttempt>(entity =>
+            {
+                entity.ToTable("PaymentAttempts");
+
+                entity.HasKey(x => x.PaymentAttemptId);
+
+                entity.Property(x => x.Status)
+                    .HasConversion<string>()
+                    .HasMaxLength(20);
+
+                entity.Property(x => x.FailureCode)
+                    .HasConversion<string>()
+                    .HasMaxLength(30);
+
+                entity.Property(x => x.FailureMessage)
+                    .HasMaxLength(500);
+
+                entity.Property(x => x.GatewayResponse)
+                    .HasColumnType("nvarchar(max)");
+
+                entity.Property(x => x.GatewayTransactionId)
+                    .HasMaxLength(200);
+
+                entity.HasIndex(x => x.PaymentId);
+                entity.HasIndex(x => x.PaymentGatewayId);
+
+                entity.HasOne(x => x.Payment)
+                    .WithMany(x => x.Attempts)
+                    .HasForeignKey(x => x.PaymentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(x => x.PaymentGateway)
+                    .WithMany()
+                    .HasForeignKey(x => x.PaymentGatewayId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // =========================
+            // PAYMENT GATEWAY TABLE
+            // =========================
+
+            builder.Entity<PaymentGateway>(entity =>
+            {
+                entity.ToTable("PaymentGateways");
+
+                entity.HasKey(x => x.PaymentGatewayId);
+
+                entity.Property(x => x.Name)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.Slug)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.Scope)
+                    .HasConversion<string>()
+                    .HasMaxLength(10);
+
+                entity.Property(x => x.SupportedCurrencies)
+                    .HasMaxLength(500);
+
+                entity.HasIndex(x => x.Slug)
+                    .IsUnique();
+
+                entity.HasIndex(x => x.IsDefault);
+            });
+            // =========================
+            // PAYMENT NOTIFICATION TABLE
+            // =========================
+
+            builder.Entity<PaymentNotification>(entity =>
+            {
+                entity.ToTable("PaymentNotifications");
+
+                entity.HasKey(x => x.PaymentNotificationId);
+
+                entity.Property(x => x.Type)
+                    .HasConversion<string>()
+                    .HasMaxLength(25);
+
+                entity.Property(x => x.Channel)
+                    .HasMaxLength(10)
+                    .IsRequired();
+
+                entity.Property(x => x.DeliveryStatus)
+                    .HasMaxLength(15)
+                    .IsRequired();
+
+                entity.HasIndex(x => x.CompanyId);
+                entity.HasIndex(x => x.Type);
+                entity.HasIndex(x => x.SentAt);
+
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // =========================
+            // PROMO CODE TABLE
+            // =========================
+
+            builder.Entity<PromoCode>(entity =>
+            {
+                entity.ToTable("PromoCodes");
+
+                entity.HasKey(x => x.PromoCodeId);
+
+                entity.Property(x => x.Code)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.DiscountType)
+                    .HasConversion<string>()
+                    .HasMaxLength(15);
+
+                entity.Property(x => x.DiscountValue)
+                    .HasColumnType("decimal(19,4)");
+
+                entity.HasIndex(x => x.Code)
+                    .IsUnique();
+
+                entity.HasIndex(x => x.ValidUntil);
+
+                entity.HasOne(x => x.SubscriptionPlan)
+                    .WithMany()
+                    .HasForeignKey(x => x.ApplicablePlanId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+
+            // =========================
+            // PROMO CODE USAGE TABLE
+            // =========================
+
+            builder.Entity<PromoCodeUsage>(entity =>
+            {
+                entity.ToTable("PromoCodeUsages");
+
+                entity.HasKey(x => x.PromoCodeUsageId);
+
+                entity.Property(x => x.DiscountApplied)
+                    .HasColumnType("decimal(19,4)");
+
+                entity.HasIndex(x => x.PromoCodeId);
+                entity.HasIndex(x => x.CompanyId);
+                entity.HasIndex(x => x.PaymentId);
+
+                entity.HasOne(x => x.PromoCode)
+                    .WithMany(x => x.Usages)
+                    .HasForeignKey(x => x.PromoCodeId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.Company)
+                    .WithMany()
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.Payment)
+                    .WithMany()
+                    .HasForeignKey(x => x.PaymentId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+
+
+             
+            });
+
+
+            // =========================
+            // REFUND TABLE
+            // =========================
+
+            builder.Entity<Refund>(entity =>
+            {
+                entity.ToTable("Refunds");
+
+                entity.HasKey(x => x.RefundId);
+
+                entity.Property(x => x.GatewayRefundId)
+                    .HasMaxLength(200);
+
+                entity.Property(x => x.Amount)
+                    .HasColumnType("decimal(19,4)");
+
+                entity.Property(x => x.Currency)
+                    .HasMaxLength(3);
+
+                entity.Property(x => x.Reason)
+                    .HasConversion<string>()
+                    .HasMaxLength(20);
+
+                entity.Property(x => x.Status)
+                    .HasConversion<string>()
+                    .HasMaxLength(10);
+
+                entity.Property(x => x.FailureReason)
+                    .HasMaxLength(500);
+
+                entity.HasIndex(x => x.PaymentId);
+                entity.HasIndex(x => x.Status);
+
+                entity.HasOne(x => x.Payment)
+                    .WithMany(x => x.Refunds)
+                    .HasForeignKey(x => x.PaymentId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+
+
+            });
+
+
+
+            // =========================
+            // SUBSCRIPTION PLAN TABLE
+            // =========================
+
+            builder.Entity<SubscriptionPlan>(entity =>
+            {
+                entity.ToTable("SubscriptionPlans");
+
+                entity.HasKey(x => x.SubscriptionPlanId);
+
+                entity.Property(x => x.Name)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.Description)
+                    .HasMaxLength(500);
+
+                entity.HasIndex(x => x.Name)
+                    .IsUnique();
+            });
+
+
+            // =========================
+            // SUBSCRIPTION PLAN PRICING TABLE
+            // =========================
+
+            builder.Entity<SubscriptionPlanPricing>(entity =>
+            {
+                entity.ToTable("SubscriptionPlanPricing");
+
+                entity.HasKey(x => x.SubscriptionPlanPricingId);
+
+                entity.Property(x => x.BillingCycle)
+                    .HasConversion<string>()
+                    .HasMaxLength(20);
+
+                entity.Property(x => x.Price)
+                    .HasColumnType("decimal(19,4)");
+
+                entity.Property(x => x.Currency)
+                    .HasMaxLength(3);
+
+                entity.Property(x => x.DiscountPercentage)
+                    .HasColumnType("decimal(5,2)");
+
+                entity.HasIndex(x => x.SubscriptionPlanId);
+
+                entity.HasOne(x => x.SubscriptionPlan)
+                    .WithMany(x => x.PricingOptions)
+                    .HasForeignKey(x => x.SubscriptionPlanId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+
+            // =========================
+            // SUBSCRIPTION PLAN FEATURE TABLE
+            // =========================
+
+            builder.Entity<SubscriptionPlanFeature>(entity =>
+            {
+                entity.ToTable("SubscriptionPlanFeatures");
+
+                entity.HasKey(x => x.SubscriptionPlanFeatureId);
+
+                entity.Property(x => x.FeatureName)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.FeatureValue)
+                    .HasMaxLength(255)
+                    .IsRequired();
+
+                entity.HasIndex(x => x.SubscriptionPlanId);
+
+                entity.HasOne(x => x.SubscriptionPlan)
+                    .WithMany(x => x.Features)
+                    .HasForeignKey(x => x.SubscriptionPlanId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+
+            });
+
+
+
+            // =========================
+            // TAX CONFIGURATION TABLE
+            // =========================
+
+            builder.Entity<TaxConfiguration>(entity =>
+            {
+                entity.ToTable("TaxConfigurations");
+
+                entity.HasKey(x => x.TaxConfigurationId);
+
+                entity.Property(x => x.CountryCode)
+                    .HasMaxLength(2)
+                    .IsRequired();
+
+                entity.Property(x => x.TaxName)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(x => x.TaxRate)
+                    .HasColumnType("decimal(5,4)");
+
+                entity.HasIndex(x => x.CountryCode)
+                    .IsUnique();
+            });
+
+            // =========================
+            // WEBHOOK LOG TABLE
+            // =========================
+
+            builder.Entity<WebhookLog>(entity =>
+            {
+                entity.ToTable("WebhookLogs");
+
+                entity.HasKey(x => x.WebhookLogId);
+
+                entity.Property(x => x.EventType)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.GatewayEventId)
+                    .HasMaxLength(200);
+
+                entity.Property(x => x.Payload)
+                    .HasColumnType("nvarchar(max)");
+
+                entity.Property(x => x.Status)
+                    .HasConversion<string>()
+                    .HasMaxLength(10);
+
+                entity.Property(x => x.FailureReason)
+                    .HasMaxLength(500);
+
+                entity.HasIndex(x => x.PaymentGatewayId);
+
+                entity.HasIndex(x => x.GatewayEventId);
+
+                entity.HasIndex(x => x.ReceivedAt);
+
+                entity.HasOne(x => x.PaymentGateway)
+                    .WithMany(x => x.WebhookLogs)
+                    .HasForeignKey(x => x.PaymentGatewayId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            //    builder.Entity<SubscriptionPlanChange>()
+            //.HasOne(x => x.FromPricing)
+            //.WithMany()
+            //.HasForeignKey(x => x.FromPricingId)
+            //.OnDelete(DeleteBehavior.Restrict);
+
+            //        builder.Entity<SubscriptionPlanChange>()
+            //            .HasOne(x => x.ToPricing)
+            //            .WithMany()
+            //            .HasForeignKey(x => x.ToPricingId)
+            //            .OnDelete(DeleteBehavior.Restrict);
+
+            //        builder.Entity<SubscriptionPlanChange>()
+            //            .HasOne(x => x.CompanySubscription)
+            //            .WithMany(x => x.PlanChanges)
+            //            .HasForeignKey(x => x.CompanySubscriptionId)
+            //            .OnDelete(DeleteBehavior.Restrict);
             // =========================
             // OTHER IDENTITY TABLES
             // =========================

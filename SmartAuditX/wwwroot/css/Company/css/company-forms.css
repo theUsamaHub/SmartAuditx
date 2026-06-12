@@ -277,10 +277,10 @@ select.form-control {
   color: var(--color-on-primary);
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: var(--color-charcoal);
-  border-color: var(--color-charcoal);
-}
+    .btn-primary:hover:not(:disabled) {
+        background: var(--color-brand-green);
+        border-color: var(--color-charcoal);
+    }
 
 /* Accent Green Button */
 .btn-success {
