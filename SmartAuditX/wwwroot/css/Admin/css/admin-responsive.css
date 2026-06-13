@@ -1,0 +1,63 @@
+/* Admin Responsive Rules */
+
+/* Tablet (768px and down) */
+@media (max-width: 991px) {
+    .admin-sidebar {
+        position: fixed;
+        left: -var(--admin-sidebar-width);
+        top: 0;
+        bottom: 0;
+        box-shadow: 0 0 24px rgba(0,0,0,0.1);
+    }
+
+    .admin-sidebar.mobile-open {
+        left: 0;
+        transform: translateX(0);
+    }
+
+    .admin-mobile-toggle {
+        display: block;
+    }
+
+    .admin-content {
+        padding: 24px;
+    }
+}
+
+/* Mobile (320px and up to 767px) */
+@media (max-width: 767px) {
+    .admin-content {
+        padding: 16px;
+    }
+    
+    .admin-topnavbar {
+        padding: 0 16px;
+    }
+    
+    .admin-page-title {
+        font-size: 18px;
+    }
+    
+    .admin-profile-name {
+        display: none;
+    }
+}
+
+/* Overlay for Mobile Sidebar */
+.admin-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(10, 10, 10, 0.5);
+    z-index: 1035;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.admin-sidebar-overlay.show {
+    display: block;
+    opacity: 1;
+}

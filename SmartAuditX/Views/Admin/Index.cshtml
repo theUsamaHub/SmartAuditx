@@ -1,8 +1,112 @@
-﻿
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Hello Admin</h1>
+<!-- Demo Dashboard Page -->
+<div class="row">
+    <!-- Stat Card 1 -->
+    <div class="col-md-3">
+        <div class="admin-card admin-stat-card">
+            <span class="stat-title">Total Companies</span>
+            <span class="stat-value">1,284</span>
+        </div>
+    </div>
+    <!-- Stat Card 2 -->
+    <div class="col-md-3">
+        <div class="admin-card admin-stat-card">
+            <span class="stat-title">Active Subscriptions</span>
+            <span class="stat-value">842</span>
+        </div>
+    </div>
+    <!-- Stat Card 3 -->
+    <div class="col-md-3">
+        <div class="admin-card admin-stat-card">
+            <span class="stat-title">Total Audits</span>
+            <span class="stat-value">4,521</span>
+        </div>
+    </div>
+    <!-- Stat Card 4 -->
+    <div class="col-md-3">
+        <div class="admin-card admin-stat-card">
+            <span class="stat-title">Pending Approvals</span>
+            <span class="stat-value">38</span>
+        </div>
+    </div>
+</div>
 
+<div class="row">
+    <!-- Recent Activity Card -->
+    <div class="col-md-8">
+        <div class="admin-card">
+            <div class="admin-card-header d-flex justify-content-between align-items-center">
+                <h2 class="admin-card-title">Recent Activity</h2>
+                <button class="admin-btn admin-btn-ghost text-steel">View All</button>
+            </div>
+            <div class="admin-table-container mt-3">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Target</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>John Doe</strong></td>
+                            <td>Created Audit Template</td>
+                            <td><span class="admin-badge admin-badge-info">ISO 27001</span></td>
+                            <td class="text-steel">2 mins ago</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sarah Smith</strong></td>
+                            <td>Updated Settings</td>
+                            <td><span class="admin-badge admin-badge-warning">System Config</span></td>
+                            <td class="text-steel">15 mins ago</td>
+                        </tr>
+                        <tr>
+                            <td><strong>System Admin</strong></td>
+                            <td>Deleted User</td>
+                            <td><span class="admin-badge admin-badge-danger">test@user.com</span></td>
+                            <td class="text-steel">1 hour ago</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mike Johnson</strong></td>
+                            <td>Subscription Paid</td>
+                            <td><span class="admin-badge admin-badge-success">Enterprise Plan</span></td>
+                            <td class="text-steel">3 hours ago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Status Card -->
+    <div class="col-md-4">
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <h2 class="admin-card-title">System Status</h2>
+            </div>
+            <div class="mt-4">
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-steel">API Uptime</span>
+                    <strong class="text-brand-green">99.99%</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-steel">Database Load</span>
+                    <strong class="text-ink">42%</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-steel">Storage Used</span>
+                    <strong class="text-warning">85%</strong>
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                    <button class="admin-btn admin-btn-secondary w-100">View Detailed Logs</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Manage Features";
+}
+
+<link href="~/css/Admin/css/cms.css" rel="stylesheet" />
+
+<div class="cms-module-header">
+    <h2 class="h4 mb-0">Features</h2>
+    <button class="btn btn-primary" id="btnCreateNew">
+        <i class="fas fa-plus mr-2"></i> Add Feature
+    </button>
+</div>
+
+<div class="cms-table-container">
+    <table id="tblData" class="table table-bordered table-hover w-100">
+        <thead class="bg-light">
+            <tr>
+                <th>Title</th>
+                <th>Icon</th>
+                <th>Display Order</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cmsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Manage Feature</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="cmsForm">
+                <div class="modal-body">
+                    <input type="hidden" name="FeatureId" value="0" />
+                    
+                    <div class="form-group">
+                        <label>Title <span class="text-danger">*</span></label>
+                        <input type="text" name="Title" class="form-control" required maxlength="150" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Short Description <span class="text-danger">*</span></label>
+                        <textarea name="ShortDescription" class="form-control" rows="3" required maxlength="500"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Icon Name (e.g. fas fa-star)</label>
+                        <input type="text" name="IconName" class="form-control" maxlength="100" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Display Order</label>
+                        <input type="number" name="DisplayOrder" class="form-control" value="0" />
+                    </div>
+
+                    <div class="form-group custom-control custom-switch mt-3">
+                        <input type="checkbox" class="custom-control-input" id="IsActive" name="IsActive" value="true" checked>
+                        <label class="custom-control-label" for="IsActive">Active</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Admin/js/cms.js"></script>
+    <script>
+        $(document).ready(function () {
+            CMSManager.init({
+                tableId: '#tblData',
+                formId: '#cmsForm',
+                modalId: '#cmsModal',
+                modalTitleId: '#modalTitle',
+                createBtnId: '#btnCreateNew',
+                getDataUrl: '/Feature/GetData',
+                createUrl: '/Feature/Create',
+                editUrl: '/Feature/Edit',
+                deleteUrl: '/Feature/Delete',
+                getRecordUrl: '/Feature/Edit',
+                toggleStatusUrl: '/Feature/ToggleStatus',
+                columns: [
+                    { data: 'title' },
+                    { 
+                        data: 'iconName',
+                        render: function(data) {
+                            return data ? `<i class="${data}"></i> ${data}` : '';
+                        }
+                    },
+                    { data: 'displayOrder' },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            if (data) {
+                                return '<span class="status-badge status-active">Active</span>';
+                            }
+                            return '<span class="status-badge status-inactive">Inactive</span>';
+                        }
+                    },
+                    {
+                        data: 'featureId',
+                        render: function (data, type, row) {
+                            return `
+                                <button type="button" class="cms-action-btn cms-edit-btn edit-btn" data-id="${data}" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="cms-action-btn cms-toggle-btn toggle-btn" data-id="${data}" title="Toggle Status"><i class="fas fa-power-off"></i></button>
+                                <button type="button" class="cms-action-btn cms-delete-btn delete-btn" data-id="${data}" title="Delete"><i class="fas fa-trash"></i></button>
+                            `;
+                        },
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            });
+        });
+    </script>
+}

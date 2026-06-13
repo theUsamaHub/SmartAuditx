@@ -1,0 +1,76 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SmartAuditX.Services.Interfaces.CMS;
+using SmartAuditX.ViewModels.CMS;
+
+namespace SmartAuditX.Controllers.Admin
+{
+    [Authorize(Roles = "SystemAdmin")]
+    public class HeroSectionController : Controller
+    {
+        private readonly IHeroSectionService _heroSectionService;
+
+        public HeroSectionController(IHeroSectionService heroSectionService)
+        {
+            _heroSectionService = heroSectionService;
+        }
+
+        public IActionResult Index()
+        {
+            return View("~/Views/Admin/HeroSection/Index.cshtml");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetData()
+        {
+            var data = await _heroSectionService.GetAllAsync();
+            return Json(new { data });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(HeroSectionVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _heroSectionService.CreateAsync(model);
+                if (result) return Json(new { success = true, message = "Hero section created successfully." });
+            }
+            return Json(new { success = false, message = "Failed to create hero section. Please check your inputs." });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var data = await _heroSectionService.GetByIdAsync(id);
+            if (data == null) return NotFound();
+            return Json(new { success = true, data });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(HeroSectionVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _heroSectionService.UpdateAsync(model);
+                if (result) return Json(new { success = true, message = "Hero section updated successfully." });
+            }
+            return Json(new { success = false, message = "Failed to update hero section." });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _heroSectionService.DeleteAsync(id);
+            if (result) return Json(new { success = true, message = "Hero section deleted successfully." });
+            return Json(new { success = false, message = "Failed to delete hero section." });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleStatus(int id)
+        {
+            var result = await _heroSectionService.ToggleStatusAsync(id);
+            if (result) return Json(new { success = true, message = "Status updated successfully." });
+            return Json(new { success = false, message = "Failed to update status." });
+        }
+    }
+}

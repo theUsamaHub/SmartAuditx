@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SmartAuditX.Models;
 using SmartAuditX.Models.BillingModule;
+using SmartAuditX.Models.CMS;
 
 
 namespace SmartAuditX.Data
@@ -45,6 +46,18 @@ namespace SmartAuditX.Data
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<PaymentGateway> PaymentGateways { get; set; }
         public DbSet<Refund> Refunds { get; set; }
+
+        // CMS Module DbSets
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Faq> Faqs { get; set; }
+        public DbSet<AboutUs> AboutUs { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<ContactInformation> ContactInformation { get; set; }
+        public DbSet<HeroSection> HeroSections { get; set; }
+        public DbSet<HowItWorksStep> HowItWorksSteps { get; set; }
+        public DbSet<PlatformModule> PlatformModules { get; set; }
+        public DbSet<SecurityFeature> SecurityFeatures { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -1541,6 +1554,16 @@ namespace SmartAuditX.Data
                 entity.Property(x => x.Id)
                     .HasColumnName("RoleClaimId");
             });
+
+            // =========================
+            // CMS TABLES
+            // =========================
+            builder.Entity<Feature>().HasQueryFilter(x => !x.IsDeleted);
+            builder.Entity<Faq>().HasQueryFilter(x => !x.IsDeleted);
+            builder.Entity<TeamMember>().HasQueryFilter(x => !x.IsDeleted);
+            builder.Entity<HowItWorksStep>().HasQueryFilter(x => !x.IsDeleted);
+            builder.Entity<PlatformModule>().HasQueryFilter(x => !x.IsDeleted);
+            builder.Entity<SecurityFeature>().HasQueryFilter(x => !x.IsDeleted);
 
             // =========================
             // SEED DEFAULT ROLES

@@ -1,0 +1,139 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Manage Hero Section";
+}
+
+<link href="~/css/Admin/css/cms.css" rel="stylesheet" />
+
+<div class="cms-module-header">
+    <h2 class="h4 mb-0">Hero Section</h2>
+    <button class="btn btn-primary" id="btnCreateNew">
+        <i class="fas fa-plus mr-2"></i> Add Record
+    </button>
+</div>
+
+<div class="alert alert-info">
+    <i class="fas fa-info-circle mr-2"></i> Only <strong>one</strong> Hero Section record can be active at a time.
+</div>
+
+<div class="cms-table-container">
+    <table id="tblData" class="table table-bordered table-hover w-100">
+        <thead class="bg-light">
+            <tr>
+                <th>Badge Text</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cmsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Manage Hero Section</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="cmsForm">
+                <div class="modal-body">
+                    <input type="hidden" name="HeroSectionId" value="0" />
+                    
+                    <div class="form-group">
+                        <label>Badge Text</label>
+                        <input type="text" name="BadgeText" class="form-control" maxlength="100" placeholder="e.g. New Feature Released!" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Title <span class="text-danger">*</span></label>
+                        <input type="text" name="Title" class="form-control" required maxlength="200" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description <span class="text-danger">*</span></label>
+                        <textarea name="Description" class="form-control" rows="3" required maxlength="500"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Primary Button Text</label>
+                            <input type="text" name="PrimaryButtonText" class="form-control" maxlength="50" />
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Primary Button URL</label>
+                            <input type="text" name="PrimaryButtonUrl" class="form-control" maxlength="255" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Secondary Button Text</label>
+                            <input type="text" name="SecondaryButtonText" class="form-control" maxlength="50" />
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Secondary Button URL</label>
+                            <input type="text" name="SecondaryButtonUrl" class="form-control" maxlength="255" />
+                        </div>
+                    </div>
+
+                    <div class="form-group custom-control custom-switch mt-3">
+                        <input type="checkbox" class="custom-control-input" id="IsActive" name="IsActive" value="true" checked>
+                        <label class="custom-control-label" for="IsActive">Set as Active</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Admin/js/cms.js"></script>
+    <script>
+        $(document).ready(function () {
+            CMSManager.init({
+                tableId: '#tblData',
+                formId: '#cmsForm',
+                modalId: '#cmsModal',
+                modalTitleId: '#modalTitle',
+                createBtnId: '#btnCreateNew',
+                getDataUrl: '/HeroSection/GetData',
+                createUrl: '/HeroSection/Create',
+                editUrl: '/HeroSection/Edit',
+                deleteUrl: '/HeroSection/Delete',
+                getRecordUrl: '/HeroSection/Edit',
+                toggleStatusUrl: '/HeroSection/ToggleStatus',
+                columns: [
+                    { data: 'badgeText' },
+                    { data: 'title' },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            if (data) return '<span class="status-badge status-active">Active</span>';
+                            return '<span class="status-badge status-inactive">Inactive</span>';
+                        }
+                    },
+                    {
+                        data: 'heroSectionId',
+                        render: function (data) {
+                            return `
+                                <button type="button" class="cms-action-btn cms-edit-btn edit-btn" data-id="${data}" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="cms-action-btn cms-toggle-btn toggle-btn" data-id="${data}" title="Toggle Status"><i class="fas fa-power-off"></i></button>
+                                <button type="button" class="cms-action-btn cms-delete-btn delete-btn" data-id="${data}" title="Delete"><i class="fas fa-trash"></i></button>
+                            `;
+                        },
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            });
+        });
+    </script>
+}

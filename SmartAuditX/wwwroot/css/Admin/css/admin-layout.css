@@ -1,0 +1,87 @@
+:root {
+    /* Colors from Mintlify design.md */
+    --admin-color-primary: #0a0a0a;
+    --admin-color-on-primary: #ffffff;
+    --admin-color-brand-green: #00d4a4;
+    --admin-color-brand-green-deep: #00b48a;
+    --admin-color-brand-green-soft: #7cebcb;
+    --admin-color-canvas: #ffffff;
+    --admin-color-canvas-dark: #0a0a0a;
+    --admin-color-surface: #f7f7f7;
+    --admin-color-surface-soft: #fafafa;
+    --admin-color-hairline: #e5e5e5;
+    --admin-color-hairline-soft: #ededed;
+    --admin-color-hairline-dark: #1f1f1f;
+    --admin-color-ink: #0a0a0a;
+    --admin-color-charcoal: #1c1c1e;
+    --admin-color-slate: #3a3a3c;
+    --admin-color-steel: #5a5a5c;
+    --admin-color-stone: #888888;
+    --admin-color-muted: #a8a8aa;
+    --admin-color-on-dark: #ffffff;
+    --admin-color-on-dark-muted: #b3b3b3;
+
+    /* Semantic */
+    --admin-color-error: #d45656;
+    --admin-color-warning: #c37d0d;
+    --admin-color-success: #1ba673;
+
+    /* Typography */
+    --admin-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --admin-font-code: 'Geist Mono', 'SF Mono', Menlo, Consolas, monospace;
+    
+    /* Rounded */
+    --admin-rounded-xs: 4px;
+    --admin-rounded-sm: 6px;
+    --admin-rounded-md: 8px;
+    --admin-rounded-lg: 12px;
+    --admin-rounded-xl: 16px;
+    --admin-rounded-full: 9999px;
+
+    /* Dimensions */
+    --admin-sidebar-width: 280px;
+    --admin-topbar-height: 64px;
+}
+
+body {
+    font-family: var(--admin-font-family);
+    background-color: var(--admin-color-canvas);
+    color: var(--admin-color-charcoal);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.admin-shell {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--admin-color-surface-soft);
+}
+
+.admin-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    transition: margin-left 0.3s ease;
+}
+
+.admin-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 32px;
+    background-color: var(--admin-color-surface-soft);
+}
+
+.admin-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Utilities */
+.text-steel { color: var(--admin-color-steel); }
+.text-ink { color: var(--admin-color-ink); }
+.text-brand-green { color: var(--admin-color-brand-green); }

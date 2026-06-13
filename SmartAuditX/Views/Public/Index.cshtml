@@ -1,0 +1,292 @@
+@{
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+    ViewData["Title"] = "SmartAuditX - Audit & Compliance Platform";
+    
+    var hero = ViewBag.HeroSection as SmartAuditX.ViewModels.CMS.HeroSectionVM;
+    var features = ViewBag.Features as List<SmartAuditX.ViewModels.CMS.FeatureVM>;
+    var faqs = ViewBag.Faqs as List<SmartAuditX.ViewModels.CMS.FaqVM>;
+    var aboutUs = ViewBag.AboutUs as SmartAuditX.ViewModels.CMS.AboutUsVM;
+    var teamMembers = ViewBag.TeamMembers as List<SmartAuditX.ViewModels.CMS.TeamMemberVM>;
+    var contactInfo = ViewBag.ContactInfo as SmartAuditX.ViewModels.CMS.ContactInformationVM;
+    var howItWorks = ViewBag.HowItWorks as List<SmartAuditX.ViewModels.CMS.HowItWorksStepVM>;
+    var platformModules = ViewBag.PlatformModules as List<SmartAuditX.ViewModels.CMS.PlatformModuleVM>;
+    var securityFeatures = ViewBag.SecurityFeatures as List<SmartAuditX.ViewModels.CMS.SecurityFeatureVM>;
+}
+
+@if (hero != null)
+{
+    <section class="hero-section text-center py-5 bg-primary text-white">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(hero.BadgeText))
+            {
+                <span class="badge badge-light mb-3">@hero.BadgeText</span>
+            }
+            <h1 class="display-4 font-weight-bold">@hero.Title</h1>
+            <p class="lead mb-4">@hero.Description</p>
+            <div class="d-flex justify-content-center gap-3">
+                @if (!string.IsNullOrEmpty(hero.PrimaryButtonText))
+                {
+                    <a href="@hero.PrimaryButtonUrl" class="btn btn-light btn-lg">@hero.PrimaryButtonText</a>
+                }
+                @if (!string.IsNullOrEmpty(hero.SecondaryButtonText))
+                {
+                    <a href="@hero.SecondaryButtonUrl" class="btn btn-outline-light btn-lg">@hero.SecondaryButtonText</a>
+                }
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <!-- Fallback Hero -->
+    <section class="hero-section text-center py-5 bg-primary text-white">
+        <div class="container">
+            <h1 class="display-4 font-weight-bold">Welcome to SmartAuditX</h1>
+            <p class="lead">The comprehensive solution for auditing and compliance.</p>
+        </div>
+    </section>
+}
+
+@if (features != null && features.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Features</h2>
+            <div class="row">
+                @foreach (var feature in features)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            @if (!string.IsNullOrEmpty(feature.IconName))
+                            {
+                                <i class="@feature.IconName fa-3x text-primary mb-3"></i>
+                            }
+                            <h4 class="card-title">@feature.Title</h4>
+                            <p class="card-text text-muted">@feature.ShortDescription</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@if (aboutUs != null)
+{
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2>@aboutUs.Title</h2>
+                    <p class="lead text-muted">@aboutUs.ShortDescription</p>
+                    <p>@aboutUs.FullDescription</p>
+                    @if (!string.IsNullOrEmpty(aboutUs.Mission))
+                    {
+                        <div class="mt-4">
+                            <h5>Our Mission</h5>
+                            <p>@aboutUs.Mission</p>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-6 text-center">
+                    @if (!string.IsNullOrEmpty(aboutUs.ImageUrl))
+                    {
+                        <img src="@aboutUs.ImageUrl" alt="About Us" class="img-fluid rounded shadow" />
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@if (howItWorks != null && howItWorks.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">How It Works</h2>
+            <div class="row text-center">
+                @foreach (var step in howItWorks)
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                            @step.StepNumber
+                        </div>
+                        <h5>@step.Title</h5>
+                        <p class="text-muted">@step.Description</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@if (platformModules != null && platformModules.Any())
+{
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Platform Modules</h2>
+            <div class="row">
+                @foreach (var module in platformModules)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm p-4">
+                            <h5 class="card-title">
+                                @if (!string.IsNullOrEmpty(module.IconName))
+                                {
+                                    <i class="@module.IconName text-primary mr-2"></i>
+                                }
+                                @module.Title
+                            </h5>
+                            <p class="card-text text-muted">@module.Description</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@if (securityFeatures != null && securityFeatures.Any())
+{
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center mb-5">Security Features</h2>
+            <div class="row">
+                @foreach (var sec in securityFeatures)
+                {
+                    <div class="col-md-4 mb-4 text-center">
+                        @if (!string.IsNullOrEmpty(sec.IconName))
+                        {
+                            <i class="@sec.IconName fa-3x mb-3 text-info"></i>
+                        }
+                        <h5>@sec.Title</h5>
+                        <p class="text-light">@sec.Description</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@if (teamMembers != null && teamMembers.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Team</h2>
+            <div class="row text-center">
+                @foreach (var member in teamMembers)
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                @if (!string.IsNullOrEmpty(member.ProfileImageUrl))
+                                {
+                                    <img src="@member.ProfileImageUrl" alt="@member.FullName" class="img-fluid rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;" />
+                                }
+                                else
+                                {
+                                    <div class="rounded-circle bg-secondary mx-auto mb-3" style="width: 120px; height: 120px;"></div>
+                                }
+                                <h5 class="card-title mb-1">@member.FullName</h5>
+                                <p class="text-muted mb-2">@member.Designation</p>
+                                @if (!string.IsNullOrEmpty(member.Bio))
+                                {
+                                    <p class="small text-muted">@member.Bio</p>
+                                }
+                                @if (!string.IsNullOrEmpty(member.LinkedInUrl))
+                                {
+                                    <a href="@member.LinkedInUrl" target="_blank" class="text-primary"><i class="fab fa-linkedin fa-lg"></i></a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@if (faqs != null && faqs.Any())
+{
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                @foreach (var faq in faqs)
+                {
+                    <div class="card">
+                        <div class="card-header" id="heading_@faq.FaqId">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse_@faq.FaqId" aria-expanded="true" aria-controls="collapse_@faq.FaqId">
+                                    @faq.Question
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapse_@faq.FaqId" class="collapse" aria-labelledby="heading_@faq.FaqId" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                @faq.Answer
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@if (contactInfo != null)
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Contact Us</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>@contactInfo.CompanyName</h4>
+                    @if (!string.IsNullOrEmpty(contactInfo.Address))
+                    {
+                        <p><i class="fas fa-map-marker-alt mr-2 text-primary"></i> @contactInfo.Address</p>
+                    }
+                    @if (!string.IsNullOrEmpty(contactInfo.PhoneNumber))
+                    {
+                        <p><i class="fas fa-phone mr-2 text-primary"></i> @contactInfo.PhoneNumber</p>
+                    }
+                    @if (!string.IsNullOrEmpty(contactInfo.SupportEmail))
+                    {
+                        <p><i class="fas fa-envelope mr-2 text-primary"></i> Support: <a href="mailto:@contactInfo.SupportEmail">@contactInfo.SupportEmail</a></p>
+                    }
+                    @if (!string.IsNullOrEmpty(contactInfo.SalesEmail))
+                    {
+                        <p><i class="fas fa-envelope mr-2 text-primary"></i> Sales: <a href="mailto:@contactInfo.SalesEmail">@contactInfo.SalesEmail</a></p>
+                    }
+                    
+                    <div class="mt-4">
+                        @if (!string.IsNullOrEmpty(contactInfo.FacebookUrl))
+                        {
+                            <a href="@contactInfo.FacebookUrl" class="mr-3 text-secondary"><i class="fab fa-facebook fa-2x"></i></a>
+                        }
+                        @if (!string.IsNullOrEmpty(contactInfo.TwitterUrl))
+                        {
+                            <a href="@contactInfo.TwitterUrl" class="mr-3 text-secondary"><i class="fab fa-twitter fa-2x"></i></a>
+                        }
+                        @if (!string.IsNullOrEmpty(contactInfo.LinkedInUrl))
+                        {
+                            <a href="@contactInfo.LinkedInUrl" class="mr-3 text-secondary"><i class="fab fa-linkedin fa-2x"></i></a>
+                        }
+                        @if (!string.IsNullOrEmpty(contactInfo.InstagramUrl))
+                        {
+                            <a href="@contactInfo.InstagramUrl" class="text-secondary"><i class="fab fa-instagram fa-2x"></i></a>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @if (!string.IsNullOrEmpty(contactInfo.GoogleMapEmbedUrl))
+                    {
+                        <div class="embed-responsive embed-responsive-16by9 border rounded shadow-sm">
+                            <iframe class="embed-responsive-item" src="@contactInfo.GoogleMapEmbedUrl" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}

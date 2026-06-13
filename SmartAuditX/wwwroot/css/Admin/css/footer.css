@@ -1,0 +1,15 @@
+.admin-footer {
+    padding: 24px 32px;
+    background-color: var(--admin-color-surface-soft);
+    border-top: 1px solid var(--admin-color-hairline);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-footer-content {
+    font-size: 13px;
+    color: var(--admin-color-steel);
+    text-align: center;
+    line-height: 1.4;
+}

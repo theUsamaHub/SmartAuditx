@@ -7,6 +7,8 @@ using SmartAuditX.Models;
 using SmartAuditX.Models.SmartAuditX.Models.Settings;
 using SmartAuditX.Services.Implementations;
 using SmartAuditX.Services.Interfaces;
+using SmartAuditX.Services.Implementations.CMS;
+using SmartAuditX.Services.Interfaces.CMS;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 using static System.Collections.Specialized.BitVector32;
@@ -140,6 +142,17 @@ builder.Services.AddScoped<IEmployeeDocumentTypeService, EmployeeDocumentTypeSer
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeeDocumentService, EmployeeDocumentService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+
+// CMS Services
+builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<IFaqService, FaqService>();
+builder.Services.AddScoped<IAboutUsService, AboutUsService>();
+builder.Services.AddScoped<ITeamMemberService, TeamMemberService>();
+builder.Services.AddScoped<IContactInformationService, ContactInformationService>();
+builder.Services.AddScoped<IHeroSectionService, HeroSectionService>();
+builder.Services.AddScoped<IHowItWorksService, HowItWorksService>();
+builder.Services.AddScoped<IPlatformModuleService, PlatformModuleService>();
+builder.Services.AddScoped<ISecurityFeatureService, SecurityFeatureService>();
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddControllersWithViews();

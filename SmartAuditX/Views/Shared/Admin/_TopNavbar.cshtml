@@ -1,0 +1,43 @@
+<header class="admin-topnavbar">
+    <div class="admin-topnavbar-left">
+        <button id="adminMobileToggle" class="admin-mobile-toggle">
+            <i class="bi bi-list"></i>
+        </button>
+        <h1 class="admin-page-title">@ViewData["Title"]</h1>
+    </div>
+
+    <div class="admin-topnavbar-right">
+        <!-- Search -->
+        <button class="admin-search-btn">
+            <i class="bi bi-search"></i>
+            <span>Search...</span>
+        </button>
+
+        <!-- Notifications -->
+        <button class="admin-nav-icon-btn">
+            <i class="bi bi-bell"></i>
+            <span class="admin-nav-badge">3</span>
+        </button>
+
+        <!-- Profile Dropdown -->
+        <div class="admin-profile-dropdown" id="adminProfileDropdownContainer">
+            <button class="admin-profile-btn" id="adminProfileBtn">
+                <div class="admin-profile-avatar">SA</div>
+                <span class="admin-profile-name">System Administrator</span>
+                <i class="bi bi-chevron-down text-steel"></i>
+            </button>
+            <div class="admin-dropdown-menu" id="adminProfileDropdown">
+                <a href="javascript:void(0);" class="admin-dropdown-item">
+                    <i class="bi bi-person"></i> Profile
+                </a>
+                <a href="javascript:void(0);" class="admin-dropdown-item">
+                    <i class="bi bi-gear"></i> Settings
+                </a>
+                <div class="admin-dropdown-divider"></div>
+                <a href="javascript:void(0);" class="admin-dropdown-item text-danger">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
