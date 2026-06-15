@@ -77,7 +77,7 @@ namespace SmartAuditX.Models.BillingModule
 
         // ── Navigation ────────────────────────────────────────────────────
         public virtual Company? Company { get; set; }
-        public virtual SubscriptionPlanPricing? SubscriptionPlanPricing { get; set; }
+        //public virtual SubscriptionPlanPricing? SubscriptionPlanPricing { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
             = new List<Payment>();
         public virtual ICollection<Invoice> Invoices { get; set; }

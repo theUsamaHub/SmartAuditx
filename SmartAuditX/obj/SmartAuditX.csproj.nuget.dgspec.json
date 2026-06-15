@@ -109,6 +109,14 @@
             "PSC.CSharp.Library.CountryData": {
               "target": "Package",
               "version": "[8.0.9, )"
+            },
+            "ZXing.Net": {
+              "target": "Package",
+              "version": "[0.16.11, )"
+            },
+            "ZXing.Net.Bindings.ImageSharp.V2": {
+              "target": "Package",
+              "version": "[0.16.18, )"
             }
           },
           "imports": [

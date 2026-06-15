@@ -1,15 +1,54 @@
-.admin-footer {
-    padding: 24px 32px;
-    background-color: var(--admin-color-surface-soft);
+/* ============================================
+   SmartAuditX Admin Panel - Footer
+   Mintlify-inspired Footer Component
+   ============================================ */
+
+.company-footer,
+.admin-footer { /* BACKWARD COMPATIBILITY */
+    background-color: var(--admin-color-canvas);
     border-top: 1px solid var(--admin-color-hairline);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
 }
 
-.admin-footer-content {
+.footer-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 32px;
+}
+
+.admin-footer .admin-footer-content {
     font-size: 13px;
     color: var(--admin-color-steel);
     text-align: center;
     line-height: 1.4;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.footer-left .copyright {
+    font-size: 13px;
+    color: var(--admin-color-steel);
+    line-height: 1.4;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.footer-link {
+    font-size: 13px;
+    color: var(--admin-color-steel);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--admin-color-ink);
 }

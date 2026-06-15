@@ -1,10 +1,14 @@
-/* Admin Components matching Mintlify Design */
+/* ============================================
+   SmartAuditX Admin Panel - Components
+   Mintlify-inspired UI Components
+   ============================================ */
 
 /* Buttons */
 .admin-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     font-family: var(--admin-font-family);
     font-size: 14px;
     font-weight: 500;
@@ -13,6 +17,7 @@
     transition: all 0.2s ease;
     border: none;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .admin-btn-primary {
@@ -68,6 +73,10 @@
     padding: 10px 20px;
 }
 
+.admin-btn-danger:hover {
+    background-color: #b94646;
+}
+
 .admin-btn-icon {
     background-color: var(--admin-color-canvas);
     color: var(--admin-color-ink);
@@ -79,6 +88,56 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.admin-btn-icon:hover {
+    background-color: var(--admin-color-surface);
+}
+
+/* Bootstrap Button Compatibility Layer */
+/* Ensure Bootstrap buttons inherit Mintlify styling */
+.btn.btn-primary {
+    background-color: var(--admin-color-primary);
+    border-color: var(--admin-color-primary);
+    border-radius: var(--admin-rounded-full);
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.2s ease;
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--admin-color-charcoal);
+    border-color: var(--admin-color-charcoal);
+}
+
+.btn.btn-success {
+    background-color: var(--admin-color-brand-green);
+    border-color: var(--admin-color-brand-green);
+    color: var(--admin-color-primary);
+    border-radius: var(--admin-rounded-full);
+}
+
+.btn.btn-success:hover {
+    background-color: var(--admin-color-brand-green-deep);
+    border-color: var(--admin-color-brand-green-deep);
+}
+
+.btn.btn-danger {
+    background-color: var(--admin-color-error);
+    border-color: var(--admin-color-error);
+    border-radius: var(--admin-rounded-full);
+}
+
+.btn.btn-secondary {
+    background-color: transparent;
+    border-color: var(--admin-color-hairline);
+    color: var(--admin-color-ink);
+    border-radius: var(--admin-rounded-full);
+}
+
+.btn.btn-secondary:hover {
+    background-color: var(--admin-color-surface);
+    border-color: var(--admin-color-stone);
 }
 
 /* Cards */

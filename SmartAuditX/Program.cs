@@ -1,4 +1,4 @@
-using Humanizer;
+
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -142,6 +142,7 @@ builder.Services.AddScoped<IEmployeeDocumentTypeService, EmployeeDocumentTypeSer
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeeDocumentService, EmployeeDocumentService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 // CMS Services
 builder.Services.AddScoped<IFeatureService, FeatureService>();

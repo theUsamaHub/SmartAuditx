@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartAuditX.Services.Interfaces.CMS;
-using SmartAuditX.ViewModels.CMS;
+using SmartAuditX.Models.CMS.ViewModels.CMS;
+
 
 namespace SmartAuditX.Controllers.Admin
 {

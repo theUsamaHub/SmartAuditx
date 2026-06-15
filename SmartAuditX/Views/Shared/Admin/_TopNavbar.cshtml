@@ -1,43 +1,95 @@
-<header class="admin-topnavbar">
-    <div class="admin-topnavbar-left">
-        <button id="adminMobileToggle" class="admin-mobile-toggle">
-            <i class="bi bi-list"></i>
-        </button>
-        <h1 class="admin-page-title">@ViewData["Title"]</h1>
-    </div>
-
-    <div class="admin-topnavbar-right">
-        <!-- Search -->
-        <button class="admin-search-btn">
-            <i class="bi bi-search"></i>
-            <span>Search...</span>
-        </button>
-
-        <!-- Notifications -->
-        <button class="admin-nav-icon-btn">
-            <i class="bi bi-bell"></i>
-            <span class="admin-nav-badge">3</span>
-        </button>
-
-        <!-- Profile Dropdown -->
-        <div class="admin-profile-dropdown" id="adminProfileDropdownContainer">
-            <button class="admin-profile-btn" id="adminProfileBtn">
-                <div class="admin-profile-avatar">SA</div>
-                <span class="admin-profile-name">System Administrator</span>
-                <i class="bi bi-chevron-down text-steel"></i>
+<nav class="company-navbar">
+    <div class="navbar-container">
+        <!-- Left: Sidebar Toggle + Page Title -->
+        <div class="navbar-start">
+            <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
-            <div class="admin-dropdown-menu" id="adminProfileDropdown">
-                <a href="javascript:void(0);" class="admin-dropdown-item">
-                    <i class="bi bi-person"></i> Profile
-                </a>
-                <a href="javascript:void(0);" class="admin-dropdown-item">
-                    <i class="bi bi-gear"></i> Settings
-                </a>
-                <div class="admin-dropdown-divider"></div>
-                <a href="javascript:void(0);" class="admin-dropdown-item text-danger">
-                    <i class="bi bi-box-arrow-right"></i> Logout
-                </a>
+
+            <h1 class="admin-page-title">@ViewData["Title"]</h1>
+        </div>
+
+        <!-- Right: Actions + Profile -->
+        <div class="navbar-end">
+            <!-- Search -->
+            <div class="navbar-search">
+                <i class="bi bi-search search-icon" aria-hidden="true"></i>
+                <input type="search" class="search-input" placeholder="Search... (⌘K)" aria-label="Search">
+            </div>
+
+            <!-- Notifications -->
+            <div class="dropdown">
+                <button class="navbar-icon-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                    <i class="bi bi-bell" aria-hidden="true"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end notification-dropdown">
+                    <div class="dropdown-header">
+                        <span class="header-title">Notifications</span>
+                        <a href="#" class="mark-all-link">Mark all read</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item notification-item" href="#">
+                        <div class="notification-icon success">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">New company registered</p>
+                            <span class="notification-time">2 minutes ago</span>
+                        </div>
+                    </a>
+                    <a class="dropdown-item notification-item" href="#">
+                        <div class="notification-icon info">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">System backup completed</p>
+                            <span class="notification-time">1 hour ago</span>
+                        </div>
+                    </a>
+                    <a class="dropdown-item notification-item" href="#">
+                        <div class="notification-icon warning">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">High storage usage detected</p>
+                            <span class="notification-time">3 hours ago</span>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item view-all-link" href="#">View all notifications</a>
+                </div>
+            </div>
+
+            <!-- User Profile -->
+            <div class="dropdown">
+                <button class="profile-trigger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="profile-avatar">
+                        <div class="avatar-fallback">SA</div>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-name">System Administrator</span>
+                        <span class="profile-role">Super Admin</span>
+                    </div>
+                    <i class="bi bi-chevron-down profile-chevron" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end profile-dropdown">
+                    <li class="dropdown-header">
+                        <div class="profile-header-info">
+                            <span class="header-name">System Administrator</span>
+                            <span class="header-email">admin@smartauditx.com</span>
+                        </div>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Account Settings</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle"></i> Help & Support</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "User", new { area = "" })"><i class="bi bi-box-arrow-right"></i> Sign Out</a></li>
+                </ul>
             </div>
         </div>
     </div>
-</header>
+</nav>

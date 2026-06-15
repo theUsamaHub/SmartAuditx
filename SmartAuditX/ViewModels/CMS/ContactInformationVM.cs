@@ -6,7 +6,7 @@ namespace SmartAuditX.ViewModels.CMS
     {
         public int ContactInformationId { get; set; }
         [Required, MaxLength(200)]
-        public string CompanyName { get; set; } = string.Empty;
+        public string CompanyName { get; set; } = string.Empty; 
         [MaxLength(100)]
         public string? SupportEmail { get; set; }
         [MaxLength(100)]
@@ -16,7 +16,7 @@ namespace SmartAuditX.ViewModels.CMS
         [MaxLength(500)]
         public string? Address { get; set; }
         [MaxLength(1000)]
-        public string? GoogleMapEmbedUrl { get; set; }
+        public string? GoogleMapEmbedUrl { get; set; } 
         [MaxLength(255)]
         public string? FacebookUrl { get; set; }
         [MaxLength(255)]

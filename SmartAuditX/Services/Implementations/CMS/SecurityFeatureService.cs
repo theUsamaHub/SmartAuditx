@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartAuditX.Data;
 using SmartAuditX.Models.CMS;
 using SmartAuditX.Services.Interfaces.CMS;
-using SmartAuditX.ViewModels.CMS;
+using SmartAuditX.Models.CMS.ViewModels.CMS;
 
 namespace SmartAuditX.Services.Implementations.CMS
 {

@@ -1,63 +1,161 @@
-/* Admin Responsive Rules */
+/* ============================================
+   SmartAuditX Admin Panel - Responsive Rules
+   Mintlify-inspired Breakpoint System
+   ============================================ */
 
-/* Tablet (768px and down) */
-@media (max-width: 991px) {
-    .admin-sidebar {
-        position: fixed;
-        left: -var(--admin-sidebar-width);
-        top: 0;
-        bottom: 0;
-        box-shadow: 0 0 24px rgba(0,0,0,0.1);
-    }
-
-    .admin-sidebar.mobile-open {
-        left: 0;
-        transform: translateX(0);
-    }
-
-    .admin-mobile-toggle {
-        display: block;
-    }
-
-    .admin-content {
-        padding: 24px;
+/* Wide Desktop (≥1280px) */
+@media (min-width: 1280px) {
+    .admin-container {
+        max-width: 1280px;
     }
 }
 
-/* Mobile (320px and up to 767px) */
-@media (max-width: 767px) {
+/* Desktop (1024px - 1279px) */
+@media (max-width: 1279px) {
+    .search-input {
+        width: 240px;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    /* Sidebar becomes off-canvas */
+    .company-sidebar,
+    .admin-sidebar { /* BACKWARD COMPATIBILITY */
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+
+    .company-sidebar.mobile-open,
+    .admin-sidebar.mobile-open { /* BACKWARD COMPATIBILITY */
+        transform: translateX(0);
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Show mobile toggle */
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    /* Adjust content padding */
     .admin-content {
-        padding: 16px;
+        padding: 24px;
     }
-    
-    .admin-topnavbar {
-        padding: 0 16px;
+
+    .navbar-container {
+        padding: 0 24px;
     }
-    
-    .admin-page-title {
-        font-size: 18px;
+
+    .footer-container {
+        padding: 24px;
     }
-    
-    .admin-profile-name {
+
+    /* Search input shrinks */
+    .search-input {
+        width: 200px;
+    }
+
+    /* Profile info hides on smaller tablets */
+    .profile-info {
         display: none;
     }
 }
 
-/* Overlay for Mobile Sidebar */
-.admin-sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(10, 10, 10, 0.5);
-    z-index: 1035;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+/* Mobile Large (480px - 767px) */
+@media (max-width: 767px) {
+    .admin-content {
+        padding: 16px;
+    }
+
+    .navbar-container {
+        padding: 0 16px;
+    }
+
+    .footer-container {
+        padding: 16px;
+    }
+
+    /* Search hides on mobile */
+    .navbar-search {
+        display: none;
+    }
+
+    /* Footer stacks vertically */
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .footer-right {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    /* Profile name hides */
+    .profile-info {
+        display: none;
+    }
 }
 
-.admin-sidebar-overlay.show {
-    display: block;
-    opacity: 1;
+/* Mobile Small (<480px) */
+@media (max-width: 479px) {
+    .admin-content {
+        padding: 12px;
+    }
+
+    .navbar-container {
+        padding: 0 12px;
+    }
+
+    .footer-container {
+        padding: 12px;
+    }
+
+    /* Footer links stack */
+    .footer-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    /* Notification dropdown full width */
+    .notification-dropdown {
+        width: 280px;
+    }
+
+    /* Profile dropdown full width */
+    .profile-dropdown {
+        width: 240px;
+    }
+}
+
+/* Touch Target Enhancements for Mobile */
+@media (max-width: 767px) {
+    .navbar-icon-button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .sidebar-toggle {
+        width: 44px;
+        height: 44px;
+    }
+
+    .nav-link {
+        min-height: 44px;
+    }
+
+    .profile-trigger {
+        padding: 8px;
+    }
 }

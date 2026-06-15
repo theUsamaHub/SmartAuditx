@@ -41,7 +41,8 @@ namespace SmartAuditX.Data
         public DbSet<EmployeeDocument> EmployeeDocuments { get; set; }
 
         public DbSet<SubscriptionPlanChange> SubscriptionPlanChanges { get; set; }
-        public DbSet<SubscriptionPlanPricing> SubscriptionPlanPricings { get; set; }
+
+        //public DbSet<SubscriptionPlanPricing> SubscriptionPlanPricings { get; set; }
         public DbSet<CompanySubscription> CompanySubscriptions { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<PaymentGateway> PaymentGateways { get; set; }
@@ -849,10 +850,10 @@ namespace SmartAuditX.Data
                     .OnDelete(DeleteBehavior.Restrict);
 
                 // Pricing
-                entity.HasOne(x => x.SubscriptionPlanPricing)
-                    .WithMany(x => x.CompanySubscriptions)
-                    .HasForeignKey(x => x.SubscriptionPlanPricingId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                //entity.HasOne(x => x.SubscriptionPlanPricing)
+                //    .WithMany(x => x.CompanySubscriptions)
+                //    .HasForeignKey(x => x.SubscriptionPlanPricingId)
+                //    .OnDelete(DeleteBehavior.Restrict);
 
                 // Payments
                 entity.HasMany(x => x.Payments)
@@ -1400,32 +1401,32 @@ namespace SmartAuditX.Data
             // SUBSCRIPTION PLAN PRICING TABLE
             // =========================
 
-            builder.Entity<SubscriptionPlanPricing>(entity =>
-            {
-                entity.ToTable("SubscriptionPlanPricing");
+            //builder.Entity<SubscriptionPlanPricing>(entity =>
+            //{
+            //    entity.ToTable("SubscriptionPlanPricing");
 
-                entity.HasKey(x => x.SubscriptionPlanPricingId);
+            //    entity.HasKey(x => x.SubscriptionPlanPricingId);
 
-                entity.Property(x => x.BillingCycle)
-                    .HasConversion<string>()
-                    .HasMaxLength(20);
+            //    entity.Property(x => x.BillingCycle)
+            //        .HasConversion<string>()
+            //        .HasMaxLength(20);
 
-                entity.Property(x => x.Price)
-                    .HasColumnType("decimal(19,4)");
+            //    entity.Property(x => x.Price)
+            //        .HasColumnType("decimal(19,4)");
 
-                entity.Property(x => x.Currency)
-                    .HasMaxLength(3);
+            //    entity.Property(x => x.Currency)
+            //        .HasMaxLength(3);
 
-                entity.Property(x => x.DiscountPercentage)
-                    .HasColumnType("decimal(5,2)");
+            //    entity.Property(x => x.DiscountPercentage)
+            //        .HasColumnType("decimal(5,2)");
 
-                entity.HasIndex(x => x.SubscriptionPlanId);
+            //    entity.HasIndex(x => x.SubscriptionPlanId);
 
-                entity.HasOne(x => x.SubscriptionPlan)
-                    .WithMany(x => x.PricingOptions)
-                    .HasForeignKey(x => x.SubscriptionPlanId)
-                    .OnDelete(DeleteBehavior.Restrict);
-            });
+            //    entity.HasOne(x => x.SubscriptionPlan)
+            //        .WithMany(x => x.PricingOptions)
+            //        .HasForeignKey(x => x.SubscriptionPlanId)
+            //        .OnDelete(DeleteBehavior.Restrict);
+            //});
 
 
             // =========================

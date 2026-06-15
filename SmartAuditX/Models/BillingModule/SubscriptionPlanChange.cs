@@ -49,10 +49,10 @@ namespace SmartAuditX.Models.BillingModule
         // ── Navigation ────────────────────────────────────────────────────
         public virtual CompanySubscription? CompanySubscription { get; set; }
 
-        [ForeignKey("FromPricingId")]
-        public virtual SubscriptionPlanPricing? FromPricing { get; set; }
+        //[ForeignKey("FromPricingId")]
+        //public virtual SubscriptionPlanPricing? FromPricing { get; set; }
 
-        [ForeignKey("ToPricingId")]
-        public virtual SubscriptionPlanPricing? ToPricing { get; set; }
+        //[ForeignKey("ToPricingId")]
+        //public virtual SubscriptionPlanPricing? ToPricing { get; set; }
     }
 }

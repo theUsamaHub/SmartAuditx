@@ -83,135 +83,135 @@ namespace SmartAuditX.Models.BillingModule
     /// - Tax calculations
     /// - Multi-currency support
     /// - Future gateway integrations
-    /// </summary>
-    [Table("SubscriptionPlanPricing")]
-    public class SubscriptionPlanPricing : AuditableEntity
-    {
-        /// <summary>
-        /// Primary key.
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int SubscriptionPlanPricingId { get; set; }
+    ///// </summary>
+    //[Table("SubscriptionPlanPricing")]
+    //public class SubscriptionPlanPricing : AuditableEntity
+    //{
+    //    /// <summary>
+    //    /// Primary key.
+    //    /// </summary>
+    //    [Key]
+    //    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    //    public int SubscriptionPlanPricingId { get; set; }
 
-        /// <summary>
-        /// Parent subscription plan.
-        /// Example:
-        /// Basic
-        /// Professional
-        /// Enterprise
-        /// </summary>
-        [Required]
-        [ForeignKey(nameof(SubscriptionPlan))]
-        public int SubscriptionPlanId { get; set; }
+    //    /// <summary>
+    //    /// Parent subscription plan.
+    //    /// Example:
+    //    /// Basic
+    //    /// Professional
+    //    /// Enterprise
+    //    /// </summary>
+    //    [Required]
+    //    [ForeignKey(nameof(SubscriptionPlan))]
+    //    public int SubscriptionPlanId { get; set; }
 
-        /// <summary>
-        /// Billing cycle type selected for this pricing option.
-        ///
-        /// Examples:
-        /// Monthly
-        /// Quarterly
-        /// BiAnnual
-        /// Yearly
-        ///
-        /// Used mainly for UI display and reporting.
-        /// Actual subscription duration calculations should use
-        /// DurationInMonths to avoid hardcoded business logic.
-        /// </summary>
-        [Required]
-        [Column(TypeName = "nvarchar(20)")]
-        public BillingCycle BillingCycle { get; set; }
+    //    /// <summary>
+    //    /// Billing cycle type selected for this pricing option.
+    //    ///
+    //    /// Examples:
+    //    /// Monthly
+    //    /// Quarterly
+    //    /// BiAnnual
+    //    /// Yearly
+    //    ///
+    //    /// Used mainly for UI display and reporting.
+    //    /// Actual subscription duration calculations should use
+    //    /// DurationInMonths to avoid hardcoded business logic.
+    //    /// </summary>
+    //    [Required]
+    //    [Column(TypeName = "nvarchar(20)")]
+    //    public BillingCycle BillingCycle { get; set; }
 
-        /// <summary>
-        /// Exact duration covered by this pricing option.
-        ///
-        /// Examples:
-        /// Monthly   = 1
-        /// Quarterly = 3
-        /// BiAnnual  = 6
-        /// Yearly    = 12
-        ///
-        /// Renewal calculations, expiry calculations,
-        /// upgrades, downgrades, and invoice generation
-        /// should always use this value.
-        ///
-        /// This avoids tightly coupling billing logic
-        /// to enum values.
-        /// </summary>
-        [Required]
-        [Range(1, 120)]
-        public int DurationInMonths { get; set; }
+    //    /// <summary>
+    //    /// Exact duration covered by this pricing option.
+    //    ///
+    //    /// Examples:
+    //    /// Monthly   = 1
+    //    /// Quarterly = 3
+    //    /// BiAnnual  = 6
+    //    /// Yearly    = 12
+    //    ///
+    //    /// Renewal calculations, expiry calculations,
+    //    /// upgrades, downgrades, and invoice generation
+    //    /// should always use this value.
+    //    ///
+    //    /// This avoids tightly coupling billing logic
+    //    /// to enum values.
+    //    /// </summary>
+    //    [Required]
+    //    [Range(1, 120)]
+    //    public int DurationInMonths { get; set; }
 
-        /// <summary>
-        /// Base plan price before any discounts.
-        ///
-        /// Examples:
-        /// 2000.00
-        /// 5500.00
-        /// 20000.00
-        /// </summary>
-        [Required]
-        [Column(TypeName = "decimal(19,4)")]
-        public decimal Price { get; set; }
+    //    /// <summary>
+    //    /// Base plan price before any discounts.
+    //    ///
+    //    /// Examples:
+    //    /// 2000.00
+    //    /// 5500.00
+    //    /// 20000.00
+    //    /// </summary>
+    //    [Required]
+    //    [Column(TypeName = "decimal(19,4)")]
+    //    public decimal Price { get; set; }
 
-        /// <summary>
-        /// ISO 4217 currency code.
-        ///
-        /// Examples:
-        /// PKR
-        /// USD
-        /// AED
-        /// SAR
-        ///
-        /// Validation should be performed in the service layer.
-        /// </summary>
-        [Required]
-        [MaxLength(3)]
-        public string Currency { get; set; } = "USD";
+    //    /// <summary>
+    //    /// ISO 4217 currency code.
+    //    ///
+    //    /// Examples:
+    //    /// PKR
+    //    /// USD
+    //    /// AED
+    //    /// SAR
+    //    ///
+    //    /// Validation should be performed in the service layer.
+    //    /// </summary>
+    //    [Required]
+    //    [MaxLength(3)]
+    //    public string Currency { get; set; } = "USD";
 
-        /// <summary>
-        /// Optional percentage discount applied to this pricing option.
-        ///
-        /// Examples:
-        /// 0   = No Discount
-        /// 10  = 10% Discount
-        /// 25  = 25% Discount
-        ///
-        /// Useful for:
-        /// - Launch promotions
-        /// - Annual plan savings
-        /// - Seasonal offers
-        /// </summary>
-        [Range(0, 100)]
-        [Column(TypeName = "decimal(5,2)")]
-        public decimal DiscountPercentage { get; set; } = 0;
+    //    /// <summary>
+    //    /// Optional percentage discount applied to this pricing option.
+    //    ///
+    //    /// Examples:
+    //    /// 0   = No Discount
+    //    /// 10  = 10% Discount
+    //    /// 25  = 25% Discount
+    //    ///
+    //    /// Useful for:
+    //    /// - Launch promotions
+    //    /// - Annual plan savings
+    //    /// - Seasonal offers
+    //    /// </summary>
+    //    [Range(0, 100)]
+    //    [Column(TypeName = "decimal(5,2)")]
+    //    public decimal DiscountPercentage { get; set; } = 0;
 
-        /// <summary>
-        /// Final customer-facing amount after discount.
-        ///
-        /// Example:
-        /// Price = 1000
-        /// DiscountPercentage = 20
-        ///
-        /// FinalPrice = 800
-        /// </summary>
-        [NotMapped]
-        public decimal FinalPrice =>
-            Price - (Price * (DiscountPercentage / 100));
+    //    /// <summary>
+    //    /// Final customer-facing amount after discount.
+    //    ///
+    //    /// Example:
+    //    /// Price = 1000
+    //    /// DiscountPercentage = 20
+    //    ///
+    //    /// FinalPrice = 800
+    //    /// </summary>
+    //    [NotMapped]
+    //    public decimal FinalPrice =>
+    //        Price - (Price * (DiscountPercentage / 100));
 
-        // ─────────────────────────────────────────────
-        // Navigation Properties
-        // ─────────────────────────────────────────────
+    //    // ─────────────────────────────────────────────
+    //    // Navigation Properties
+    //    // ─────────────────────────────────────────────
 
-        /// <summary>
-        /// Parent subscription plan.
-        /// </summary>
-        public virtual SubscriptionPlan? SubscriptionPlan { get; set; }
+    //    /// <summary>
+    //    /// Parent subscription plan.
+    //    /// </summary>
+    //    public virtual SubscriptionPlan? SubscriptionPlan { get; set; }
 
-        /// <summary>
-        /// Company subscriptions purchased using this pricing option.
-        /// </summary>
-        public virtual ICollection<CompanySubscription> CompanySubscriptions { get; set; }
-            = new List<CompanySubscription>();
-    }
+    //    /// <summary>
+    //    /// Company subscriptions purchased using this pricing option.
+    //    /// </summary>
+    //    public virtual ICollection<CompanySubscription> CompanySubscriptions { get; set; }
+    //        = new List<CompanySubscription>();
+    //}
 }

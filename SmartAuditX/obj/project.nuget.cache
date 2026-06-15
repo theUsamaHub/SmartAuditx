@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xupw1Iorx/I=",
+  "dgSpecHash": "EJD/vl5l7x0=",
   "success": true,
   "projectFilePath": "D:\\SmartAuditx\\SmartAuditX\\SmartAuditX.csproj",
   "expectedPackageFiles": [
@@ -120,6 +120,7 @@
     "C:\\Users\\u6413\\.nuget\\packages\\nuget.protocol\\6.12.1\\nuget.protocol.6.12.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\nuget.versioning\\6.13.1\\nuget.versioning.6.13.1.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\psc.csharp.library.countrydata\\8.0.9\\psc.csharp.library.countrydata.8.0.9.nupkg.sha512",
+    "C:\\Users\\u6413\\.nuget\\packages\\sixlabors.imagesharp\\2.1.12\\sixlabors.imagesharp.2.1.12.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\system.composition\\9.0.0\\system.composition.9.0.0.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\system.composition.attributedmodel\\9.0.0\\system.composition.attributedmodel.9.0.0.nupkg.sha512",
@@ -132,7 +133,9 @@
     "C:\\Users\\u6413\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.16.0\\system.identitymodel.tokens.jwt.8.16.0.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\system.reflection.metadataloadcontext\\8.0.0\\system.reflection.metadataloadcontext.8.0.0.nupkg.sha512",
     "C:\\Users\\u6413\\.nuget\\packages\\system.security.cryptography.pkcs\\10.0.0\\system.security.cryptography.pkcs.10.0.0.nupkg.sha512",
-    "C:\\Users\\u6413\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.13\\system.security.cryptography.protecteddata.9.0.13.nupkg.sha512"
+    "C:\\Users\\u6413\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.13\\system.security.cryptography.protecteddata.9.0.13.nupkg.sha512",
+    "C:\\Users\\u6413\\.nuget\\packages\\zxing.net\\0.16.11\\zxing.net.0.16.11.nupkg.sha512",
+    "C:\\Users\\u6413\\.nuget\\packages\\zxing.net.bindings.imagesharp.v2\\0.16.18\\zxing.net.bindings.imagesharp.v2.0.16.18.nupkg.sha512"
   ],
   "logs": []
 }

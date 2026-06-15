@@ -32,8 +32,8 @@ namespace SmartAuditX.Models.BillingModule
         public int TrialDays { get; set; } = 0;
 
         // ── Navigation ────────────────────────────────────────────────────
-        public virtual ICollection<SubscriptionPlanPricing> PricingOptions { get; set; }
-            = new List<SubscriptionPlanPricing>();
+        //public virtual ICollection<SubscriptionPlanPricing> PricingOptions { get; set; }
+        //    = new List<SubscriptionPlanPricing>();
         public virtual ICollection<SubscriptionPlanFeature> Features { get; set; }
             = new List<SubscriptionPlanFeature>();
     }

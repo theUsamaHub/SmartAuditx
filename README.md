@@ -23,7 +23,7 @@ The application manages complex organizational hierarchies (Companies, Branches,
 - **ASP.NET Core Identity** - User management and authentication
 - **Role-Based Access Control (RBAC)** - Multi-role authorization
 - **HTTP-Only Cookies** - Protection against XSS attacks
-- **Secure Cookie Policies** - SameSite, Secure, and HttpOnly configurations
+- **Secure Cookie Policies** - SameSite, Secure, and HttpOnly configurations 
 - **Session Management** - Server-side session state with secure policies
 
 ### Email & Communication

@@ -1,4 +1,4 @@
-using SmartAuditX.ViewModels.CMS;
+using SmartAuditX.Models.CMS.ViewModels.CMS;
 
 namespace SmartAuditX.Services.Interfaces.CMS
 {

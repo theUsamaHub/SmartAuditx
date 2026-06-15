@@ -1,3 +1,8 @@
+/* ============================================
+   SmartAuditX Admin Panel - Layout Foundation
+   Mintlify-inspired Design System
+   ============================================ */
+
 :root {
     /* Colors from Mintlify design.md */
     --admin-color-primary: #0a0a0a;
@@ -40,19 +45,29 @@
 
     /* Dimensions */
     --admin-sidebar-width: 280px;
+    --admin-sidebar-collapsed-width: 80px;
     --admin-topbar-height: 64px;
+}
+
+/* Global Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: var(--admin-font-family);
-    background-color: var(--admin-color-canvas);
+    background-color: var(--admin-color-surface-soft);
     color: var(--admin-color-charcoal);
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
 }
 
+/* Main Shell Layout */
 .admin-shell {
     display: flex;
     height: 100vh;
@@ -60,6 +75,7 @@ body {
     background-color: var(--admin-color-surface-soft);
 }
 
+/* Main Content Area */
 .admin-main {
     flex-grow: 1;
     display: flex;
@@ -67,6 +83,7 @@ body {
     height: 100vh;
     overflow: hidden;
     transition: margin-left 0.3s ease;
+    min-width: 0;
 }
 
 .admin-content {
@@ -81,7 +98,26 @@ body {
     margin: 0 auto;
 }
 
+/* Scrollbar Styling for Content Area */
+.admin-content::-webkit-scrollbar {
+    width: 8px;
+}
+.admin-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+.admin-content::-webkit-scrollbar-thumb {
+    background-color: var(--admin-color-hairline);
+    border-radius: var(--admin-rounded-full);
+}
+.admin-content::-webkit-scrollbar-thumb:hover {
+    background-color: var(--admin-color-stone);
+}
+
 /* Utilities */
 .text-steel { color: var(--admin-color-steel); }
 .text-ink { color: var(--admin-color-ink); }
 .text-brand-green { color: var(--admin-color-brand-green); }
+.text-muted { color: var(--admin-color-muted); }
+.text-error { color: var(--admin-color-error); }
+.text-warning { color: var(--admin-color-warning); }
+.text-success { color: var(--admin-color-success); }

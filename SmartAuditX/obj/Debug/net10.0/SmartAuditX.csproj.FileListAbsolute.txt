@@ -69,6 +69,7 @@ D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\NuGet.ProjectModel.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\NuGet.Protocol.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\NuGet.Versioning.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\PSC.CSharp.Library.CountryData.dll
+D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\SixLabors.ImageSharp.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\System.CodeDom.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\System.Composition.AttributedModel.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\System.Composition.Convention.dll
@@ -79,6 +80,8 @@ D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\System.Configuration.ConfigurationM
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\System.Reflection.MetadataLoadContext.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\System.Security.Cryptography.ProtectedData.dll
+D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\zxing.dll
+D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\ZXing.ImageSharp.V2.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\af\Humanizer.resources.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\ar\Humanizer.resources.dll
 D:\SmartAuditx\SmartAuditX\bin\Debug\net10.0\az\Humanizer.resources.dll
@@ -328,12 +331,7 @@ D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\a3ygkwa5zy-{0}-2z0ns9nrw
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\nezrqnk58p-{0}-muycvpuwrr-muycvpuwrr.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\v0zgfp0y55-{0}-87fc7y1x7t-87fc7y1x7t.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\yfc7ypekbg-{0}-mlv21k5csn-mlv21k5csn.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\epilxxu6o8-{0}-xelsuny9th-xelsuny9th.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\l8xmuiejml-{0}-b8bfyjyah6-b8bfyjyah6.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\v70aoeq2xx-{0}-nj8l0uar28-nj8l0uar28.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\0l8w8o6ast-{0}-dayw68qhm3-dayw68qhm3.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\2irk9gpq6n-{0}-g6a1hfpb6p-g6a1hfpb6p.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\pfetvd8v25-{0}-t12w3puiwa-t12w3puiwa.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\frss2us4jn-{0}-l8rqh2dal3-l8rqh2dal3.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\whez37yurh-{0}-026e6kk7rh-026e6kk7rh.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\2elebt11nd-{0}-zg5vxo6eih-zg5vxo6eih.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\8ljxqgj3it-{0}-92p4g6qupb-92p4g6qupb.gz
@@ -373,9 +371,7 @@ D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\hq9z7wds2w-{0}-b3do9zq6g
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\qgv9dnoqz6-{0}-8ohvp9ubmz-8ohvp9ubmz.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\00d7yshx57-{0}-b9sayid5wm-b9sayid5wm.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\g0dghedb5x-{0}-61n19gt1b8-61n19gt1b8.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\4m8jagic4l-{0}-eg4qxr2ce4-eg4qxr2ce4.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\kskqwb7fo6-{0}-jg1epm7jl3-jg1epm7jl3.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\tmjocaqnsm-{0}-7n2eg0ghbj-7n2eg0ghbj.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\0e3zdi5w91-{0}-797akd4vst-797akd4vst.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\b79m7zarke-{0}-wvublzrdv8-wvublzrdv8.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\t77o2dqvs6-{0}-34aoqq2ezg-34aoqq2ezg.gz
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\xrabo6ue4w-{0}-mq3rs3c2m1-mq3rs3c2m1.gz
@@ -466,5 +462,12 @@ D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\refint\SmartAuditX.dll
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.pdb
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\SmartAuditX.genruntimeconfig.cache
 D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\ref\SmartAuditX.dll
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\frss2us4jn-{0}-l8rqh2dal3-l8rqh2dal3.gz
-D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\0e3zdi5w91-{0}-797akd4vst-797akd4vst.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\epilxxu6o8-{0}-bzwswz23pa-bzwswz23pa.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\l8xmuiejml-{0}-vx9vm28q13-vx9vm28q13.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\v70aoeq2xx-{0}-0g4dh1jj33-0g4dh1jj33.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\0l8w8o6ast-{0}-bldxx9b9u0-bldxx9b9u0.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\2irk9gpq6n-{0}-h9fd24qxym-h9fd24qxym.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\pfetvd8v25-{0}-993det2hid-993det2hid.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\4m8jagic4l-{0}-5zp7wv4abm-5zp7wv4abm.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\kskqwb7fo6-{0}-kzzjaafwub-kzzjaafwub.gz
+D:\SmartAuditx\SmartAuditX\obj\Debug\net10.0\compressed\tmjocaqnsm-{0}-p18y9p8zb6-p18y9p8zb6.gz
