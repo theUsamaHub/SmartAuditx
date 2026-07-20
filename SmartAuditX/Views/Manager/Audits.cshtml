@@ -1,0 +1,116 @@
+@{
+    ViewData["Title"] = "Audit Reviews";
+    Layout = "~/Views/Shared/Layouts/_ManagerLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1>Audit Reviews</h1>
+            <p class="page-subtitle">Review and approve completed audits for your branch</p>
+        </div>
+        <div class="page-actions">
+            <a href="/Manager" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="table-responsive px-3 px-md-4 pb-3 pb-md-4 pt-3">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Template</th>
+                    <th>Auditor</th>
+                    <th>Branch</th>
+                    <th>Status</th>
+                    <th>Score</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="auditsTableBody">
+                <tr>
+                    <td colspan="7" class="text-center">Loading audits...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            loadAudits();
+        });
+
+        async function loadAudits() {
+            try {
+                const response = await fetch('/Manager/AuditList');
+                const data = await response.json();
+                if (data.success) {
+                    renderAuditsTable(data.data);
+                }
+            } catch (error) {
+                console.error('Error loading audits:', error);
+            }
+        }
+
+        function renderAuditsTable(audits) {
+            const tbody = document.getElementById('auditsTableBody');
+            if (!audits || audits.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No audits found for your branch</td></tr>';
+                return;
+            }
+
+            const statusClasses = {
+                1: 'table-badge-neutral',
+                2: 'table-badge-info',
+                3: 'table-badge-warning',
+                4: 'table-badge-success',
+                5: 'table-badge-info',
+                6: 'table-badge-success',
+                7: 'table-badge-danger'
+            };
+
+            const statusNames = {
+                1: 'Draft',
+                2: 'Scheduled',
+                3: 'In Progress',
+                4: 'Completed',
+                5: 'Under Review',
+                6: 'Approved',
+                7: 'Cancelled'
+            };
+
+            tbody.innerHTML = audits.map(audit => `
+                <tr>
+                    <td><strong>${escapeHtml(audit.title)}</strong></td>
+                    <td>${escapeHtml(audit.templateTitle || '-')}</td>
+                    <td>${escapeHtml(audit.assignedToUserName || '-')}</td>
+                    <td>${escapeHtml(audit.branchName || 'All Branches')}</td>
+                    <td><span class="table-badge ${statusClasses[audit.status] || 'table-badge-neutral'}">${statusNames[audit.status] || 'Unknown'}</span></td>
+                    <td>${audit.finalScore != null ? audit.finalScore.toFixed(1) + '%' : '-'}</td>
+                    <td>
+                        ${audit.status === 4 ? `<a href="/Manager/Review/${audit.id}" class="btn btn-success btn-sm"><i class="bi bi-eye me-1"></i>Review</a>` : ''}
+                        ${(audit.status === 4 || audit.status === 5 || audit.status === 6) ? `<a href="/Manager/DownloadReport/${audit.id}" class="btn btn-outline-primary btn-sm" title="Download Report"><i class="bi bi-download"></i></a>` : ''}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+}

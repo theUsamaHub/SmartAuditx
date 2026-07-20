@@ -2,15 +2,15 @@
     Layout = "~/Views/Shared/_PublicLayout.cshtml";
     ViewData["Title"] = "SmartAuditX - Audit & Compliance Platform";
     
-    var hero = ViewBag.HeroSection as SmartAuditX.ViewModels.CMS.HeroSectionVM;
-    var features = ViewBag.Features as List<SmartAuditX.ViewModels.CMS.FeatureVM>;
-    var faqs = ViewBag.Faqs as List<SmartAuditX.ViewModels.CMS.FaqVM>;
-    var aboutUs = ViewBag.AboutUs as SmartAuditX.ViewModels.CMS.AboutUsVM;
-    var teamMembers = ViewBag.TeamMembers as List<SmartAuditX.ViewModels.CMS.TeamMemberVM>;
-    var contactInfo = ViewBag.ContactInfo as SmartAuditX.ViewModels.CMS.ContactInformationVM;
-    var howItWorks = ViewBag.HowItWorks as List<SmartAuditX.ViewModels.CMS.HowItWorksStepVM>;
-    var platformModules = ViewBag.PlatformModules as List<SmartAuditX.ViewModels.CMS.PlatformModuleVM>;
-    var securityFeatures = ViewBag.SecurityFeatures as List<SmartAuditX.ViewModels.CMS.SecurityFeatureVM>;
+    var hero = ViewBag.HeroSection as SmartAuditX.Models.CMS.ViewModels.CMS.HeroSectionVM;
+    var features = ViewBag.Features as List<SmartAuditX.Models.CMS.ViewModels.CMS.FeatureVM>;
+    var faqs = ViewBag.Faqs as List<SmartAuditX.Models.CMS.ViewModels.CMS.FaqVM>;
+    var aboutUs = ViewBag.AboutUs as SmartAuditX.Models.CMS.ViewModels.CMS.AboutUsVM;
+    var teamMembers = ViewBag.TeamMembers as List<SmartAuditX.Models.CMS.ViewModels.CMS.TeamMemberVM>;
+    var contactInfo = ViewBag.ContactInfo as SmartAuditX.Models.CMS.ViewModels.CMS.ContactInformationVM;
+    var howItWorks = ViewBag.HowItWorks as List<SmartAuditX.Models.CMS.ViewModels.CMS.HowItWorksStepVM>;
+    var platformModules = ViewBag.PlatformModules as List<SmartAuditX.Models.CMS.ViewModels.CMS.PlatformModuleVM>;
+    var securityFeatures = ViewBag.SecurityFeatures as List<SmartAuditX.Models.CMS.ViewModels.CMS.SecurityFeatureVM>;
 }
 
 @if (hero != null)

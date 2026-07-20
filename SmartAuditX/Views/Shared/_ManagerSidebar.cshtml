@@ -1,0 +1,43 @@
+<div class="sidebar-backdrop" data-sidebar-close></div>
+
+<aside class="company-sidebar" id="managerSidebar" aria-label="Main navigation">
+    <!-- Sidebar Header / Brand -->
+    <div class="sidebar-header">
+        <a class="sidebar-brand" asp-controller="Manager" asp-action="Index" aria-label="SmartAuditX Manager">
+            <span class="brand-icon">
+                <i class="bi bi-shield-check" aria-hidden="true"></i>
+            </span>
+            <span class="brand-text">
+                <span class="brand-name">SmartAuditX</span>
+                <span class="brand-tagline">Manager Portal</span>
+            </span>
+        </a>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-navigation">
+        <!-- Dashboard Section -->
+        <div class="nav-section">
+            <div class="nav-section-header">Overview</div>
+            <a class="nav-link active" href="@Url.Action("Index", "Manager")" aria-current="page">
+                <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+        </div>
+
+        <!-- Audit Review Section -->
+        <div class="nav-section">
+            <div class="nav-section-header">Audit Review</div>
+            <a class="nav-link" href="@Url.Action("Audits", "Manager")">
+                <span class="nav-icon"><i class="bi bi-clipboard-data" aria-hidden="true"></i></span>
+                <span class="nav-text">All Audits</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+        <span class="status-indicator"></span>
+        <span class="sidebar-footer-text">Manager Portal</span>
+    </div>
+</aside>

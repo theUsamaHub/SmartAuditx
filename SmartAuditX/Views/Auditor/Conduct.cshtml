@@ -1,0 +1,209 @@
+@model SmartAuditX.Models.ViewModels.AuditModule.AuditConductViewModel
+
+@{
+    ViewData["Title"] = "Conduct Audit";
+    Layout = "~/Views/Shared/Layouts/_AuditorLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1>@Model.AuditTitle</h1>
+            <p class="page-subtitle">@Model.TemplateTitle</p>
+        </div>
+        <div class="page-actions">
+            @if (Model.Status == SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.Scheduled)
+            {
+                <button type="button" class="btn btn-primary" onclick="startAudit()">
+                    <i class="bi bi-play-circle"></i> Start Audit
+                </button>
+            }
+            else if (Model.Status == SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress)
+            {
+                <button type="button" class="btn btn-secondary" onclick="saveProgress()">
+                    <i class="bi bi-save"></i> Save Progress
+                </button>
+                <button type="button" class="btn btn-success" onclick="submitAudit()">
+                    <i class="bi bi-check-circle"></i> Submit Audit
+                </button>
+            }
+            <a href="/Auditor" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content-card">
+    @if (Model.Status == SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.Scheduled)
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i>
+            Click "Start Audit" to begin. You can save progress at any time.
+        </div>
+    }
+
+    <form id="auditForm">
+        @Html.AntiForgeryToken()
+        <input type="hidden" id="auditId" value="@Model.AuditId" />
+
+        @foreach (var auditSection in Model.Sections)
+        {
+            <div class="form-section" data-section-id="@auditSection.Id">
+                <h3 class="form-section-title">@auditSection.Title</h3>
+
+                @foreach (var field in auditSection.Fields)
+                {
+                    <div class="form-group" data-field-id="@field.Id" data-field-type="@((int)field.ItemType)">
+                        <label class="form-label">
+                            @field.QuestionText
+                            @if (field.IsRequired)
+                            {
+                                <span class="text-danger">*</span>
+                            }
+                        </label>
+
+                        @if (!string.IsNullOrEmpty(field.HelpText))
+                        {
+                            <p class="form-hint">@field.HelpText</p>
+                        }
+
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Boolean)
+                        {
+                            <div class="btn-group" role="group">
+                                <input type="radio" class="btn-check" name="field_@field.Id" id="field_@(field.Id)_yes" value="true" @(field.ResponseBoolean == true ? "checked" : "") @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "") />
+                                <label class="btn btn-outline-success" for="field_@(field.Id)_yes">Yes</label>
+
+                                <input type="radio" class="btn-check" name="field_@field.Id" id="field_@(field.Id)_no" value="false" @(field.ResponseBoolean == false ? "checked" : "") @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "") />
+                                <label class="btn btn-outline-danger" for="field_@(field.Id)_no">No</label>
+                            </div>
+                        }
+
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Text)
+                        {
+                            <textarea class="form-control response-text" data-field-id="@field.Id" rows="3" @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "")>@field.ResponseText</textarea>
+                        }
+
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Number)
+                        {
+                            <input type="number" class="form-control response-number" data-field-id="@field.Id" value="@field.ResponseNumber" step="0.01" @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "") />
+                        }
+
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Rating)
+                        {
+                            var min = (int)(field.MinValue ?? 1);
+                            var max = (int)(field.MaxValue ?? 5);
+                            <div class="rating-container">
+                                @for (int i = min; i <= max; i++)
+                                {
+                                    <button type="button" class="btn btn-outline-primary rating-btn @(field.ResponseNumber == i ? "active" : "")" data-field-id="@field.Id" data-value="@i" @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "")>
+                                        @i
+                                    </button>
+                                }
+                                <input type="hidden" class="response-number" data-field-id="@field.Id" value="@field.ResponseNumber" />
+                            </div>
+                        }
+
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Selection)
+                        {
+                            <select class="form-control response-option" data-field-id="@field.Id" @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "")>
+                                <option value="">Select an option</option>
+                                @foreach (var option in field.Options)
+                                {
+                                    if (field.SelectedOptionId == option.Id)
+                                    {
+                                        <option value="@option.Id" selected>@option.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@option.Id">@option.Text</option>
+                                    }
+                                }
+                            </select>
+                        }
+
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Date)
+                        {
+                            var dateValue = field.ResponseDate?.ToString("yyyy-MM-dd") ?? "";
+                            <input type="date" class="form-control response-date" data-field-id="@field.Id" value="@dateValue" @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "") />
+                        }
+
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Photo)
+                        {
+                            <input type="file" class="form-control response-photo" data-field-id="@field.Id" accept="image/*" @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "") />
+                        }
+
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Signature)
+                        {
+                            <div class="signature-pad-container">
+                                <canvas id="signaturePad_@field.Id" width="400" height="150" class="signature-canvas"></canvas>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="clearSignature(@field.Id)">Clear</button>
+                            </div>
+                            <input type="hidden" class="response-text signature-data" data-field-id="@field.Id" value="@field.ResponseText" />
+                        }
+
+                        @if (field.AllowNotes)
+                        {
+                            <textarea class="form-control response-notes mt-2" data-field-id="@field.Id" rows="2" placeholder="Additional notes (optional)..." @(Model.Status != SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress ? "disabled" : "")>@field.Notes</textarea>
+                        }
+                    </div>
+                }
+            </div>
+        }
+
+        @if (Model.Status == SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress)
+        {
+            <div class="form-section">
+                <h3 class="form-section-title">Barcode Scanning</h3>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-5">
+                        <label class="form-label">Barcode Value</label>
+                        <input type="text" class="form-control" id="barcodeInput" placeholder="Scan or type barcode" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Actual Quantity</label>
+                        <input type="number" class="form-control" id="barcodeQuantity" value="1" min="0" step="0.01" />
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary" onclick="scanBarcode()">
+                            <i class="bi bi-upc-scan"></i> Scan
+                        </button>
+                    </div>
+                </div>
+                <div id="scanResult" class="alert d-none mb-3"></div>
+
+                <h4 class="h6 mb-2">Scanned Items</h4>
+                <div class="table-responsive">
+                    <table class="table table-sm" id="scansTable">
+                        <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Item</th>
+                                <th>Expected</th>
+                                <th>Actual</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scansTableBody">
+                            <tr><td colspan="6" class="text-center text-muted">No scans yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/Auditor/auditor-conduct.js"></script>
+    <script>
+        const auditId = @Model.AuditId;
+        const isConducting = @((Model.Status == SmartAuditX.Models.AuditModule.AuditEnums.AuditStatus.InProgress).ToString().ToLower());
+    </script>
+}

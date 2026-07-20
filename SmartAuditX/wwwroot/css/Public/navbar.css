@@ -124,7 +124,7 @@
     .public-navbar .navbar-actions .btn-accent-green,
     .public-navbar .navbar-actions .btn-secondary,
     .public-navbar .navbar-actions .btn-link {
-        width: 100%;
-        justify-content: center;
+/*        width: 100%;
+*/       /* justify-content: center;*/
     }
 }

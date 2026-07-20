@@ -1,8 +1,238 @@
-﻿
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Manager Dashboard";
+    Layout = "~/Views/Shared/Layouts/_ManagerLayout.cshtml";
 }
 
-<h1>Hello Manager</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+    <style>
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        .stat-card {
+            background: var(--company-surface);
+            border: 1px solid var(--company-border);
+            border-radius: var(--rounded-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--rounded-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 20px;
+        }
+        .stat-icon.blue { background: rgba(13, 110, 253, 0.1); color: #0d6efd; }
+        .stat-icon.yellow { background: rgba(255, 193, 7, 0.1); color: #ffc107; }
+        .stat-icon.orange { background: rgba(253, 126, 20, 0.1); color: #fd7e14; }
+        .stat-icon.green { background: rgba(25, 135, 84, 0.1); color: #198754; }
+        .stat-icon.purple { background: rgba(111, 66, 193, 0.1); color: #6f42c1; }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--company-text);
+            margin-bottom: var(--spacing-xs);
+        }
+        .stat-label {
+            font-size: 14px;
+            color: var(--company-muted);
+            font-weight: 500;
+        }
+        .welcome-section h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        .welcome-section p {
+            color: var(--company-muted);
+            font-size: 14px;
+        }
+    </style>
+}
 
+<div class="welcome-section">
+    <h1>Manager Dashboard</h1>
+    <p>Review and approve audits for your branch.</p>
+</div>
+
+<!-- Branch Filter -->
+<div class="content-card mb-4" style="padding: var(--spacing-xl);">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <label class="form-label fw-bold">Branch</label>
+            <select id="branchFilter" class="form-control">
+                <option value="">My Branch</option>
+                <option value="all">All Branches</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Grid -->
+<div class="stats-grid" id="statsContainer">
+    <div class="stat-card">
+        <div class="stat-icon blue"><i class="bi bi-clipboard-data"></i></div>
+        <div class="stat-value" id="statTotal">-</div>
+        <div class="stat-label">Total Audits</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon yellow"><i class="bi bi-calendar-check"></i></div>
+        <div class="stat-value" id="statScheduled">-</div>
+        <div class="stat-label">Scheduled</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon orange"><i class="bi bi-pencil-square"></i></div>
+        <div class="stat-value" id="statInProgress">-</div>
+        <div class="stat-label">In Progress</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green"><i class="bi bi-check-circle"></i></div>
+        <div class="stat-value" id="statCompleted">-</div>
+        <div class="stat-label">Completed</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon purple"><i class="bi bi-check2-circle"></i></div>
+        <div class="stat-value" id="statApproved">-</div>
+        <div class="stat-label">Approved</div>
+    </div>
+</div>
+
+<!-- All Audits Table -->
+<div class="content-card">
+    <div class="px-3 px-md-4 pt-3 pt-md-4 pb-0">
+        <h2 class="h5 mb-1">All Audits</h2>
+        <p class="text-muted mb-0">Overview of audits for your branch.</p>
+    </div>
+    <div class="table-responsive px-3 px-md-4 pb-3 pb-md-4 pt-3">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Template</th>
+                    <th>Auditor</th>
+                    <th>Branch</th>
+                    <th>Status</th>
+                    <th>Scheduled</th>
+                    <th>Score</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="auditsTableBody">
+                <tr>
+                    <td colspan="8" class="text-center">Loading audits...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            loadStats();
+            loadAudits();
+
+            $('#branchFilter').on('change', function() {
+                loadStats();
+                loadAudits();
+            });
+        });
+
+        async function loadStats() {
+            const branchFilter = document.getElementById('branchFilter').value;
+            const url = branchFilter === 'all' ? '/Manager/GetStats' : '/Manager/GetStats';
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.success) {
+                    const s = data.data;
+                    document.getElementById('statTotal').textContent = s.totalAudits;
+                    document.getElementById('statScheduled').textContent = s.scheduledAudits;
+                    document.getElementById('statInProgress').textContent = s.inProgressAudits;
+                    document.getElementById('statCompleted').textContent = s.completedAudits;
+                    document.getElementById('statApproved').textContent = s.approvedAudits;
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function loadAudits() {
+            const branchFilter = document.getElementById('branchFilter').value;
+            const url = branchFilter === 'all' ? '/Manager/AuditList?allBranches=true' : '/Manager/AuditList';
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.success) {
+                    renderAuditsTable(data.data);
+                }
+            } catch (error) {
+                console.error('Error loading audits:', error);
+            }
+        }
+
+        function renderAuditsTable(audits) {
+            const tbody = document.getElementById('auditsTableBody');
+            if (!audits || audits.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No audits found</td></tr>';
+                return;
+            }
+
+            const statusClasses = {
+                1: 'table-badge-neutral',
+                2: 'table-badge-info',
+                3: 'table-badge-warning',
+                4: 'table-badge-success',
+                5: 'table-badge-info',
+                6: 'table-badge-success',
+                7: 'table-badge-danger'
+            };
+
+            const statusNames = {
+                1: 'Draft',
+                2: 'Scheduled',
+                3: 'In Progress',
+                4: 'Completed',
+                5: 'Under Review',
+                6: 'Approved',
+                7: 'Cancelled'
+            };
+
+            tbody.innerHTML = audits.map(audit => `
+                <tr>
+                    <td><strong>${escapeHtml(audit.title)}</strong></td>
+                    <td>${escapeHtml(audit.templateTitle || '-')}</td>
+                    <td>${escapeHtml(audit.assignedToUserName || '-')}</td>
+                    <td>${escapeHtml(audit.branchName || 'All Branches')}</td>
+                    <td><span class="table-badge ${statusClasses[audit.status] || 'table-badge-neutral'}">${statusNames[audit.status] || 'Unknown'}</span></td>
+                    <td>${audit.scheduledStartDate ? new Date(audit.scheduledStartDate).toLocaleDateString() : '-'}</td>
+                    <td>${audit.finalScore != null ? audit.finalScore.toFixed(1) + '%' : '-'}</td>
+                    <td>
+                        ${audit.status === 4 ? `<a href="/Manager/Review/${audit.id}" class="btn btn-success btn-sm"><i class="bi bi-eye me-1"></i>Review</a>` : ''}
+                        ${(audit.status === 4 || audit.status === 5 || audit.status === 6) ? `<a href="/Manager/DownloadReport/${audit.id}" class="btn btn-outline-primary btn-sm" title="Download Report"><i class="bi bi-download"></i></a>` : ''}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+}

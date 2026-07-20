@@ -1,7 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+@using Microsoft.AspNetCore.Identity
+@using SmartAuditX.Models
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
 @{
+    var currentUser = await UserManager.GetUserAsync(User);
+    var userRoles = currentUser != null ? await UserManager.GetRolesAsync(currentUser) : new List<string>();
+    var displayName = currentUser?.UserName ?? "User";
+    var displayEmail = currentUser?.Email ?? "";
+    var displayRole = userRoles.FirstOrDefault()?.Replace("Company", "Company ") ?? "User";
+    var initial = displayName.Length > 0 ? displayName[0].ToString().ToUpper() : "U";
 }
 
 <nav class="company-navbar">
@@ -75,20 +83,19 @@
             <div class="dropdown">
                 <button class="profile-trigger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="profile-avatar">
-                        <img src="~/images/default-avatar.png" alt="User" class="avatar-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="avatar-fallback" style="display:none;">U</div>
+                        <div class="avatar-fallback">@initial</div>
                     </div>
                     <div class="profile-info">
-                        <span class="profile-name">User Name</span>
-                        <span class="profile-role">Company Admin</span>
+                        <span class="profile-name">@displayName</span>
+                        <span class="profile-role">@displayRole</span>
                     </div>
                     <i class="bi bi-chevron-down profile-chevron" aria-hidden="true"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end profile-dropdown">
                     <li class="dropdown-header">
                         <div class="profile-header-info">
-                            <span class="header-name">User Name</span>
-                            <span class="header-email">user@company.com</span>
+                            <span class="header-name">@displayName</span>
+                            <span class="header-email">@displayEmail</span>
                         </div>
                     </li>
                     <li><hr class="dropdown-divider"></li>
@@ -96,7 +103,8 @@
                     <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Account Settings</a></li>
                     <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle"></i> Help & Support</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right"></i> Sign Out</a></li>
+                    <li><a class="dropdown-item text-danger" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "User", new { area = "" })"><i class="bi bi-box-arrow-right"></i> Sign Out</a></li>
+
                 </ul>
             </div>
         </div>

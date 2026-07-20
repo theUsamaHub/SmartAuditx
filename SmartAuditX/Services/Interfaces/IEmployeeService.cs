@@ -21,5 +21,8 @@ namespace SmartAuditX.Services.Interfaces
         Task<EmployeeOperationResult> DeleteAsync(int companyId, int employeeId);
 
         Task<EmployeeOperationResult> ToggleActiveAsync(int companyId, int employeeId);
+
+        Task<EmployeeOperationResult> CreateSystemUserAsync(int companyId, int employeeId, CreateSystemUserViewModel model);
+        Task<EmployeeOperationResult> RemoveSystemUserAsync(int companyId, int employeeId);
     }
 }

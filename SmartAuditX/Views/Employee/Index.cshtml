@@ -6,6 +6,7 @@
 }
 
 @section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css" />
     <link rel="stylesheet" href="~/css/Company/css/employee.css" asp-append-version="true" />
 }
 
@@ -144,10 +145,15 @@
                                 <div class="invalid-feedback">Enter a valid email address.</div>
                             </div>
 
+                           
                             <div class="col-md-6">
-                                <label for="PersonalPhone" class="form-label">Personal Phone</label>
-                                <input asp-for="PersonalPhone" class="form-control" id="PersonalPhone" maxlength="20" placeholder="+1 234 567 8900" />
+                                <label for="SystemPhoneNumber" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="SystemPhoneNumberInput" />
+                                <input type="hidden" asp-for="SystemPhoneDialCode" id="SystemPhoneDialCode" />
+                                <input type="hidden" asp-for="SystemPhoneNumber" name="SystemPhoneNumber" id="SystemPhoneNumber" />
+                                <div class="invalid-feedback">Enter a valid phone number.</div>
                             </div>
+
                         </div>
                     </div>
 
@@ -187,56 +193,13 @@
                         </div>
                     </div>
 
-                    <!-- Section C: System User Option -->
+                    <!-- Section C: Status -->
                     <div class="employee-section mt-4">
                         <h3 class="h6 mb-3">
                             <i class="bi bi-shield-check me-2"></i>
-                            Section C: System Access
+                            Section C: Status
                         </h3>
                         <div class="row g-3">
-                            <div class="col-12">
-                                <div class="form-check form-switch">
-                                    <input asp-for="IsSystemUser" class="form-check-input" type="checkbox" id="IsSystemUser" />
-                                    <label class="form-check-label" for="IsSystemUser">
-                                        Create system user account (allows login to the platform)
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Identity User Fields (shown only when IsSystemUser is checked) -->
-                            <div id="identityFields" class="col-12 d-none">
-                                <div class="row g-3 p-3 border rounded bg-light">
-                                    <div class="col-md-6">
-                                        <label for="SystemEmail" class="form-label">System Email <span class="text-danger">*</span></label>
-                                        <input asp-for="SystemEmail" class="form-control" id="SystemEmail" type="email" maxlength="256" placeholder="john@company.com" />
-                                        <div class="invalid-feedback">System email is required.</div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="Role" class="form-label">Role</label>
-                                        <select asp-for="Role" class="form-select" id="Role">
-                                            <option value="">Select Role</option>
-                                            <option value="Employee">Employee</option>
-                                            <option value="Manager">Manager</option>
-                                            <option value="Auditor">Auditor</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="Password" class="form-label">Password <span class="text-danger">*</span></label>
-                                        <input asp-for="Password" class="form-control" id="Password" type="password" minlength="8" placeholder="Minimum 8 characters" />
-                                        <div class="invalid-feedback">Password must be at least 8 characters.</div>
-                                        <small class="text-muted">Must include uppercase, lowercase, number, and special character</small>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="ConfirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                                        <input asp-for="ConfirmPassword" class="form-control" id="ConfirmPassword" type="password" minlength="8" placeholder="Re-enter password" />
-                                        <div class="invalid-feedback">Passwords must match.</div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="col-12">
                                 <div class="form-check">
                                     <input asp-for="IsActive" class="form-check-input" type="checkbox" id="IsActive" checked />
@@ -251,7 +214,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" id="employeeFormSubmit">
                         Save Employee
-                    </button>
+                    </button> 
                 </div>
             </form>
         </div>
@@ -295,8 +258,70 @@
     </div>
 </div>
 
+<!-- Create System User Modal -->
+<div class="modal fade" id="createSystemUserModal" tabindex="-1" aria-labelledby="createSystemUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title h5" id="createSystemUserModalLabel">Create System User Account</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="createSystemUserForm" class="needs-validation" novalidate>
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="SystemUserEmployeeId" name="EmployeeId" />
+
+                <div class="modal-body">
+                    <div id="systemUserFormAlert" class="alert alert-danger d-none" role="alert"></div>
+
+                    <p class="text-muted mb-3">Create a login account for <strong id="systemUserEmployeeName"></strong>.</p>
+
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="SystemUserEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="SystemUserEmail" name="Email" required maxlength="256" placeholder="john@company.com" />
+                            <div class="invalid-feedback">Valid email is required.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="SystemUserPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="SystemUserPhone" />
+                            <input type="hidden" id="SystemUserPhoneDialCode" name="PhoneDialCode" />
+                            <input type="hidden" id="SystemUserPhoneNumber" name="PhoneNumber" />
+                            <div class="invalid-feedback">Phone number is required.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="SystemUserRole" class="form-label">Role</label>
+                            <select class="form-select" id="SystemUserRole" name="Role">
+                                <option value="">Select Role</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="SystemUserPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="SystemUserPassword" name="Password" required minlength="8" placeholder="Minimum 8 characters" />
+                            <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="SystemUserConfirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="SystemUserConfirmPassword" name="ConfirmPassword" required minlength="8" placeholder="Re-enter password" />
+                            <div class="invalid-feedback">Passwords must match.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="createSystemUserSubmit">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
-    <script>
+    <script> 
         window.employeeConfig = {
             listUrl: '@Url.Action("List", "Employee")',
             getUrl: '@Url.Action("Get", "Employee")',
@@ -304,6 +329,8 @@
             editUrl: '@Url.Action("Edit", "Employee")',
             deleteUrl: '@Url.Action("Delete", "Employee")',
             toggleActiveUrl: '@Url.Action("ToggleActive", "Employee")',
+            getRolesUrl: '@Url.Action("GetRoles", "Employee")',
+            createSystemUserUrl: '@Url.Action("CreateSystemUser", "Employee")',
             documentListUrl: '@Url.Action("GetDocuments", "EmployeeDocument")',
             documentUploadUrl: '@Url.Action("Upload", "EmployeeDocument")',
             documentDeleteUrl: '@Url.Action("Delete", "EmployeeDocument")',
@@ -311,5 +338,6 @@
             documentTypesUrl: '@Url.Action("GetDocumentTypes", "EmployeeDocument")'
         };
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
     <script src="~/js/Company/js/employee.js" asp-append-version="true"></script>
 }

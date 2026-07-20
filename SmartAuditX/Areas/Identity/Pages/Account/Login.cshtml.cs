@@ -23,6 +23,7 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
     /// Handles user login functionality including authentication with email, username, or phone number
     /// and role-based redirection after successful login
     /// </summary>
+    [AllowAnonymous]
     public class LoginModel : PageModel
     {
         // Manages user sign-in operations (login, logout, etc.)
@@ -227,38 +228,46 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                 user.UserName!,     // Use the found user's username for authentication
                 Input.Password,     // The provided password
                 Input.RememberMe,   // Whether to persist the login session
-                lockoutOnFailure: false); // Account lockout is disabled
+                lockoutOnFailure: true); // Lockout after max failed attempts (5 attempts, 15min)
 
-            // STEP 5: Handle successful authentication
+            // STEP 5: Handle lockout
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning("User account locked out.");
+                ModelState.AddModelError(string.Empty, "Account locked out due to too many failed attempts. Please try again in 15 minutes.");
+                return Page();
+            }
+
+            // STEP 6: Handle two-factor authentication required
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+            }
+
+            // STEP 7: Handle successful authentication
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in.");
 
                 // Get user's roles for role-based redirection
-                var roles = await _userManager.GetRolesAsync(user); //better way
+                var roles = await _userManager.GetRolesAsync(user);
 
                 // Role-based dashboard redirection
-                // SystemAdmin goes to Admin dashboard
                 if (roles.Contains("SystemAdmin"))
                     return LocalRedirect("/Admin/Index");
 
-                // CompanyOwner goes to Company dashboard
                 if (roles.Contains("CompanyOwner"))
                     return LocalRedirect("/Company/Index");
 
-                // Manager goes to Manager dashboard
                 if (roles.Contains("Manager"))
                     return LocalRedirect("/Manager/Index");
 
-                // Auditor goes to Auditor dashboard
                 if (roles.Contains("Auditor"))
                     return LocalRedirect("/Auditor/Index");
 
-                // Employee goes to Employee dashboard
                 if (roles.Contains("Employee"))
                     return LocalRedirect("/Employee/Index");
 
-                // Default User role goes to User dashboard
                 if (roles.Contains("User"))
                     return LocalRedirect("/User/Index");
 
@@ -266,7 +275,7 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                 return LocalRedirect(returnUrl);
             }
 
-            // STEP 6: Authentication failed - display generic error message
+            // STEP 8: Authentication failed - display generic error message
             ModelState.AddModelError(
                 string.Empty,
                 "Invalid login attempt.");
@@ -306,7 +315,12 @@ namespace SmartAuditX.Areas.Identity.Pages.Account
                 user.UserName!,
                 Input.Password,
                 Input.RememberMe,
-                lockoutOnFailure: false);
+                lockoutOnFailure: true);
+
+            if (result.IsLockedOut)
+            {
+                return new JsonResult(new { success = false, message = "Account locked out due to too many failed attempts. Please try again in 15 minutes." });
+            }
 
             if (result.Succeeded)
             {

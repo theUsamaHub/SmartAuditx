@@ -1,0 +1,126 @@
+@{
+    ViewData["Title"] = "User Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="admin-card mb-4">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <h2 class="admin-card-title">User Management</h2>
+        <div class="d-flex gap-2">
+            <select id="filterStatus" class="form-select form-select-sm" style="width: 150px;">
+                <option value="">All Status</option>
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+            <input type="search" id="searchUsers" class="form-control form-control-sm" placeholder="Search users..." style="width: 200px;" />
+        </div>
+    </div>
+    <div class="admin-table-container mt-3">
+        <table class="admin-table" id="usersTable">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="usersTableBody">
+                <tr><td colspan="8" class="text-center">Loading users...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            loadUsers();
+            $('#searchUsers').on('input', debounce(loadUsers, 300));
+            $('#filterStatus').on('change', loadUsers);
+        });
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        async function loadUsers() {
+            const search = $('#searchUsers').val();
+            const status = $('#filterStatus').val();
+            let url = '/Admin/UserList?';
+            if (search) url += 'search=' + encodeURIComponent(search) + '&';
+            if (status) url += 'isActive=' + status;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.success) renderUsersTable(data.data);
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+        }
+
+        function renderUsersTable(users) {
+            const tbody = document.getElementById('usersTableBody');
+            if (!users || users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center">No users found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = users.map(u => `
+                <tr>
+                    <td><strong>${escapeHtml(u.username)}</strong></td>
+                    <td>${escapeHtml(u.email)}</td>
+                    <td>${escapeHtml(u.phoneNumber || '-')}</td>
+                    <td>${escapeHtml(u.companyName || '-')}</td>
+                    <td><span class="admin-badge admin-badge-info">${escapeHtml(u.role || '-')}</span></td>
+                    <td>${u.isActive ? '<span class="admin-badge admin-badge-success">Active</span>' : '<span class="admin-badge admin-badge-danger">Inactive</span>'}</td>
+                    <td>${new Date(u.createdAt).toLocaleDateString()}</td>
+                    <td>
+                        <button type="button" class="admin-btn ${u.isActive ? 'admin-btn-danger' : 'admin-btn-success'} btn-sm" onclick="toggleUser(${u.userId})">
+                            ${u.isActive ? 'Deactivate' : 'Activate'}
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function toggleUser(userId) {
+            try {
+                const formData = new FormData();
+                const token = document.querySelector('input[name="__RequestVerificationToken"]');
+                if (token) formData.append('__RequestVerificationToken', token.value);
+
+                const response = await fetch('/Admin/ToggleUserActive?id=' + userId, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (data.success) {
+                    loadUsers();
+                    toastr.success(data.message);
+                } else {
+                    toastr.error(data.message);
+                }
+            } catch (error) {
+                console.error('Error toggling user:', error);
+                toastr.error('Failed to update user.');
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+}

@@ -1,4 +1,4 @@
-﻿@*
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -9,7 +9,7 @@
 <aside class="company-sidebar" id="adminSidebar" aria-label="Main navigation">
     <!-- Sidebar Header / Brand -->
     <div class="sidebar-header">
-        <a class="sidebar-brand" asp-controller="Home" asp-action="Index" aria-label="SmartAuditX Dashboard">
+        <a class="sidebar-brand" asp-controller="Company" asp-action="Index" aria-label="SmartAuditX Dashboard">
             <span class="brand-icon">
                 <i class="bi bi-shield-check" aria-hidden="true"></i>
             </span>
@@ -66,6 +66,19 @@
             <a class="nav-link" href="@Url.Action("Index", "CompanyContact")">
                 <span class="nav-icon"><i class="bi bi-person-lines-fill" aria-hidden="true"></i></span>
                 <span class="nav-text">Company Contacts</span>
+            </a>
+        </div>
+
+        <!-- Audit Section -->
+        <div class="nav-section">
+            <div class="nav-section-header">Audit</div>
+            <a class="nav-link" href="@Url.Action("Index", "AuditTemplate")">
+                <span class="nav-icon"><i class="bi bi-clipboard-check" aria-hidden="true"></i></span>
+                <span class="nav-text">Audit Templates</span>
+            </a>
+            <a class="nav-link" href="@Url.Action("Index", "Audit")">
+                <span class="nav-icon"><i class="bi bi-clipboard-data" aria-hidden="true"></i></span>
+                <span class="nav-text">Audits</span>
             </a>
         </div>
 

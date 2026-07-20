@@ -1,4 +1,4 @@
-﻿
+
 @{
 }
 
@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="~/css/Company/css/company-responsive.css" asp-append-version="true">
     
     @await RenderSectionAsync("Styles", required: false)
+
 </head>
 
 <body>
@@ -50,6 +51,7 @@
         </div>
     </div>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/Company/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/Company/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

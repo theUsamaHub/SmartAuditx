@@ -8,8 +8,12 @@ namespace SmartAuditX.Models.AuditModule
 {
     public class AuditTemplateItem : BaseEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
         [Required]
-        public Guid AuditTemplateId { get; set; }
+        public int AuditTemplateId { get; set; }
 
         [ForeignKey("AuditTemplateId")]
         public virtual AuditTemplate? AuditTemplate { get; set; }

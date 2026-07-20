@@ -7,14 +7,18 @@ namespace SmartAuditX.Models.AuditModule
 {
     public class AuditAssignment
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
         [Required]
-        public Guid AuditId { get; set; }
+        public int AuditId { get; set; }
 
         [ForeignKey("AuditId")]
         public virtual Audit? Audit { get; set; }
 
         [Required]
-        public string AuditorId { get; set; } = string.Empty; // References ASP.NET Core Identity's ApplicationUser
+        public int AuditorId { get; set; } // References ASP.NET Core Identity's ApplicationUser
 
         [ForeignKey("AuditorId")]
         public virtual ApplicationUser? Auditor { get; set; }

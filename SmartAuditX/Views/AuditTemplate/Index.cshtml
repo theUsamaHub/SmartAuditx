@@ -1,0 +1,161 @@
+@model IEnumerable<SmartAuditX.Models.ViewModels.AuditModule.AuditTemplateViewModel>
+
+@{
+    ViewData["Title"] = "Audit Templates";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1>Audit Templates</h1>
+            <p class="page-subtitle">Manage your audit templates</p>
+        </div>
+        <div class="page-actions">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Create New Template
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Template Title</th>
+                        <th>Description</th>
+                        <th>Version</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var template in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="table-media-title">@template.Title</div>
+                                </td>
+                                <td>
+                                    <div class="table-media-subtitle">@template.Description</div>
+                                </td>
+                                <td>
+                                    <span class="table-badge table-badge-neutral">v@(template.Version)</span>
+                                </td>
+                                <td>
+                                    @if (template.IsPublished)
+                                    {
+                                        <span class="table-badge table-badge-success">Published</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="table-badge table-badge-warning">Draft</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <a asp-action="Builder" asp-route-id="@template.AuditTemplateId" class="table-action-btn" title="Open Builder">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@template.AuditTemplateId" class="table-action-btn" title="Edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        @if (!template.IsPublished)
+                                        {
+                                            <button type="button" class="table-action-btn danger" onclick="deleteTemplate(@template.AuditTemplateId)" title="Delete">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">
+                                <div class="table-empty">
+                                    <div class="table-empty-icon">
+                                        <i class="bi bi-file-earmark-plus"></i>
+                                    </div>
+                                    <h4 class="table-empty-title">No Templates Found</h4>
+                                    <p class="table-empty-description">Create your first audit template to get started</p>
+                                    <a asp-action="Create" class="btn btn-primary">
+                                        <i class="bi bi-plus-lg"></i> Create Template
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        async function deleteTemplate(templateId) {
+            try {
+                const result = await Swal.fire({
+                    title: 'Delete Template?',
+                    text: 'This will permanently delete this template. This action cannot be undone.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d45656',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, delete it!'
+                });
+
+                if (result.isConfirmed) {
+                    const response = await fetch(`/AuditTemplate/Delete/${templateId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: data.message,
+                            icon: 'success',
+                            confirmButtonColor: '#00d4a4'
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: data.message,
+                            icon: 'error',
+                            confirmButtonColor: '#d45656'
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Error deleting template:', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Failed to delete template. Please try again.',
+                    icon: 'error',
+                    confirmButtonColor: '#d45656'
+                });
+            }
+        }
+    </script>
+}

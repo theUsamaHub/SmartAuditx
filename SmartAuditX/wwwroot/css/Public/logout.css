@@ -1,0 +1,673 @@
+﻿/* ========================================
+   LOGOUT PAGE - Fully Responsive
+   ======================================== */
+
+/* Root Variables (should already be in your root) */
+:root {
+    --company-navbar-height: 64px;
+    --company-bg: #fafafa;
+    --company-surface: #ffffff;
+    --company-border: #e5e5e5;
+    --company-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+    --color-surface: #f7f7f7;
+    --color-surface-soft: #fafafa;
+    --color-hairline: #e5e5e5;
+    --color-hairline-soft: #ededed;
+    --color-ink: #0a0a0a;
+    --color-charcoal: #1c1c1e;
+    --color-steel: #5a5a5c;
+    --color-muted: #a8a8aa;
+    --color-on-primary: #ffffff;
+    --color-primary: #0a0a0a;
+    --color-brand-green: #00d4a4;
+    --color-brand-green-deep: #00b48a;
+    --color-brand-green-soft: #7cebcb;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --rounded-full: 9999px;
+    --rounded-lg: 12px;
+    --rounded-md: 8px;
+    --rounded-sm: 6px;
+    --spacing-xxs: 4px;
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 20px;
+    --spacing-xl: 24px;
+    --spacing-xxl: 32px;
+    --spacing-xxxl: 40px;
+}
+
+/* ========================================
+   PAGE CONTAINER
+   ======================================== */
+.logout-page {
+    min-height: calc(100vh - var(--company-navbar-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--company-bg);
+    padding: var(--spacing-xl);
+}
+
+/* ========================================
+   CARD
+   ======================================== */
+.logout-card {
+    max-width: 480px;
+    width: 100%;
+    background: var(--company-surface);
+    border-radius: var(--rounded-lg);
+    padding: var(--spacing-xxl);
+    border: 1px solid var(--company-border);
+    box-shadow: var(--company-shadow);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* ========================================
+   ICON
+   ======================================== */
+.logout-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--rounded-full);
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    border: 1px solid var(--color-hairline);
+    flex-shrink: 0;
+}
+
+    .logout-icon svg {
+        width: 36px;
+        height: 36px;
+        color: var(--color-brand-green);
+    }
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+.logout-title {
+    font-family: var(--font-family);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-ink);
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: -0.5px;
+    word-break: break-word;
+}
+
+.logout-subtitle {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.50;
+    color: var(--color-steel);
+    margin-bottom: var(--spacing-xxl);
+}
+
+.logout-message {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.50;
+    color: var(--color-steel);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--color-surface-soft);
+    border-radius: var(--rounded-md);
+    border: 1px solid var(--color-hairline-soft);
+    margin-bottom: var(--spacing-xxl);
+}
+
+    .logout-message .checkmark {
+        display: inline-block;
+        margin-right: var(--spacing-xs);
+        color: var(--color-brand-green);
+    }
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: 12px 32px;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.30;
+    border: none;
+    border-radius: var(--rounded-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    width: 100%;
+    min-height: 48px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+    .logout-button:hover {
+        background: var(--color-charcoal);
+        transform: translateY(-1px);
+        box-shadow: var(--company-shadow);
+    }
+
+    .logout-button:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+    .logout-button:focus-visible {
+        outline: 2px solid var(--color-brand-green);
+        outline-offset: 2px;
+    }
+
+    .logout-button svg {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+
+.logout-secondary {
+    margin-top: var(--spacing-md);
+    display: inline-block;
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-steel);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--rounded-sm);
+    min-height: 44px;
+    line-height: 44px;
+}
+
+    .logout-secondary:hover {
+        color: var(--color-ink);
+        text-decoration: underline;
+    }
+
+    .logout-secondary:focus-visible {
+        outline: 2px solid var(--color-brand-green);
+        outline-offset: 2px;
+    }
+
+.logout-footer {
+    margin-top: var(--spacing-xxl);
+    font-family: var(--font-family);
+    font-size: 13px;
+    color: var(--color-muted);
+    border-top: 1px solid var(--color-hairline-soft);
+    padding-top: var(--spacing-lg);
+}
+
+/* ========================================
+   LOGGED OUT STATE
+   ======================================== */
+.logout-success {
+    text-align: center;
+}
+
+    .logout-success .checkmark-big {
+        width: 80px;
+        height: 80px;
+        border-radius: var(--rounded-full);
+        background: var(--color-brand-green-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-xl);
+        flex-shrink: 0;
+    }
+
+        .logout-success .checkmark-big svg {
+            width: 40px;
+            height: 40px;
+            color: var(--color-brand-green-deep);
+        }
+
+.logout-success-title {
+    font-family: var(--font-family);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.30;
+    color: var(--color-ink);
+    margin-bottom: var(--spacing-xs);
+    word-break: break-word;
+}
+
+.logout-success-subtitle {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.50;
+    color: var(--color-steel);
+    margin-bottom: var(--spacing-xl);
+}
+
+.logout-redirect {
+    font-family: var(--font-family);
+    font-size: 14px;
+    color: var(--color-muted);
+}
+
+    .logout-redirect a {
+        color: var(--color-brand-green);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .logout-redirect a:hover {
+            text-decoration: underline;
+        }
+
+        .logout-redirect a:focus-visible {
+            outline: 2px solid var(--color-brand-green);
+            outline-offset: 2px;
+        }
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+   ======================================== */
+
+/* ---------- Tablets (768px - 1023px) ---------- */
+@media (max-width: 1023px) {
+    .logout-page {
+        padding: var(--spacing-xl);
+    }
+
+    .logout-card {
+        max-width: 440px;
+        padding: var(--spacing-xxl);
+    }
+
+    .logout-title {
+        font-size: 26px;
+    }
+
+    .logout-icon {
+        width: 64px;
+        height: 64px;
+    }
+
+        .logout-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+    .logout-button {
+        padding: 11px 28px;
+        min-height: 46px;
+    }
+}
+
+/* ---------- Mobile Large (480px - 767px) ---------- */
+@media (max-width: 767px) {
+    .logout-page {
+        padding: var(--spacing-lg);
+        min-height: calc(100vh - var(--company-navbar-height) - 20px);
+    }
+
+    .logout-card {
+        max-width: 100%;
+        padding: var(--spacing-xl);
+        border-radius: var(--rounded-md);
+    }
+
+    .logout-title {
+        font-size: 24px;
+        letter-spacing: -0.3px;
+    }
+
+    .logout-subtitle {
+        font-size: 15px;
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .logout-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: var(--spacing-md);
+    }
+
+        .logout-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+    .logout-button {
+        padding: 10px 24px;
+        font-size: 14px;
+        min-height: 44px;
+        gap: var(--spacing-xs);
+    }
+
+        .logout-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+    .logout-secondary {
+        font-size: 13px;
+        min-height: 40px;
+        line-height: 40px;
+    }
+
+    .logout-footer {
+        font-size: 12px;
+        padding-top: var(--spacing-md);
+        margin-top: var(--spacing-xl);
+    }
+
+    /* Logged out state */
+    .logout-success .checkmark-big {
+        width: 64px;
+        height: 64px;
+    }
+
+        .logout-success .checkmark-big svg {
+            width: 32px;
+            height: 32px;
+        }
+
+    .logout-success-title {
+        font-size: 22px;
+    }
+
+    .logout-success-subtitle {
+        font-size: 15px;
+    }
+
+    .logout-redirect {
+        font-size: 13px;
+    }
+}
+
+/* ---------- Mobile Small (< 480px) ---------- */
+@media (max-width: 479px) {
+    .logout-page {
+        padding: var(--spacing-sm);
+        min-height: calc(100vh - var(--company-navbar-height) - 10px);
+    }
+
+    .logout-card {
+        padding: var(--spacing-lg);
+        border-radius: var(--rounded-sm);
+        box-shadow: none;
+        border: 1px solid var(--company-border);
+    }
+
+    .logout-title {
+        font-size: 20px;
+        letter-spacing: -0.2px;
+    }
+
+    .logout-subtitle {
+        font-size: 14px;
+        line-height: 1.40;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .logout-icon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: var(--spacing-md);
+    }
+
+        .logout-icon svg {
+            width: 26px;
+            height: 26px;
+        }
+
+    .logout-message {
+        font-size: 14px;
+        padding: var(--spacing-sm) var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .logout-button {
+        padding: 10px 20px;
+        font-size: 13px;
+        min-height: 40px;
+        gap: var(--spacing-xxs);
+    }
+
+        .logout-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+    .logout-secondary {
+        font-size: 12px;
+        min-height: 36px;
+        line-height: 36px;
+        margin-top: var(--spacing-sm);
+    }
+
+    .logout-footer {
+        font-size: 11px;
+        padding-top: var(--spacing-sm);
+        margin-top: var(--spacing-lg);
+    }
+
+    /* Logged out state */
+    .logout-success .checkmark-big {
+        width: 56px;
+        height: 56px;
+    }
+
+        .logout-success .checkmark-big svg {
+            width: 28px;
+            height: 28px;
+        }
+
+    .logout-success-title {
+        font-size: 18px;
+    }
+
+    .logout-success-subtitle {
+        font-size: 14px;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .logout-redirect {
+        font-size: 12px;
+    }
+}
+
+/* ---------- Very Small Devices (< 360px) ---------- */
+@media (max-width: 359px) {
+    .logout-card {
+        padding: var(--spacing-md);
+    }
+
+    .logout-title {
+        font-size: 18px;
+    }
+
+    .logout-subtitle {
+        font-size: 13px;
+    }
+
+    .logout-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+        .logout-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+    .logout-button {
+        font-size: 12px;
+        padding: 8px 16px;
+        min-height: 36px;
+    }
+
+    .logout-secondary {
+        font-size: 11px;
+        min-height: 32px;
+        line-height: 32px;
+    }
+
+    .logout-footer {
+        font-size: 10px;
+    }
+}
+
+/* ---------- Landscape Mode for Mobile ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+    .logout-page {
+        padding: var(--spacing-sm);
+        min-height: calc(100vh - var(--company-navbar-height) - 10px);
+    }
+
+    .logout-card {
+        padding: var(--spacing-lg);
+        max-width: 400px;
+    }
+
+    .logout-icon {
+        width: 44px;
+        height: 44px;
+        margin-bottom: var(--spacing-sm);
+    }
+
+        .logout-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+    .logout-title {
+        font-size: 20px;
+        margin-bottom: var(--spacing-xxs);
+    }
+
+    .logout-subtitle {
+        font-size: 14px;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .logout-button {
+        min-height: 36px;
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+
+    .logout-secondary {
+        min-height: 32px;
+        line-height: 32px;
+        margin-top: var(--spacing-xs);
+    }
+
+    .logout-footer {
+        margin-top: var(--spacing-md);
+        padding-top: var(--spacing-sm);
+    }
+
+    .logout-success .checkmark-big {
+        width: 48px;
+        height: 48px;
+        margin-bottom: var(--spacing-md);
+    }
+
+        .logout-success .checkmark-big svg {
+            width: 24px;
+            height: 24px;
+        }
+
+    .logout-success-title {
+        font-size: 18px;
+    }
+
+    .logout-success-subtitle {
+        font-size: 14px;
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ---------- Dark Mode Support ---------- */
+/*@media (prefers-color-scheme: dark) {
+    :root {
+        --company-bg: #1a1a1a;
+        --company-surface: #2a2a2a;
+        --company-border: #3a3a3a;
+        --color-surface: #2a2a2a;
+        --color-surface-soft: #222222;
+        --color-hairline: #3a3a3a;
+        --color-hairline-soft: #333333;
+        --color-ink: #ffffff;
+        --color-charcoal: #e0e0e0;
+        --color-steel: #b0b0b0;
+        --color-muted: #888888;
+        --color-on-primary: #ffffff;
+        --color-primary: #1a1a1a;
+    }
+
+    .logout-card {
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .logout-icon {
+        background: var(--color-surface);
+        border-color: var(--color-hairline);
+    }
+
+    .logout-button {
+        background: #3a3a3a;
+        color: #ffffff;
+    }
+
+        .logout-button:hover {
+            background: #4a4a4a;
+        }
+
+    .logout-message {
+        background: var(--color-surface);
+        border-color: var(--color-hairline);
+    }
+}*/
+
+/* ---------- Reduced Motion ---------- */
+/*@media (prefers-reduced-motion: reduce) {
+    .logout-button,
+    .logout-secondary {
+        transition: none;
+    }
+
+        .logout-button:hover {
+            transform: none;
+        }
+}*/
+
+/* ---------- Print Styles ---------- */
+/*@media print {
+    .logout-page {
+        min-height: auto;
+        padding: 20px;
+        background: white;
+    }
+
+    .logout-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    .logout-button,
+    .logout-secondary {
+        display: none;
+    }
+
+    .logout-footer {
+        border-top-color: #ddd;
+    }
+}*/

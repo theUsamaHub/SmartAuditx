@@ -26,6 +26,16 @@ namespace SmartAuditX.Models.ViewModels
         [MaxLength(30)]
         public string? CNICOrNationalId { get; set; }
 
+        // Add these properties inside your EmployeeViewModel class
+
+        [Display(Name = "System Phone Number")]
+        [MaxLength(20)]
+        public string? SystemPhoneNumber { get; set; }
+
+        [MaxLength(5)]
+         // Optional custom validation, or handle in service layer validation
+        public string? SystemPhoneDialCode { get; set; }
+
         [MaxLength(255)]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         [Display(Name = "Personal Email")]
@@ -63,6 +73,7 @@ namespace SmartAuditX.Models.ViewModels
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string? SystemEmail { get; set; }
 
+    
         [Display(Name = "Password")]
         [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters.")]
         public string? Password { get; set; }

@@ -42,9 +42,9 @@ namespace SmartAuditX.Services.Implementations
         using var smtp = new SmtpClient();
 
             await smtp.ConnectAsync(
-                _settings.Host,
-                _settings.Port,
-                SecureSocketOptions.StartTls);
+          _settings.Host,
+          _settings.Port,
+          SecureSocketOptions.StartTls);
 
             await smtp.AuthenticateAsync(
                 _settings.Username,

@@ -1,0 +1,106 @@
+@model SmartAuditX.Models.ViewModels.AuditModule.CreateAuditViewModel
+
+@{
+    ViewData["Title"] = "Create Audit";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1>Create Audit</h1>
+            <p class="page-subtitle">Schedule a new audit from a published template</p>
+        </div>
+        <div class="page-actions">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Audits
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content-card" style="padding: var(--spacing-xl);">
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-section">
+            <h3 class="form-section-title">Audit Details</h3>
+
+            <div class="form-group">
+                <label asp-for="Title" class="form-label form-label-required">Audit Title</label>
+                <input asp-for="Title" class="form-control" placeholder="e.g. Kitchen Hygiene Check - Branch A - June 2026" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AuditTemplateId" class="form-label form-label-required">Template</label>
+                <select asp-for="AuditTemplateId" asp-items="Model.Templates" class="form-control">
+                    <option value="">Select a published template</option>
+                </select>
+                <span asp-validation-for="AuditTemplateId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BranchId" class="form-label">Branch (Optional)</label>
+                <select asp-for="BranchId" asp-items="Model.Branches" class="form-control">
+                    <option value="">All Branches</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3 class="form-section-title">Schedule</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="ScheduledStartDate" class="form-label form-label-required">Start Date</label>
+                    @{
+                        var startValue = Model.ScheduledStartDate.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm");
+                    }
+                    <input name="ScheduledStartDate" type="datetime-local" class="form-control" value="@startValue" />
+                    <span asp-validation-for="ScheduledStartDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ScheduledEndDate" class="form-label">End Date (Optional)</label>
+                    @{
+                        var endValue = Model.ScheduledEndDate?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm") ?? "";
+                    }
+                    <input name="ScheduledEndDate" type="datetime-local" class="form-control" value="@endValue" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3 class="form-section-title">Assignment</h3>
+
+            <div class="form-group">
+                <label asp-for="AssignedToUserId" class="form-label">Assign to Auditor</label>
+                <select asp-for="AssignedToUserId" asp-items="Model.Auditors" class="form-control">
+                    <option value="">Select an auditor</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Notes" class="form-label">Notes (Optional)</label>
+                <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Any additional notes for this audit..."></textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg"></i> Create Audit
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

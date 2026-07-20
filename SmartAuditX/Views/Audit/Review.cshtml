@@ -1,0 +1,285 @@
+@model SmartAuditX.Models.ViewModels.AuditModule.AuditConductViewModel
+
+@{
+    ViewData["Title"] = "Review Audit";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1>Review Audit</h1>
+            <p class="page-subtitle">@Model.AuditTitle — @Model.TemplateTitle</p>
+        </div>
+        <div class="page-actions">
+            <a href="/Audit/DownloadReport/@Model.AuditId" class="btn btn-outline-primary">
+                <i class="bi bi-download"></i> Download Report
+            </a>
+            <a href="/Audit/DownloadInventoryReport/@Model.AuditId" class="btn btn-outline-success">
+                <i class="bi bi-file-earmark-excel"></i> Inventory Report
+            </a>
+            <button type="button" class="btn btn-success" onclick="approveAudit()">
+                <i class="bi bi-check-circle"></i> Approve
+            </button>
+            <button type="button" class="btn btn-danger" onclick="rejectAudit()">
+                <i class="bi bi-x-circle"></i> Send Back
+            </button>
+            <a href="/Audit" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Audits
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Review Notes -->
+<div class="content-card mb-4" style="padding: var(--spacing-xl);">
+    <h3 class="form-section-title">Review Notes</h3>
+    <textarea id="reviewNotes" class="form-control" rows="3" placeholder="Add your review notes (optional)..."></textarea>
+</div>
+
+<!-- Audit Sections & Responses -->
+@foreach (var auditSection in Model.Sections)
+{
+    <div class="content-card mb-4" style="padding: var(--spacing-xl);">
+        <h3 class="form-section-title">@auditSection.Title</h3>
+
+        @foreach (var field in auditSection.Fields)
+        {
+            <div class="form-section" style="border-bottom: 1px solid var(--company-border); padding-bottom: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <strong>@field.QuestionText</strong>
+                        @if (field.IsRequired)
+                        {
+                            <span class="text-danger">*</span>
+                        }
+                    </div>
+                    <span class="badge" style="background: var(--color-surface); color: var(--color-steel); font-size: 12px;">
+                        @field.ItemType • Weight: @field.Weightage
+                    </span>
+                </div>
+
+                @if (!string.IsNullOrEmpty(field.HelpText))
+                {
+                    <p class="text-muted mb-2" style="font-size: 13px;">@field.HelpText</p>
+                }
+
+                @if (field.IsSkipped)
+                {
+                    <div class="alert alert-warning py-2 mb-0" style="font-size: 13px;">
+                        <i class="bi bi-skip-forward"></i> Field was skipped
+                    </div>
+                }
+                else
+                {
+                    <div class="p-3 rounded" style="background: var(--color-surface-soft, #fafafa); border: 1px solid var(--color-hairline-soft, #ededed);">
+                        @* Boolean *@
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Boolean)
+                        {
+                            if (field.ResponseBoolean == true)
+                            {
+                                <span class="badge bg-success"><i class="bi bi-check-lg"></i> Yes</span>
+                            }
+                            else if (field.ResponseBoolean == false)
+                            {
+                                <span class="badge bg-danger"><i class="bi bi-x-lg"></i> No</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Not answered</span>
+                            }
+                        }
+
+                        @* Text *@
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Text)
+                        {
+                            <span>@(field.ResponseText ?? "Not answered")</span>
+                        }
+
+                        @* Number *@
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Number)
+                        {
+                            <span>@(field.ResponseNumber?.ToString() ?? "Not answered")</span>
+                        }
+
+                        @* Rating *@
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Rating)
+                        {
+                            if (field.ResponseNumber.HasValue)
+                            {
+                                <span>
+                                    @for (int i = 1; i <= (field.MaxValue ?? 5); i++)
+                                    {
+                                        if (i <= field.ResponseNumber.Value)
+                                        {
+                                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-star" style="color: #ddd;"></i>
+                                        }
+                                    }
+                                    <strong class="ms-2">@field.ResponseNumber.Value / @(field.MaxValue ?? 5)</strong>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Not answered</span>
+                            }
+                        }
+
+                        @* Selection (Dropdown) *@
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Selection)
+                        {
+                            if (field.SelectedOptionId.HasValue)
+                            {
+                                var selectedOption = field.Options.FirstOrDefault(o => o.Id == field.SelectedOptionId.Value);
+                                <span class="badge bg-primary">@selectedOption?.Text</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Not answered</span>
+                            }
+                        }
+
+                        @* Date *@
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Date)
+                        {
+                            <span>@(field.ResponseDate?.ToString("dd MMM yyyy") ?? "Not answered")</span>
+                        }
+
+                        @* Photo *@
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Photo)
+                        {
+                            <span class="text-muted"><i class="bi bi-camera"></i> Photo evidence uploaded</span>
+                        }
+
+                        @* Signature *@
+                        @if (field.ItemType == SmartAuditX.Models.AuditModule.AuditEnums.TemplateItemType.Signature)
+                        {
+                            <span class="text-muted"><i class="bi bi-pen"></i> Signature captured</span>
+                        }
+                    </div>
+                }
+
+                @* Notes *@
+                @if (!string.IsNullOrEmpty(field.Notes))
+                {
+                    <div class="mt-2 p-2 rounded" style="background: #fff3cd; border: 1px solid #ffc107;">
+                        <small class="text-muted"><i class="bi bi-chat-left-text"></i> Notes:</small>
+                        <p class="mb-0 mt-1" style="font-size: 13px;">@field.Notes</p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const auditId = @Model.AuditId;
+
+        function getToken() {
+            return document.querySelector('input[name="__RequestVerificationToken"]')?.value || '';
+        }
+
+        async function approveAudit() {
+            const result = await Swal.fire({
+                title: 'Approve Audit',
+                text: 'Are you sure you want to approve this audit?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#198754',
+                cancelButtonColor: '#5a5a5c',
+                confirmButtonText: 'Approve'
+            });
+
+            if (!result.isConfirmed) return;
+
+            const reviewNotes = document.getElementById('reviewNotes').value;
+
+            try {
+                const formData = new FormData();
+                formData.append('reviewNotes', reviewNotes);
+                formData.append('__RequestVerificationToken', getToken());
+
+                const response = await fetch('/Audit/Approve/' + auditId, {
+                    method: 'POST',
+                    headers: { 'RequestVerificationToken': getToken() },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Approved!',
+                        text: data.message,
+                        icon: 'success',
+                        confirmButtonColor: '#00d4a4'
+                    }).then(() => {
+                        window.location.href = '/Audit';
+                    });
+                } else {
+                    Swal.fire('Error', data.message || 'Failed to approve.', 'error');
+                }
+            } catch (error) {
+                console.error('Error approving audit:', error);
+                Swal.fire('Error', 'Failed to approve audit.', 'error');
+            }
+        }
+
+        async function rejectAudit() {
+            const result = await Swal.fire({
+                title: 'Send Back for Correction',
+                text: 'This will send the audit back to the auditor. Add review notes explaining what needs to be corrected.',
+                icon: 'warning',
+                input: 'textarea',
+                inputPlaceholder: 'Enter review notes...',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#5a5a5c',
+                confirmButtonText: 'Send Back'
+            });
+
+            if (!result.isConfirmed) return;
+
+            const reviewNotes = result.value || document.getElementById('reviewNotes').value;
+
+            try {
+                const formData = new FormData();
+                formData.append('reviewNotes', reviewNotes);
+                formData.append('__RequestVerificationToken', getToken());
+
+                const response = await fetch('/Audit/Reject/' + auditId, {
+                    method: 'POST',
+                    headers: { 'RequestVerificationToken': getToken() },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Sent Back',
+                        text: data.message,
+                        icon: 'success',
+                        confirmButtonColor: '#00d4a4'
+                    }).then(() => {
+                        window.location.href = '/Audit';
+                    });
+                } else {
+                    Swal.fire('Error', data.message || 'Failed to reject.', 'error');
+                }
+            } catch (error) {
+                console.error('Error rejecting audit:', error);
+                Swal.fire('Error', 'Failed to send back audit.', 'error');
+            }
+        }
+    </script>
+}

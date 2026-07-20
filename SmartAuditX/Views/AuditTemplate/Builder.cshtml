@@ -1,0 +1,373 @@
+@model SmartAuditX.Models.ViewModels.AuditModule.AuditTemplateViewModel
+
+@{
+    ViewData["Title"] = "Template Builder";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1>Template Builder</h1>
+            <p class="page-subtitle">@Model.Title - Version @Model.Version</p>
+        </div>
+        <div class="page-actions">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Templates
+            </a>
+            <a asp-action="Edit" asp-route-id="@Model.AuditTemplateId" class="btn btn-secondary">
+                <i class="bi bi-pencil"></i> Edit Details
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="builder-container">
+    <!-- Template Info Bar -->
+    <div class="builder-info-bar">
+        <div class="builder-info">
+            <span class="info-label">Status:</span>
+            @if (Model.IsPublished)
+            {
+                <span class="table-badge table-badge-success">Published</span>
+            } 
+            else 
+            { 
+                <span class="table-badge table-badge-neutral">Draft</span>
+            }
+        </div>
+        <div class="builder-info">
+            <span class="info-label">Scoring:</span>
+            <span class="info-value">@(Model.IsScoringEnabled ? "Enabled" : "Disabled")</span>
+        </div>
+        <div class="builder-actions">
+            @if (!Model.IsPublished)
+            {
+                <button type="button" class="btn btn-success btn-sm" onclick="publishTemplate(@Model.AuditTemplateId)">
+                    <i class="bi bi-check-circle"></i> Publish
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-secondary btn-sm" onclick="unpublishTemplate(@Model.AuditTemplateId)">
+                    <i class="bi bi-x-circle"></i> Unpublish
+                </button>
+            }
+        </div>
+    </div>
+
+    <!-- Builder Layout -->
+    <div class="builder-layout">
+        <!-- Left Panel: Sections -->
+        <div class="builder-sections-panel">
+            <div class="panel-header">
+                <h3>Sections</h3>
+                <button type="button" class="btn btn-primary btn-sm" onclick="openAddSectionModal()">
+                    <i class="bi bi-plus-lg"></i> Add Section
+                </button>
+            </div>
+            <div class="panel-content">
+                <div id="sections-container" class="sections-list">
+                    @if (Model.Sections != null && Model.Sections.Any())
+                    {
+                        @foreach (var section in Model.Sections.OrderBy(s => s.SortOrder))
+                        {
+                            <div class="section-item" data-section-id="@(section.Id)" data-section-order="@(section.SortOrder)">
+                                <div class="section-header" onclick="selectSection(@(section.Id))">
+                                    <div class="section-title">
+                                        <i class="bi bi-folder"></i>
+                                        <span>@(section.Title)</span>
+                                    </div>
+                                    <div class="section-actions">
+                                        <button type="button" class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); editSection(@(section.Id))" title="Edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); deleteSection(@(section.Id))" title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="section-fields-count">
+                                    @(section.Fields?.Count ?? 0) fields
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="empty-state">
+                            <i class="bi bi-folder-plus"></i>
+                            <p>No sections yet</p>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="openAddSectionModal()">
+                                Add First Section
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Panel: Fields -->
+        <div class="builder-fields-panel">
+            <div class="panel-header">
+                <h3>Fields</h3>
+                <button type="button" class="btn btn-primary btn-sm" id="add-field-btn" onclick="openAddFieldModal()" disabled>
+                    <i class="bi bi-plus-lg"></i> Add Field
+                </button>
+            </div>
+            <div class="panel-content">
+                <div id="fields-container" class="fields-list">
+                    <div class="empty-state">
+                        <i class="bi bi-list-ul"></i>
+                        <p>Select a section to view fields</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Field Settings -->
+        <div class="builder-settings-panel">
+            <div class="panel-header">
+                <h3>Field Settings</h3>
+            </div>
+            <div class="panel-content">
+                <div id="settings-container" class="settings-content">
+                    <div class="empty-state">
+                        <i class="bi bi-gear"></i>
+                        <p>Select a field to edit settings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Section Modal -->
+<div class="modal fade" id="addSectionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Section</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSectionForm">
+                    <div class="form-group">
+                        <label for="sectionTitle" class="form-label form-label-required">Section Title</label>
+                        <input type="text" id="sectionTitle" class="form-control" placeholder="Enter section title" required />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="addSection()">Add Section</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Section Modal -->
+<div class="modal fade" id="editSectionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Section</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editSectionForm">
+                    <input type="hidden" id="editSectionId" />
+                    <div class="form-group">
+                        <label for="editSectionTitle" class="form-label form-label-required">Section Title</label>
+                        <input type="text" id="editSectionTitle" class="form-control" placeholder="Enter section title" required />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="updateSection()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Field Modal -->
+<div class="modal fade" id="addFieldModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Field</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addFieldForm">
+                    <div class="form-group">
+                        <label for="fieldQuestionText" class="form-label form-label-required">Question Text</label>
+                        <input type="text" id="fieldQuestionText" class="form-control" placeholder="Enter question text" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldItemType" class="form-label form-label-required">Field Type</label>
+                        <select id="fieldItemType" class="form-control" required onchange="toggleOptionsField()">
+                            <option value="">Select field type</option>
+                            <option value="1">Yes/No (Boolean)</option>
+                            <option value="2">Text</option>
+                            <option value="3">Number</option>
+                            <option value="4">Photo</option>
+                            <option value="5">Barcode Scanner</option>
+                            <option value="6">Dropdown (Selection)</option>
+                            <option value="7">Rating (Scale)</option>
+                            <option value="8">Date</option>
+                            <option value="9">Signature</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <input type="checkbox" id="fieldIsRequired" />
+                            Required field
+                        </label>
+                    </div>
+                    <div class="form-group" id="weightageGroup">
+                        <label for="fieldWeightage" class="form-label">Weightage</label>
+                        <input type="number" id="fieldWeightage" class="form-control" value="1.00" step="0.01" min="0" />
+                        <p class="form-hint">Weight for scoring calculation (if scoring is enabled)</p>
+                    </div>
+                    <div class="form-group" id="optionsGroup" style="display: none;">
+                        <label class="form-label">Options</label>
+                        <div id="optionsContainer">
+                            <div class="option-item">
+                                <input type="text" class="form-control option-input" placeholder="Option 1" />
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="addOptionInput()">
+                            <i class="bi bi-plus"></i> Add Option
+                        </button>
+                    </div>
+                    <div class="form-group" id="ratingRangeGroup" style="display: none;">
+                        <label class="form-label">Rating Range</label>
+                        <div style="display: flex; gap: 12px;">
+                            <div style="flex: 1;">
+                                <label for="fieldMinValue" class="form-label">Min Value</label>
+                                <input type="number" id="fieldMinValue" class="form-control" value="1" min="0" />
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="fieldMaxValue" class="form-label">Max Value</label>
+                                <input type="number" id="fieldMaxValue" class="form-control" value="5" min="1" />
+                            </div>
+                        </div>
+                        <p class="form-hint">Scale range for rating (e.g., 1-5 or 1-10)</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="addField()">Add Field</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Field Modal -->
+<div class="modal fade" id="editFieldModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Field</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editFieldForm">
+                    <input type="hidden" id="editFieldId" />
+                    <div class="form-group">
+                        <label for="editFieldQuestionText" class="form-label form-label-required">Question Text</label>
+                        <input type="text" id="editFieldQuestionText" class="form-control" placeholder="Enter question text" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="editFieldItemType" class="form-label form-label-required">Field Type</label>
+                        <select id="editFieldItemType" class="form-control" required onchange="toggleEditOptionsField()">
+                            <option value="">Select field type</option>
+                            <option value="1">Yes/No (Boolean)</option>
+                            <option value="2">Text</option>
+                            <option value="3">Number</option>
+                            <option value="4">Photo</option>
+                            <option value="5">Barcode Scanner</option>
+                            <option value="6">Dropdown (Selection)</option>
+                            <option value="7">Rating (Scale)</option>
+                            <option value="8">Date</option>
+                            <option value="9">Signature</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <input type="checkbox" id="editFieldIsRequired" />
+                            Required field
+                        </label>
+                    </div>
+                    <div class="form-group" id="editWeightageGroup">
+                        <label for="editFieldWeightage" class="form-label">Weightage</label>
+                        <input type="number" id="editFieldWeightage" class="form-control" value="1.00" step="0.01" min="0" />
+                        <p class="form-hint">Weight for scoring calculation (if scoring is enabled)</p>
+                    </div>
+                    <div class="form-group" id="editOptionsGroup" style="display: none;">
+                        <label class="form-label">Options</label>
+                        <div id="editOptionsContainer"></div>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="addEditOptionInput()">
+                            <i class="bi bi-plus"></i> Add Option
+                        </button>
+                    </div>
+                    <div class="form-group" id="editRatingRangeGroup" style="display: none;">
+                        <label class="form-label">Rating Range</label>
+                        <div style="display: flex; gap: 12px;">
+                            <div style="flex: 1;">
+                                <label for="editFieldMinValue" class="form-label">Min Value</label>
+                                <input type="number" id="editFieldMinValue" class="form-control" value="1" min="0" />
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="editFieldMaxValue" class="form-label">Max Value</label>
+                                <input type="number" id="editFieldMaxValue" class="form-control" value="5" min="1" />
+                            </div>
+                        </div>
+                        <p class="form-hint">Scale range for rating (e.g., 1-5 or 1-10)</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="updateField()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/AuditTemplate/audit-template-builder.js"></script>
+    <script>
+        const templateId = @Model.AuditTemplateId;
+        const isScoringEnabled = @Model.IsScoringEnabled.ToString().ToLower();
+        
+        // Store section fields data for dynamic loading
+        const sectionsData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Sections?.Select(s => new {
+            id = s.Id,
+            title = s.Title,
+            sortOrder = s.SortOrder,
+            fields = s.Fields?.Select(f => new {
+                id = f.Id,
+                questionText = f.QuestionText,
+                itemType = f.ItemType,
+                isRequired = f.IsRequired,
+                weightage = f.Weightage,
+                options = f.Options?.Select(o => new {
+                    id = o.Id,
+                    text = o.Text,
+                    value = o.Value,
+                    sortOrder = o.SortOrder
+                }).ToList()
+            }).ToList()
+        }).ToList()));
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

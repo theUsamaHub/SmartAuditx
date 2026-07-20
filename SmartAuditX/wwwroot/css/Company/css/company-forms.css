@@ -250,7 +250,7 @@ select.form-control {
   padding: var(--spacing-sm) var(--spacing-lg);
   border: 1px solid transparent;
   border-radius: var(--rounded-md);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   font-family: var(--font-family);
   line-height: 1.5;

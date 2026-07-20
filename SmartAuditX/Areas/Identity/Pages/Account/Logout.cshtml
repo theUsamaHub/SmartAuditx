@@ -4,18 +4,66 @@
     ViewData["Title"] = "Log out";
 }
 
-<header>
-    <h1>@ViewData["Title"]</h1>
-    @{
-        if (User.Identity?.IsAuthenticated ?? false)
-        {
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
-            </form>
+<link rel="stylesheet" href="~/css/Public/logout.css" asp-append-version="true">
+
+
+<div class="logout-page">
+    <div class="logout-card">
+        @{
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <!-- Logged In - Show Logout Confirmation -->
+                <div class="logout-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                </div>
+
+                <h1 class="logout-title">Sign Out</h1>
+                <p class="logout-subtitle">
+                    Are you sure you want to sign out of your account?
+                </p>
+
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/User/Index", new { area = "" })" method="post">
+                    <button type="submit" class="logout-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                        </svg>
+                        Sign Out
+                    </button>
+                </form>
+
+                <a href="javascript:history.go(-1)" class="logout-secondary">Cancel, return to previous page</a>
+                <div class="logout-footer">
+                    <span>You'll be redirected to the home page after signing out.</span>
+                </div>
+            }
+            else
+            {
+                <!-- Logged Out State -->
+                <div class="logout-success">
+                    <div class="checkmark-big">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+
+                    <h2 class="logout-success-title">You've Been Signed Out</h2>
+                    <p class="logout-success-subtitle">
+                        You have successfully logged out of the application.
+                    </p>
+
+                    <div class="logout-redirect">
+                        Redirecting to <a href="@Url.Page("/User/Index")">home page</a>...
+                    </div>
+
+                    <div class="logout-footer" style="margin-top: var(--spacing-xl);">
+                        <a href="@Url.Page("/Account/Login")" class="logout-secondary" style="margin-top: 0;">
+                            Sign back in
+                        </a>
+                    </div>
+                </div>
+            }
         }
-        else
-        {
-            <p>You have successfully logged out of the application.</p>
-        }
-    }
-</header>
+    </div>
+</div>

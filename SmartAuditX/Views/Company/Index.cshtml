@@ -1,7 +1,198 @@
-﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Company Dashboard";
     Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
 }
 
-<h1>Hello Company</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+    <style>
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        .stat-card {
+            background: var(--company-surface);
+            border: 1px solid var(--company-border);
+            border-radius: var(--rounded-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--rounded-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 20px;
+        }
+        .stat-icon.blue { background: rgba(13, 110, 253, 0.1); color: #0d6efd; }
+        .stat-icon.green { background: rgba(25, 135, 84, 0.1); color: #198754; }
+        .stat-icon.orange { background: rgba(253, 126, 20, 0.1); color: #fd7e14; }
+        .stat-icon.purple { background: rgba(111, 66, 193, 0.1); color: #6f42c1; }
+        .stat-icon.teal { background: rgba(13, 202, 240, 0.1); color: #0dcaf0; }
+        .stat-icon.pink { background: rgba(214, 51, 132, 0.1); color: #d63384; }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--company-text);
+            margin-bottom: var(--spacing-xs);
+        }
+        .stat-label {
+            font-size: 14px;
+            color: var(--company-muted);
+            font-weight: 500;
+        }
+        .welcome-section h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        .welcome-section p {
+            color: var(--company-muted);
+            font-size: 14px;
+        }
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+        .quick-link-card {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+            background: var(--company-surface);
+            border: 1px solid var(--company-border);
+            border-radius: var(--rounded-lg);
+            text-decoration: none;
+            color: var(--company-text);
+            transition: all 0.2s ease;
+        }
+        .quick-link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: var(--color-brand-green);
+        }
+        .quick-link-card i {
+            font-size: 24px;
+            color: var(--color-brand-green);
+        }
+        .quick-link-card .link-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .quick-link-card .link-desc {
+            font-size: 12px;
+            color: var(--company-muted);
+        }
+    </style>
+}
+
+<div class="welcome-section">
+    <h1>Welcome to Your Company Dashboard</h1>
+    <p>Overview of your organization's audit and compliance status.</p>
+</div>
+
+<!-- Stats Grid -->
+<div class="stats-grid" id="statsContainer">
+    <div class="stat-card">
+        <div class="stat-icon blue"><i class="bi bi-people"></i></div>
+        <div class="stat-value" id="statEmployees">-</div>
+        <div class="stat-label">Total Employees</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green"><i class="bi bi-building"></i></div>
+        <div class="stat-value" id="statBranches">-</div>
+        <div class="stat-label">Branches</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon orange"><i class="bi bi-diagram-3"></i></div>
+        <div class="stat-value" id="statDepartments">-</div>
+        <div class="stat-label">Departments</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon purple"><i class="bi bi-clipboard-check"></i></div>
+        <div class="stat-value" id="statTemplates">-</div>
+        <div class="stat-label">Templates</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon teal"><i class="bi bi-clipboard-data"></i></div>
+        <div class="stat-value" id="statAudits">-</div>
+        <div class="stat-label">Total Audits</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green"><i class="bi bi-check-circle"></i></div>
+        <div class="stat-value" id="statCompleted">-</div>
+        <div class="stat-label">Completed Audits</div>
+    </div>
+</div>
+
+<!-- Quick Links -->
+<div class="content-card mb-4" style="padding: var(--spacing-xl);">
+    <h3 class="mb-3" style="font-size: 18px; font-weight: 600;">Quick Actions</h3>
+    <div class="quick-links">
+        <a href="/AuditTemplate" class="quick-link-card">
+            <i class="bi bi-clipboard-check"></i>
+            <div>
+                <div class="link-title">Audit Templates</div>
+                <div class="link-desc">Create and manage templates</div>
+            </div>
+        </a>
+        <a href="/Audit" class="quick-link-card">
+            <i class="bi bi-clipboard-data"></i>
+            <div>
+                <div class="link-title">Audits</div>
+                <div class="link-desc">Manage and track audits</div>
+            </div>
+        </a>
+        <a href="/Employee" class="quick-link-card">
+            <i class="bi bi-people"></i>
+            <div>
+                <div class="link-title">Employees</div>
+                <div class="link-desc">Manage your workforce</div>
+            </div>
+        </a>
+        <a href="/Branch" class="quick-link-card">
+            <i class="bi bi-building"></i>
+            <div>
+                <div class="link-title">Branches</div>
+                <div class="link-desc">Manage locations</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            loadStats();
+        });
+
+        async function loadStats() {
+            try {
+                const response = await fetch('/Company/GetStats');
+                const data = await response.json();
+                if (data.success) {
+                    const s = data.data;
+                    document.getElementById('statEmployees').textContent = s.totalEmployees;
+                    document.getElementById('statBranches').textContent = s.totalBranches;
+                    document.getElementById('statDepartments').textContent = s.totalDepartments;
+                    document.getElementById('statTemplates').textContent = s.totalTemplates;
+                    document.getElementById('statAudits').textContent = s.totalAudits;
+                    document.getElementById('statCompleted').textContent = s.completedAudits;
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+    </script>
+}

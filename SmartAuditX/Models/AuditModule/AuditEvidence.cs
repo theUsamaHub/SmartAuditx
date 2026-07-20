@@ -7,8 +7,9 @@ namespace SmartAuditX.Models
 {
     public class AuditEvidence : AuditableEntity
     {
-        [Required]
-        public Guid AuditResponseId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int AuditResponseId { get; set; }
 
         [ForeignKey("AuditResponseId")]
         public virtual AuditResponse? AuditResponse { get; set; }

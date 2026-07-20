@@ -7,6 +7,9 @@ namespace SmartAuditX.Models
 {
     public class AuditBarcodeMapping : AuditableEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         [Required]
         [MaxLength(100)]
         public string BarcodeValue { get; set; } = string.Empty;

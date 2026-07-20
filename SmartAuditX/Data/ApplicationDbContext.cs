@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using SmartAuditX.Models;
 using SmartAuditX.Models.BillingModule;
 using SmartAuditX.Models.CMS;
+using SmartAuditX.Models.AuditModule;
+using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 
 
 namespace SmartAuditX.Data
@@ -59,6 +61,23 @@ namespace SmartAuditX.Data
         public DbSet<PlatformModule> PlatformModules { get; set; }
         public DbSet<SecurityFeature> SecurityFeatures { get; set; }
 
+        // Audit Module
+
+        public DbSet<AuditTemplate> AuditTemplates { get; set; }
+        public DbSet<AuditTemplateItem> AuditTemplateItems { get; set; }
+
+        // Audit Template Builder (Hierarchical Model)
+        public DbSet<AuditTemplateSection> AuditTemplateSections { get; set; }
+        public DbSet<AuditTemplateField> AuditTemplateFields { get; set; }
+        public DbSet<AuditTemplateFieldOption> AuditTemplateFieldOptions { get; set; }
+
+
+        public DbSet<Audit> Audits { get; set; }
+        public DbSet<AuditResponse> AuditResponses { get; set; }
+
+        // Audit Inventory Module
+        public DbSet<AuditTemplateInventoryItem> AuditTemplateInventoryItems { get; set; }
+        public DbSet<AuditBarcodeScan> AuditBarcodeScans { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -1523,6 +1542,272 @@ namespace SmartAuditX.Data
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
+            // Audit Template Configuration
+            builder.Entity<AuditTemplate>(entity =>
+            {
+                entity.ToTable("AuditTemplates");
+
+                entity.HasKey(e => e.AuditTemplateId);
+
+                entity.Property(e => e.AuditTemplateId)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired();
+
+                entity.Property(e => e.IsPublished)
+                    .IsRequired();
+
+                entity.Property(e => e.Version)
+                    .IsRequired();
+
+                entity.Property(e => e.IsScoringEnabled)
+                    .IsRequired();
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.AuditTemplates)
+                    .HasForeignKey(d => d.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasQueryFilter(x => !x.IsDeleted);
+
+
+            });
+
+            builder.Entity<AuditTemplateItem>(entity =>
+            {
+                entity.ToTable("AuditTemplateItems");
+
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.AuditTemplateId)
+                    .IsRequired();
+
+                entity.Property(e => e.SectionName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.SortOrder)
+                    .IsRequired();
+
+                entity.Property(e => e.QuestionText)
+                    .IsRequired()
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.ItemType)
+                    .IsRequired();
+
+                entity.Property(e => e.IsRequired)
+                    .IsRequired();
+
+                entity.Property(e => e.Weightage)
+                    .HasColumnType("decimal(5,2)")
+                    .IsRequired();
+
+                entity.Property(e => e.ConfigurationJson)
+                    .HasMaxLength(2000);
+
+                entity.HasOne(d => d.AuditTemplate)
+                    .WithMany(p => p.Items)
+                    .HasForeignKey(d => d.AuditTemplateId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+   // Audit Template Builder (Hierarchical Model) Configuration
+            builder.Entity<AuditTemplateSection>(entity =>
+            {
+                entity.ToTable("AuditTemplateSections");
+
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.AuditTemplateId)
+                    .IsRequired();
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.SortOrder)
+                    .IsRequired();
+
+                entity.HasOne(d => d.AuditTemplate)
+                    .WithMany(p => p.Sections) // We'll need to add a Sections navigation property to AuditTemplate
+                    .HasForeignKey(d => d.AuditTemplateId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<AuditTemplateField>(entity =>
+            {
+                entity.ToTable("AuditTemplateFields");
+
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.AuditTemplateSectionId)
+                    .IsRequired();
+
+                entity.Property(e => e.QuestionText)
+                    .IsRequired()
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.ItemType)
+                    .IsRequired();
+
+                entity.Property(e => e.IsRequired)
+                    .IsRequired();
+
+                entity.Property(e => e.Weightage)
+                    .HasColumnType("decimal(5,2)")
+                    .IsRequired();
+
+                entity.HasOne(d => d.AuditTemplateSection)
+                    .WithMany(p => p.Fields) // We'll need to add a Fields navigation property to AuditTemplateSection
+                    .HasForeignKey(d => d.AuditTemplateSectionId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<AuditTemplateFieldOption>(entity =>
+            {
+                entity.ToTable("AuditTemplateFieldOptions");
+
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.AuditTemplateFieldId)
+                    .IsRequired();
+
+                entity.Property(e => e.Text)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.SortOrder)
+                    .IsRequired();
+
+                entity.Property(e => e.Value)
+                    .HasMaxLength(200);
+
+                entity.HasOne(d => d.AuditTemplateField)
+                    .WithMany(p => p.Options) // We'll need to add an Options navigation property to AuditTemplateField
+                    .HasForeignKey(d => d.AuditTemplateFieldId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // Audit Configuration
+            builder.Entity<Audit>(entity =>
+            {
+                entity.ToTable("Audits");
+
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AuditTemplateId)
+                    .IsRequired();
+
+                entity.Property(e => e.CompanyId)
+                    .IsRequired();
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Status)
+                    .IsRequired();
+
+                entity.Property(e => e.FinalScore)
+                    .HasColumnType("decimal(5,2)");
+
+                entity.HasOne(d => d.AuditTemplate)
+                    .WithMany(p => p.Audits)
+                    .HasForeignKey(d => d.AuditTemplateId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(d => d.Company)
+                    .WithMany()
+                    .HasForeignKey(d => d.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(d => d.Branch)
+                    .WithMany()
+                    .HasForeignKey(d => d.BranchId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // AuditResponse Configuration
+            builder.Entity<AuditResponse>(entity =>
+            {
+                entity.ToTable("AuditResponses");
+
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AuditId)
+                    .IsRequired();
+
+                entity.Property(e => e.AuditTemplateFieldId)
+                    .IsRequired();
+
+                entity.Property(e => e.FieldLabelSnapshot)
+                    .HasMaxLength(500)
+                    .IsRequired();
+
+                entity.Property(e => e.ResponseText)
+                    .HasMaxLength(2000);
+
+                entity.Property(e => e.Notes)
+                    .HasMaxLength(1000);
+
+                entity.HasOne(d => d.Audit)
+                    .WithMany(p => p.Responses)
+                    .HasForeignKey(d => d.AuditId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(d => d.AuditTemplateField)
+                    .WithMany()
+                    .HasForeignKey(d => d.AuditTemplateFieldId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(d => d.SelectedOption)
+                    .WithMany()
+                    .HasForeignKey(d => d.SelectedOptionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // AuditAssignment Configuration
+            builder.Entity<AuditAssignment>(entity =>
+            {
+                entity.ToTable("AuditAssignments");
+
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AuditId)
+                    .IsRequired();
+
+                entity.Property(e => e.AuditorId)
+                    .IsRequired();
+
+                entity.HasOne(d => d.Audit)
+                    .WithMany(p => p.Assignments)
+                    .HasForeignKey(d => d.AuditId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(d => d.Auditor)
+                    .WithMany()
+                    .HasForeignKey(d => d.AuditorId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
             //    builder.Entity<SubscriptionPlanChange>()
             //.HasOne(x => x.FromPricing)
             //.WithMany()
@@ -1627,9 +1912,34 @@ namespace SmartAuditX.Data
                     ConcurrencyStamp = "22222222-2222-2222-2222-222222222222"
                 }
             );
+
+            // =========================
+            // AUDIT INVENTORY MODULE
+            // =========================
+
+            builder.Entity<AuditTemplateInventoryItem>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne(e => e.AuditTemplate)
+                    .WithMany()
+                    .HasForeignKey(e => e.AuditTemplateId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasIndex(e => e.AuditTemplateId);
+                entity.HasIndex(e => e.BarcodeValue);
+            });
+
+            builder.Entity<AuditBarcodeScan>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne(e => e.Audit)
+                    .WithMany()
+                    .HasForeignKey(e => e.AuditId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasIndex(e => new { e.AuditId, e.BarcodeValue }).IsUnique();
+                entity.HasIndex(e => e.AuditId);
+            });
+
         }
-
-
 
     }
 }

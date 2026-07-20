@@ -121,3 +121,8 @@ body {
 .text-error { color: var(--admin-color-error); }
 .text-warning { color: var(--admin-color-warning); }
 .text-success { color: var(--admin-color-success); }
+
+
+.dropdown-toggle::after {
+    display: none !important;
+}

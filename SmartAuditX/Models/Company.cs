@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using SmartAuditX.Models.AuditModule;
 using SmartAuditX.Models.BillingModule;
 namespace SmartAuditX.Models
 {
@@ -379,5 +380,6 @@ namespace SmartAuditX.Models
         public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
         public virtual ICollection<ApplicationUser> Users { get; set; } = new List<ApplicationUser>();
         public virtual ICollection<CompanySubscription> Subscriptions { get; set; } = new List<CompanySubscription>();
+        public virtual ICollection<AuditTemplate> AuditTemplates { get; set; } = new List<AuditTemplate>();
     }
 }

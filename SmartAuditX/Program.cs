@@ -142,7 +142,15 @@ builder.Services.AddScoped<IEmployeeDocumentTypeService, EmployeeDocumentTypeSer
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeeDocumentService, EmployeeDocumentService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
-
+builder.Services.AddScoped<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSenderAdapter>();
+builder.Services.AddScoped<IAuditTemplateService, AuditTemplateService>();
+builder.Services.AddScoped<IAuditService, AuditService>();
+builder.Services.AddScoped<IAuditorService, AuditorService>();
+builder.Services.AddScoped<IAuditInventoryService, AuditInventoryService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IManagerService, ManagerService>();
+builder.Services.AddScoped<ICompanyDashboardService, CompanyDashboardService>();
 
 // CMS Services
 builder.Services.AddScoped<IFeatureService, FeatureService>();
@@ -177,7 +185,15 @@ using (var scope = app.Services.CreateScope())
         scope.ServiceProvider
              .GetRequiredService<ISeedService>();
 
-    await seedService.SeedSystemAdminAsync();
+    try
+    {
+        await seedService.SeedSystemAdminAsync();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Seed service error: {ex.Message}");
+        Console.WriteLine($"Stack trace: {ex.StackTrace}");
+    }
 }
 
 app.UseHttpsRedirection();

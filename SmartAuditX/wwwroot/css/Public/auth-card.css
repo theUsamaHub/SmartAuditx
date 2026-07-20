@@ -1,0 +1,486 @@
+/* ========================================
+   AUTH CARD - Shared style for Logout, ForgotPassword, ResetPassword
+   ======================================== */
+
+.auth-card-page {
+    min-height: calc(100vh - var(--company-navbar-height, 64px));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--company-bg, #fafafa);
+    padding: var(--spacing-xl, 24px);
+}
+
+.auth-card {
+    max-width: 480px;
+    width: 100%;
+    background: var(--company-surface, #ffffff);
+    border-radius: var(--rounded-lg, 12px);
+    padding: var(--spacing-xxl, 32px);
+    border: 1px solid var(--company-border, #e5e5e5);
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* ========================================
+   ICON
+   ======================================== */
+.auth-card-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 9999px;
+    background: var(--color-surface, #f7f7f7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg, 20px);
+    border: 1px solid var(--color-hairline, #e5e5e5);
+    flex-shrink: 0;
+}
+
+.auth-card-icon svg {
+    width: 36px;
+    height: 36px;
+    color: var(--color-brand-green, #00d4a4);
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+.auth-card-title {
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-ink, #0a0a0a);
+    margin-bottom: var(--spacing-sm, 12px);
+    letter-spacing: -0.5px;
+    word-break: break-word;
+}
+
+.auth-card-subtitle {
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.50;
+    color: var(--color-steel, #5a5a5c);
+    margin-bottom: var(--spacing-xxl, 32px);
+}
+
+.auth-card-message {
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.50;
+    color: var(--color-steel, #5a5a5c);
+    padding: var(--spacing-md, 16px) var(--spacing-lg, 20px);
+    background: var(--color-surface-soft, #fafafa);
+    border-radius: var(--rounded-md, 8px);
+    border: 1px solid var(--color-hairline-soft, #ededed);
+    margin-bottom: var(--spacing-xxl, 32px);
+    text-align: left;
+}
+
+.auth-card-message .checkmark {
+    display: inline-block;
+    margin-right: var(--spacing-xs, 8px);
+    color: var(--color-brand-green, #00d4a4);
+}
+
+/* ========================================
+   FORM FIELDS
+   ======================================== */
+.auth-card .form-group {
+    margin-bottom: var(--spacing-lg, 20px);
+    text-align: left;
+}
+
+.auth-card .form-label {
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink, #0a0a0a);
+    margin-bottom: var(--spacing-xxs, 4px);
+    display: block;
+}
+
+.auth-card .form-control {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 16px;
+    line-height: 1.50;
+    color: var(--color-ink, #0a0a0a);
+    background: var(--company-surface, #ffffff);
+    border: 1px solid var(--color-hairline, #e5e5e5);
+    border-radius: var(--rounded-md, 8px);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    min-height: 48px;
+}
+
+.auth-card .form-control:focus {
+    outline: none;
+    border-color: var(--color-brand-green, #00d4a4);
+    box-shadow: 0 0 0 3px rgba(0, 212, 164, 0.1);
+}
+
+.auth-card .form-control::placeholder {
+    color: var(--color-muted, #a8a8aa);
+}
+
+.auth-card .text-danger {
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 13px;
+    color: #d45656;
+    margin-top: var(--spacing-xxs, 4px);
+    display: block;
+}
+
+.auth-card .validation-summary-errors {
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 14px;
+    color: #d45656;
+    background: rgba(212, 86, 86, 0.08);
+    border: 1px solid rgba(212, 86, 86, 0.2);
+    border-radius: var(--rounded-md, 8px);
+    padding: var(--spacing-sm, 12px) var(--spacing-md, 16px);
+    margin-bottom: var(--spacing-lg, 20px);
+    text-align: left;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.auth-card-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm, 12px);
+    padding: 12px 32px;
+    background: var(--color-primary, #0a0a0a);
+    color: var(--color-on-primary, #ffffff);
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.30;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    width: 100%;
+    min-height: 48px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.auth-card-button:hover {
+    background: var(--color-charcoal, #1c1c1e);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+}
+
+.auth-card-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.auth-card-button:focus-visible {
+    outline: 2px solid var(--color-brand-green, #00d4a4);
+    outline-offset: 2px;
+}
+
+.auth-card-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.auth-card-button svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.auth-card-secondary {
+    margin-top: var(--spacing-md, 16px);
+    display: inline-block;
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-steel, #5a5a5c);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: var(--spacing-xs, 8px) var(--spacing-sm, 12px);
+    border-radius: var(--rounded-sm, 6px);
+    min-height: 44px;
+    line-height: 44px;
+}
+
+.auth-card-secondary:hover {
+    color: var(--color-ink, #0a0a0a);
+    text-decoration: underline;
+}
+
+.auth-card-secondary:focus-visible {
+    outline: 2px solid var(--color-brand-green, #00d4a4);
+    outline-offset: 2px;
+}
+
+.auth-card-footer {
+    margin-top: var(--spacing-xxl, 32px);
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 13px;
+    color: var(--color-muted, #a8a8aa);
+    border-top: 1px solid var(--color-hairline-soft, #ededed);
+    padding-top: var(--spacing-lg, 20px);
+}
+
+/* ========================================
+   SUCCESS STATE
+   ======================================== */
+.auth-card-success {
+    text-align: center;
+}
+
+.auth-card-success .checkmark-big {
+    width: 80px;
+    height: 80px;
+    border-radius: 9999px;
+    background: var(--color-brand-green-soft, #7cebcb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-xl, 24px);
+    flex-shrink: 0;
+}
+
+.auth-card-success .checkmark-big svg {
+    width: 40px;
+    height: 40px;
+    color: var(--color-brand-green-deep, #00b48a);
+}
+
+.auth-card-success-title {
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.30;
+    color: var(--color-ink, #0a0a0a);
+    margin-bottom: var(--spacing-xs, 8px);
+    word-break: break-word;
+}
+
+.auth-card-success-subtitle {
+    font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.50;
+    color: var(--color-steel, #5a5a5c);
+    margin-bottom: var(--spacing-xl, 24px);
+}
+
+/* ========================================
+   SPINNER
+   ======================================== */
+.auth-card-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: auth-spin 0.6s linear infinite;
+}
+
+@keyframes auth-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 767px) {
+    .auth-card-page {
+        padding: var(--spacing-lg, 20px);
+        min-height: calc(100vh - var(--company-navbar-height, 64px) - 20px);
+    }
+
+    .auth-card {
+        max-width: 100%;
+        padding: var(--spacing-xl, 24px);
+        border-radius: var(--rounded-md, 8px);
+    }
+
+    .auth-card-title {
+        font-size: 24px;
+        letter-spacing: -0.3px;
+    }
+
+    .auth-card-subtitle {
+        font-size: 15px;
+        margin-bottom: var(--spacing-xl, 24px);
+    }
+
+    .auth-card-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: var(--spacing-md, 16px);
+    }
+
+    .auth-card-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .auth-card-button {
+        padding: 10px 24px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    .auth-card-secondary {
+        font-size: 13px;
+        min-height: 40px;
+        line-height: 40px;
+    }
+
+    .auth-card-footer {
+        font-size: 12px;
+        padding-top: var(--spacing-md, 16px);
+        margin-top: var(--spacing-xl, 24px);
+    }
+
+    .auth-card-success .checkmark-big {
+        width: 64px;
+        height: 64px;
+    }
+
+    .auth-card-success .checkmark-big svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .auth-card-success-title {
+        font-size: 22px;
+    }
+
+    .auth-card-success-subtitle {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 479px) {
+    .auth-card-page {
+        padding: var(--spacing-sm, 12px);
+    }
+
+    .auth-card {
+        padding: var(--spacing-lg, 20px);
+        border-radius: var(--rounded-sm, 6px);
+        box-shadow: none;
+        border: 1px solid var(--company-border, #e5e5e5);
+    }
+
+    .auth-card-title {
+        font-size: 20px;
+        letter-spacing: -0.2px;
+    }
+
+    .auth-card-subtitle {
+        font-size: 14px;
+        line-height: 1.40;
+        margin-bottom: var(--spacing-lg, 20px);
+    }
+
+    .auth-card-icon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: var(--spacing-md, 16px);
+    }
+
+    .auth-card-icon svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .auth-card-button {
+        padding: 10px 20px;
+        font-size: 13px;
+        min-height: 40px;
+    }
+
+    .auth-card-secondary {
+        font-size: 12px;
+        min-height: 36px;
+        line-height: 36px;
+        margin-top: var(--spacing-sm, 12px);
+    }
+
+    .auth-card-footer {
+        font-size: 11px;
+        padding-top: var(--spacing-sm, 12px);
+        margin-top: var(--spacing-lg, 20px);
+    }
+
+    .auth-card-success .checkmark-big {
+        width: 56px;
+        height: 56px;
+    }
+
+    .auth-card-success .checkmark-big svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .auth-card-success-title {
+        font-size: 18px;
+    }
+
+    .auth-card-success-subtitle {
+        font-size: 14px;
+        margin-bottom: var(--spacing-lg, 20px);
+    }
+}
+
+@media (max-width: 359px) {
+    .auth-card {
+        padding: var(--spacing-md, 16px);
+    }
+
+    .auth-card-title {
+        font-size: 18px;
+    }
+
+    .auth-card-subtitle {
+        font-size: 13px;
+    }
+
+    .auth-card-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .auth-card-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .auth-card-button {
+        font-size: 12px;
+        padding: 8px 16px;
+        min-height: 36px;
+    }
+
+    .auth-card-secondary {
+        font-size: 11px;
+        min-height: 32px;
+        line-height: 32px;
+    }
+
+    .auth-card-footer {
+        font-size: 10px;
+    }
+}

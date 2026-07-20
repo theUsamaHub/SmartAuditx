@@ -361,6 +361,578 @@ namespace SmartAuditX.Migrations
                     b.ToTable("UserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("SmartAuditX.Models.AuditEvidence", b =>
+                {
+                    b.Property<int>("AuditResponseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("AuditResponseId");
+
+                    b.ToTable("AuditEvidence");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.Audit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset?>("ActualEndDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("ActualStartDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("AssignedToUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AuditTemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("FinalScore")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("ReviewNotes")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<DateTimeOffset?>("ReviewedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("ReviewedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("ScheduledEndDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("ScheduledStartDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemplateVersionSnapshot")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignedToUserId");
+
+                    b.HasIndex("AuditTemplateId");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("ReviewedByUserId");
+
+                    b.ToTable("Audits", (string)null);
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditAssignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("AssignedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("AuditId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AuditorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditId");
+
+                    b.HasIndex("AuditorId");
+
+                    b.ToTable("AuditAssignments", (string)null);
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditBarcodeScan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("ActualQuantity")
+                        .HasColumnType("decimal(10,4)");
+
+                    b.Property<int>("AuditId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AuditResponseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BarcodeValue")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("DiscrepancyQuantity")
+                        .HasColumnType("decimal(10,4)");
+
+                    b.Property<decimal?>("ExpectedQuantity")
+                        .HasColumnType("decimal(10,4)");
+
+                    b.Property<DateTime>("FirstScannedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ItemNameSnapshot")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("LastScannedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LocationSnapshot")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("SKUSnapshot")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("ScanCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Unit")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditId");
+
+                    b.HasIndex("AuditResponseId");
+
+                    b.HasIndex("AuditId", "BarcodeValue")
+                        .IsUnique();
+
+                    b.ToTable("AuditBarcodeScans");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditResponse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuditId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AuditTemplateFieldId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FieldLabelSnapshot")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("FieldTypeSnapshot")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsSkipped")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<bool?>("ResponseBoolean")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ResponseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("ResponseNumber")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<string>("ResponseText")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<decimal?>("Score")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int?>("SelectedOptionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditId");
+
+                    b.HasIndex("AuditTemplateFieldId");
+
+                    b.HasIndex("SelectedOptionId");
+
+                    b.ToTable("AuditResponses", (string)null);
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplate", b =>
+                {
+                    b.Property<int>("AuditTemplateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuditTemplateId"));
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsScoringEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.HasKey("AuditTemplateId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("AuditTemplates", (string)null);
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateField", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("AllowNotes")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("AuditTemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AuditTemplateSectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HelpText")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<bool>("IsRequired")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ItemType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("MaxValue")
+                        .HasColumnType("decimal(10,4)");
+
+                    b.Property<int?>("MinPhotoCount")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("MinValue")
+                        .HasColumnType("decimal(10,4)");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Weightage")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditTemplateSectionId");
+
+                    b.ToTable("AuditTemplateFields", (string)null);
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateFieldOption", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuditTemplateFieldId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Value")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditTemplateFieldId");
+
+                    b.ToTable("AuditTemplateFieldOptions", (string)null);
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateInventoryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuditTemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BarcodeValue")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Category")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("ExpectedQuantity")
+                        .HasColumnType("decimal(10,4)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("SKU")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Unit")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditTemplateId");
+
+                    b.HasIndex("BarcodeValue");
+
+                    b.ToTable("AuditTemplateInventoryItems");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuditTemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConfigurationJson")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRequired")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ItemType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("SectionName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Weightage")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditTemplateId");
+
+                    b.ToTable("AuditTemplateItems", (string)null);
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateSection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuditTemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditTemplateId");
+
+                    b.ToTable("AuditTemplateSections", (string)null);
+                });
+
             modelBuilder.Entity("SmartAuditX.Models.BillingModule.CompanyCredit", b =>
                 {
                     b.Property<int>("CompanyCreditId")
@@ -2425,6 +2997,183 @@ namespace SmartAuditX.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SmartAuditX.Models.AuditEvidence", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditResponse", "AuditResponse")
+                        .WithMany("Evidences")
+                        .HasForeignKey("AuditResponseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuditResponse");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.Audit", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.ApplicationUser", "AssignedToUser")
+                        .WithMany()
+                        .HasForeignKey("AssignedToUserId");
+
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditTemplate", "AuditTemplate")
+                        .WithMany("Audits")
+                        .HasForeignKey("AuditTemplateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartAuditX.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartAuditX.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartAuditX.Models.ApplicationUser", "ReviewedByUser")
+                        .WithMany()
+                        .HasForeignKey("ReviewedByUserId");
+
+                    b.Navigation("AssignedToUser");
+
+                    b.Navigation("AuditTemplate");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("ReviewedByUser");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditAssignment", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.Audit", "Audit")
+                        .WithMany("Assignments")
+                        .HasForeignKey("AuditId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartAuditX.Models.ApplicationUser", "Auditor")
+                        .WithMany()
+                        .HasForeignKey("AuditorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Audit");
+
+                    b.Navigation("Auditor");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditBarcodeScan", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.Audit", "Audit")
+                        .WithMany()
+                        .HasForeignKey("AuditId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditResponse", "AuditResponse")
+                        .WithMany()
+                        .HasForeignKey("AuditResponseId");
+
+                    b.Navigation("Audit");
+
+                    b.Navigation("AuditResponse");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditResponse", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.Audit", "Audit")
+                        .WithMany("Responses")
+                        .HasForeignKey("AuditId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditTemplateField", "AuditTemplateField")
+                        .WithMany()
+                        .HasForeignKey("AuditTemplateFieldId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditTemplateFieldOption", "SelectedOption")
+                        .WithMany()
+                        .HasForeignKey("SelectedOptionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Audit");
+
+                    b.Navigation("AuditTemplateField");
+
+                    b.Navigation("SelectedOption");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplate", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.Company", "Company")
+                        .WithMany("AuditTemplates")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateField", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditTemplateSection", "AuditTemplateSection")
+                        .WithMany("Fields")
+                        .HasForeignKey("AuditTemplateSectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuditTemplateSection");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateFieldOption", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditTemplateField", "AuditTemplateField")
+                        .WithMany("Options")
+                        .HasForeignKey("AuditTemplateFieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuditTemplateField");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateInventoryItem", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditTemplate", "AuditTemplate")
+                        .WithMany()
+                        .HasForeignKey("AuditTemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuditTemplate");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateItem", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditTemplate", "AuditTemplate")
+                        .WithMany("Items")
+                        .HasForeignKey("AuditTemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuditTemplate");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateSection", b =>
+                {
+                    b.HasOne("SmartAuditX.Models.AuditModule.AuditTemplate", "AuditTemplate")
+                        .WithMany("Sections")
+                        .HasForeignKey("AuditTemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuditTemplate");
+                });
+
             modelBuilder.Entity("SmartAuditX.Models.BillingModule.CompanyCredit", b =>
                 {
                     b.HasOne("SmartAuditX.Models.Company", "Company")
@@ -2778,6 +3527,37 @@ namespace SmartAuditX.Migrations
                     b.Navigation("UserRoles");
                 });
 
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.Audit", b =>
+                {
+                    b.Navigation("Assignments");
+
+                    b.Navigation("Responses");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditResponse", b =>
+                {
+                    b.Navigation("Evidences");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplate", b =>
+                {
+                    b.Navigation("Audits");
+
+                    b.Navigation("Items");
+
+                    b.Navigation("Sections");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateField", b =>
+                {
+                    b.Navigation("Options");
+                });
+
+            modelBuilder.Entity("SmartAuditX.Models.AuditModule.AuditTemplateSection", b =>
+                {
+                    b.Navigation("Fields");
+                });
+
             modelBuilder.Entity("SmartAuditX.Models.BillingModule.CompanySubscription", b =>
                 {
                     b.Navigation("DunningSchedules");
@@ -2822,6 +3602,8 @@ namespace SmartAuditX.Migrations
 
             modelBuilder.Entity("SmartAuditX.Models.Company", b =>
                 {
+                    b.Navigation("AuditTemplates");
+
                     b.Navigation("Branches");
 
                     b.Navigation("CompanyContacts");

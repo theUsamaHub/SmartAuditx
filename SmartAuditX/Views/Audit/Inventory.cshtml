@@ -1,0 +1,230 @@
+@{
+    ViewData["Title"] = "Inventory Management";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1>Inventory Management</h1>
+            <p class="page-subtitle">Manage inventory items for template: @ViewBag.TemplateTitle</p>
+        </div>
+        <div class="page-actions">
+            <a href="/Audit" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Audits
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Upload Section -->
+<div class="content-card mb-4" style="padding: var(--spacing-xl);">
+    <h3 class="form-section-title">Upload Inventory</h3>
+    <p class="text-muted mb-3">Upload an Excel file (.xlsx, .xls, or .csv) with columns: Barcode, ItemName, Quantity, Location (optional), SKU (optional), Category (optional), Unit (optional)</p>
+    
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="hidden" name="templateId" value="@ViewBag.TemplateId" />
+        <div class="row g-3 align-items-end">
+            <div class="col-md-6">
+                <input type="file" class="form-control" id="inventoryFile" accept=".xlsx,.xls,.csv" />
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary" id="uploadBtn">
+                    <i class="bi bi-upload"></i> Upload
+                </button>
+            </div>
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-danger" onclick="clearInventory()">
+                    <i class="bi bi-trash"></i> Clear All
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Inventory Table -->
+<div class="content-card">
+    <div class="px-3 px-md-4 pt-3 pt-md-4 pb-0">
+        <h2 class="h5 mb-1">Inventory Items</h2>
+        <p class="text-muted mb-0">Total items: <span id="itemCount">0</span></p>
+    </div>
+    <div class="table-responsive px-3 px-md-4 pb-3 pb-md-4 pt-3">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Barcode</th>
+                    <th>Item Name</th>
+                    <th>Expected Qty</th>
+                    <th>Unit</th>
+                    <th>Location</th>
+                    <th>SKU</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="inventoryTableBody">
+                <tr>
+                    <td colspan="8" class="text-center">Loading inventory...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const templateId = @ViewBag.TemplateId;
+
+        $(document).ready(function() {
+            loadInventory();
+            $('#uploadForm').on('submit', uploadFile);
+        });
+
+        async function loadInventory() {
+            try {
+                const response = await fetch('/AuditInventory/List?templateId=' + templateId);
+                const data = await response.json();
+                if (data.success) {
+                    renderTable(data.data);
+                }
+            } catch (error) {
+                console.error('Error loading inventory:', error);
+            }
+        }
+
+        function renderTable(items) {
+            const tbody = document.getElementById('inventoryTableBody');
+            document.getElementById('itemCount').textContent = items.length;
+
+            if (!items || items.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No inventory items uploaded yet</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = items.map(item => `
+                <tr>
+                    <td><code>${escapeHtml(item.barcodeValue)}</code></td>
+                    <td><strong>${escapeHtml(item.itemName)}</strong></td>
+                    <td>${item.expectedQuantity}</td>
+                    <td>${escapeHtml(item.unit || '-')}</td>
+                    <td>${escapeHtml(item.location || '-')}</td>
+                    <td>${escapeHtml(item.sku || '-')}</td>
+                    <td>${escapeHtml(item.category || '-')}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteItem(${item.id})">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function uploadFile(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('inventoryFile');
+            if (!fileInput.files[0]) {
+                Swal.fire('Error', 'Please select a file.', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('templateId', templateId);
+
+            const btn = document.getElementById('uploadBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Uploading...';
+
+            try {
+                const response = await fetch('/AuditInventory/Upload?templateId=' + templateId, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    Swal.fire('Success', data.message, 'success');
+                    fileInput.value = '';
+                    loadInventory();
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            } catch (error) {
+                Swal.fire('Error', 'Upload failed.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-upload"></i> Upload';
+            }
+        }
+
+        async function deleteItem(itemId) {
+            const result = await Swal.fire({
+                title: 'Delete Item',
+                text: 'Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d45656',
+                confirmButtonText: 'Delete'
+            });
+
+            if (result.isConfirmed) {
+                const formData = new FormData();
+                formData.append('templateId', templateId);
+                formData.append('itemId', itemId);
+
+                const response = await fetch('/AuditInventory/DeleteItem?templateId=' + templateId + '&itemId=' + itemId, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    loadInventory();
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            }
+        }
+
+        async function clearInventory() {
+            const result = await Swal.fire({
+                title: 'Clear All Inventory',
+                text: 'This will remove all inventory items. Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d45656',
+                confirmButtonText: 'Clear All'
+            });
+
+            if (result.isConfirmed) {
+                const formData = new FormData();
+                formData.append('templateId', templateId);
+
+                const response = await fetch('/AuditInventory/Clear?templateId=' + templateId, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    Swal.fire('Success', data.message, 'success');
+                    loadInventory();
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+}

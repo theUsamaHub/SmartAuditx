@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartAuditX.Models;
 using System.Diagnostics;
 
 namespace SmartAuditX.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

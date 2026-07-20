@@ -1,0 +1,60 @@
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SmartAuditX - Auditor Dashboard">
+    <title>@ViewData["Title"] | SmartAuditX</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="~/css/Company/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/Company/vendors/bootstrap-icons/bootstrap-icons.css">
+    
+    <!-- Modern Company Design System -->
+    <link rel="stylesheet" href="~/css/Company/css/company-layout.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-sidebar.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-navbar.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-footer.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-dashboard.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-forms.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-tables.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-components.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-compat.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Company/css/company-responsive.css" asp-append-version="true">
+    
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+
+<body> 
+    <div class="company-shell">
+        <partial name="_AuditorSidebar" />
+
+        <div class="company-main">
+            <partial name="_TopNavbar" />
+
+            <main class="company-content">
+                <div class="company-container">
+                    @RenderBody()
+                </div>
+            </main>
+            
+            <partial name="_Footer" />
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/Company/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Company/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

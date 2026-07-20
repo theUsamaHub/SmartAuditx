@@ -5,10 +5,14 @@
   var employeeModal;
   var detailsModal;
   var deleteModal;
+  var createSystemUserModal;
   var editingEmployeeId = null;
   var pendingDeleteId = null;
   var viewingEmployeeId = null;
+  var creatingSystemUserForEmployeeId = null;
   var searchTimer;
+  var systemPhoneInputInstance;
+  var systemUserPhoneInputInstance;
 
   function onReady(callback) {
     if (document.readyState === "loading") {
@@ -18,8 +22,9 @@
     callback();
   }
 
-  function getAntiForgeryToken() {
-    var tokenInput = document.querySelector("#employeeForm input[name='__RequestVerificationToken']");
+  function getAntiForgeryToken(formId) {
+    var selector = formId ? "#" + formId + " input[name='__RequestVerificationToken']" : "input[name='__RequestVerificationToken']";
+    var tokenInput = document.querySelector(selector);
     return tokenInput ? tokenInput.value : "";
   }
 
@@ -64,6 +69,48 @@
       alert.classList.add("d-none");
       alert.textContent = "";
     }
+  }
+
+  function initSystemPhoneInput() {
+    var phoneField = document.getElementById("SystemPhoneNumberInput");
+    if (!phoneField || !window.intlTelInput) {
+      return;
+    }
+
+    if (systemPhoneInputInstance) {
+      systemPhoneInputInstance.destroy();
+    }
+
+    systemPhoneInputInstance = window.intlTelInput(phoneField, {
+      initialCountry: "pk",
+      preferredCountries: ["pk", "ae", "sa", "us", "gb"],
+      separateDialCode: true,
+      strictMode: true,
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"
+    });
+  }
+
+  function syncSystemPhoneFields() {
+    var phoneField = document.getElementById("SystemPhoneNumberInput");
+    var dialCodeInput = document.getElementById("SystemPhoneDialCode");
+    var phoneNumberInput = document.getElementById("SystemPhoneNumber");
+
+    if (!systemPhoneInputInstance || !dialCodeInput || !phoneNumberInput || !phoneField) {
+      return false;
+    }
+
+    var countryData = systemPhoneInputInstance.getSelectedCountryData();
+    var digits = phoneField.value.replace(/\D/g, "");
+
+    if (!digits) {
+      phoneField.classList.add("is-invalid");
+      return false;
+    }
+
+    dialCodeInput.value = "+" + countryData.dialCode;
+    phoneNumberInput.value = systemPhoneInputInstance.getNumber();
+    phoneField.classList.remove("is-invalid");
+    return true;
   }
 
   function getFilterValues() {
@@ -134,6 +181,7 @@
           '<div class="employee-actions">' +
             '<button type="button" class="btn btn-sm btn-outline-info btn-view-employee" data-id="' + emp.employeeId + '" title="View"><i class="bi bi-eye"></i></button>' +
             '<button type="button" class="btn btn-sm btn-outline-primary btn-edit-employee" data-id="' + emp.employeeId + '" title="Edit"><i class="bi bi-pencil"></i></button>' +
+            (emp.isSystemUser ? '<button type="button" class="btn btn-sm btn-outline-warning btn-remove-system-user" data-id="' + emp.employeeId + '" data-name="' + fullName + '" title="Remove System User"><i class="bi bi-person-dash"></i></button>' : '') +
             '<button type="button" class="btn btn-sm btn-outline-secondary btn-toggle-active" data-id="' + emp.employeeId + '" title="' + (emp.isActive ? "Deactivate" : "Activate") + '">' +
               (emp.isActive ? '<i class="bi bi-pause-circle"></i>' : '<i class="bi bi-play-circle"></i>') +
             '</button>' +
@@ -183,17 +231,21 @@
 
     document.getElementById("EmployeeId").value = "";
     document.getElementById("IsActive").checked = true;
-    document.getElementById("IsSystemUser").checked = false;
-    document.getElementById("identityFields").classList.add("d-none");
     document.getElementById("employeeModalLabel").textContent = "Add Employee";
     document.getElementById("employeeFormSubmit").textContent = "Save Employee";
 
     editingEmployeeId = null;
+
+    // Reset phone input
+    if (systemPhoneInputInstance) {
+      systemPhoneInputInstance.setCountry("pk");
+    }
   }
 
   function openCreateModal() {
     resetEmployeeForm();
     loadDropdowns();
+    initSystemPhoneInput();
     employeeModal.show();
   }
 
@@ -206,22 +258,16 @@
     document.getElementById("DateOfBirth").value = emp.dateOfBirth ? emp.dateOfBirth.split('T')[0] : "";
     document.getElementById("CNICOrNationalId").value = emp.cnicOrNationalId || "";
     document.getElementById("PersonalEmail").value = emp.personalEmail || "";
-    document.getElementById("PersonalPhone").value = emp.personalPhone || "";
+    // Set phone field
+    var phoneInput = document.getElementById("SystemPhoneNumberInput");
+    if (phoneInput) {
+      phoneInput.value = emp.personalPhone || "";
+    }
     document.getElementById("BranchId").value = emp.branchId || "";
     document.getElementById("DepartmentId").value = emp.departmentId || "";
     document.getElementById("DesignationId").value = emp.designationId || "";
     document.getElementById("JoiningDate").value = emp.joiningDate ? emp.joiningDate.split('T')[0] : "";
-    document.getElementById("IsSystemUser").checked = !!emp.isSystemUser;
     document.getElementById("IsActive").checked = !!emp.isActive;
-    document.getElementById("SystemEmail").value = emp.systemEmail || "";
-    document.getElementById("Role").value = emp.role || "";
-
-    // Show/hide identity fields
-    if (emp.isSystemUser) {
-      document.getElementById("identityFields").classList.remove("d-none");
-    } else {
-      document.getElementById("identityFields").classList.add("d-none");
-    }
   }
 
   function openEditModal(employeeId) {
@@ -275,36 +321,55 @@
     hideFormAlert();
     hidePageAlert();
 
+    console.log("=== EMPLOYEE FORM SUBMIT ===");
+
     var form = document.getElementById("employeeForm");
+    console.log("Form valid:", form.checkValidity());
+
     if (!form.checkValidity()) {
       form.classList.add("was-validated");
       return;
     }
 
-    // Validate system user fields if checkbox is checked
-    var isSystemUser = document.getElementById("IsSystemUser").checked;
-    if (isSystemUser) {
-      var systemEmail = document.getElementById("SystemEmail").value;
-      var password = document.getElementById("Password").value;
-      var confirmPassword = document.getElementById("ConfirmPassword").value;
+    // Validate phone manually
+    var phoneInput = document.getElementById("SystemPhoneNumberInput");
+    console.log("Phone input found:", !!phoneInput);
+    console.log("Phone input value:", phoneInput ? phoneInput.value : "N/A");
+    console.log("systemPhoneInputInstance:", !!systemPhoneInputInstance);
 
-      if (!systemEmail) {
-        showFormAlert("System email is required.");
-        return;
-      }
-
-      if (!editingEmployeeId || (editingEmployeeId && password)) {
-        if (!password || password.length < 8) {
-          showFormAlert("Password must be at least 8 characters.");
-          return;
-        }
-
-        if (password !== confirmPassword) {
-          showFormAlert("Password and confirmation password do not match.");
-          return;
-        }
-      }
+    if (!phoneInput || !phoneInput.value.trim()) {
+      console.log("ERROR: Employee phone input is empty");
+      if (phoneInput) phoneInput.classList.add("is-invalid");
+      showFormAlert("Phone number is required.");
+      return;
     }
+    phoneInput.classList.remove("is-invalid");
+
+    // Sync phone fields before submission
+    var phoneValue = "";
+
+    if (systemPhoneInputInstance) {
+      var countryData = systemPhoneInputInstance.getSelectedCountryData();
+      document.getElementById("SystemPhoneDialCode").value = "+" + countryData.dialCode;
+
+      // Try getNumber() first, fall back to raw input value
+      phoneValue = systemPhoneInputInstance.getNumber();
+      console.log("Employee getNumber() returned:", phoneValue);
+
+      if (!phoneValue || phoneValue.trim() === "") {
+        console.log("Employee getNumber() empty, using raw input value");
+        phoneValue = phoneInput.value;
+      }
+    } else {
+      // Fallback: use the raw input value
+      document.getElementById("SystemPhoneDialCode").value = "+92";
+      phoneValue = phoneInput.value;
+    }
+
+    document.getElementById("SystemPhoneNumber").value = phoneValue;
+
+    console.log("SystemPhoneDialCode:", document.getElementById("SystemPhoneDialCode").value);
+    console.log("SystemPhoneNumber:", document.getElementById("SystemPhoneNumber").value);
 
     var url = editingEmployeeId
       ? config.editUrl + "?id=" + encodeURIComponent(editingEmployeeId)
@@ -394,6 +459,188 @@
       });
   }
 
+  function openCreateSystemUserModal(employeeId, employeeName) {
+    creatingSystemUserForEmployeeId = employeeId;
+    document.getElementById("SystemUserEmployeeId").value = employeeId;
+    document.getElementById("systemUserEmployeeName").textContent = employeeName;
+    document.getElementById("createSystemUserForm").reset();
+    document.getElementById("systemUserFormAlert").classList.add("d-none");
+
+    // Load roles for the dropdown
+    fetch(config.getRolesUrl, { headers: { Accept: "application/json" } })
+      .then(function (response) { return response.json(); })
+      .then(function (result) {
+        if (!result.success) return;
+        var select = document.getElementById("SystemUserRole");
+        select.innerHTML = '<option value="">Select Role</option>';
+        result.data.forEach(function (role) {
+          select.innerHTML += '<option value="' + escapeHtml(role.name) + '">' + escapeHtml(role.name) + (role.description ? ' - ' + escapeHtml(role.description) : '') + '</option>';
+        });
+      });
+
+    // Initialize phone input
+    setTimeout(function() {
+      var phoneField = document.getElementById("SystemUserPhone");
+      if (phoneField && window.intlTelInput) {
+        if (systemUserPhoneInputInstance) systemUserPhoneInputInstance.destroy();
+        systemUserPhoneInputInstance = window.intlTelInput(phoneField, {
+          initialCountry: "pk",
+          preferredCountries: ["pk", "ae", "sa", "us", "gb"],
+          separateDialCode: true,
+          strictMode: true,
+          utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"
+        });
+      }
+    }, 100);
+
+    createSystemUserModal.show();
+  }
+
+  function submitCreateSystemUser(event) {
+    event.preventDefault();
+    var alertEl = document.getElementById("systemUserFormAlert");
+    alertEl.classList.add("d-none");
+
+    console.log("=== CREATE SYSTEM USER SUBMIT ===");
+
+    var form = document.getElementById("createSystemUserForm");
+    console.log("Form found:", !!form);
+    console.log("Form valid:", form.checkValidity());
+
+    if (!form.checkValidity()) {
+      form.classList.add("was-validated");
+      return;
+    }
+
+    // Check phone input
+    var phoneInput = document.getElementById("SystemUserPhone");
+    console.log("Phone input found:", !!phoneInput);
+    console.log("Phone input value:", phoneInput ? phoneInput.value : "N/A");
+    console.log("Phone input trimmed:", phoneInput ? phoneInput.value.trim() : "N/A");
+    console.log("systemUserPhoneInputInstance:", !!systemUserPhoneInputInstance);
+    console.log("intlTelInput available:", !!window.intlTelInput);
+
+    if (!phoneInput || !phoneInput.value.trim()) {
+      console.log("ERROR: Phone input is empty");
+      if (phoneInput) phoneInput.classList.add("is-invalid");
+      alertEl.textContent = "Phone number is required.";
+      alertEl.classList.remove("d-none");
+      return;
+    }
+    phoneInput.classList.remove("is-invalid");
+
+    // Validate password match
+    var password = document.getElementById("SystemUserPassword").value;
+    var confirmPassword = document.getElementById("SystemUserConfirmPassword").value;
+    console.log("Password length:", password.length);
+    console.log("Passwords match:", password === confirmPassword);
+
+    if (password !== confirmPassword) {
+      alertEl.textContent = "Password and confirmation password do not match.";
+      alertEl.classList.remove("d-none");
+      return;
+    }
+
+    // Sync phone fields
+    console.log("Syncing phone fields...");
+    var phoneValue = "";
+
+    if (systemUserPhoneInputInstance) {
+      console.log("Using intl-tel-input instance");
+      var countryData = systemUserPhoneInputInstance.getSelectedCountryData();
+      console.log("Country data:", countryData);
+      document.getElementById("SystemUserPhoneDialCode").value = "+" + countryData.dialCode;
+
+      // Try getNumber() first, fall back to raw input value
+      phoneValue = systemUserPhoneInputInstance.getNumber();
+      console.log("getNumber() returned:", phoneValue);
+
+      if (!phoneValue || phoneValue.trim() === "") {
+        console.log("getNumber() empty, using raw input value");
+        phoneValue = phoneInput.value;
+      }
+    } else {
+      console.log("Using fallback phone sync");
+      document.getElementById("SystemUserPhoneDialCode").value = "+92";
+      phoneValue = phoneInput.value;
+    }
+
+    document.getElementById("SystemUserPhoneNumber").value = phoneValue;
+
+    console.log("SystemUserPhoneDialCode:", document.getElementById("SystemUserPhoneDialCode").value);
+    console.log("SystemUserPhoneNumber:", document.getElementById("SystemUserPhoneNumber").value);
+
+    var submitButton = document.getElementById("createSystemUserSubmit");
+    submitButton.disabled = true;
+
+    var formData = new FormData(form);
+
+    // Log all FormData entries
+    console.log("=== FORM DATA ===");
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+
+    var token = getAntiForgeryToken("createSystemUserForm");
+    console.log("Anti-forgery token:", token ? "present (" + token.length + " chars)" : "MISSING");
+
+    var url = config.createSystemUserUrl + "?employeeId=" + encodeURIComponent(creatingSystemUserForEmployeeId);
+    console.log("Request URL:", url);
+
+    fetch(url, {
+      method: "POST",
+      headers: { "RequestVerificationToken": token },
+      body: formData
+    })
+      .then(function (response) {
+        console.log("Response status:", response.status);
+        console.log("Response headers:", response.headers.get("content-type"));
+        return response.text().then(function (text) {
+          console.log("Response body:", text);
+          try {
+            return JSON.parse(text);
+          } catch (e) {
+            console.log("Failed to parse JSON:", e);
+            return { success: false, message: "Invalid server response: " + text.substring(0, 200) };
+          }
+        });
+      })
+      .then(function (result) {
+        console.log("=== SERVER RESPONSE ===");
+        console.log("Success:", result.success);
+        console.log("Message:", result.message);
+        console.log("Errors:", JSON.stringify(result.errors));
+
+        if (!result.success) {
+          // Show specific validation errors if available
+          if (result.errors) {
+            var messages = [];
+            Object.keys(result.errors).forEach(function (key) {
+              result.errors[key].forEach(function (msg) {
+                messages.push(msg);
+              });
+            });
+            alertEl.textContent = messages.join(" ");
+          } else {
+            alertEl.textContent = result.message || "Failed to create system user.";
+          }
+          alertEl.classList.remove("d-none");
+          return;
+        }
+
+        createSystemUserModal.hide();
+        showPageAlert(result.message || "System user account created successfully.", "success");
+        loadEmployees();
+      })
+      .catch(function () {
+        alertEl.textContent = "An error occurred. Please try again.";
+        alertEl.classList.remove("d-none");
+      })
+      .finally(function () {
+        submitButton.disabled = false;
+      });
+  }
+
   function viewEmployeeDetails(employeeId) {
     viewingEmployeeId = employeeId;
     var content = document.getElementById("employeeDetailsContent");
@@ -432,7 +679,11 @@
               '<tr><td class="text-muted">Department</td><td>' + (emp.departmentId ? "Loaded" : "—") + '</td></tr>' +
               '<tr><td class="text-muted">Designation</td><td>' + (emp.designationId ? "Loaded" : "—") + '</td></tr>' +
               '<tr><td class="text-muted">Joining Date</td><td>' + (emp.joiningDate ? new Date(emp.joiningDate).toLocaleDateString() : "—") + '</td></tr>' +
-              '<tr><td class="text-muted">System User</td><td>' + (emp.isSystemUser ? '<span class="badge bg-primary">Yes</span>' : '<span class="badge bg-secondary">No</span>') + '</td></tr>' +
+              '<tr><td class="text-muted">System User</td><td>' +
+                (emp.isSystemUser
+                  ? '<span class="badge bg-primary">Yes</span>'
+                  : '<span class="badge bg-secondary">No</span> <button type="button" class="btn btn-sm btn-outline-primary ms-2" onclick="window.employeeopenCreateSystemUserModal(' + emp.employeeId + ', \'' + escapeHtml(emp.firstName + ' ' + (emp.lastName || '')) + '\')"><i class="bi bi-plus-lg me-1"></i>Create Account</button>')
+              + '</td></tr>' +
               '<tr><td class="text-muted">Status</td><td>' + (emp.isActive ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>') + '</td></tr>' +
             '</table>' +
           '</div>' +
@@ -682,37 +933,80 @@
           var filterSelect = document.getElementById("filterDepartment");
           if (select) {
             select.innerHTML = '<option value="">Select Department</option>';
-            result.data.forEach(function (item) {
-              select.innerHTML += '<option value="' + item.departmentId + '">' + escapeHtml(item.departmentName) + '</option>';
+              result.data.forEach(function (item) {
+                  select.innerHTML += '<option value="' + item.departmentId + '">' + escapeHtml(item.name) + '</option>';
             });
           }
           if (filterSelect) {
             filterSelect.innerHTML = '<option value="">All Departments</option>';
             result.data.forEach(function (item) {
-              filterSelect.innerHTML += '<option value="' + item.departmentId + '">' + escapeHtml(item.departmentName) + '</option>';
+              filterSelect.innerHTML += '<option value="' + item.departmentId + '">' + escapeHtml(item.name) + '</option>';
             });
           }
         })
     );
 
     // Load Designations
+      // Load Designations
+      promises.push(
+          fetch('/Designation/List', { headers: { Accept: "application/json" } })
+              .then(function (response) {
+                  return response.json();
+              })
+              .then(function (result) {
+
+                  console.log("Full Result:", result);
+                  console.log("Designation Data:", result.data);
+
+                  if (!result.success) return;
+
+                  var select = document.getElementById("DesignationId");
+                  var filterSelect = document.getElementById("filterDesignation");
+
+                  if (select) {
+                      select.innerHTML = '<option value="">Select Designation</option>';
+
+                      result.data.forEach(function (item) {
+
+                          console.log("Designation Item:", item);
+                          console.log("DesignationId:", item.designationId);
+                          console.log("DesignationName:", item.name);
+
+                          select.innerHTML +=
+                              '<option value="' +
+                              item.designationId +
+                              '">' +
+                              escapeHtml(item.name) +
+                              '</option>';
+                      });
+                  }
+
+                  if (filterSelect) {
+                      filterSelect.innerHTML = '<option value="">All Designations</option>';
+
+                      result.data.forEach(function (item) {
+                          filterSelect.innerHTML +=
+                              '<option value="' +
+                              item.designationId +
+                              '">' +
+                              escapeHtml(item.name) +
+                              '</option>';
+                      });
+                  }
+              })
+      );
+
+    // Load Roles
     promises.push(
-      fetch('/Designation/List', { headers: { Accept: "application/json" } })
+      fetch(config.getRolesUrl, { headers: { Accept: "application/json" } })
         .then(function (response) { return response.json(); })
         .then(function (result) {
           if (!result.success) return;
-          var select = document.getElementById("DesignationId");
-          var filterSelect = document.getElementById("filterDesignation");
+          var select = document.getElementById("Role");
           if (select) {
-            select.innerHTML = '<option value="">Select Designation</option>';
-            result.data.forEach(function (item) {
-              select.innerHTML += '<option value="' + item.designationId + '">' + escapeHtml(item.designationName) + '</option>';
-            });
-          }
-          if (filterSelect) {
-            filterSelect.innerHTML = '<option value="">All Designations</option>';
-            result.data.forEach(function (item) {
-              filterSelect.innerHTML += '<option value="' + item.designationId + '">' + escapeHtml(item.designationName) + '</option>';
+            select.innerHTML = '<option value="">Select Role</option>';
+            result.data.forEach(function (role) {
+              select.innerHTML += '<option value="' + escapeHtml(role.name) + '">' + escapeHtml(role.name) + (role.description ? ' - ' + escapeHtml(role.description) : '') + '</option>';
             });
           }
         })
@@ -736,7 +1030,8 @@
     var employeeModalElement = document.getElementById("employeeModal");
     var detailsModalElement = document.getElementById("employeeDetailsModal");
     var deleteModalElement = document.getElementById("deleteEmployeeModal");
-    var isSystemUserCheckbox = document.getElementById("IsSystemUser");
+    var createSystemUserModalElement = document.getElementById("createSystemUserModal");
+    var createSystemUserForm = document.getElementById("createSystemUserForm");
 
     if (employeeModalElement) {
       employeeModal = new bootstrap.Modal(employeeModalElement);
@@ -751,6 +1046,10 @@
       deleteModal = new bootstrap.Modal(deleteModalElement);
     }
 
+    if (createSystemUserModalElement) {
+      createSystemUserModal = new bootstrap.Modal(createSystemUserModalElement);
+    }
+
     if (addButton) {
       addButton.addEventListener("click", openCreateModal);
     }
@@ -759,14 +1058,8 @@
       form.addEventListener("submit", submitEmployeeForm);
     }
 
-    if (isSystemUserCheckbox) {
-      isSystemUserCheckbox.addEventListener("change", function () {
-        if (this.checked) {
-          document.getElementById("identityFields").classList.remove("d-none");
-        } else {
-          document.getElementById("identityFields").classList.add("d-none");
-        }
-      });
+    if (createSystemUserForm) {
+      createSystemUserForm.addEventListener("submit", submitCreateSystemUser);
     }
 
     if (statusFilter) statusFilter.addEventListener("change", loadEmployees);
@@ -795,6 +1088,7 @@
         var editButton = event.target.closest(".btn-edit-employee");
         var deleteButton = event.target.closest(".btn-delete-employee");
         var toggleButton = event.target.closest(".btn-toggle-active");
+        var removeSystemUserButton = event.target.closest(".btn-remove-system-user");
 
         if (viewButton) {
           viewEmployeeDetails(viewButton.getAttribute("data-id"));
@@ -803,6 +1097,11 @@
 
         if (editButton) {
           openEditModal(editButton.getAttribute("data-id"));
+          return;
+        }
+
+        if (removeSystemUserButton) {
+          removeSystemUser(removeSystemUserButton.getAttribute("data-id"), removeSystemUserButton.getAttribute("data-name"));
           return;
         }
 
@@ -816,8 +1115,46 @@
 
         if (toggleButton) {
           toggleActive(toggleButton.getAttribute("data-id"));
+          return;
         }
       });
+    }
+  }
+
+  async function removeSystemUser(employeeId, employeeName) {
+    const result = await Swal.fire({
+      title: 'Remove System User',
+      text: 'This will remove the system user account for ' + employeeName + '. The employee record will remain. Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d45656',
+      cancelButtonColor: '#5a5a5c',
+      confirmButtonText: 'Remove'
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const formData = new FormData();
+        formData.append("__RequestVerificationToken", getAntiForgeryToken());
+
+        const response = await fetch('/Employee/RemoveSystemUser?id=' + employeeId, {
+          method: 'POST',
+          headers: { "RequestVerificationToken": getAntiForgeryToken() },
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          loadEmployees();
+          showPageAlert(data.message, "success");
+        } else {
+          showPageAlert(data.message || "Failed to remove system user.", "danger");
+        }
+      } catch (error) {
+        console.error('Error removing system user:', error);
+        showPageAlert("Failed to remove system user.", "danger");
+      }
     }
   }
 
@@ -825,5 +1162,8 @@
     bindEvents();
     loadDropdowns();
     loadEmployees();
+
+    // Expose functions to window for inline onclick handlers
+    window.employeeopenCreateSystemUserModal = openCreateSystemUserModal;
   });
 })();

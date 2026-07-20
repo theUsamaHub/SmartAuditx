@@ -15,6 +15,7 @@ namespace SmartAuditX.Services.Implementations
 
         public EmployeeService(
             ApplicationDbContext context,
+           
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager)
         {
@@ -107,7 +108,7 @@ namespace SmartAuditX.Services.Implementations
                 EmployeeCode = employee.EmployeeCode
             };
 
-            // If system user, get the associated Identity user email
+            // If system user, get the associated Identity user email and phone
             if (employee.IsSystemUser)
             {
                 var identityUser = await _context.Users
@@ -116,6 +117,8 @@ namespace SmartAuditX.Services.Implementations
                 if (identityUser != null)
                 {
                     viewModel.SystemEmail = identityUser.Email;
+                    viewModel.SystemPhoneDialCode = identityUser.PhoneDialCode;
+                    viewModel.SystemPhoneNumber = identityUser.PhoneNumber;
                 }
             }
 
@@ -144,10 +147,21 @@ namespace SmartAuditX.Services.Implementations
                     return EmployeeOperationResult.Fail("An employee with this CNIC/National ID already exists.");
             }
 
+            // Validate duplicate phone
+            if (!string.IsNullOrWhiteSpace(model.PersonalPhone))
+            {
+                var normalizedPhone = model.PersonalPhone.Replace(" ", "").Replace("-", "").Trim();
+                var phoneExists = await _context.Employees
+                    .AnyAsync(e => e.CompanyId == companyId && e.PersonalPhone != null && e.PersonalPhone.Replace(" ", "").Replace("-", "").Trim() == normalizedPhone && !e.IsDeleted);
+
+                if (phoneExists)
+                    return EmployeeOperationResult.Fail("An employee with this phone number already exists.");
+            }
+
             // Generate Employee Code
             var employeeCode = await GenerateEmployeeCodeAsync(companyId);
 
-            // Create Employee
+            // Create Employee (always without system user - system user is created separately)
             var employee = new Employee
             {
                 CompanyId = companyId,
@@ -163,23 +177,10 @@ namespace SmartAuditX.Services.Implementations
                 DepartmentId = model.DepartmentId,
                 DesignationId = model.DesignationId,
                 JoiningDate = model.JoiningDate,
-                IsSystemUser = model.IsSystemUser,
+                IsSystemUser = false,
                 IsActive = model.IsActive,
                 CreatedAt = DateTime.UtcNow
             };
-
-            // If system user, validate and create Identity user
-            if (model.IsSystemUser)
-            {
-                var validationResult = await ValidateSystemUserInput(model);
-                if (!validationResult.Success)
-                    return validationResult;
-
-                // Create Identity User
-                var identityResult = await CreateIdentityUserAsync(employee, model);
-                if (!identityResult.Success)
-                    return identityResult;
-            }
 
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
@@ -224,7 +225,10 @@ namespace SmartAuditX.Services.Implementations
             employee.DateOfBirth = model.DateOfBirth;
             employee.CNICOrNationalId = model.CNICOrNationalId?.Trim();
             employee.PersonalEmail = model.PersonalEmail?.Trim();
-            employee.PersonalPhone = model.PersonalPhone?.Trim();
+            // Use system phone for PersonalPhone if system user, otherwise use personal phone
+            employee.PersonalPhone = model.IsSystemUser && !string.IsNullOrWhiteSpace(model.SystemPhoneNumber)
+                ? model.SystemPhoneNumber.Trim()
+                : model.PersonalPhone?.Trim();
             employee.BranchId = model.BranchId;
             employee.DepartmentId = model.DepartmentId;
             employee.DesignationId = model.DesignationId;
@@ -246,21 +250,6 @@ namespace SmartAuditX.Services.Implementations
 
                 employee.IsSystemUser = true;
             }
-            else if (!model.IsSystemUser && employee.IsSystemUser)
-            {
-                // Converting system user to non-system user - delete Identity user
-                var identityUser = await _context.Users
-                    .FirstOrDefaultAsync(u => u.EmployeeId == employeeId && u.CompanyId == companyId && !u.IsDeleted);
-
-                if (identityUser != null)
-                {
-                    var deleteResult = await _userManager.DeleteAsync(identityUser);
-                    if (!deleteResult.Succeeded)
-                        return EmployeeOperationResult.Fail("Failed to remove system user account.");
-                }
-
-                employee.IsSystemUser = false;
-            }
             else if (model.IsSystemUser && employee.IsSystemUser)
             {
                 // Updating existing system user - check if email changed
@@ -277,6 +266,9 @@ namespace SmartAuditX.Services.Implementations
 
                         identityUser.Email = model.SystemEmail;
                         identityUser.UserName = model.SystemEmail;
+                        identityUser.PhoneNumber = model.SystemPhoneNumber?.Trim();
+                        identityUser.PhoneDialCode = model.SystemPhoneDialCode?.Trim();
+
                         identityUser.NormalizedEmail = model.SystemEmail.ToUpperInvariant();
                         identityUser.NormalizedUserName = model.SystemEmail.ToUpperInvariant();
                         // Keep EmailConfirmed as true since admin is managing the account
@@ -396,44 +388,127 @@ namespace SmartAuditX.Services.Implementations
                 await MapToListItemAsync(companyId, employee));
         }
 
+        public async Task<EmployeeOperationResult> CreateSystemUserAsync(int companyId, int employeeId, CreateSystemUserViewModel model)
+        {
+            var employee = await _context.Employees
+                .FirstOrDefaultAsync(e => e.EmployeeId == employeeId && e.CompanyId == companyId && !e.IsDeleted);
+
+            if (employee == null)
+                return EmployeeOperationResult.Fail("Employee not found.");
+
+            if (employee.IsSystemUser)
+                return EmployeeOperationResult.Fail("This employee already has a system user account.");
+
+            // Validate email uniqueness
+            var existingUser = await _userManager.FindByEmailAsync(model.Email);
+            if (existingUser != null)
+                return EmployeeOperationResult.Fail("This email is already registered as a system user.");
+
+            // Validate phone number uniqueness
+            if (!string.IsNullOrWhiteSpace(model.PhoneNumber))
+            {
+                var normalizedPhone = model.PhoneNumber.Replace(" ", "").Replace("-", "").Trim();
+                var phoneExists = await _userManager.Users
+                    .AnyAsync(u => u.PhoneNumber == normalizedPhone && !u.IsDeleted);
+                if (phoneExists)
+                    return EmployeeOperationResult.Fail("This phone number is already registered to another user.");
+            }
+
+            // Validate role
+            if (!string.IsNullOrWhiteSpace(model.Role))
+            {
+                var roleExists = await _roleManager.RoleExistsAsync(model.Role);
+                if (!roleExists)
+                    return EmployeeOperationResult.Fail($"The role '{model.Role}' does not exist.");
+
+                var excludedRoles = new[] { "SystemAdmin", "CompanyOwner" };
+                if (excludedRoles.Contains(model.Role, StringComparer.OrdinalIgnoreCase))
+                    return EmployeeOperationResult.Fail($"The role '{model.Role}' is not allowed for employees.");
+            }
+
+            // Create Identity User
+            var user = new ApplicationUser
+            {
+                CompanyId = companyId,
+                EmployeeId = employeeId,
+                UserName = model.Email,
+                Email = model.Email,
+                EmailConfirmed = true,
+                PhoneDialCode = model.PhoneDialCode?.Trim() ?? "+92",
+                PhoneNumber = model.PhoneNumber?.Trim() ?? "",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            try
+            {
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (!result.Succeeded)
+                {
+                    var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                    return EmployeeOperationResult.Fail($"Failed to create system user: {errors}");
+                }
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+            {
+                return EmployeeOperationResult.Fail("A user with this phone number or email already exists.");
+            }
+
+            // Assign role
+            if (!string.IsNullOrWhiteSpace(model.Role))
+            {
+                await _userManager.AddToRoleAsync(user, model.Role);
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(user, "Employee");
+            }
+
+            // Update employee record
+            employee.IsSystemUser = true;
+            employee.PersonalPhone = $"{model.PhoneDialCode}{model.PhoneNumber}".Trim();
+            employee.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            return EmployeeOperationResult.Ok(
+                "System user account created successfully.",
+                await MapToListItemAsync(companyId, employee));
+        }
+
         // Private helper methods
 
         private async Task<string> GenerateEmployeeCodeAsync(int companyId)
         {
-            // Get company short code or use company ID as fallback
             var company = await _context.Companies
                 .FirstOrDefaultAsync(c => c.CompanyId == companyId);
 
-            string companyShortCode;
-            if (company != null && !string.IsNullOrWhiteSpace(company.Name))
-            {
-                // Extract first 3 characters of company name and convert to uppercase
-                companyShortCode = new string(company.Name.Take(3).ToArray()).ToUpperInvariant();
-            }
-            else
-            {
-                companyShortCode = companyId.ToString();
-            }
+            var companyShortCode = company?.Name?.Length >= 3
+                ? company.Name[..3].ToUpperInvariant()
+                : companyId.ToString();
 
-            // Get the next sequential number for this company
-            var lastEmployee = await _context.Employees
-                .Where(e => e.CompanyId == companyId && !e.IsDeleted)
-                .OrderByDescending(e => e.EmployeeId)
-                .FirstOrDefaultAsync();
+            var existingCodes = await _context.Employees
+                .Where(e => e.CompanyId == companyId)
+                .Select(e => e.EmployeeCode)
+                .ToListAsync();
 
-            int nextNumber = 1;
-            if (lastEmployee != null && lastEmployee.EmployeeCode.StartsWith($"Emp-{companyShortCode}-"))
+            int maxNumber = 0;
+
+            foreach (var code in existingCodes)
             {
-                // Extract the number from the last employee code
-                var lastNumberStr = lastEmployee.EmployeeCode.Split('-').LastOrDefault();
-                if (int.TryParse(lastNumberStr, out int lastNumber))
+                if (string.IsNullOrWhiteSpace(code))
+                    continue;
+
+                var parts = code.Split('-');
+
+                if (parts.Length == 3 &&
+                    int.TryParse(parts[2], out int number))
                 {
-                    nextNumber = lastNumber + 1;
+                    maxNumber = Math.Max(maxNumber, number);
                 }
             }
 
-            // Format: Emp-{CompanyShortCode}-{SequentialNumber with 4 digits}
-            return $"Emp-{companyShortCode}-{nextNumber:D4}";
+            return $"Emp-{companyShortCode}-{(maxNumber + 1):D4}";
         }
 
         private async Task<EmployeeOperationResult> ValidateSystemUserInput(EmployeeViewModel model)
@@ -477,7 +552,8 @@ namespace SmartAuditX.Services.Implementations
                 UserName = model.SystemEmail,
                 Email = model.SystemEmail,
                 EmailConfirmed = true, // Auto-confirm since admin is creating the account
-                PhoneDialCode = "+1", // Default, can be updated later
+                PhoneDialCode = model.SystemPhoneDialCode?.Trim(),
+                PhoneNumber = model.SystemPhoneNumber?.Trim(),
                 IsActive = true,
                 IsDeleted = false,
                 CreatedAt = DateTime.UtcNow
@@ -502,6 +578,42 @@ namespace SmartAuditX.Services.Implementations
             }
 
             return EmployeeOperationResult.Ok("Identity user created successfully.");
+        }
+
+        public async Task<EmployeeOperationResult> RemoveSystemUserAsync(int companyId, int employeeId)
+        {
+            var employee = await _context.Employees
+                .FirstOrDefaultAsync(e => e.EmployeeId == employeeId && e.CompanyId == companyId && !e.IsDeleted);
+
+            if (employee == null)
+                return EmployeeOperationResult.Fail("Employee not found.");
+
+            if (!employee.IsSystemUser)
+                return EmployeeOperationResult.Fail("This employee does not have a system user account.");
+
+            var identityUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.EmployeeId == employeeId && u.CompanyId == companyId && !u.IsDeleted);
+
+            if (identityUser != null)
+            {
+                // Remove all roles first
+                var currentRoles = await _userManager.GetRolesAsync(identityUser);
+                if (currentRoles.Any())
+                {
+                    await _userManager.RemoveFromRolesAsync(identityUser, currentRoles);
+                }
+
+                // Deactivate the user instead of deleting
+                identityUser.IsActive = false;
+                identityUser.UpdatedAt = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+            }
+
+            employee.IsSystemUser = false;
+            employee.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            return EmployeeOperationResult.Ok("System user account removed successfully.");
         }
 
         private async Task<EmployeeListItemViewModel> MapToListItemAsync(int companyId, Employee employee)

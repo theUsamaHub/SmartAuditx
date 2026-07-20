@@ -1,0 +1,44 @@
+@model SmartAuditX.Models.ViewModels.AuditModule.AuditTemplateViewModel
+
+@{
+    ViewData["Title"] = "Create Audit Template";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+<h1>Create Audit Template</h1>
+
+<form asp-action="Create">
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Title:</label>
+        <div class="col-sm-10">
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Description:</label>
+        <div class="col-sm-10">
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Scoring Enabled:</label>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <input asp-for="IsScoringEnabled" class="form-check-input" />
+                <label class="form-check-label" asp-for="IsScoringEnabled"></label>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

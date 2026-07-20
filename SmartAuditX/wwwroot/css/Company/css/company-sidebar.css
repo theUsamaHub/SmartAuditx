@@ -169,6 +169,7 @@
 .sidebar-navigation .nav-link:focus {
   background: var(--company-surface-soft);
   color: var(--company-sidebar-text-strong);
+  /*width:150px;*/
   transform: translateX(2px);
 }
 
@@ -177,6 +178,7 @@
   color: var(--color-brand-green-deep) !important;
   font-weight: 600;
   border-left: 3px solid var(--color-brand-green);
+/*  width:150px;*/
   padding-left: 9px;
 }
 

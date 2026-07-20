@@ -3,160 +3,56 @@
   "WorkspaceRootPath": "D:\\SmartAuditX\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\shared\\admin\\_topnavbar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\shared\\admin\\_topnavbar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\audittemplateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\audittemplateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\shared\\layouts\\_auditorlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\shared\\layouts\\_auditorlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\admin\\teammembercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\admin\\teammembercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\shared\\layouts\\_companylayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\shared\\layouts\\_companylayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\admin\\securityfeaturecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\admin\\securityfeaturecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\audittemplate\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\audittemplate\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\admin\\platformmodulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\admin\\platformmodulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\admin\\howitworksstepcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\admin\\howitworksstepcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\mvccontrollers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\mvccontrollers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\admin\\herosectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\admin\\herosectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\mvccontrollers\\audittemplatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\mvccontrollers\\audittemplatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\admin\\faqcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\admin\\faqcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\areas\\identity\\pages\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\areas\\identity\\pages\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\admin\\contactinformationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\admin\\contactinformationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\audittemplate\\builder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\audittemplate\\builder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\controllers\\admin\\aboutuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\controllers\\admin\\aboutuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\cms\\teammemberservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\cms\\teammemberservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\cms\\securityfeatureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\cms\\securityfeatureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\cms\\platformmoduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\cms\\platformmoduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\cms\\howitworksservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\cms\\howitworksservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\cms\\herosectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\cms\\herosectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\cms\\featureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\cms\\featureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\cms\\faqservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\cms\\faqservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\services\\implementations\\cms\\contactinformationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\services\\implementations\\cms\\contactinformationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\teammembervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\teammembervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\securityfeaturevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\securityfeaturevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\platformmodulevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\platformmodulevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\howitworksstepvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\howitworksstepvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\herosectionvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\herosectionvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\featurevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\featurevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\faqvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\faqvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\contactinformationvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\contactinformationvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\cms\\viewmodels\\aboutusvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\cms\\viewmodels\\aboutusvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\auditevidence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\auditevidence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\auditbarcodemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\auditbarcodemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\auditresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\auditresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\auditassignment..cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\auditassignment..cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\audit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\audit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\views\\audittemplate\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\views\\audittemplate\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\audittemplateitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\audittemplateitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\audittemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\audittemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\auditenums\\barcodemappingtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\auditenums\\barcodemappingtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\auditenums\\templateitemtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\auditenums\\templateitemtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\models\\auditmodule\\auditenums\\auditstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\models\\auditmodule\\auditenums\\auditstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SmartAuditX\\SmartAuditX\\AuditModule.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SmartAuditX\\AuditModule.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+      "AbsoluteMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|d:\\smartauditx\\smartauditx\\migrations\\20260622175732_addedqueryfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D94ECB-D56F-E7CE-255C-F530CD59CE03}|SmartAuditX\\SmartAuditX.csproj|solutionrelative:smartauditx\\migrations\\20260622175732_addedqueryfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -171,472 +67,160 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "_TopNavbar.cshtml",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Admin\\_TopNavbar.cshtml",
-              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Shared\\Admin\\_TopNavbar.cshtml",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Admin\\_TopNavbar.cshtml",
-              "RelativeToolTip": "SmartAuditX\\Views\\Shared\\Admin\\_TopNavbar.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-15T19:40:06.672Z",
+              "Title": "AuditTemplateService.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\AuditTemplateService.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\AuditTemplateService.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\AuditTemplateService.cs",
+              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\AuditTemplateService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-19T20:11:08.652Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "SmartAuditX\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:09:58.027Z",
-              "EditorCaption": ""
+              "Title": "_AdminLayout.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Shared\\_AdminLayout.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\Shared\\_AdminLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-15T07:30:41.733Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Program.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Program.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Program.cs",
-              "RelativeToolTip": "SmartAuditX\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:02:41.871Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TeamMemberController.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\TeamMemberController.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\Admin\\TeamMemberController.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\TeamMemberController.cs",
-              "RelativeToolTip": "SmartAuditX\\Controllers\\Admin\\TeamMemberController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:02:14.986Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SecurityFeatureController.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\SecurityFeatureController.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\Admin\\SecurityFeatureController.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\SecurityFeatureController.cs",
-              "RelativeToolTip": "SmartAuditX\\Controllers\\Admin\\SecurityFeatureController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:02:13.382Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PlatformModuleController.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\PlatformModuleController.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\Admin\\PlatformModuleController.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\PlatformModuleController.cs",
-              "RelativeToolTip": "SmartAuditX\\Controllers\\Admin\\PlatformModuleController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:02:12.548Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "HowItWorksStepController.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\HowItWorksStepController.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\Admin\\HowItWorksStepController.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\HowItWorksStepController.cs",
-              "RelativeToolTip": "SmartAuditX\\Controllers\\Admin\\HowItWorksStepController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:02:10.705Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "HeroSectionController.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\HeroSectionController.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\Admin\\HeroSectionController.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\HeroSectionController.cs",
-              "RelativeToolTip": "SmartAuditX\\Controllers\\Admin\\HeroSectionController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:02:09.481Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "FaqController.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\FaqController.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\Admin\\FaqController.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\FaqController.cs",
-              "RelativeToolTip": "SmartAuditX\\Controllers\\Admin\\FaqController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:02:05.143Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ContactInformationController.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\ContactInformationController.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\Admin\\ContactInformationController.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\ContactInformationController.cs",
-              "RelativeToolTip": "SmartAuditX\\Controllers\\Admin\\ContactInformationController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:00:43.52Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AboutUsController.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\AboutUsController.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\Admin\\AboutUsController.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\Admin\\AboutUsController.cs",
-              "RelativeToolTip": "SmartAuditX\\Controllers\\Admin\\AboutUsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:00:35.086Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TeamMemberService.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\TeamMemberService.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\CMS\\TeamMemberService.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\TeamMemberService.cs",
-              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\CMS\\TeamMemberService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:00:12.485Z"
+              "Title": "_AuditorLayout.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Layouts\\_AuditorLayout.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Shared\\Layouts\\_AuditorLayout.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Layouts\\_AuditorLayout.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\Shared\\Layouts\\_AuditorLayout.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAABIAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-14T18:03:43.362Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "SecurityFeatureService.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\SecurityFeatureService.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\CMS\\SecurityFeatureService.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\SecurityFeatureService.cs",
-              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\CMS\\SecurityFeatureService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
+              "Title": "20260622175732_AddedQueryFilter.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260622175732_AddedQueryFilter.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Migrations\\20260622175732_AddedQueryFilter.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Migrations\\20260622175732_AddedQueryFilter.cs",
+              "RelativeToolTip": "SmartAuditX\\Migrations\\20260622175732_AddedQueryFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:00:06.721Z"
+              "WhenOpened": "2026-06-22T17:57:33.595Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "PlatformModuleService.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\PlatformModuleService.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\CMS\\PlatformModuleService.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\PlatformModuleService.cs",
-              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\CMS\\PlatformModuleService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "AuditTemplateController.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\mvccontrollers\\AuditTemplateController.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\mvccontrollers\\AuditTemplateController.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\mvccontrollers\\AuditTemplateController.cs",
+              "RelativeToolTip": "SmartAuditX\\Controllers\\mvccontrollers\\AuditTemplateController.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAIAywBsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T17:00:00.715Z"
+              "WhenOpened": "2026-06-19T20:47:51.849Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "HowItWorksService.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\HowItWorksService.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\CMS\\HowItWorksService.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\HowItWorksService.cs",
-              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\CMS\\HowItWorksService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\AuditTemplate\\Create.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\AuditTemplate\\Create.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\AuditTemplate\\Create.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\AuditTemplate\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-19T19:44:09.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\AuditTemplate\\Index.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\AuditTemplate\\Index.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\AuditTemplate\\Index.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\AuditTemplate\\Index.cshtml",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAuwIQAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-22T17:09:33.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Company.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\Company.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Models\\Company.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\Company.cs",
+              "RelativeToolTip": "SmartAuditX\\Models\\Company.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:59:54.704Z"
+              "WhenOpened": "2026-06-20T03:25:29.142Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "HeroSectionService.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\HeroSectionService.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\CMS\\HeroSectionService.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\HeroSectionService.cs",
-              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\CMS\\HeroSectionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "_CompanyLayout.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\Shared\\Layouts\\_CompanyLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-20T03:21:02.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\mvccontrollers\\UserController.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Controllers\\mvccontrollers\\UserController.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Controllers\\mvccontrollers\\UserController.cs",
+              "RelativeToolTip": "SmartAuditX\\Controllers\\mvccontrollers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:59:49.38Z"
+              "WhenOpened": "2026-07-14T12:05:48.661Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "FeatureService.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\FeatureService.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\CMS\\FeatureService.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\FeatureService.cs",
-              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\CMS\\FeatureService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "Builder.cshtml",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Views\\AuditTemplate\\Builder.cshtml",
+              "RelativeDocumentMoniker": "SmartAuditX\\Views\\AuditTemplate\\Builder.cshtml",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Views\\AuditTemplate\\Builder.cshtml",
+              "RelativeToolTip": "SmartAuditX\\Views\\AuditTemplate\\Builder.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACMAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-20T03:05:17.096Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Login.cshtml.cs",
+              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "RelativeDocumentMoniker": "SmartAuditX\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "RelativeToolTip": "SmartAuditX\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:59:43.498Z"
+              "WhenOpened": "2026-06-22T17:27:49.623Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "FaqService.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\FaqService.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\CMS\\FaqService.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\FaqService.cs",
-              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\CMS\\FaqService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:59:35.004Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ContactInformationService.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\ContactInformationService.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Services\\Implementations\\CMS\\ContactInformationService.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Services\\Implementations\\CMS\\ContactInformationService.cs",
-              "RelativeToolTip": "SmartAuditX\\Services\\Implementations\\CMS\\ContactInformationService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:59:26.995Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "TeamMemberVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\TeamMemberVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\TeamMemberVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\TeamMemberVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\TeamMemberVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:55:52.62Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "SecurityFeatureVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\SecurityFeatureVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\SecurityFeatureVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\SecurityFeatureVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\SecurityFeatureVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:55:47.056Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "PlatformModuleVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\PlatformModuleVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\PlatformModuleVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\PlatformModuleVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\PlatformModuleVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:55:40.333Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "HowItWorksStepVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\HowItWorksStepVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\HowItWorksStepVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\HowItWorksStepVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\HowItWorksStepVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:55:33.33Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "HeroSectionVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\HeroSectionVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\HeroSectionVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\HeroSectionVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\HeroSectionVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:55:26.972Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "FeatureVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\FeatureVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\FeatureVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\FeatureVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\FeatureVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:55:20.699Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "FaqVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\FaqVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\FaqVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\FaqVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\FaqVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:55:14.07Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "ContactInformationVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\ContactInformationVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\ContactInformationVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\ContactInformationVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\ContactInformationVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:55:05.372Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "AboutUsVM.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\AboutUsVM.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\CMS\\ViewModels\\AboutUsVM.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\CMS\\ViewModels\\AboutUsVM.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\CMS\\ViewModels\\AboutUsVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T16:54:34.324Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "AuditModule.md",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\AuditModule.md",
-              "RelativeDocumentMoniker": "SmartAuditX\\AuditModule.md",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\AuditModule.md",
-              "RelativeToolTip": "SmartAuditX\\AuditModule.md",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2026-06-14T18:53:16.193Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "AuditBarcodeMapping.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditBarcodeMapping.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditBarcodeMapping.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditBarcodeMapping.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditBarcodeMapping.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:21:49.444Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "AuditEvidence.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditEvidence.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditEvidence.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditEvidence.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditEvidence.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:21:24.672Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "AuditResponse.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditResponse.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditResponse.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditResponse.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:20:52.516Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "AuditAssignment..cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditAssignment..cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditAssignment..cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditAssignment..cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditAssignment..cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAkwA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:19:57.893Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "Audit.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\Audit.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\Audit.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\Audit.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\Audit.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAuwCYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:18:59.406Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 11,
               "Title": "AuditTemplateItem.cs",
               "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditTemplateItem.cs",
               "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditTemplateItem.cs",
               "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditTemplateItem.cs",
               "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditTemplateItem.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAkwCIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAIwCIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:17:35.357Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "AuditTemplate.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditTemplate.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditTemplate.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditTemplate.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditTemplate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:16:19.871Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "BarcodeMappingType.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditEnums\\BarcodeMappingType.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditEnums\\BarcodeMappingType.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditEnums\\BarcodeMappingType.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditEnums\\BarcodeMappingType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:13:46.313Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "TemplateItemType.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditEnums\\TemplateItemType.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditEnums\\TemplateItemType.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditEnums\\TemplateItemType.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditEnums\\TemplateItemType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:12:24.269Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "AuditStatus.cs",
-              "DocumentMoniker": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditEnums\\AuditStatus.cs",
-              "RelativeDocumentMoniker": "SmartAuditX\\Models\\AuditModule\\AuditEnums\\AuditStatus.cs",
-              "ToolTip": "D:\\SmartAuditX\\SmartAuditX\\Models\\AuditModule\\AuditEnums\\AuditStatus.cs",
-              "RelativeToolTip": "SmartAuditX\\Models\\AuditModule\\AuditEnums\\AuditStatus.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T18:11:45.327Z"
+              "WhenOpened": "2026-06-20T04:01:36.801Z"
             }
           ]
         }

@@ -1,0 +1,107 @@
+@model SmartAuditX.Models.ViewModels.AuditModule.AuditTemplateViewModel
+
+@{
+    ViewData["Title"] = "Edit Audit Template";
+    Layout = "~/Views/Shared/Layouts/_CompanyLayout.cshtml";
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Company/css/audit-template.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1>Edit Audit Template</h1>
+            <p class="page-subtitle">Update template details and configuration</p>
+        </div>
+        <div class="page-actions">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Templates
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="AuditTemplateId" />
+            <input type="hidden" asp-for="Version" />
+            <input type="hidden" asp-for="IsPublished" />
+
+            <div class="form-section">
+                <h3 class="section-title">Template Information</h3>
+                
+                <div class="form-group">
+                    <label asp-for="Title" class="form-label form-label-required">Template Title</label>
+                    <input asp-for="Title" class="form-control" placeholder="Enter template title" />
+                    <span asp-validation-for="Title" class="invalid-feedback"></span>
+                    <p class="form-hint">A descriptive name for your audit template</p>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter template description (optional)"></textarea>
+                    <span asp-validation-for="Description" class="invalid-feedback"></span>
+                    <p class="form-hint">Provide additional context about this template</p>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IsScoringEnabled" class="form-label">Scoring</label>
+                    <div class="form-check">
+                        <input asp-for="IsScoringEnabled" class="form-check-input" type="checkbox" />
+                        <label class="form-check-label" asp-for="IsScoringEnabled">Enable scoring for this template</label>
+                    </div>
+                    <p class="form-hint">When enabled, fields can have weightage for score calculation</p>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="section-title">Template Status</h3>
+                
+                <div class="status-indicator">
+                    <span class="status-label">Current Version:</span>
+                    <span class="status-value">@Model.Version</span>
+                </div>
+                
+                <div class="status-indicator">
+                    <span class="status-label">Status:</span>
+                    @if (Model.IsPublished)
+                    {
+                        <span class="table-badge table-badge-success">Published</span>
+                    }
+                    else
+                    {
+                        <span class="table-badge table-badge-neutral">Draft</span>
+                    }
+                </div>
+
+                @if (Model.IsPublished)
+                {
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <strong>Note:</strong> Editing a published template will create a new version (v@(Model.Version + 1)). The current version will remain published.
+                    </div>
+                }
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-lg"></i> Save Changes
+                </button>
+                <a asp-action="Builder" asp-route-id="@Model.AuditTemplateId" class="btn btn-success">
+                    <i class="bi bi-pencil-square"></i> Open Builder
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

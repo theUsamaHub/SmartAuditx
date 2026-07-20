@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmartAuditX.Models;
 using SmartAuditX.Models.ViewModels;
 using SmartAuditX.Services.Interfaces;
@@ -12,13 +13,16 @@ namespace SmartAuditX.Controllers.mvccontrollers
     {
         private readonly IEmployeeService _employeeService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
         public EmployeeController(
             IEmployeeService employeeService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager)
         {
             _employeeService = employeeService;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -169,6 +173,92 @@ namespace SmartAuditX.Controllers.mvccontrollers
                 message = result.Message,
                 data = result.Employee
             });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveSystemUser(int id)
+        {
+            var companyId = await GetCurrentCompanyIdAsync();
+            if (companyId == null)
+            {
+                return Unauthorized(new { success = false, message = "Unable to resolve company context." });
+            }
+
+            var result = await _employeeService.RemoveSystemUserAsync(companyId.Value, id);
+            return Json(new { success = result.Success, message = result.Message });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetRoles()
+        {
+            var companyId = await GetCurrentCompanyIdAsync();
+            if (companyId == null)
+            {
+                return Unauthorized(new { success = false, message = "Unable to resolve company context." });
+            }
+
+            // Exclude admin-level roles
+            var excludedRoles = new[] { "SystemAdmin", "CompanyOwner" };
+
+            var roles = await _roleManager.Roles
+                .Where(r => r.IsActive && !excludedRoles.Contains(r.Name!))
+                .Select(r => new
+                {
+                    r.Id,
+                    r.Name,
+                    r.Description
+                })
+                .OrderBy(r => r.Name)
+                .ToListAsync();
+
+            return Json(new { success = true, data = roles });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateSystemUser(int employeeId, [FromForm] CreateSystemUserViewModel model)
+        {
+            try
+            {
+                var companyId = await GetCurrentCompanyIdAsync();
+                if (companyId == null)
+                {
+                    return Unauthorized(new { success = false, message = "Unable to resolve company context." });
+                }
+
+                model.EmployeeId = employeeId;
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(new
+                    {
+                        success = false,
+                        message = "Validation failed.",
+                        errors = ModelState
+                            .Where(entry => entry.Value?.Errors.Count > 0)
+                            .ToDictionary(
+                                entry => entry.Key,
+                                entry => entry.Value!.Errors.Select(error => error.ErrorMessage).ToArray())
+                    });
+                }
+
+                var result = await _employeeService.CreateSystemUserAsync(companyId.Value, employeeId, model);
+                return Json(new
+                {
+                    success = result.Success,
+                    message = result.Message,
+                    data = result.Employee
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = $"Server error: {ex.Message}"
+                });
+            }
         }
 
         private async Task<int?> GetCurrentCompanyIdAsync()

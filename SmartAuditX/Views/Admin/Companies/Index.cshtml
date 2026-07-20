@@ -1,0 +1,126 @@
+@{
+    ViewData["Title"] = "Company Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="admin-card mb-4">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <h2 class="admin-card-title">Company Management</h2>
+        <div class="d-flex gap-2">
+            <select id="filterStatus" class="form-select form-select-sm" style="width: 150px;">
+                <option value="">All Status</option>
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+            <input type="search" id="searchCompanies" class="form-control form-control-sm" placeholder="Search companies..." style="width: 200px;" />
+        </div>
+    </div>
+    <div class="admin-table-container mt-3">
+        <table class="admin-table" id="companiesTable">
+            <thead>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Industry</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Employees</th>
+                    <th>Users</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="companiesTableBody">
+                <tr><td colspan="8" class="text-center">Loading companies...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            loadCompanies();
+            $('#searchCompanies').on('input', debounce(loadCompanies, 300));
+            $('#filterStatus').on('change', loadCompanies);
+        });
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        async function loadCompanies() {
+            const search = $('#searchCompanies').val();
+            const status = $('#filterStatus').val();
+            let url = '/Admin/CompanyList?';
+            if (search) url += 'search=' + encodeURIComponent(search) + '&';
+            if (status) url += 'isActive=' + status;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.success) renderCompaniesTable(data.data);
+            } catch (error) {
+                console.error('Error loading companies:', error);
+            }
+        }
+
+        function renderCompaniesTable(companies) {
+            const tbody = document.getElementById('companiesTableBody');
+            if (!companies || companies.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center">No companies found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = companies.map(c => `
+                <tr>
+                    <td><strong>${escapeHtml(c.name)}</strong></td>
+                    <td>${escapeHtml(c.industry || '-')}</td>
+                    <td>${escapeHtml(c.city || '-')}</td>
+                    <td>${escapeHtml(c.countryCode || '-')}</td>
+                    <td>${c.employeeCount}</td>
+                    <td>${c.userCount}</td>
+                    <td>${c.isActive ? '<span class="admin-badge admin-badge-success">Active</span>' : '<span class="admin-badge admin-badge-danger">Inactive</span>'}</td>
+                    <td>
+                        <button type="button" class="admin-btn ${c.isActive ? 'admin-btn-danger' : 'admin-btn-success'} btn-sm" onclick="toggleCompany(${c.companyId})">
+                            ${c.isActive ? 'Deactivate' : 'Activate'}
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function toggleCompany(companyId) {
+            try {
+                const formData = new FormData();
+                const token = document.querySelector('input[name="__RequestVerificationToken"]');
+                if (token) formData.append('__RequestVerificationToken', token.value);
+
+                const response = await fetch('/Admin/ToggleCompanyActive?id=' + companyId, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (data.success) {
+                    loadCompanies();
+                    toastr.success(data.message);
+                } else {
+                    toastr.error(data.message);
+                }
+            } catch (error) {
+                console.error('Error toggling company:', error);
+                toastr.error('Failed to update company.');
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+}

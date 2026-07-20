@@ -493,17 +493,16 @@ namespace SmartAuditX.Controllers.mvccontrollers
                 {
                     case "Email":
                         var emailExists = await _userManager.FindByEmailAsync(value);
-                        if (emailExists != null) return Json(new { success = false, message = "Email already exists." });
+                        if (emailExists != null) return Json(new { success = false, message = "This email is not available." });
                         break;
                     case "Username":
                         var usernameExists = await _userManager.FindByNameAsync(value);
-                        if (usernameExists != null) return Json(new { success = false, message = "Username already exists." });
+                        if (usernameExists != null) return Json(new { success = false, message = "This username is not available." });
                         break;
                     case "PhoneNumber":
                         var normalizedPhone = value.Replace(" ", "").Replace("-", "").Trim();
-                        // Optional: Dial code could be passed via AJAX if needed, but checking raw phone here.
                         var phoneExists = await _userManager.Users.AnyAsync(x => x.PhoneNumber == normalizedPhone);
-                        if (phoneExists) return Json(new { success = false, message = "Phone number already exists." });
+                        if (phoneExists) return Json(new { success = false, message = "This phone number is not available." });
                         break;
                 }
 
